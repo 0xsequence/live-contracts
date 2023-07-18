@@ -48,3 +48,23 @@ After installing dependencies please install the git hooks.
 ```sh
 yarn lint:init
 ```
+
+## Addresses
+
+The following is a list of contracts that are deployed by this script.
+
+| Name                      | Address                                    |
+|---------------------------|--------------------------------------------|
+| WalletFactoryV2           | 0xFaA5c0b14d1bED5C888Ca655B9a8A5911F78eF4A |
+| MainModuleV2              | 0xfBf8f1A5E00034762D928f46d438B947f5d4065d |
+| MainModuleUpgradableV2    | 0x4222dcA3974E39A8b41c411FeDDE9b09Ae14b911 |
+| GuestModuleV2             | 0xfea230Ee243f88BC698dD8f1aE93F8301B6cdfaE |
+| SequenceUtilsV2           | 0xdbbFa3cB3B087B64F4ef5E3D20Dda2488AA244e6 |
+| WalletFactoryV1           | 0xf9D09D634Fb818b05149329C1dcCFAeA53639d96 |
+| MainModuleV1              | 0xd01F11855bCcb95f88D7A48492F66410d4637313 |
+| MainModuleUpgradableV1    | 0x7EFE6cE415956c5f80C6530cC6cc81b4808F6118 |
+| GuestModuleV1             | 0x02390F3E6E5FD1C6786CB78FD3027C117a9955A7 |
+| SequenceUtilsV1           | 0xd130B43062D875a4B7aF3f8fc036Bc6e9D3E1B3E |
+| RequireFreshSignerLibV1   | 0xE6B9B21C077F382333220a072e4c44280b873907 |
+| GuardV2                   | 0x761f5e29944D79d76656323F106CF2efBF5F09e9 |
+| GuardV1                   | 0x596aF90CecdBF9A768886E771178fd5561dD27Ab |
