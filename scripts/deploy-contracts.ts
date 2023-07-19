@@ -82,7 +82,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     walletFactoryV2,
     'Guard V2',
     '0x761f5e29944D79d76656323F106CF2efBF5F09e9',
-    mainModuleV1.address,
+    mainModuleV2.address,
     '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4'
   )
 
