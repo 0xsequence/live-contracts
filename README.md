@@ -36,6 +36,19 @@ Run the deployment script.
 yarn deploy
 ```
 
+#### Gotcha: EIP-155
+
+The deployment flow relies on pre-[EIP-155](https://eips.ethereum.org/EIPS/eip-155) transactions.
+If your selected RPC node enforces EIP-155, deployments will fail.
+
+### Gotcha: Gas Costs
+
+Deployments of the [Universal Deployer](https://gist.github.com/Agusx1211/de05dabf918d448d315aa018e2572031) and [Singleton Factory](https://eips.ethereum.org/EIPS/eip-2470) use a generated deployer address.
+This address is funded with a fixed amount of ETH as per their EIP definition.
+
+Some chains calculate gas differently and may require additional funds to be sent to the deployer address for deployment to continue.
+This has been noticed in Optimistic roll up chains such as [Base](https://base.org).
+
 ### Checking Deployment
 
 To check if the Sequence contracts have been deployed on a given network, run the deployment script connected to a wallet without any funds.
