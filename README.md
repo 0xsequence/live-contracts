@@ -62,6 +62,14 @@ After installing dependencies please install the git hooks.
 yarn lint:init
 ```
 
+Run a local chain with [Anvil](https://github.com/foundry-rs/foundry/blob/master/anvil/README.md).
+
+```sh
+anvil
+```
+
+Configure your environment variables for your local chain settings.
+
 ## Addresses
 
 The following is a list of contracts that are deployed by this script.
