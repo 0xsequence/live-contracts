@@ -33,7 +33,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
 
   // v1
 
-  prompt.info(`Deploying V1 contracts`)
+  prompt.start(`Deploying V1 contracts`)
   
   const txParams = {
     // gasLimit: BigNumber.from(7500000),
@@ -71,9 +71,11 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128'
   )
 
+  prompt.succeed(`Deployed V1 contracts`)
+
   // v2
 
-  prompt.info(`Deploying V2 contracts`)
+  prompt.start(`Deploying V2 contracts`)
 
   const singletonDeployer = new SingletonDeployer(signer, console)
 
@@ -97,6 +99,8 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     mainModuleV2.address,
     '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4'
   )
+
+  prompt.succeed(`Deployed V2 contracts`)
 
   // Output addresses
 
