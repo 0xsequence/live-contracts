@@ -14,11 +14,22 @@ import {
   SequenceUtilsV1
 } from './factories/v1'
 import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2 } from './factories/v2'
-import { SingletonDeployer, UniversalDeployer } from '@0xsequence/solidity-deployer/dist/src/deployers'
+import { deployers, verifiers } from '@0xsequence/solidity-deployer'
+import { GUEST_MODULE_V1_VERIFICATION } from './factories/v1/GuestModuleV1'
+import { MAIN_MODULE_V1_VERIFICATION } from './factories/v1/MainModuleV1'
+import { MAIN_MODULE_UPGRADABLE_V1_VERIFICATION } from './factories/v1/MainModuleUpgradableV1'
+import { FACTORY_V1_VERIFICATION } from './factories/v1/FactoryV1'
+import { SEQUENCE_UTILS_V1_VERIFICATION } from './factories/v1/SequenceUtilsV1'
+import { REQUIRE_FRESH_SIGNER_V1_VERIFICATION } from './factories/v1/RequireFreshSignerV1'
+import { FACTORY_V2_VERIFICATION } from './factories/v2/FactoryV2'
+import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
+import { MAIN_MODULE_UPGRADABLE_V2_VERIFICATION } from './factories/v2/MainModuleUpgradableV2'
+import { GUEST_MODULE_V2_VERIFICATION } from './factories/v2/GuestModuleV2'
+import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
 
 dotenvConfig()
 
-const { RPC_URL, DEPLOYER_PRIVATE_KEY, NETWORK_NAME } = process.env
+const { RPC_URL, DEPLOYER_PRIVATE_KEY, NETWORK_NAME, VERIFIER_API_URL, VERIFIER_API_KEY } = process.env
 
 export const deployContracts = async (rpcUrl: string, deployerPK: string, networkName?: string): Promise<void> => {
   const prompt = ora()
@@ -34,19 +45,19 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
   // v1
 
   prompt.start(`Deploying V1 contracts`)
-  
+
   const txParams = {
     // gasLimit: BigNumber.from(7500000),
     gasLimit: await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10))
     // gasPrice: BigNumber.from(10).pow(8).mul(16)
   }
 
-  const universalDeployer = new UniversalDeployer(signer, console)
+  const universalDeployer = new deployers.UniversalDeployer(signer, console)
 
-  const guestModuleV1 = await universalDeployer.deploy('GuestModule', GuestModuleV1, 0, txParams)
-  const mainModuleUpgradeableV1 = await universalDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV1, 0, txParams)
   const walletFactoryV1 = await universalDeployer.deploy('WalletFactory', FactoryV1, 0, txParams)
   const mainModuleV1 = await universalDeployer.deploy('MainModule', MainModuleV1, 0, txParams, walletFactoryV1.address)
+  const mainModuleUpgradeableV1 = await universalDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV1, 0, txParams)
+  const guestModuleV1 = await universalDeployer.deploy('GuestModule', GuestModuleV1, 0, txParams)
   const sequenceUtilsV1 = await universalDeployer.deploy(
     'SequenceUtils',
     SequenceUtilsV1,
@@ -77,7 +88,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
 
   prompt.start(`Deploying V2 contracts`)
 
-  const singletonDeployer = new SingletonDeployer(signer, console)
+  const singletonDeployer = new deployers.SingletonDeployer(signer, console)
 
   const walletFactoryV2 = await singletonDeployer.deploy('Factory', FactoryV2, 0, txParams)
   const mainModuleUpgradeableV2 = await singletonDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV2, 0, txParams)
@@ -128,6 +139,63 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     )
   )
   prompt.succeed()
+
+  // Verify contracts
+
+  if (!VERIFIER_API_KEY || !VERIFIER_API_URL) {
+    prompt.warn('Skipping contract verification.')
+    // Exit early
+    return
+  }
+
+  const verifier = new verifiers.EtherscanVerifier(VERIFIER_API_KEY, VERIFIER_API_URL, console)
+  const waitForSuccess = true // One at a time
+
+  const { defaultAbiCoder } = ethers.utils
+
+  // v1
+
+  prompt.start('Verifying V1 contracts')
+
+  await verifier.verifyContract(walletFactoryV1.address, { ...FACTORY_V1_VERIFICATION, waitForSuccess })
+  await verifier.verifyContract(mainModuleV1.address, {
+    ...MAIN_MODULE_V1_VERIFICATION,
+    constructorArgs: defaultAbiCoder.encode(['address'], [walletFactoryV1.address]),
+    waitForSuccess
+  })
+  await verifier.verifyContract(mainModuleUpgradeableV1.address, { ...MAIN_MODULE_UPGRADABLE_V1_VERIFICATION, waitForSuccess })
+  await verifier.verifyContract(guestModuleV1.address, { ...GUEST_MODULE_V1_VERIFICATION, waitForSuccess })
+  await verifier.verifyContract(sequenceUtilsV1.address, {
+    ...SEQUENCE_UTILS_V1_VERIFICATION,
+    constructorArgs: defaultAbiCoder.encode(['address', 'address'], [walletFactoryV1.address, mainModuleV1.address]),
+    waitForSuccess
+  })
+  await verifier.verifyContract(requireFreshSignerLibV1.address, {
+    ...REQUIRE_FRESH_SIGNER_V1_VERIFICATION,
+    constructorArgs: defaultAbiCoder.encode(['address'], [sequenceUtilsV1.address]),
+    waitForSuccess
+  })
+
+  prompt.succeed('Verified V1 contracts')
+
+  // v2
+
+  prompt.start('Verifying V2 contracts')
+
+  await verifier.verifyContract(walletFactoryV2.address, { ...FACTORY_V2_VERIFICATION, waitForSuccess })
+  await verifier.verifyContract(mainModuleUpgradeableV2.address, { ...MAIN_MODULE_UPGRADABLE_V2_VERIFICATION, waitForSuccess })
+  await verifier.verifyContract(mainModuleV2.address, {
+    ...MAIN_MODULE_V2_VERIFICATION,
+    constructorArgs: defaultAbiCoder.encode(['address', 'address'], [walletFactoryV2.address, mainModuleUpgradeableV2.address]),
+    waitForSuccess
+  })
+  await verifier.verifyContract(guestModuleV2.address, { ...GUEST_MODULE_V2_VERIFICATION, waitForSuccess })
+  await verifier.verifyContract(sequenceUtilsV2.address, {
+    ...SEQUENCE_UTILS_V2_VERIFICATION,
+    waitForSuccess
+  })
+
+  prompt.succeed('Verified V2 contracts')
 }
 
 const main = async () => {
