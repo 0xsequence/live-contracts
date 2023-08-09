@@ -5,8 +5,6 @@ import { config as dotenvConfig } from 'dotenv'
 import { ethers } from 'ethers'
 import fs from 'fs'
 import { deployGuard } from './factories/deployers/GuardDeployer'
-import { deployWithSingletonFactory } from './factories/deployers/SingletonFactory'
-import { deployWithUniversalDeployer } from './factories/deployers/UniversalDeployer'
 import {
   FactoryV1,
   GuestModuleV1,
@@ -16,6 +14,7 @@ import {
   SequenceUtilsV1
 } from './factories/v1'
 import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2 } from './factories/v2'
+import { SingletonDeployer, UniversalDeployer } from '@0xsequence/solidity-deployer/dist/src/deployers'
 
 dotenvConfig()
 
@@ -35,22 +34,32 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
   // v1
 
   prompt.info(`Deploying V1 contracts`)
+  
+  const txParams = {
+    // gasLimit: BigNumber.from(7500000),
+    gasLimit: await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10))
+    // gasPrice: BigNumber.from(10).pow(8).mul(16)
+  }
 
-  const guestModuleV1 = await deployWithUniversalDeployer(signer, 'GuestModule', GuestModuleV1)
-  const mainModuleUpgradeableV1 = await deployWithUniversalDeployer(signer, 'MainModuleUpgradable', MainModuleUpgradableV1)
-  const walletFactoryV1 = await deployWithUniversalDeployer(signer, 'WalletFactory', FactoryV1)
-  const mainModuleV1 = await deployWithUniversalDeployer(signer, 'MainModule', MainModuleV1, walletFactoryV1.address)
-  const sequenceUtilsV1 = await deployWithUniversalDeployer(
-    signer,
+  const universalDeployer = new UniversalDeployer(signer, console)
+
+  const guestModuleV1 = await universalDeployer.deploy('GuestModule', GuestModuleV1, 0, txParams)
+  const mainModuleUpgradeableV1 = await universalDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV1, 0, txParams)
+  const walletFactoryV1 = await universalDeployer.deploy('WalletFactory', FactoryV1, 0, txParams)
+  const mainModuleV1 = await universalDeployer.deploy('MainModule', MainModuleV1, 0, txParams, walletFactoryV1.address)
+  const sequenceUtilsV1 = await universalDeployer.deploy(
     'SequenceUtils',
     SequenceUtilsV1,
+    0,
+    txParams,
     walletFactoryV1.address,
     mainModuleV1.address
   )
-  const requireFreshSignerLibV1 = await deployWithUniversalDeployer(
-    signer,
+  const requireFreshSignerLibV1 = await universalDeployer.deploy(
     'RequireFreshSignerLib',
     RequireFreshSignerV1,
+    0,
+    txParams,
     sequenceUtilsV1.address
   )
 
@@ -66,17 +75,20 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
 
   prompt.info(`Deploying V2 contracts`)
 
-  const walletFactoryV2 = await deployWithSingletonFactory(signer, 'Factory', FactoryV2)
-  const mainModuleUpgradeableV2 = await deployWithSingletonFactory(signer, 'MainModuleUpgradable', MainModuleUpgradableV2)
-  const mainModuleV2 = await deployWithSingletonFactory(
-    signer,
+  const singletonDeployer = new SingletonDeployer(signer, console)
+
+  const walletFactoryV2 = await singletonDeployer.deploy('Factory', FactoryV2, 0, txParams)
+  const mainModuleUpgradeableV2 = await singletonDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV2, 0, txParams)
+  const mainModuleV2 = await singletonDeployer.deploy(
     'MainModule',
     MainModuleV2,
+    0,
+    txParams,
     walletFactoryV2.address,
     mainModuleUpgradeableV2.address
   )
-  const guestModuleV2 = await deployWithSingletonFactory(signer, 'GuestModule', GuestModuleV2)
-  const sequenceUtilsV2 = await deployWithSingletonFactory(signer, 'SequenceUtils', SequenceUtilsV2)
+  const guestModuleV2 = await singletonDeployer.deploy('GuestModule', GuestModuleV2, 0, txParams)
+  const sequenceUtilsV2 = await singletonDeployer.deploy('SequenceUtils', SequenceUtilsV2, 0, txParams)
 
   await deployGuard(
     walletFactoryV2,
