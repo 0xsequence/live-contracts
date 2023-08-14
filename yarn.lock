@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@0xsequence/solidity-deployer@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@0xsequence/solidity-deployer/-/solidity-deployer-0.0.3.tgz#f0127d3247ef3148df225e3bba0e8b31b7479d37"
-  integrity sha512-oxO6Ot5DY43yN1mEmnh1CjeJADiqoXYwrAQOF+I3SYZMf2QswTwoTOKUdmtZwArQvJ1VIfGeW2GC1OPOIjiyFA==
+"@0xsequence/solidity-deployer@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@0xsequence/solidity-deployer/-/solidity-deployer-0.0.4.tgz#76b1b97c72f5d26ab8257402b5cefa71e137d5d0"
+  integrity sha512-/+R993D9Eem2lzI7dQA1sXR9pVelWvT6Fgt5vhJbdO8OcK9cicnQ8QmMgqNzWSP8MwXmJ6fsnrG2P/2O/1oWPA==
   dependencies:
     "@tenderly/sdk" "^0.1.14"
     axios "^1.3.5"
@@ -508,9 +508,9 @@
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
 "@types/node@^20.4.2":
-  version "20.4.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.4.9.tgz#c7164e0f8d3f12dfae336af0b1f7fdec8c6b204f"
-  integrity sha512-8e2HYcg7ohnTUbHk8focoklEQYvemQmu9M/f43DZVx43kHn0tE3BY/6gSDxS7k0SprtS0NHvj+L80cGLnoOUcQ==
+  version "20.5.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.5.0.tgz#7fc8636d5f1aaa3b21e6245e97d56b7f56702313"
+  integrity sha512-Mgq7eCtoTjT89FqNoTzzXg2XvCi5VMhRV6+I2aYanc6kQCBImeNaAYRs/DyoVqk1YEUJK5gN9VO7HRIdz4Wo3Q==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -1500,9 +1500,9 @@ glob@^7.1.3:
     path-is-absolute "^1.0.0"
 
 globals@^13.6.0, globals@^13.9.0:
-  version "13.20.0"
-  resolved "https://registry.yarnpkg.com/globals/-/globals-13.20.0.tgz#ea276a1e508ffd4f1612888f9d1bad1e2717bf82"
-  integrity sha512-Qg5QtVkCy/kv3FUSlu4ukeZDVf9ee0iXLAUYX13gbR17bnejFTzr4iS9bY7kwCf1NztRNm1t91fjOiyx4CSwPQ==
+  version "13.21.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-13.21.0.tgz#163aae12f34ef502f5153cfbdd3600f36c63c571"
+  integrity sha512-ybyme3s4yy/t/3s35bewwXKOf7cvzfreG2lH0lZl0JB7I4GxRP2ghxOK/Nb9EkRXdbBXZLfq/p/0W2JUONB/Gg==
   dependencies:
     type-fest "^0.20.2"
 
