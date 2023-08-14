@@ -54,6 +54,21 @@ This has been noticed in Optimistic roll up chains such as [Base](https://base.o
 To check if the Sequence contracts have been deployed on a given network, run the deployment script connected to a wallet without any funds.
 A successful run indicates the contracts are already deployer on the network, as the script will fail if a deployment is required. 
 
+### Retrieve Source Code
+
+You can retrieve the source code from a contract that has already been deployed on an Etherscan compatible API.
+
+First, set the environment variables for `VERIFIER_API_URL` and `VERIFIER_API_KEY`.
+Then within `scripts/download-source-code.ts` replace the `addr` variable value with the address of the contract you want to retrieve.
+
+Then run the following command:
+
+```sh
+yarn source
+```
+
+The source code will be downloaded to a file called `output.json`.
+
 ## Development
 
 After installing dependencies please install the git hooks.
