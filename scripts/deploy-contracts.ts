@@ -44,7 +44,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
 
   // v1
 
-  prompt.start(`Deploying V1 contracts`)
+  prompt.start(`Deploying V1 contracts\n`)
 
   const txParams = {
     // gasLimit: BigNumber.from(7500000),
@@ -82,11 +82,11 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128'
   )
 
-  prompt.succeed(`Deployed V1 contracts`)
+  prompt.succeed(`Deployed V1 contracts\n`)
 
   // v2
 
-  prompt.start(`Deploying V2 contracts`)
+  prompt.start(`Deploying V2 contracts\n`)
 
   const singletonDeployer = new deployers.SingletonDeployer(signer, console) //, undefined, BigNumber.from('30000000000000000'))
 
@@ -111,11 +111,11 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4'
   )
 
-  prompt.succeed(`Deployed V2 contracts`)
+  prompt.succeed(`Deployed V2 contracts\n`)
 
   // Output addresses
 
-  prompt.start(`Writing deployment information to output_${networkName}.json`)
+  prompt.start(`Writing deployment information to output_${networkName}.json\n`)
   fs.writeFileSync(
     `./output_${networkName}.json`,
     JSON.stringify(
@@ -138,12 +138,12 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
       2
     )
   )
-  prompt.succeed()
+  prompt.succeed(`Wrote deployment information to output_${networkName}.json\n`)
 
   // Verify contracts
 
   if (!VERIFIER_API_KEY || !VERIFIER_API_URL) {
-    prompt.warn('Skipping contract verification.')
+    prompt.warn('Skipping contract verification.\n')
     // Exit early
     return
   }
@@ -155,7 +155,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
 
   // v1
 
-  prompt.start('Verifying V1 contracts')
+  prompt.start('Verifying V1 contracts\n')
 
   await verifier.verifyContract(walletFactoryV1.address, { ...FACTORY_V1_VERIFICATION, waitForSuccess })
   await verifier.verifyContract(mainModuleV1.address, {
@@ -176,11 +176,11 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     waitForSuccess
   })
 
-  prompt.succeed('Verified V1 contracts')
+  prompt.succeed('Verified V1 contracts\n')
 
   // v2
 
-  prompt.start('Verifying V2 contracts')
+  prompt.start('Verifying V2 contracts\n')
 
   await verifier.verifyContract(walletFactoryV2.address, { ...FACTORY_V2_VERIFICATION, waitForSuccess })
   await verifier.verifyContract(mainModuleUpgradeableV2.address, { ...MAIN_MODULE_UPGRADABLE_V2_VERIFICATION, waitForSuccess })
@@ -195,7 +195,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     waitForSuccess
   })
 
-  prompt.succeed('Verified V2 contracts')
+  prompt.succeed('Verified V2 contracts\n')
 }
 
 const main = async () => {
