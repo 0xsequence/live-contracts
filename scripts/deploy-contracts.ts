@@ -26,6 +26,7 @@ import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { MAIN_MODULE_UPGRADABLE_V2_VERIFICATION } from './factories/v2/MainModuleUpgradableV2'
 import { GUEST_MODULE_V2_VERIFICATION } from './factories/v2/GuestModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
+import { ORDERBOOK_VERIFICATION, Orderbook } from './factories/orderbook/Orderbook'
 
 dotenvConfig()
 
@@ -113,6 +114,12 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
 
   prompt.succeed(`Deployed V2 contracts\n`)
 
+  // Marketplace contracts
+
+  prompt.start(`Deploying Marketplace contracts\n`)
+  const orderbook = await singletonDeployer.deploy('Orderbook', Orderbook, 0, txParams)
+  prompt.succeed(`Deployed Marketplace contracts\n`)
+
   // Output addresses
 
   prompt.start(`Writing deployment information to output_${networkName}.json\n`)
@@ -132,7 +139,8 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
         { name: 'SequenceUtilsV1', address: sequenceUtilsV1.address },
         { name: 'RequireFreshSignerLibV1', address: requireFreshSignerLibV1.address },
         { name: 'GuardV2', address: '0x761f5e29944D79d76656323F106CF2efBF5F09e9' },
-        { name: 'GuardV1', address: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab' }
+        { name: 'GuardV1', address: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab' },
+        { name: 'Orderbook', address: orderbook.address },
       ],
       null,
       2
@@ -196,6 +204,12 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
   })
 
   prompt.succeed('Verified V2 contracts\n')
+
+  // Marketplace
+
+  prompt.start('Verifying Marketplace contracts\n')
+  await verifier.verifyContract(orderbook.address, { ...ORDERBOOK_VERIFICATION, waitForSuccess })
+  prompt.succeed('Verified Marketplace contracts\n')
 }
 
 const main = async () => {

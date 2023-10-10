@@ -27,7 +27,7 @@ async function downloadJsonFromApi(apiUrl: string, outputFile: string): Promise<
 }
 
 //FIXME Change this to the address of the contract you want to download
-const addr = '0xdbbFa3cB3B087B64F4ef5E3D20Dda2488AA244e6';
+const addr = '0x105430acDFE0bf65cD0331DFc2FB2420Ace73895';
 const outputFile = 'output.json';
 
 const apiUrl = `${VERIFIER_API_URL}?module=contract&action=getsourcecode&apikey=${VERIFIER_API_KEY}&address=${addr}`;
