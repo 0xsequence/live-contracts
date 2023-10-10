@@ -88,7 +88,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
 
   prompt.start(`Deploying V2 contracts`)
 
-  const singletonDeployer = new deployers.SingletonDeployer(signer, console)
+  const singletonDeployer = new deployers.SingletonDeployer(signer, console) //, undefined, BigNumber.from('30000000000000000'))
 
   const walletFactoryV2 = await singletonDeployer.deploy('Factory', FactoryV2, 0, txParams)
   const mainModuleUpgradeableV2 = await singletonDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV2, 0, txParams)
