@@ -41,7 +41,7 @@ yarn deploy
 The deployment flow relies on pre-[EIP-155](https://eips.ethereum.org/EIPS/eip-155) transactions.
 If your selected RPC node enforces EIP-155, deployments will fail.
 
-### Gotcha: Gas Costs
+#### Gotcha: Gas Costs
 
 Deployments of the [Universal Deployer](https://gist.github.com/Agusx1211/de05dabf918d448d315aa018e2572031) and [Singleton Factory](https://eips.ethereum.org/EIPS/eip-2470) use a generated deployer address.
 This address is funded with a fixed amount of ETH as per their EIP definition.
@@ -53,21 +53,6 @@ This has been noticed in Optimistic roll up chains such as [Base](https://base.o
 
 To check if the Sequence contracts have been deployed on a given network, run the deployment script connected to a wallet without any funds.
 A successful run indicates the contracts are already deployer on the network, as the script will fail if a deployment is required. 
-
-### Retrieve Source Code
-
-You can retrieve the source code from a contract that has already been deployed on an Etherscan compatible API.
-
-First, set the environment variables for `VERIFIER_API_URL` and `VERIFIER_API_KEY`.
-Then within `scripts/download-source-code.ts` replace the `addr` variable value with the address of the contract you want to retrieve.
-
-Then run the following command:
-
-```sh
-yarn source
-```
-
-The source code will be downloaded to a file called `output.json`.
 
 ## Development
 
@@ -84,6 +69,38 @@ anvil
 ```
 
 Configure your environment variables for your local chain settings.
+
+### Adding a New Contract
+
+To add a new contract, create a new contract factory in the `scripts/factories` directory.
+Include the contract's ABI, bytecode and deployment source in the factory.
+
+Update `scripts/deploy-contracts.ts` to:
+
+* Deploy the contract using the factory
+* Add the contract address to the `Output addresses` for debugging purposes
+* Add contract source verification add the end of the script
+
+**Make sure to include logging in each step!**
+
+You can include configuration / initialization steps in the `scripts/deploy-contracts.ts` script if required.
+
+Note: Using the `SingletonDeployer` is the preferred method for deploying contracts.
+
+### Retrieve Source Code
+
+If you have already deployed the contract with another script and want to migrate here, you can retrieve the source code from the Etherscan (or other compatible APIs).
+
+First, set the environment variables for `VERIFIER_API_URL` and `VERIFIER_API_KEY`.
+Then within `scripts/download-source-code.ts` replace the `addr` variable value with the address of the contract you want to retrieve.
+
+Then run the following command:
+
+```sh
+yarn source
+```
+
+The source code will be downloaded to a file called `output.json`.
 
 ## Addresses
 
