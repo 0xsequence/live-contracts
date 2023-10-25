@@ -1,4 +1,4 @@
-import ora from 'ora'
+import ora, { Ora } from 'ora'
 
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { config as dotenvConfig } from 'dotenv'
@@ -30,10 +30,21 @@ import { ORDERBOOK_VERIFICATION, Orderbook } from './factories/orderbook/Orderbo
 
 dotenvConfig()
 
+interface Logger {
+  log(message: string): void
+  error(message: string): void
+}
+
 const { RPC_URL, DEPLOYER_PRIVATE_KEY, NETWORK_NAME, VERIFIER_API_URL, VERIFIER_API_KEY } = process.env
 
 export const deployContracts = async (rpcUrl: string, deployerPK: string, networkName?: string): Promise<void> => {
-  const prompt = ora()
+  const prompt = ora() as Ora & Logger
+  prompt.log = (message: string) => {
+    // Log a message and keep spinner running
+    const currentText = prompt.text
+    prompt.info(message)
+    prompt.start(currentText)
+  }
 
   const provider = new JsonRpcProvider(rpcUrl)
   const signer = new ethers.Wallet(deployerPK, provider)
@@ -53,7 +64,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     // gasPrice: BigNumber.from(10).pow(8).mul(16)
   }
 
-  const universalDeployer = new deployers.UniversalDeployer(signer, console)
+  const universalDeployer = new deployers.UniversalDeployer(signer, prompt)
 
   const walletFactoryV1 = await universalDeployer.deploy('WalletFactory', FactoryV1, 0, txParams)
   const mainModuleV1 = await universalDeployer.deploy('MainModule', MainModuleV1, 0, txParams, walletFactoryV1.address)
@@ -89,7 +100,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
 
   prompt.start(`Deploying V2 contracts\n`)
 
-  const singletonDeployer = new deployers.SingletonDeployer(signer, console) //, undefined, BigNumber.from('30000000000000000'))
+  const singletonDeployer = new deployers.SingletonDeployer(signer, prompt) //, undefined, BigNumber.from('30000000000000000'))
 
   const walletFactoryV2 = await singletonDeployer.deploy('Factory', FactoryV2, 0, txParams)
   const mainModuleUpgradeableV2 = await singletonDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV2, 0, txParams)
@@ -156,7 +167,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     return
   }
 
-  const verifier = new verifiers.EtherscanVerifier(VERIFIER_API_KEY, VERIFIER_API_URL, console)
+  const verifier = new verifiers.EtherscanVerifier(VERIFIER_API_KEY, VERIFIER_API_URL, prompt)
   const waitForSuccess = true // One at a time
 
   const { defaultAbiCoder } = ethers.utils
