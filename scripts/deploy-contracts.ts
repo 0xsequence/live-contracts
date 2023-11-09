@@ -98,7 +98,8 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     'Guard V1',
     '0x596aF90CecdBF9A768886E771178fd5561dD27Ab',
     mainModuleV1.address,
-    '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128'
+    '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128',
+    txParams
   )
 
   prompt.succeed(`Deployed V1 contracts\n`)
@@ -127,7 +128,8 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     'Guard V2',
     '0x761f5e29944D79d76656323F106CF2efBF5F09e9',
     mainModuleV2.address,
-    '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4'
+    '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4',
+    txParams
   )
 
   prompt.succeed(`Deployed V2 contracts\n`)
@@ -145,7 +147,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     sequenceUtils: sequenceUtilsV2.address,
     walletCreationCode: WALLET_CREATION_CODE
   }
-  const developerMultisig = await deployDeveloperMultisig(signer, v2WalletContext)
+  const developerMultisig = await deployDeveloperMultisig(signer, v2WalletContext, txParams)
   prompt.succeed(`Deployed Sequence development multisig\n`)
 
   // Marketplace contracts

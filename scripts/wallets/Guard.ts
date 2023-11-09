@@ -6,7 +6,8 @@ export const deployGuard = async (
   guardAlias: string,
   guardAddr: string,
   mainModuleAddr: string,
-  salt: string
+  salt: string,
+  txParams?: ethers.providers.TransactionRequest
 ): Promise<void> => {
   if (!factory.hasOwnProperty('deploy')) throw new Error('Factory must have a deploy method')
   if (!factory.signer.provider) throw new Error('Signer must be connected to a provider')
@@ -19,12 +20,13 @@ export const deployGuard = async (
     return
   }
 
-  const txParams = {
+  const params = {
     // gasLimit: BigNumber.from(7500000),
-    gasLimit: await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10))
-    // gasPrice: BigNumber.from(10).pow(8).mul(16)
+    gasLimit: await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10)),
+    // gasPrice: BigNumber.from(10).pow(8).mul(16),
+    ...txParams
   }
-  const tx = await factory.deploy(mainModuleAddr, salt, txParams)
+  const tx = await factory.deploy(mainModuleAddr, salt, params)
   await tx.wait()
 
   // Double check

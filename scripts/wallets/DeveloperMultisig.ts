@@ -47,7 +47,8 @@ const EXPECTED_ADDRESS = '0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4'
  */
 export const deployDeveloperMultisig = async (
   signer: ethers.Signer,
-  context: commons.context.WalletContext
+  context: commons.context.WalletContext,
+  txParams?: ethers.providers.TransactionRequest
 ): Promise<WalletType> => {
   const { provider } = signer
   if (!provider) {
@@ -62,6 +63,11 @@ export const deployDeveloperMultisig = async (
     throw new Error('Developer multisig address is not correct')
   }
 
+  const relayer = new LocalRelayer(signer)
+  if (txParams) {
+    relayer.setTransactionOptions(txParams)
+  }
+
   const wallet = new Wallet({
     coders: {
       signature: v2.signature.SignatureCoder,
@@ -73,7 +79,7 @@ export const deployDeveloperMultisig = async (
     address,
     orchestrator: new Orchestrator([]),
     provider,
-    relayer: new LocalRelayer(signer)
+    relayer
   })
 
   if (await wallet.reader().isDeployed(wallet.address)) {
