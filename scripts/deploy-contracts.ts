@@ -33,6 +33,11 @@ import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
+import {
+  TUBPROXY_VERIFICATION,
+  TransparentUpgradeableBeaconProxy
+} from './factories/token_library/TransparentUpgradeableBeaconProxy'
+import { UPGRADEABLEBEACON_VERIFICATION, UpgradeableBeacon } from './factories/token_library/UpgradeableBeacon'
 
 dotenvConfig()
 
@@ -296,6 +301,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
   // Library contracts
 
   prompt.start(`Verifying Library contracts\n`)
+  // Factories
   await verifier.verifyContract(erc20MinterFactory.address, {
     ...ERC20MINTERFACTORY_VERIFICATION,
     waitForSuccess,
@@ -321,6 +327,53 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     waitForSuccess,
     constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
   })
+  // Also deploy the TUBProxy for verification purposes
+  const tubProxy = await singletonDeployer.deploy(
+    'TransparentUpgradeableBeaconProxy',
+    TransparentUpgradeableBeaconProxy,
+    0,
+    txParams
+  )
+  // Token contracts deployed by the factories
+  const beacon = new UpgradeableBeacon(signer)
+  await verifier.verifyContract(await beacon.attach(await erc20MinterFactory.beacon()).implementation(), {
+    ...ERC20MINTERFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC20/presets/minter/ERC20TokenMinter.sol:ERC20TokenMinter',
+    waitForSuccess
+  })
+  await verifier.verifyContract(await beacon.attach(await erc721MinterFactory.beacon()).implementation(), {
+    ...ERC721MINTERFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC721/presets/minter/ERC721TokenMinter.sol:ERC721TokenMinter',
+    waitForSuccess
+  })
+  await verifier.verifyContract(await beacon.attach(await erc721SaleFactory.beacon()).implementation(), {
+    ...ERC721SALEFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC721/presets/sale/ERC721Sale.sol:ERC721Sale',
+    waitForSuccess
+  })
+  await verifier.verifyContract(await beacon.attach(await erc1155MinterFactory.beacon()).implementation(), {
+    ...ERC1155MINTERFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC1155/presets/minter/ERC1155TokenMinter.sol:ERC1155TokenMinter',
+    waitForSuccess
+  })
+  const erc1155SaleBeacon = await erc1155SaleFactory.beacon()
+  const erc1155SaleImplementation = await beacon.attach(erc1155SaleBeacon).implementation()
+  await verifier.verifyContract(erc1155SaleImplementation, {
+    ...ERC1155SALEFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC1155/presets/sale/ERC1155Sale.sol:ERC1155Sale',
+    waitForSuccess
+  })
+  // Proxies
+  await verifier.verifyContract(erc1155SaleBeacon, {
+    ...UPGRADEABLEBEACON_VERIFICATION,
+    waitForSuccess,
+    constructorArgs: defaultAbiCoder.encode(['address'], [erc1155SaleImplementation])
+  })
+  await verifier.verifyContract(tubProxy.address, {
+    ...TUBPROXY_VERIFICATION,
+    waitForSuccess
+  })
+
   prompt.succeed(`Verified Library contracts\n`)
 }
 
