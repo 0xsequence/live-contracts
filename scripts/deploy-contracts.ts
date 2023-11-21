@@ -46,7 +46,7 @@ interface Logger {
   error(message: string): void
 }
 
-const { RPC_URL, DEPLOYER_PRIVATE_KEY, NETWORK_NAME, VERIFIER_API_URL, VERIFIER_API_KEY } = process.env
+const { RPC_URL, DEPLOYER_PRIVATE_KEY, NETWORK_NAME, VERIFIER_API_URL, VERIFIER_API_KEY, GAS_LIMIT, GAS_PRICE } = process.env
 
 export const deployContracts = async (rpcUrl: string, deployerPK: string, networkName?: string): Promise<void> => {
   const prompt = ora() as Ora & Logger
@@ -63,12 +63,15 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
   provider.getSigner = () => signer as unknown as ethers.providers.JsonRpcSigner
 
   prompt.info(`Network Name:           ${networkName}`)
+  prompt.info(`Chain Id: ${(await provider.getNetwork()).chainId}`)
+  prompt.info(`Gas price: ${await provider.getGasPrice()}`)
   prompt.info(`Local Deployer Address: ${await signer.getAddress()}`)
   prompt.info(`Local Deployer Balance: ${await signer.getBalance()}`)
 
   const txParams = {
-    // gasLimit: BigNumber.from(15000000)
-    gasLimit: await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10))
+    gasPrice: GAS_PRICE ? BigNumber.from(GAS_PRICE) : undefined, // Automated gas price
+    // gasPrice: (await provider.getGasPrice()).mul(3).div(2), // 1.5x gas price
+    gasLimit: GAS_LIMIT ? BigNumber.from(GAS_LIMIT) : await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10))
     // gasPrice: BigNumber.from(10).pow(8).mul(16)
   }
 
