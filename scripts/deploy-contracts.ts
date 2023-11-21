@@ -1,10 +1,16 @@
-import ora from 'ora'
+import ora, { Ora } from 'ora'
 
+import { deployers, verifiers } from '@0xsequence/solidity-deployer'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { config as dotenvConfig } from 'dotenv'
-import { ethers } from 'ethers'
-import fs from 'fs'
-import { deployGuard } from './factories/deployers/GuardDeployer'
+import { BigNumber, ethers } from 'ethers'
+import { writeFile } from 'fs/promises'
+import { ORDERBOOK_VERIFICATION, Orderbook } from './factories/orderbook/Orderbook'
+import { ERC1155MINTERFACTORY_VERIFICATION, ERC1155MinterFactory } from './factories/token_library/ERC1155MinterFactory'
+import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
+import { ERC20MINTERFACTORY_VERIFICATION, ERC20MinterFactory } from './factories/token_library/ERC20MinterFactory'
+import { ERC721MINTERFACTORY_VERIFICATION, ERC721MinterFactory } from './factories/token_library/ERC721MinterFactory'
+import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
 import {
   FactoryV1,
   GuestModuleV1,
@@ -13,47 +19,67 @@ import {
   RequireFreshSignerV1,
   SequenceUtilsV1
 } from './factories/v1'
-import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2 } from './factories/v2'
-import { deployers, verifiers } from '@0xsequence/solidity-deployer'
-import { GUEST_MODULE_V1_VERIFICATION } from './factories/v1/GuestModuleV1'
-import { MAIN_MODULE_V1_VERIFICATION } from './factories/v1/MainModuleV1'
-import { MAIN_MODULE_UPGRADABLE_V1_VERIFICATION } from './factories/v1/MainModuleUpgradableV1'
 import { FACTORY_V1_VERIFICATION } from './factories/v1/FactoryV1'
-import { SEQUENCE_UTILS_V1_VERIFICATION } from './factories/v1/SequenceUtilsV1'
+import { GUEST_MODULE_V1_VERIFICATION } from './factories/v1/GuestModuleV1'
+import { MAIN_MODULE_UPGRADABLE_V1_VERIFICATION } from './factories/v1/MainModuleUpgradableV1'
+import { MAIN_MODULE_V1_VERIFICATION } from './factories/v1/MainModuleV1'
 import { REQUIRE_FRESH_SIGNER_V1_VERIFICATION } from './factories/v1/RequireFreshSignerV1'
-import { FACTORY_V2_VERIFICATION } from './factories/v2/FactoryV2'
-import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
-import { MAIN_MODULE_UPGRADABLE_V2_VERIFICATION } from './factories/v2/MainModuleUpgradableV2'
+import { SEQUENCE_UTILS_V1_VERIFICATION } from './factories/v1/SequenceUtilsV1'
+import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2 } from './factories/v2'
+import { FACTORY_V2_VERIFICATION, WALLET_CREATION_CODE } from './factories/v2/FactoryV2'
 import { GUEST_MODULE_V2_VERIFICATION } from './factories/v2/GuestModuleV2'
+import { MAIN_MODULE_UPGRADABLE_V2_VERIFICATION } from './factories/v2/MainModuleUpgradableV2'
+import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
-import { ORDERBOOK_VERIFICATION, Orderbook } from './factories/orderbook/Orderbook'
+import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
+import { deployGuard } from './wallets/Guard'
+import {
+  TUBPROXY_VERIFICATION,
+  TransparentUpgradeableBeaconProxy
+} from './factories/token_library/TransparentUpgradeableBeaconProxy'
+import { UPGRADEABLEBEACON_VERIFICATION, UpgradeableBeacon } from './factories/token_library/UpgradeableBeacon'
 
 dotenvConfig()
 
-const { RPC_URL, DEPLOYER_PRIVATE_KEY, NETWORK_NAME, VERIFIER_API_URL, VERIFIER_API_KEY } = process.env
+interface Logger {
+  log(message: string): void
+  error(message: string): void
+}
+
+const { RPC_URL, DEPLOYER_PRIVATE_KEY, NETWORK_NAME, VERIFIER_API_URL, VERIFIER_API_KEY, GAS_LIMIT, GAS_PRICE } = process.env
 
 export const deployContracts = async (rpcUrl: string, deployerPK: string, networkName?: string): Promise<void> => {
-  const prompt = ora()
+  const prompt = ora() as Ora & Logger
+  prompt.log = (message: string) => {
+    // Log a message and keep spinner running
+    const currentText = prompt.text
+    prompt.info(message)
+    prompt.start(currentText)
+  }
+  prompt.error = prompt.fail
 
   const provider = new JsonRpcProvider(rpcUrl)
   const signer = new ethers.Wallet(deployerPK, provider)
   provider.getSigner = () => signer as unknown as ethers.providers.JsonRpcSigner
 
   prompt.info(`Network Name:           ${networkName}`)
+  prompt.info(`Chain Id: ${(await provider.getNetwork()).chainId}`)
+  prompt.info(`Gas price: ${await provider.getGasPrice()}`)
   prompt.info(`Local Deployer Address: ${await signer.getAddress()}`)
   prompt.info(`Local Deployer Balance: ${await signer.getBalance()}`)
+
+  const txParams = {
+    gasPrice: GAS_PRICE ? BigNumber.from(GAS_PRICE) : undefined, // Automated gas price
+    // gasPrice: (await provider.getGasPrice()).mul(3).div(2), // 1.5x gas price
+    gasLimit: GAS_LIMIT ? BigNumber.from(GAS_LIMIT) : await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10))
+    // gasPrice: BigNumber.from(10).pow(8).mul(16)
+  }
 
   // v1
 
   prompt.start(`Deploying V1 contracts\n`)
 
-  const txParams = {
-    // gasLimit: BigNumber.from(7500000),
-    gasLimit: await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10))
-    // gasPrice: BigNumber.from(10).pow(8).mul(16)
-  }
-
-  const universalDeployer = new deployers.UniversalDeployer(signer, console)
+  const universalDeployer = new deployers.UniversalDeployer(signer, prompt)
 
   const walletFactoryV1 = await universalDeployer.deploy('WalletFactory', FactoryV1, 0, txParams)
   const mainModuleV1 = await universalDeployer.deploy('MainModule', MainModuleV1, 0, txParams, walletFactoryV1.address)
@@ -80,7 +106,8 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     'Guard V1',
     '0x596aF90CecdBF9A768886E771178fd5561dD27Ab',
     mainModuleV1.address,
-    '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128'
+    '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128',
+    txParams
   )
 
   prompt.succeed(`Deployed V1 contracts\n`)
@@ -89,7 +116,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
 
   prompt.start(`Deploying V2 contracts\n`)
 
-  const singletonDeployer = new deployers.SingletonDeployer(signer, console) //, undefined, BigNumber.from('30000000000000000'))
+  const singletonDeployer = new deployers.SingletonDeployer(signer, prompt) //, undefined, BigNumber.from('30000000000000000'))
 
   const walletFactoryV2 = await singletonDeployer.deploy('Factory', FactoryV2, 0, txParams)
   const mainModuleUpgradeableV2 = await singletonDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV2, 0, txParams)
@@ -109,10 +136,27 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     'Guard V2',
     '0x761f5e29944D79d76656323F106CF2efBF5F09e9',
     mainModuleV2.address,
-    '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4'
+    '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4',
+    txParams
   )
 
   prompt.succeed(`Deployed V2 contracts\n`)
+
+  // Sequence development multisig
+
+  prompt.start(`Deploying Sequence development multisig\n`)
+
+  const v2WalletContext = {
+    version: 2,
+    factory: walletFactoryV2.address,
+    mainModule: mainModuleV2.address,
+    mainModuleUpgradable: mainModuleUpgradeableV2.address,
+    guestModule: guestModuleV2.address,
+    sequenceUtils: sequenceUtilsV2.address,
+    walletCreationCode: WALLET_CREATION_CODE
+  }
+  const developerMultisig = await deployDeveloperMultisig(signer, v2WalletContext, txParams)
+  prompt.succeed(`Deployed Sequence development multisig\n`)
 
   // Marketplace contracts
 
@@ -120,10 +164,50 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
   const orderbook = await singletonDeployer.deploy('Orderbook', Orderbook, 0, txParams)
   prompt.succeed(`Deployed Marketplace contracts\n`)
 
+  // Contracts library
+
+  prompt.start(`Deploying Library contracts\n`)
+  const erc20MinterFactory = await singletonDeployer.deploy(
+    'ERC20MinterFactory',
+    ERC20MinterFactory,
+    0,
+    txParams,
+    developerMultisig.address
+  )
+  const erc721MinterFactory = await singletonDeployer.deploy(
+    'ERC721MinterFactory',
+    ERC721MinterFactory,
+    0,
+    txParams,
+    developerMultisig.address
+  )
+  const erc721SaleFactory = await singletonDeployer.deploy(
+    'ERC721SaleFactory',
+    ERC721SaleFactory,
+    0,
+    txParams,
+    developerMultisig.address
+  )
+  const erc1155MinterFactory = await singletonDeployer.deploy(
+    'ERC1155MinterFactory',
+    ERC1155MinterFactory,
+    0,
+    txParams,
+    developerMultisig.address
+  )
+  const erc1155SaleFactory = await singletonDeployer.deploy(
+    'ERC1155SaleFactory',
+    ERC1155SaleFactory,
+    0,
+    txParams,
+    developerMultisig.address
+  )
+  prompt.succeed(`Deployed Library contracts\n`)
+
   // Output addresses
 
   prompt.start(`Writing deployment information to output_${networkName}.json\n`)
-  fs.writeFileSync(
+  void writeFile(
     `./output_${networkName}.json`,
     JSON.stringify(
       [
@@ -140,7 +224,13 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
         { name: 'RequireFreshSignerLibV1', address: requireFreshSignerLibV1.address },
         { name: 'GuardV2', address: '0x761f5e29944D79d76656323F106CF2efBF5F09e9' },
         { name: 'GuardV1', address: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab' },
+        { name: 'DeveloperMultisig', address: developerMultisig.address },
         { name: 'Orderbook', address: orderbook.address },
+        { name: 'ERC20MinterFactory', address: erc20MinterFactory.address },
+        { name: 'ERC721MinterFactory', address: erc721MinterFactory.address },
+        { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
+        { name: 'ERC1155MinterFactory', address: erc1155MinterFactory.address },
+        { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address }
       ],
       null,
       2
@@ -156,7 +246,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
     return
   }
 
-  const verifier = new verifiers.EtherscanVerifier(VERIFIER_API_KEY, VERIFIER_API_URL, console)
+  const verifier = new verifiers.EtherscanVerifier(VERIFIER_API_KEY, VERIFIER_API_URL, prompt)
   const waitForSuccess = true // One at a time
 
   const { defaultAbiCoder } = ethers.utils
@@ -210,6 +300,84 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
   prompt.start('Verifying Marketplace contracts\n')
   await verifier.verifyContract(orderbook.address, { ...ORDERBOOK_VERIFICATION, waitForSuccess })
   prompt.succeed('Verified Marketplace contracts\n')
+
+  // Library contracts
+
+  prompt.start(`Verifying Library contracts\n`)
+  // Factories
+  await verifier.verifyContract(erc20MinterFactory.address, {
+    ...ERC20MINTERFACTORY_VERIFICATION,
+    waitForSuccess,
+    constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+  })
+  await verifier.verifyContract(erc721MinterFactory.address, {
+    ...ERC721MINTERFACTORY_VERIFICATION,
+    waitForSuccess,
+    constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+  })
+  await verifier.verifyContract(erc721SaleFactory.address, {
+    ...ERC721SALEFACTORY_VERIFICATION,
+    waitForSuccess,
+    constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+  })
+  await verifier.verifyContract(erc1155MinterFactory.address, {
+    ...ERC1155MINTERFACTORY_VERIFICATION,
+    waitForSuccess,
+    constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+  })
+  await verifier.verifyContract(erc1155SaleFactory.address, {
+    ...ERC1155SALEFACTORY_VERIFICATION,
+    waitForSuccess,
+    constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+  })
+  // Also deploy the TUBProxy for verification purposes
+  const tubProxy = await singletonDeployer.deploy(
+    'TransparentUpgradeableBeaconProxy',
+    TransparentUpgradeableBeaconProxy,
+    0,
+    txParams
+  )
+  // Token contracts deployed by the factories
+  const beacon = new UpgradeableBeacon(signer)
+  await verifier.verifyContract(await beacon.attach(await erc20MinterFactory.beacon()).implementation(), {
+    ...ERC20MINTERFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC20/presets/minter/ERC20TokenMinter.sol:ERC20TokenMinter',
+    waitForSuccess
+  })
+  await verifier.verifyContract(await beacon.attach(await erc721MinterFactory.beacon()).implementation(), {
+    ...ERC721MINTERFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC721/presets/minter/ERC721TokenMinter.sol:ERC721TokenMinter',
+    waitForSuccess
+  })
+  await verifier.verifyContract(await beacon.attach(await erc721SaleFactory.beacon()).implementation(), {
+    ...ERC721SALEFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC721/presets/sale/ERC721Sale.sol:ERC721Sale',
+    waitForSuccess
+  })
+  await verifier.verifyContract(await beacon.attach(await erc1155MinterFactory.beacon()).implementation(), {
+    ...ERC1155MINTERFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC1155/presets/minter/ERC1155TokenMinter.sol:ERC1155TokenMinter',
+    waitForSuccess
+  })
+  const erc1155SaleBeacon = await erc1155SaleFactory.beacon()
+  const erc1155SaleImplementation = await beacon.attach(erc1155SaleBeacon).implementation()
+  await verifier.verifyContract(erc1155SaleImplementation, {
+    ...ERC1155SALEFACTORY_VERIFICATION,
+    contractToVerify: 'src/tokens/ERC1155/presets/sale/ERC1155Sale.sol:ERC1155Sale',
+    waitForSuccess
+  })
+  // Proxies
+  await verifier.verifyContract(erc1155SaleBeacon, {
+    ...UPGRADEABLEBEACON_VERIFICATION,
+    waitForSuccess,
+    constructorArgs: defaultAbiCoder.encode(['address'], [erc1155SaleImplementation])
+  })
+  await verifier.verifyContract(tubProxy.address, {
+    ...TUBPROXY_VERIFICATION,
+    waitForSuccess
+  })
+
+  prompt.succeed(`Verified Library contracts\n`)
 }
 
 const main = async () => {
