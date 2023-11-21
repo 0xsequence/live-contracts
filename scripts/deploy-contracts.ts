@@ -4,7 +4,7 @@ import { deployers, verifiers } from '@0xsequence/solidity-deployer'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { config as dotenvConfig } from 'dotenv'
 import { BigNumber, ethers } from 'ethers'
-import fs from 'fs'
+import { writeFile } from 'fs/promises'
 import { ORDERBOOK_VERIFICATION, Orderbook } from './factories/orderbook/Orderbook'
 import { ERC1155MINTERFACTORY_VERIFICATION, ERC1155MinterFactory } from './factories/token_library/ERC1155MinterFactory'
 import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
@@ -207,7 +207,7 @@ export const deployContracts = async (rpcUrl: string, deployerPK: string, networ
   // Output addresses
 
   prompt.start(`Writing deployment information to output_${networkName}.json\n`)
-  fs.writeFileSync(
+  void writeFile(
     `./output_${networkName}.json`,
     JSON.stringify(
       [
