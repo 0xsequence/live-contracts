@@ -121,3 +121,4 @@ The following is a list of contracts that are deployed by this script.
 | RequireFreshSignerLibV1   | 0xE6B9B21C077F382333220a072e4c44280b873907 |
 | GuardV2                   | 0x761f5e29944D79d76656323F106CF2efBF5F09e9 |
 | GuardV1                   | 0x596aF90CecdBF9A768886E771178fd5561dD27Ab |
+| Orderbook                 | 0x2cF83ECbad9D2c43ab49C512715887Bd812896f1 |
