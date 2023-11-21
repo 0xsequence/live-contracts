@@ -123,8 +123,8 @@ The following is a list of contracts that are deployed by this script.
 | GuardV1                   | 0x596aF90CecdBF9A768886E771178fd5561dD27Ab |
 | Orderbook                 | 0x2cF83ECbad9D2c43ab49C512715887Bd812896f1 |
 | DeveloperMultisig         | 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 |
-| ERC20MinterFactory        | 0x55ECCa57590740DF0df92CE88DBdF9E8309AE9FC |
-| ERC721MinterFactory       | 0x0Aab812958e7996bf84A046D07639561bF6495bA |
-| ERC721SaleFactory         | 0x4482E04D68E5460926F25fB270694e9F5125cb61 |
-| ERC1155MinterFactory      | 0x04B94e4d62cdC04a7bCc829FE3d423fa5fE1b0bc |
-| ERC1155SaleFactory        | 0xfBa5ACD43246fc8f7B8661aE92fC5e0317FAab20 |
+| ERC20MinterFactory        | 0x46987d82D6F74D857152E2DAfe762E763Accf64C |
+| ERC721MinterFactory       | 0x80EF50E9f42d6c06999010F9692C4CAdf3bc14c8 |
+| ERC721SaleFactory         | 0x619010C70E559B9B8D61F354c4eDC2e806cEc34F |
+| ERC1155MinterFactory      | 0xE7413ACAd4700e2ed4d4E3a367Aa54EaC3C3Fc1A |
+| ERC1155SaleFactory        | 0xE5C30b97799686315C43893279F2C2C76d457bf5 |

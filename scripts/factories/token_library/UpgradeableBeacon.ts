@@ -1,8 +1,6 @@
 import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, ethers } from 'ethers'
 
-//TODO Code link
-
 const abi = [
   {
     inputs: [

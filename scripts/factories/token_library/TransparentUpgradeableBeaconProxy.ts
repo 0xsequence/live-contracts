@@ -1,7 +1,7 @@
 import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, ethers } from 'ethers'
 
-//TODO Code link
+// https://github.com/0xsequence/contracts-library/blob/438a33c141737f8b4230c4697b6ee8ce447805f0/src/proxies/TransparentUpgradeableBeaconProxy.sol
 
 const abi = [
   {
