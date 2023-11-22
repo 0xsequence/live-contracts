@@ -6,10 +6,8 @@ import { BigNumber, ethers } from 'ethers'
 import { writeFile } from 'fs/promises'
 import { ORDERBOOK_VERIFICATION, Orderbook } from './factories/orderbook/Orderbook'
 import { ERC1155MINTERFACTORY_VERIFICATION, ERC1155MinterFactory } from './factories/token_library/ERC1155MinterFactory'
-import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
 import { ERC20MINTERFACTORY_VERIFICATION, ERC20MinterFactory } from './factories/token_library/ERC20MinterFactory'
 import { ERC721MINTERFACTORY_VERIFICATION, ERC721MinterFactory } from './factories/token_library/ERC721MinterFactory'
-import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
 import {
   FactoryV1,
   GuestModuleV1,
@@ -182,23 +180,9 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       txParams,
       developerMultisig.address
     )
-    const erc721SaleFactory = await singletonDeployer.deploy(
-      'ERC721SaleFactory',
-      ERC721SaleFactory,
-      0,
-      txParams,
-      developerMultisig.address
-    )
     const erc1155MinterFactory = await singletonDeployer.deploy(
       'ERC1155MinterFactory',
       ERC1155MinterFactory,
-      0,
-      txParams,
-      developerMultisig.address
-    )
-    const erc1155SaleFactory = await singletonDeployer.deploy(
-      'ERC1155SaleFactory',
-      ERC1155SaleFactory,
       0,
       txParams,
       developerMultisig.address
@@ -229,9 +213,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'Orderbook', address: orderbook.address },
           { name: 'ERC20MinterFactory', address: erc20MinterFactory.address },
           { name: 'ERC721MinterFactory', address: erc721MinterFactory.address },
-          { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
-          { name: 'ERC1155MinterFactory', address: erc1155MinterFactory.address },
-          { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address }
+          { name: 'ERC1155MinterFactory', address: erc1155MinterFactory.address }
         ],
         null,
         2
@@ -317,18 +299,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
-    await verifier.verifyContract(erc721SaleFactory.address, {
-      ...ERC721SALEFACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
     await verifier.verifyContract(erc1155MinterFactory.address, {
       ...ERC1155MINTERFACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
-    await verifier.verifyContract(erc1155SaleFactory.address, {
-      ...ERC1155SALEFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
@@ -351,28 +323,18 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       contractToVerify: 'src/tokens/ERC721/presets/minter/ERC721TokenMinter.sol:ERC721TokenMinter',
       waitForSuccess
     })
-    await verifier.verifyContract(await beacon.attach(await erc721SaleFactory.beacon()).implementation(), {
-      ...ERC721SALEFACTORY_VERIFICATION,
-      contractToVerify: 'src/tokens/ERC721/presets/sale/ERC721Sale.sol:ERC721Sale',
-      waitForSuccess
-    })
-    await verifier.verifyContract(await beacon.attach(await erc1155MinterFactory.beacon()).implementation(), {
+    const erc1155MinterBeacon = await erc1155MinterFactory.beacon()
+    const erc1155MinterImplementation = await beacon.attach(erc1155MinterBeacon).implementation()
+    await verifier.verifyContract(erc1155MinterImplementation, {
       ...ERC1155MINTERFACTORY_VERIFICATION,
       contractToVerify: 'src/tokens/ERC1155/presets/minter/ERC1155TokenMinter.sol:ERC1155TokenMinter',
       waitForSuccess
     })
-    const erc1155SaleBeacon = await erc1155SaleFactory.beacon()
-    const erc1155SaleImplementation = await beacon.attach(erc1155SaleBeacon).implementation()
-    await verifier.verifyContract(erc1155SaleImplementation, {
-      ...ERC1155SALEFACTORY_VERIFICATION,
-      contractToVerify: 'src/tokens/ERC1155/presets/sale/ERC1155Sale.sol:ERC1155Sale',
-      waitForSuccess
-    })
     // Proxies
-    await verifier.verifyContract(erc1155SaleBeacon, {
+    await verifier.verifyContract(erc1155MinterBeacon, {
       ...UPGRADEABLEBEACON_VERIFICATION,
       waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [erc1155SaleImplementation])
+      constructorArgs: defaultAbiCoder.encode(['address'], [erc1155MinterImplementation])
     })
     await verifier.verifyContract(tubProxy.address, {
       ...TUBPROXY_VERIFICATION,
