@@ -1,0 +1,18 @@
+[
+  {
+    "networkName": "anvil",
+    "rpcUrl": "http://127.0.0.1:8545",
+    "deployerPk": "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
+    "skip": true
+  },
+  {
+    "networkName": "sepolia",
+    "rpcUrl": "https://sepolia.infura.io/v3/xxx",
+    "deployerPk": "0x0000000000000000000000000000000000000000000000000000000000042069",
+    "gasLimit": 10000000,
+    "gasPrice": 3000000000,
+    "verifierApiUrl": "https://api-sepolia.etherscan.io/api",
+    "verifierApiKey": "XXX",
+    "skip": false
+  }
+]

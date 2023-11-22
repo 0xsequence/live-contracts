@@ -21,10 +21,10 @@ Install dependencies.
 yarn
 ```
 
-Update the environment variables.
+Update the configuration variables.
 
 ```sh
-cp .env.example .env
+cp config.sample.json config.json
 # Then manually add your settings
 ```
 
@@ -34,6 +34,12 @@ Run the deployment script.
 
 ```sh
 yarn deploy
+```
+
+To deploy on a single chain, run the deployment script with the network name as a parameter.
+
+```sh
+yarn deploy <network_name>
 ```
 
 #### Gotcha: EIP-155

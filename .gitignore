@@ -1,4 +1,4 @@
 output*.json
 node_modules
 dist
-.env
+config.json
