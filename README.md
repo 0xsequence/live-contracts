@@ -84,7 +84,7 @@ Include the contract's ABI, bytecode and deployment source in the factory.
 Update `scripts/deploy-contracts.ts` to:
 
 * Deploy the contract using the factory
-* Add the contract address to the `Output addresses` for debugging purposes
+* Add the contract address to the `Output addresses` and this README
 * Add contract source verification add the end of the script
 
 **Make sure to include logging in each step!**
@@ -129,6 +129,6 @@ The following is a list of contracts that are deployed by this script.
 | GuardV1                   | 0x596aF90CecdBF9A768886E771178fd5561dD27Ab |
 | Orderbook                 | 0x2cF83ECbad9D2c43ab49C512715887Bd812896f1 |
 | DeveloperMultisig         | 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 |
-| ERC20MinterFactory        | 0x46987d82D6F74D857152E2DAfe762E763Accf64C |
-| ERC721MinterFactory       | 0x80EF50E9f42d6c06999010F9692C4CAdf3bc14c8 |
-| ERC1155MinterFactory      | 0xE7413ACAd4700e2ed4d4E3a367Aa54EaC3C3Fc1A |
+| ERC20ItemsFactory         | 0x393Bb1FE6f98e2b8ABc3deCE71E4ac24fEcb4a1A |
+| ERC721ItemsFactory        | 0x3672aA765492c1506Eec865f4bb8c7a452dE6707 |
+| ERC1155ItemsFactory       | 0xe5A0D3Efa0dF07835b553Ac5F65A97844a4b79FB |
