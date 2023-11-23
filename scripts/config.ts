@@ -9,6 +9,7 @@ export type Config = {
   verifierApiKey?: string
   gasLimit?: BigNumberish
   gasPrice?: BigNumberish
+  skipWalletContext?: boolean
   skip?: boolean // Don't deploy
 }
 

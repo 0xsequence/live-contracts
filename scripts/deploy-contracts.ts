@@ -4,10 +4,17 @@ import { deployers, verifiers } from '@0xsequence/solidity-deployer'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { BigNumber, ethers } from 'ethers'
 import { writeFile } from 'fs/promises'
+import { argv } from 'process'
+import { Config, getConfigs } from './config'
 import { ORDERBOOK_VERIFICATION, Orderbook } from './factories/orderbook/Orderbook'
 import { ERC1155ITEMSFACTORY_VERIFICATION, ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
 import { ERC20ITEMSFACTORY_VERIFICATION, ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
 import { ERC721ITEMSFACTORY_VERIFICATION, ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
+import {
+  TUBPROXY_VERIFICATION,
+  TransparentUpgradeableBeaconProxy
+} from './factories/token_library/TransparentUpgradeableBeaconProxy'
+import { UPGRADEABLEBEACON_VERIFICATION, UpgradeableBeacon } from './factories/token_library/UpgradeableBeacon'
 import {
   FactoryV1,
   GuestModuleV1,
@@ -30,13 +37,6 @@ import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
-import {
-  TUBPROXY_VERIFICATION,
-  TransparentUpgradeableBeaconProxy
-} from './factories/token_library/TransparentUpgradeableBeaconProxy'
-import { UPGRADEABLEBEACON_VERIFICATION, UpgradeableBeacon } from './factories/token_library/UpgradeableBeacon'
-import { Config, getConfigs } from './config'
-import { argv } from 'process'
 
 interface Logger {
   log(message: string): void
@@ -74,72 +74,103 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       // gasPrice: BigNumber.from(10).pow(8).mul(16)
     }
 
-    // v1
-
-    prompt.start(`Deploying V1 contracts\n`)
-
-    const universalDeployer = new deployers.UniversalDeployer(signer, prompt)
-
-    const walletFactoryV1 = await universalDeployer.deploy('WalletFactory', FactoryV1, 0, txParams)
-    const mainModuleV1 = await universalDeployer.deploy('MainModule', MainModuleV1, 0, txParams, walletFactoryV1.address)
-    const mainModuleUpgradeableV1 = await universalDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV1, 0, txParams)
-    const guestModuleV1 = await universalDeployer.deploy('GuestModule', GuestModuleV1, 0, txParams)
-    const sequenceUtilsV1 = await universalDeployer.deploy(
-      'SequenceUtils',
-      SequenceUtilsV1,
-      0,
-      txParams,
-      walletFactoryV1.address,
-      mainModuleV1.address
-    )
-    const requireFreshSignerLibV1 = await universalDeployer.deploy(
-      'RequireFreshSignerLib',
-      RequireFreshSignerV1,
-      0,
-      txParams,
-      sequenceUtilsV1.address
-    )
-
-    await deployGuard(
-      walletFactoryV1,
-      'Guard V1',
-      '0x596aF90CecdBF9A768886E771178fd5561dD27Ab',
-      mainModuleV1.address,
-      '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128',
-      txParams
-    )
-
-    prompt.succeed(`Deployed V1 contracts\n`)
-
-    // v2
-
-    prompt.start(`Deploying V2 contracts\n`)
-
+    const universalDeployer = new deployers.UniversalDeployer(signer, prompt) //, undefined, BigNumber.from('35000000000000000'))
     const singletonDeployer = new deployers.SingletonDeployer(signer, prompt) //, undefined, BigNumber.from('30000000000000000'))
 
-    const walletFactoryV2 = await singletonDeployer.deploy('Factory', FactoryV2, 0, txParams)
-    const mainModuleUpgradeableV2 = await singletonDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV2, 0, txParams)
-    const mainModuleV2 = await singletonDeployer.deploy(
-      'MainModule',
-      MainModuleV2,
-      0,
-      txParams,
-      walletFactoryV2.address,
-      mainModuleUpgradeableV2.address
-    )
-    const guestModuleV2 = await singletonDeployer.deploy('GuestModule', GuestModuleV2, 0, txParams)
-    const sequenceUtilsV2 = await singletonDeployer.deploy('SequenceUtils', SequenceUtilsV2, 0, txParams)
+    let walletContextAddrs = {
+      WalletFactoryV2: '0xFaA5c0b14d1bED5C888Ca655B9a8A5911F78eF4A',
+      MainModuleV2: '0xfBf8f1A5E00034762D928f46d438B947f5d4065d',
+      MainModuleUpgradableV2: '0x4222dcA3974E39A8b41c411FeDDE9b09Ae14b911',
+      GuestModuleV2: '0xfea230Ee243f88BC698dD8f1aE93F8301B6cdfaE',
+      SequenceUtilsV2: '0xdbbFa3cB3B087B64F4ef5E3D20Dda2488AA244e6',
+      WalletFactoryV1: '0xf9D09D634Fb818b05149329C1dcCFAeA53639d96',
+      MainModuleV1: '0xd01F11855bCcb95f88D7A48492F66410d4637313',
+      MainModuleUpgradableV1: '0x7EFE6cE415956c5f80C6530cC6cc81b4808F6118',
+      GuestModuleV1: '0x02390F3E6E5FD1C6786CB78FD3027C117a9955A7',
+      SequenceUtilsV1: '0xd130B43062D875a4B7aF3f8fc036Bc6e9D3E1B3E',
+      RequireFreshSignerLibV1: '0xE6B9B21C077F382333220a072e4c44280b873907'
+    }
 
-    await deployGuard(
-      walletFactoryV2,
-      'Guard V2',
-      '0x761f5e29944D79d76656323F106CF2efBF5F09e9',
-      mainModuleV2.address,
-      '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4',
-      txParams
-    )
+    if (config.skipWalletContext) {
+      prompt.log('Skipping wallet context deployment\n')
+    } else {
+      // v1
 
-    prompt.succeed(`Deployed V2 contracts\n`)
+      prompt.start(`Deploying V1 contracts\n`)
+
+      const walletFactoryV1 = await universalDeployer.deploy('WalletFactory', FactoryV1, 0, txParams)
+      const mainModuleV1 = await universalDeployer.deploy('MainModule', MainModuleV1, 0, txParams, walletFactoryV1.address)
+      const mainModuleUpgradableV1 = await universalDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV1, 0, txParams)
+      const guestModuleV1 = await universalDeployer.deploy('GuestModule', GuestModuleV1, 0, txParams)
+      const sequenceUtilsV1 = await universalDeployer.deploy(
+        'SequenceUtils',
+        SequenceUtilsV1,
+        0,
+        txParams,
+        walletFactoryV1.address,
+        mainModuleV1.address
+      )
+      const requireFreshSignerLibV1 = await universalDeployer.deploy(
+        'RequireFreshSignerLib',
+        RequireFreshSignerV1,
+        0,
+        txParams,
+        sequenceUtilsV1.address
+      )
+
+      await deployGuard(
+        walletFactoryV1,
+        'Guard V1',
+        '0x596aF90CecdBF9A768886E771178fd5561dD27Ab',
+        mainModuleV1.address,
+        '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128',
+        txParams
+      )
+
+      prompt.succeed(`Deployed V1 contracts\n`)
+
+      // v2
+
+      prompt.start(`Deploying V2 contracts\n`)
+
+      const walletFactoryV2 = await singletonDeployer.deploy('Factory', FactoryV2, 0, txParams)
+      const mainModuleUpgradableV2 = await singletonDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV2, 0, txParams)
+      const mainModuleV2 = await singletonDeployer.deploy(
+        'MainModule',
+        MainModuleV2,
+        0,
+        txParams,
+        walletFactoryV2.address,
+        mainModuleUpgradableV2.address
+      )
+      const guestModuleV2 = await singletonDeployer.deploy('GuestModule', GuestModuleV2, 0, txParams)
+      const sequenceUtilsV2 = await singletonDeployer.deploy('SequenceUtils', SequenceUtilsV2, 0, txParams)
+
+      await deployGuard(
+        walletFactoryV2,
+        'Guard V2',
+        '0x761f5e29944D79d76656323F106CF2efBF5F09e9',
+        mainModuleV2.address,
+        '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4',
+        txParams
+      )
+
+      prompt.succeed(`Deployed V2 contracts\n`)
+
+      walletContextAddrs = {
+        WalletFactoryV2: walletFactoryV2.address,
+        MainModuleV2: mainModuleV2.address,
+        MainModuleUpgradableV2: mainModuleUpgradableV2.address,
+        GuestModuleV2: guestModuleV2.address,
+        SequenceUtilsV2: sequenceUtilsV2.address,
+        WalletFactoryV1: walletFactoryV1.address,
+        MainModuleV1: mainModuleV1.address,
+        MainModuleUpgradableV1: mainModuleUpgradableV1.address,
+        GuestModuleV1: guestModuleV1.address,
+        SequenceUtilsV1: sequenceUtilsV1.address,
+        RequireFreshSignerLibV1: requireFreshSignerLibV1.address
+      }
+    }
 
     // Sequence development multisig
 
@@ -147,11 +178,11 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     const v2WalletContext = {
       version: 2,
-      factory: walletFactoryV2.address,
-      mainModule: mainModuleV2.address,
-      mainModuleUpgradable: mainModuleUpgradeableV2.address,
-      guestModule: guestModuleV2.address,
-      sequenceUtils: sequenceUtilsV2.address,
+      factory: walletContextAddrs.WalletFactoryV2,
+      mainModule: walletContextAddrs.MainModuleV2,
+      mainModuleUpgradable: walletContextAddrs.MainModuleUpgradableV2,
+      guestModule: walletContextAddrs.GuestModuleV2,
+      sequenceUtils: walletContextAddrs.SequenceUtilsV2,
       walletCreationCode: WALLET_CREATION_CODE
     }
     const developerMultisig = await deployDeveloperMultisig(signer, v2WalletContext, txParams)
@@ -196,17 +227,17 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       `./output_${config.networkName}.json`,
       JSON.stringify(
         [
-          { name: 'WalletFactoryV2', address: walletFactoryV2.address },
-          { name: 'MainModuleV2', address: mainModuleV2.address },
-          { name: 'MainModuleUpgradableV2', address: mainModuleUpgradeableV2.address },
-          { name: 'GuestModuleV2', address: guestModuleV2.address },
-          { name: 'SequenceUtilsV2', address: sequenceUtilsV2.address },
-          { name: 'WalletFactoryV1', address: walletFactoryV1.address },
-          { name: 'MainModuleV1', address: mainModuleV1.address },
-          { name: 'MainModuleUpgradableV1', address: mainModuleUpgradeableV1.address },
-          { name: 'GuestModuleV1', address: guestModuleV1.address },
-          { name: 'SequenceUtilsV1', address: sequenceUtilsV1.address },
-          { name: 'RequireFreshSignerLibV1', address: requireFreshSignerLibV1.address },
+          { name: 'WalletFactoryV2', address: walletContextAddrs.WalletFactoryV2 },
+          { name: 'MainModuleV2', address: walletContextAddrs.MainModuleV2 },
+          { name: 'MainModuleUpgradableV2', address: walletContextAddrs.MainModuleUpgradableV2 },
+          { name: 'GuestModuleV2', address: walletContextAddrs.GuestModuleV2 },
+          { name: 'SequenceUtilsV2', address: walletContextAddrs.SequenceUtilsV2 },
+          { name: 'WalletFactoryV1', address: walletContextAddrs.WalletFactoryV1 },
+          { name: 'MainModuleV1', address: walletContextAddrs.MainModuleV1 },
+          { name: 'MainModuleUpgradableV1', address: walletContextAddrs.MainModuleUpgradableV1 },
+          { name: 'GuestModuleV1', address: walletContextAddrs.GuestModuleV1 },
+          { name: 'SequenceUtilsV1', address: walletContextAddrs.SequenceUtilsV1 },
+          { name: 'RequireFreshSignerLibV1', address: walletContextAddrs.RequireFreshSignerLibV1 },
           { name: 'GuardV2', address: '0x761f5e29944D79d76656323F106CF2efBF5F09e9' },
           { name: 'GuardV1', address: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab' },
           { name: 'DeveloperMultisig', address: developerMultisig.address },
@@ -235,49 +266,65 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     const { defaultAbiCoder } = ethers.utils
 
-    // v1
+    if (config.skipWalletContext) {
+      prompt.log('Skipping wallet context verification\n')
+    } else {
+      // v1
 
-    prompt.start('Verifying V1 contracts\n')
+      prompt.start('Verifying V1 contracts\n')
 
-    await verifier.verifyContract(walletFactoryV1.address, { ...FACTORY_V1_VERIFICATION, waitForSuccess })
-    await verifier.verifyContract(mainModuleV1.address, {
-      ...MAIN_MODULE_V1_VERIFICATION,
-      constructorArgs: defaultAbiCoder.encode(['address'], [walletFactoryV1.address]),
-      waitForSuccess
-    })
-    await verifier.verifyContract(mainModuleUpgradeableV1.address, { ...MAIN_MODULE_UPGRADABLE_V1_VERIFICATION, waitForSuccess })
-    await verifier.verifyContract(guestModuleV1.address, { ...GUEST_MODULE_V1_VERIFICATION, waitForSuccess })
-    await verifier.verifyContract(sequenceUtilsV1.address, {
-      ...SEQUENCE_UTILS_V1_VERIFICATION,
-      constructorArgs: defaultAbiCoder.encode(['address', 'address'], [walletFactoryV1.address, mainModuleV1.address]),
-      waitForSuccess
-    })
-    await verifier.verifyContract(requireFreshSignerLibV1.address, {
-      ...REQUIRE_FRESH_SIGNER_V1_VERIFICATION,
-      constructorArgs: defaultAbiCoder.encode(['address'], [sequenceUtilsV1.address]),
-      waitForSuccess
-    })
+      await verifier.verifyContract(walletContextAddrs.WalletFactoryV1, { ...FACTORY_V1_VERIFICATION, waitForSuccess })
+      await verifier.verifyContract(walletContextAddrs.MainModuleV1, {
+        ...MAIN_MODULE_V1_VERIFICATION,
+        constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.WalletFactoryV1]),
+        waitForSuccess
+      })
+      await verifier.verifyContract(walletContextAddrs.MainModuleUpgradableV1, {
+        ...MAIN_MODULE_UPGRADABLE_V1_VERIFICATION,
+        waitForSuccess
+      })
+      await verifier.verifyContract(walletContextAddrs.GuestModuleV1, { ...GUEST_MODULE_V1_VERIFICATION, waitForSuccess })
+      await verifier.verifyContract(walletContextAddrs.SequenceUtilsV1, {
+        ...SEQUENCE_UTILS_V1_VERIFICATION,
+        constructorArgs: defaultAbiCoder.encode(
+          ['address', 'address'],
+          [walletContextAddrs.WalletFactoryV1, walletContextAddrs.MainModuleV1]
+        ),
+        waitForSuccess
+      })
+      await verifier.verifyContract(walletContextAddrs.RequireFreshSignerLibV1, {
+        ...REQUIRE_FRESH_SIGNER_V1_VERIFICATION,
+        constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.SequenceUtilsV1]),
+        waitForSuccess
+      })
 
-    prompt.succeed('Verified V1 contracts\n')
+      prompt.succeed('Verified V1 contracts\n')
 
-    // v2
+      // v2
 
-    prompt.start('Verifying V2 contracts\n')
+      prompt.start('Verifying V2 contracts\n')
 
-    await verifier.verifyContract(walletFactoryV2.address, { ...FACTORY_V2_VERIFICATION, waitForSuccess })
-    await verifier.verifyContract(mainModuleUpgradeableV2.address, { ...MAIN_MODULE_UPGRADABLE_V2_VERIFICATION, waitForSuccess })
-    await verifier.verifyContract(mainModuleV2.address, {
-      ...MAIN_MODULE_V2_VERIFICATION,
-      constructorArgs: defaultAbiCoder.encode(['address', 'address'], [walletFactoryV2.address, mainModuleUpgradeableV2.address]),
-      waitForSuccess
-    })
-    await verifier.verifyContract(guestModuleV2.address, { ...GUEST_MODULE_V2_VERIFICATION, waitForSuccess })
-    await verifier.verifyContract(sequenceUtilsV2.address, {
-      ...SEQUENCE_UTILS_V2_VERIFICATION,
-      waitForSuccess
-    })
+      await verifier.verifyContract(walletContextAddrs.WalletFactoryV2, { ...FACTORY_V2_VERIFICATION, waitForSuccess })
+      await verifier.verifyContract(walletContextAddrs.MainModuleUpgradableV2, {
+        ...MAIN_MODULE_UPGRADABLE_V2_VERIFICATION,
+        waitForSuccess
+      })
+      await verifier.verifyContract(walletContextAddrs.MainModuleV2, {
+        ...MAIN_MODULE_V2_VERIFICATION,
+        constructorArgs: defaultAbiCoder.encode(
+          ['address', 'address'],
+          [walletContextAddrs.WalletFactoryV2, walletContextAddrs.MainModuleUpgradableV2]
+        ),
+        waitForSuccess
+      })
+      await verifier.verifyContract(walletContextAddrs.GuestModuleV2, { ...GUEST_MODULE_V2_VERIFICATION, waitForSuccess })
+      await verifier.verifyContract(walletContextAddrs.SequenceUtilsV2, {
+        ...SEQUENCE_UTILS_V2_VERIFICATION,
+        waitForSuccess
+      })
 
-    prompt.succeed('Verified V2 contracts\n')
+      prompt.succeed('Verified V2 contracts\n')
+    }
 
     // Marketplace
 
