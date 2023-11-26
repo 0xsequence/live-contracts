@@ -131,4 +131,4 @@ The following is a list of contracts that are deployed by this script.
 | DeveloperMultisig         | 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 |
 | ERC20ItemsFactory         | 0x393Bb1FE6f98e2b8ABc3deCE71E4ac24fEcb4a1A |
 | ERC721ItemsFactory        | 0x3672aA765492c1506Eec865f4bb8c7a452dE6707 |
-| ERC1155ItemsFactory       | 0xe5A0D3Efa0dF07835b553Ac5F65A97844a4b79FB |
+| ERC1155ItemsFactory       | 0x58D9aBCe49dA36171f0e6af72DA0F2bf9cc2d0cf |
