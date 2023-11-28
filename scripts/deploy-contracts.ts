@@ -55,7 +55,10 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
   prompt.prefixText = config.networkName
 
   try {
-    const provider = new JsonRpcProvider(config.rpcUrl)
+    const provider = new JsonRpcProvider({
+      url: config.rpcUrl,
+      timeout: 60000 // 1 minute timeout
+    })
     const signer = new ethers.Wallet(config.deployerPk, provider)
     provider.getSigner = () => signer as unknown as ethers.providers.JsonRpcSigner
 
