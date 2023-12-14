@@ -129,6 +129,6 @@ The following is a list of contracts that are deployed by this script.
 | GuardV1                   | 0x596aF90CecdBF9A768886E771178fd5561dD27Ab |
 | Orderbook                 | 0xfBd41B6C9A86ea01927DD9E26006d7EFc2e66630 |
 | DeveloperMultisig         | 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 |
-| ERC20ItemsFactory         | 0x393Bb1FE6f98e2b8ABc3deCE71E4ac24fEcb4a1A |
-| ERC721ItemsFactory        | 0x3672aA765492c1506Eec865f4bb8c7a452dE6707 |
-| ERC1155ItemsFactory       | 0x58D9aBCe49dA36171f0e6af72DA0F2bf9cc2d0cf |
+| ERC20ItemsFactory         | 0xac6DE0d8D6Fee372D7A8Cd1212E257985c2D7901 |
+| ERC721ItemsFactory        | 0xE3FA545cce8C0881E5263b930547DA3f05A0c013 |
+| ERC1155ItemsFactory       | 0xac21dF68549F119b9C48462960ae37D0867Bd402 |
