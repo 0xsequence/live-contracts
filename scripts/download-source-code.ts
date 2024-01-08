@@ -1,16 +1,31 @@
 import axios from 'axios';
 import fs from 'fs';
 
-async function downloadJsonFromApi(apiUrl: string, outputFile: string): Promise<void> {
+type ApiAction = 'getsourcecode' | 'getabi'
+
+async function downloadJsonFromApi(
+  apiUrlBase: string,
+  apiKey: string,
+  contractAddr: string,
+  action: ApiAction,
+  outputFile: string
+): Promise<void> {
+  const apiUrl = `${apiUrlBase}?module=contract&action=${action}&apikey=${apiKey}&address=${contractAddr}`
   try {
     const response = await axios.get(apiUrl)
     if (response.status !== 200) {
       throw new Error(`HTTP error: ${response.status}`)
     }
 
-    const jsonData = response.data.result[0].SourceCode
-    const cleanedJsonData = jsonData.slice(1, -1) // Fix formatting
-    const parsedJsonData = JSON.parse(cleanedJsonData)
+    let parsedJsonData
+    if (action === 'getsourcecode') {
+      const jsonData = response.data.result[0].SourceCode
+      const cleanedJsonData = jsonData.slice(1, -1) // Fix formatting
+      parsedJsonData = JSON.parse(cleanedJsonData)
+    } else if (action === 'getabi') {
+      const jsonData = response.data.result
+      parsedJsonData = JSON.parse(jsonData)
+    }
 
     fs.writeFileSync(outputFile, JSON.stringify(parsedJsonData, null, 2))
 
@@ -25,7 +40,5 @@ const verifierApiUrl = 'https://api-sepolia.etherscan.io/api'
 const verifierApiKey = 'XXX'
 const addr = '0x105430acDFE0bf65cD0331DFc2FB2420Ace73895'
 
-const outputFile = 'output.json'
-const apiUrl = `${verifierApiUrl}?module=contract&action=getsourcecode&apikey=${verifierApiKey}&address=${addr}`
-
-downloadJsonFromApi(apiUrl, outputFile);
+downloadJsonFromApi(verifierApiUrl, verifierApiKey, addr, 'getsourcecode', 'source_output.json')
+downloadJsonFromApi(verifierApiUrl, verifierApiKey, addr, 'getabi', 'source_abi.json')
