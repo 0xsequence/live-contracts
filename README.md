@@ -127,8 +127,8 @@ The following is a list of contracts that are deployed by this script.
 | RequireFreshSignerLibV1   | 0xE6B9B21C077F382333220a072e4c44280b873907 |
 | GuardV2                   | 0x761f5e29944D79d76656323F106CF2efBF5F09e9 |
 | GuardV1                   | 0x596aF90CecdBF9A768886E771178fd5561dD27Ab |
-| Orderbook                 | 0xfBd41B6C9A86ea01927DD9E26006d7EFc2e66630 |
 | DeveloperMultisig         | 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 |
-| ERC20ItemsFactory         | 0xac6DE0d8D6Fee372D7A8Cd1212E257985c2D7901 |
-| ERC721ItemsFactory        | 0xE3FA545cce8C0881E5263b930547DA3f05A0c013 |
-| ERC1155ItemsFactory       | 0xac21dF68549F119b9C48462960ae37D0867Bd402 |
+| Orderbook                 | 0x189B8Fec7A0F9C5360929e8ffEC9F13923E96F7F |
+| ERC20ItemsFactory         | 0x1063cBEe6b3Cd69B49f1B922A0D402f484b39855 |
+| ERC721ItemsFactory        | 0x29BCF1043Ca4B2c95aB28082143587896D39D22D |
+| ERC1155ItemsFactory       | 0x7364fDEFe24385B2b3869504383c94cF083AcbD6 |

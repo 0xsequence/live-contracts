@@ -194,7 +194,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     // Marketplace contracts
 
     prompt.start(`Deploying Marketplace contracts\n`)
-    const orderbook = await singletonDeployer.deploy('Orderbook', Orderbook, 0, txParams)
+    const orderbook = await singletonDeployer.deploy('Orderbook', Orderbook, 0, txParams, developerMultisig.address)
     prompt.succeed(`Deployed Marketplace contracts\n`)
 
     // Contracts library
@@ -332,7 +332,11 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     // Marketplace
 
     prompt.start('Verifying Marketplace contracts\n')
-    await verifier.verifyContract(orderbook.address, { ...ORDERBOOK_VERIFICATION, waitForSuccess })
+    await verifier.verifyContract(orderbook.address, {
+      ...ORDERBOOK_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+    })
     prompt.succeed('Verified Marketplace contracts\n')
 
     // Library contracts
