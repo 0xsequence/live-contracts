@@ -6,7 +6,7 @@ import { BigNumber, ethers } from 'ethers'
 import { writeFile } from 'fs/promises'
 import { argv } from 'process'
 import { Config, getConfigs } from './config'
-import { ORDERBOOK_VERIFICATION, Orderbook } from './factories/orderbook/Orderbook'
+import { SEQUENCE_MARKET_VERIFICATION, SequenceMarket } from './factories/marketplace/SequenceMarket'
 import { ERC1155ITEMSFACTORY_VERIFICATION, ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
 import { ERC20ITEMSFACTORY_VERIFICATION, ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
 import { ERC721ITEMSFACTORY_VERIFICATION, ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
@@ -191,11 +191,11 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const developerMultisig = await deployDeveloperMultisig(signer, v2WalletContext, txParams)
     prompt.succeed(`Deployed Sequence development multisig\n`)
 
-    // Marketplace contracts
+    // Market contracts
 
-    prompt.start(`Deploying Marketplace contracts\n`)
-    const orderbook = await singletonDeployer.deploy('Orderbook', Orderbook, 0, txParams, developerMultisig.address)
-    prompt.succeed(`Deployed Marketplace contracts\n`)
+    prompt.start(`Deploying Market contracts\n`)
+    const market = await singletonDeployer.deploy('SequenceMarket', SequenceMarket, 0, txParams, developerMultisig.address)
+    prompt.succeed(`Deployed Market contracts\n`)
 
     // Contracts library
 
@@ -244,7 +244,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'GuardV2', address: '0x761f5e29944D79d76656323F106CF2efBF5F09e9' },
           { name: 'GuardV1', address: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab' },
           { name: 'DeveloperMultisig', address: developerMultisig.address },
-          { name: 'Orderbook', address: orderbook.address },
+          { name: 'SequenceMarket', address: market.address },
           { name: 'ERC20ItemsFactory', address: erc20ItemsFactory.address },
           { name: 'ERC721ItemsFactory', address: erc721ItemsFactory.address },
           { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address }
@@ -329,15 +329,15 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       prompt.succeed('Verified V2 contracts\n')
     }
 
-    // Marketplace
+    // Market
 
-    prompt.start('Verifying Marketplace contracts\n')
-    await verifier.verifyContract(orderbook.address, {
-      ...ORDERBOOK_VERIFICATION,
+    prompt.start('Verifying Market contracts\n')
+    await verifier.verifyContract(market.address, {
+      ...SEQUENCE_MARKET_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
-    prompt.succeed('Verified Marketplace contracts\n')
+    prompt.succeed('Verified Market contracts\n')
 
     // Library contracts
 
