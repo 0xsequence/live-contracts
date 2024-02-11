@@ -62,12 +62,6 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const signer = new ethers.Wallet(config.deployerPk, provider)
     provider.getSigner = () => signer as unknown as ethers.providers.JsonRpcSigner
 
-    prompt.info(`Network Name:           ${config.networkName}`)
-    prompt.info(`Chain Id: ${(await provider.getNetwork()).chainId}`)
-    prompt.info(`Gas price: ${await provider.getGasPrice()}`)
-    prompt.info(`Local Deployer Address: ${await signer.getAddress()}`)
-    prompt.info(`Local Deployer Balance: ${await signer.getBalance()}`)
-
     const txParams = {
       gasPrice: config.gasPrice ? BigNumber.from(config.gasPrice) : undefined, // Automated gas price
       // gasPrice: (await provider.getGasPrice()).mul(3).div(2), // 1.5x gas price
@@ -76,6 +70,14 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
         : await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10))
       // gasPrice: BigNumber.from(10).pow(8).mul(16)
     }
+
+    prompt.info(`Network Name:           ${config.networkName}`)
+    prompt.info(`Chain Id: ${(await provider.getNetwork()).chainId}`)
+    prompt.info(`Gas price (network): ${await provider.getGasPrice()}`)
+    prompt.info(`Gas price (used): ${txParams.gasPrice ?? 'auto'}`)
+    prompt.info(`Gas limit (used): ${txParams.gasLimit ?? 'auto'}`)
+    prompt.info(`Local Deployer Address: ${await signer.getAddress()}`)
+    prompt.info(`Local Deployer Balance: ${await signer.getBalance()}`)
 
     const universalDeployer = new deployers.UniversalDeployer(signer, prompt) //, undefined, BigNumber.from('35000000000000000'))
     const singletonDeployer = new deployers.SingletonDeployer(signer, prompt) //, undefined, BigNumber.from('30000000000000000'))
