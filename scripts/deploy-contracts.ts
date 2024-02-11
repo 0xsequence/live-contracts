@@ -37,6 +37,15 @@ import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
+import {
+  NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN,
+  NIFTYSWAP_FACTORY_20_VERIFICATION,
+  NiftyswapFactory20
+} from './factories/marketplace/NiftyswapFactory20'
+import {
+  NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION,
+  NiftyswapExchange20Wrapper
+} from './factories/marketplace/NiftyswapExchange20Wrapper'
 
 interface Logger {
   log(message: string): void
@@ -193,9 +202,17 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const developerMultisig = await deployDeveloperMultisig(signer, v2WalletContext, txParams)
     prompt.succeed(`Deployed Sequence development multisig\n`)
 
-    // Market contracts
+    // Niftyswap and Market contracts
 
     prompt.start(`Deploying Market contracts\n`)
+    const niftyFactory = await universalDeployer.deploy(
+      'NiftyswapFactory20',
+      NiftyswapFactory20,
+      0,
+      txParams,
+      NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN
+    ) // Use Universal deployer for consistency
+    const niftyWrapper = await singletonDeployer.deploy('NiftyExchange20Wrapper', NiftyswapExchange20Wrapper, 0, txParams)
     const market = await singletonDeployer.deploy('SequenceMarket', SequenceMarket, 0, txParams, developerMultisig.address)
     prompt.succeed(`Deployed Market contracts\n`)
 
@@ -246,6 +263,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'GuardV2', address: '0x761f5e29944D79d76656323F106CF2efBF5F09e9' },
           { name: 'GuardV1', address: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab' },
           { name: 'DeveloperMultisig', address: developerMultisig.address },
+          { name: 'NiftyswapFactory20', address: niftyFactory.address },
+          { name: 'NiftyExchange20Wrapper', address: niftyWrapper.address },
           { name: 'SequenceMarket', address: market.address },
           { name: 'ERC20ItemsFactory', address: erc20ItemsFactory.address },
           { name: 'ERC721ItemsFactory', address: erc721ItemsFactory.address },
@@ -331,9 +350,15 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       prompt.succeed('Verified V2 contracts\n')
     }
 
-    // Market
+    // Niftyswap and Market
 
     prompt.start('Verifying Market contracts\n')
+    await verifier.verifyContract(niftyFactory.address, {
+      ...NIFTYSWAP_FACTORY_20_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address'], [NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN])
+    })
+    await verifier.verifyContract(niftyWrapper.address, { ...NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION, waitForSuccess })
     await verifier.verifyContract(market.address, {
       ...SEQUENCE_MARKET_VERIFICATION,
       waitForSuccess,
