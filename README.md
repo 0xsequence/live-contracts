@@ -134,3 +134,27 @@ The following is a list of contracts that are deployed by this script.
 | ERC20ItemsFactory          | 0x1063cBEe6b3Cd69B49f1B922A0D402f484b39855 |
 | ERC721ItemsFactory         | 0x29BCF1043Ca4B2c95aB28082143587896D39D22D |
 | ERC1155ItemsFactory        | 0x7364fDEFe24385B2b3869504383c94cF083AcbD6 |
+
+## Chains
+
+The contracts have been deployed on the following chains.
+
+- [Ethereum Mainnet](https://chainlist.org/chain/1)
+- [Sepolia](https://chainlist.org/chain/11155111)
+- [Polygon](https://chainlist.org/chain/137)
+- [Polygon ZK](https://chainlist.org/chain/1101)
+- [Polygon Mumbai](https://chainlist.org/chain/80001)
+- [Optimism](https://chainlist.org/chain/10)
+- [Optimism Sepolia](https://chainlist.org/chain/11155420)
+- [Base](https://chainlist.org/chain/8453)
+- [Base Sepolia](https://chainlist.org/chain/84532)
+- [Arbitrum One](https://chainlist.org/chain/42161)
+- [Arbitrum Nova](https://chainlist.org/chain/42170)
+- [Arbitrum Sepolia](https://chainlist.org/chain/421614)
+- [Avalanche Fuji](https://chainlist.org/chain/43113)
+- [Avalanche](https://chainlist.org/chain/43114)
+- [Binance Smart Chain](https://chainlist.org/chain/56)
+- [Binance Smart Chain Testnet](https://chainlist.org/chain/97)
+- [Gnosis](https://chainlist.org/chain/100)
+- [Home Verse](https://chainlist.org/chain/19011)
+- [Home Verse Testnet](https://chainlist.org/chain/40875)
