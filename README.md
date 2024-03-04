@@ -115,7 +115,7 @@ The source code will be downloaded to a file called `output.json`.
 The following is a list of contracts that are deployed by this script.
 
 | Name                       | Address                                    |
-|----------------------------|--------------------------------------------|
+| -------------------------- | ------------------------------------------ |
 | WalletFactoryV2            | 0xFaA5c0b14d1bED5C888Ca655B9a8A5911F78eF4A |
 | MainModuleV2               | 0xfBf8f1A5E00034762D928f46d438B947f5d4065d |
 | MainModuleUpgradableV2     | 0x4222dcA3974E39A8b41c411FeDDE9b09Ae14b911 |
@@ -160,3 +160,7 @@ The contracts have been deployed on the following chains.
 - [Gnosis](https://chainlist.org/chain/100)
 - [Home Verse](https://chainlist.org/chain/19011)
 - [Home Verse Testnet](https://chainlist.org/chain/40875)
+- [Skale Calypso Hub Testnet](https://chainlist.org/chain/974399131)
+- [Skale Europa Liquidity Hub Testnet](https://chainlist.org/chain/1444673419)
+- [Skale Nebula Gaming Hub Testnet](https://chainlist.org/chain/37084624)
+- [Skale Titan AI Hub Testnet](https://chainlist.org/chain/1020352220)
