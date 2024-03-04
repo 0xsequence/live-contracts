@@ -437,7 +437,8 @@ const main = async () => {
     // Filter network
     const networkName = argv[2]
     console.log(`Deploying to ${networkName} only`)
-    configs = configs.filter(config => config.networkName === networkName)
+    const networkRegex = new RegExp(`^${networkName}$`, 'i')
+    configs = configs.filter(config => networkRegex.test(config.networkName))
   } else {
     configs = configs.filter(config => config.skip !== true)
     console.log(`Deploying to ${configs.length} networks`)

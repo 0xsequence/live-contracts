@@ -42,6 +42,8 @@ To deploy on a single chain, run the deployment script with the network name as 
 yarn deploy <network_name>
 ```
 
+Note `<network_name>` can also be a regex to deploy to multiple related chains. e.g. `yarn deploy "polygon.*"`.
+
 #### Gotcha: EIP-155
 
 The deployment flow relies on pre-[EIP-155](https://eips.ethereum.org/EIPS/eip-155) transactions.
@@ -58,7 +60,7 @@ This has been noticed in Optimistic roll up chains such as [Base](https://base.o
 ### Checking Deployment
 
 To check if the Sequence contracts have been deployed on a given network, run the deployment script connected to a wallet without any funds.
-A successful run indicates the contracts are already deployer on the network, as the script will fail if a deployment is required. 
+A successful run indicates the contracts are already deployer on the network, as the script will fail if a deployment is required.
 
 ## Development
 
@@ -83,9 +85,9 @@ Include the contract's ABI, bytecode and deployment source in the factory.
 
 Update `scripts/deploy-contracts.ts` to:
 
-* Deploy the contract using the factory
-* Add the contract address to the `Output addresses` and this README
-* Add contract source verification add the end of the script
+- Deploy the contract using the factory
+- Add the contract address to the `Output addresses` and this README
+- Add contract source verification add the end of the script
 
 **Make sure to include logging in each step!**
 
