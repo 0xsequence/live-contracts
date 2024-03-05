@@ -121,6 +121,7 @@ The following is a list of contracts that are deployed by this script.
 | MainModuleUpgradableV2     | 0x4222dcA3974E39A8b41c411FeDDE9b09Ae14b911 |
 | GuestModuleV2              | 0xfea230Ee243f88BC698dD8f1aE93F8301B6cdfaE |
 | SequenceUtilsV2            | 0xdbbFa3cB3B087B64F4ef5E3D20Dda2488AA244e6 |
+| TrustFactory               | 0x4483FaA9dEEDd6D6FaCFee9c686f1E394A1280f9 |
 | WalletFactoryV1            | 0xf9D09D634Fb818b05149329C1dcCFAeA53639d96 |
 | MainModuleV1               | 0xd01F11855bCcb95f88D7A48492F66410d4637313 |
 | MainModuleUpgradableV1     | 0x7EFE6cE415956c5f80C6530cC6cc81b4808F6118 |

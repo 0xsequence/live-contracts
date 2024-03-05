@@ -29,7 +29,7 @@ import { MAIN_MODULE_UPGRADABLE_V1_VERIFICATION } from './factories/v1/MainModul
 import { MAIN_MODULE_V1_VERIFICATION } from './factories/v1/MainModuleV1'
 import { REQUIRE_FRESH_SIGNER_V1_VERIFICATION } from './factories/v1/RequireFreshSignerV1'
 import { SEQUENCE_UTILS_V1_VERIFICATION } from './factories/v1/SequenceUtilsV1'
-import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2 } from './factories/v2'
+import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2, TrustFactory } from './factories/v2'
 import { FACTORY_V2_VERIFICATION, WALLET_CREATION_CODE } from './factories/v2/FactoryV2'
 import { GUEST_MODULE_V2_VERIFICATION } from './factories/v2/GuestModuleV2'
 import { MAIN_MODULE_UPGRADABLE_V2_VERIFICATION } from './factories/v2/MainModuleUpgradableV2'
@@ -46,6 +46,7 @@ import {
   NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION,
   NiftyswapExchange20Wrapper
 } from './factories/marketplace/NiftyswapExchange20Wrapper'
+import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
 
 interface Logger {
   log(message: string): void
@@ -186,6 +187,12 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       }
     }
 
+    prompt.start(`Deploying V2 commons contracts\n`)
+
+    const trustFactory = await singletonDeployer.deploy('TrustFactory', TrustFactory, 0, txParams)
+
+    prompt.succeed(`Deployed V2 commons contracts\n`)
+
     // Sequence development multisig
 
     prompt.start(`Deploying Sequence development multisig\n`)
@@ -254,6 +261,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'MainModuleUpgradableV2', address: walletContextAddrs.MainModuleUpgradableV2 },
           { name: 'GuestModuleV2', address: walletContextAddrs.GuestModuleV2 },
           { name: 'SequenceUtilsV2', address: walletContextAddrs.SequenceUtilsV2 },
+          { name: 'TrustFactory', address: trustFactory.address },
           { name: 'WalletFactoryV1', address: walletContextAddrs.WalletFactoryV1 },
           { name: 'MainModuleV1', address: walletContextAddrs.MainModuleV1 },
           { name: 'MainModuleUpgradableV1', address: walletContextAddrs.MainModuleUpgradableV1 },
@@ -349,6 +357,14 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
       prompt.succeed('Verified V2 contracts\n')
     }
+
+    // v2 commons
+
+    prompt.start('Verifying V2 commons contracts\n')
+
+    await verifier.verifyContract(trustFactory.address, { ...TRUST_FACTORY_VERIFICATION, waitForSuccess })
+
+    prompt.succeed('Verified V2 commons contracts\n')
 
     // Niftyswap and Market
 
