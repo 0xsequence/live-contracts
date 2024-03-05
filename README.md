@@ -128,8 +128,10 @@ The following is a list of contracts that are deployed by this script.
 | GuestModuleV1              | 0x02390F3E6E5FD1C6786CB78FD3027C117a9955A7 |
 | SequenceUtilsV1            | 0xd130B43062D875a4B7aF3f8fc036Bc6e9D3E1B3E |
 | RequireFreshSignerLibV1    | 0xE6B9B21C077F382333220a072e4c44280b873907 |
-| GuardV2                    | 0x761f5e29944D79d76656323F106CF2efBF5F09e9 |
-| GuardV1                    | 0x596aF90CecdBF9A768886E771178fd5561dD27Ab |
+| ProdGuardV2                | 0x761f5e29944D79d76656323F106CF2efBF5F09e9 |
+| DevGuardV2                 | 0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0 |
+| ProdGuardV1                | 0x596aF90CecdBF9A768886E771178fd5561dD27Ab |
+| DevGuardV1                 | 0x2ca2380dA88528C6061ACb70aD5222fe455F25DF |
 | DeveloperMultisig          | 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 |
 | NiftyswapFactory20         | 0x9196b852437D9Ed92d95715dCbdA4533ffC479E0 |
 | NiftyswapExchange20Wrapper | 0x2c944F28965F9A2cd5E69bA7e7520CbbD928258a |
