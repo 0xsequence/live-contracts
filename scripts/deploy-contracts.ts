@@ -133,12 +133,25 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
         sequenceUtilsV1.address
       )
 
+      // v1 prod
+
       await deployGuard(
         walletFactoryV1,
-        'Guard V1',
+        'Prod guard V1',
         '0x596aF90CecdBF9A768886E771178fd5561dD27Ab',
         mainModuleV1.address,
         '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128',
+        txParams
+      )
+
+      // v1 dev
+
+      await deployGuard(
+        walletFactoryV1,
+        'Dev guard V1',
+        '0x2ca2380dA88528C6061ACb70aD5222fe455F25DF',
+        mainModuleV1.address,
+        '0x6af209e2a5cca04bfdb4839aba939f715b1840930508af89e7692b21ddecd9b6',
         txParams
       )
 
@@ -161,12 +174,25 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       const guestModuleV2 = await singletonDeployer.deploy('GuestModule', GuestModuleV2, 0, txParams)
       const sequenceUtilsV2 = await singletonDeployer.deploy('SequenceUtils', SequenceUtilsV2, 0, txParams)
 
+      // v2 prod
+
       await deployGuard(
         walletFactoryV2,
-        'Guard V2',
+        'Prod guard V2',
         '0x761f5e29944D79d76656323F106CF2efBF5F09e9',
         mainModuleV2.address,
         '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4',
+        txParams
+      )
+
+      // v2 dev
+
+      await deployGuard(
+        walletFactoryV2,
+        'Dev guard V2',
+        '0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0',
+        mainModuleV2.address,
+        '0x5106c13e87f7f4f67c44fee666525c1859ad193b997694fd294c53d7c2a465f6',
         txParams
       )
 
