@@ -161,6 +161,8 @@ The contracts have been deployed on the following chains.
 - [Binance Smart Chain](https://chainlist.org/chain/56)
 - [Binance Smart Chain Testnet](https://chainlist.org/chain/97)
 - [Gnosis](https://chainlist.org/chain/100)
+- [Astar zkEVM](https://chainlist.org/chain/3776)
+- [Astar zKatana](https://chainlist.org/chain/1261120)
 - [Home Verse](https://chainlist.org/chain/19011)
 - [Home Verse Testnet](https://chainlist.org/chain/40875)
 - [Skale Calypso Hub Testnet](https://chainlist.org/chain/974399131)
