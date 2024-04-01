@@ -148,7 +148,7 @@ The contracts have been deployed on the following chains.
 - [Sepolia](https://chainlist.org/chain/11155111)
 - [Polygon](https://chainlist.org/chain/137)
 - [Polygon ZK](https://chainlist.org/chain/1101)
-- [Polygon Mumbai](https://chainlist.org/chain/80001)
+- [Polygon Amoy](https://chainlist.org/chain/80002)
 - [Optimism](https://chainlist.org/chain/10)
 - [Optimism Sepolia](https://chainlist.org/chain/11155420)
 - [Base](https://chainlist.org/chain/8453)
