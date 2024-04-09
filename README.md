@@ -170,3 +170,4 @@ The contracts have been deployed on the following chains.
 - [Skale Europa Liquidity Hub Testnet](https://chainlist.org/chain/1444673419)
 - [Skale Nebula Gaming Hub Testnet](https://chainlist.org/chain/37084624)
 - [Skale Titan AI Hub Testnet](https://chainlist.org/chain/1020352220)
+- [XR Sepolia](https://xr-one.gitbook.io/xr)
