@@ -57,6 +57,8 @@ This address is funded with a fixed amount of ETH as per their EIP definition.
 Some chains calculate gas differently and may require additional funds to be sent to the deployer address for deployment to continue.
 This has been noticed in Optimistic roll up chains such as [Base](https://base.org).
 
+The Universal Deployer and Singleton Factory contracts are deploying using a gas price of `100 gwei`. We unable to deploy to networks with a gas price higher than this.
+
 ### Checking Deployment
 
 To check if the Sequence contracts have been deployed on a given network, run the deployment script connected to a wallet without any funds.
