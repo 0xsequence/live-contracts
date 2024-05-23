@@ -137,7 +137,8 @@ The following is a list of contracts that are deployed by this script.
 | DeveloperMultisig          | 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 |
 | NiftyswapFactory20         | 0x9196b852437D9Ed92d95715dCbdA4533ffC479E0 |
 | NiftyswapExchange20Wrapper | 0x2c944F28965F9A2cd5E69bA7e7520CbbD928258a |
-| SequenceMarket             | 0xB537a160472183f2150d42EB1c3DD6684A55f74c |
+| SequenceMarketFactory      | 0xBDC76d15eA28beB6AF2Cc69b4EFBb4Aa4FB77689 |
+| SequenceMarket             | 0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712 |
 | ERC20ItemsFactory          | 0x1063cBEe6b3Cd69B49f1B922A0D402f484b39855 |
 | ERC721ItemsFactory         | 0x29BCF1043Ca4B2c95aB28082143587896D39D22D |
 | ERC1155ItemsFactory        | 0x7364fDEFe24385B2b3869504383c94cF083AcbD6 |
@@ -174,3 +175,5 @@ The contracts have been deployed on the following chains.
 - [Skale Titan AI Hub Testnet](https://chainlist.org/chain/1020352220)
 - [Telos](https://www.telos.net/)
 - [XR Sepolia](https://xr-one.gitbook.io/xr)
+- [Immutable zkEVM](https://chainlist.org/chain/13371)
+- [Immutable zkEVM Testnet](https://chainlist.org/chain/13473)

@@ -6,7 +6,7 @@ import { BigNumber, ethers } from 'ethers'
 import { writeFile } from 'fs/promises'
 import { argv } from 'process'
 import { Config, getConfigs } from './config'
-import { SEQUENCE_MARKET_VERIFICATION, SequenceMarket } from './factories/marketplace/SequenceMarket'
+import { SEQUENCEMARKETFACTORY_VERIFICATION, SequenceMarketFactory, SequenceMarketInterface } from './factories/marketplace/SequenceMarketFactory'
 import { ERC1155ITEMSFACTORY_VERIFICATION, ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
 import { ERC20ITEMSFACTORY_VERIFICATION, ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
 import { ERC721ITEMSFACTORY_VERIFICATION, ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
@@ -246,7 +246,15 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN
     ) // Use Universal deployer for consistency
     const niftyWrapper = await singletonDeployer.deploy('NiftyExchange20Wrapper', NiftyswapExchange20Wrapper, 0, txParams)
-    const market = await singletonDeployer.deploy('SequenceMarket', SequenceMarket, 0, txParams, developerMultisig.address)
+    const marketFactory = await singletonDeployer.deploy('SequenceMarketFactory', SequenceMarketFactory)
+    prompt.log(`Deploying SequenceMarket\n`)
+    const salt = ethers.constants.HashZero
+    const marketAddress = (await marketFactory.functions.predictAddress(salt, developerMultisig.address))[0]
+    if (await signer.provider.getCode(marketAddress) === '0x') {
+      const marketDeployTx = await marketFactory.functions.deploy(salt, developerMultisig.address)
+      await marketDeployTx.wait()
+    }
+    prompt.log(`Market deployed at ${marketAddress}\n`)
     prompt.succeed(`Deployed Market contracts\n`)
 
     // Contracts library
@@ -301,7 +309,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'DeveloperMultisig', address: developerMultisig.address },
           { name: 'NiftyswapFactory20', address: niftyFactory.address },
           { name: 'NiftyExchange20Wrapper', address: niftyWrapper.address },
-          { name: 'SequenceMarket', address: market.address },
+          { name: 'SequenceMarketFactory', address: marketFactory.address },
+          { name: 'SequenceMarket', address: marketAddress },
           { name: 'ERC20ItemsFactory', address: erc20ItemsFactory.address },
           { name: 'ERC721ItemsFactory', address: erc721ItemsFactory.address },
           { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address }
@@ -403,10 +412,21 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       constructorArgs: defaultAbiCoder.encode(['address'], [NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN])
     })
     await verifier.verifyContract(niftyWrapper.address, { ...NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION, waitForSuccess })
-    await verifier.verifyContract(market.address, {
-      ...SEQUENCE_MARKET_VERIFICATION,
+    await verifier.verifyContract(marketFactory.address, {
+      ...SEQUENCEMARKETFACTORY_VERIFICATION,
+      waitForSuccess
+    })
+    const marketImplementationAddress = await marketFactory.implementation()
+    await verifier.verifyContract(marketImplementationAddress, {
+      ...SEQUENCEMARKETFACTORY_VERIFICATION,
+      contractToVerify: 'contracts/SequenceMarket.sol:SequenceMarket',
+      waitForSuccess
+    })
+    await verifier.verifyContract(marketAddress, {
+      ...SEQUENCEMARKETFACTORY_VERIFICATION,
+      contractToVerify: 'lib/openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol:ERC1967Proxy',
       waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+      constructorArgs: defaultAbiCoder.encode(['address', 'bytes'], [marketImplementationAddress, SequenceMarketInterface.encodeFunctionData('initialize', [developerMultisig.address])])
     })
     prompt.succeed('Verified Market contracts\n')
 
