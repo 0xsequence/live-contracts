@@ -47,6 +47,8 @@ import {
   NiftyswapExchange20Wrapper
 } from './factories/marketplace/NiftyswapExchange20Wrapper'
 import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
+import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
+import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
 
 interface Logger {
   log(message: string): void
@@ -281,6 +283,20 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       txParams,
       developerMultisig.address
     )
+    const erc721SaleFactory = await singletonDeployer.deploy(
+      'ERC721SaleFactory',
+      ERC721SaleFactory,
+      0,
+      txParams,
+      developerMultisig.address
+    )
+    const erc1155SaleFactory = await singletonDeployer.deploy(
+      'ERC1155SaleFactory',
+      ERC1155SaleFactory,
+      0,
+      txParams,
+      developerMultisig.address
+    )
     prompt.succeed(`Deployed Library contracts\n`)
 
     // Output addresses
@@ -313,7 +329,9 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'SequenceMarket', address: marketAddress },
           { name: 'ERC20ItemsFactory', address: erc20ItemsFactory.address },
           { name: 'ERC721ItemsFactory', address: erc721ItemsFactory.address },
-          { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address }
+          { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address },
+          { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
+          { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address },
         ],
         null,
         2
@@ -449,6 +467,16 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
+    await verifier.verifyContract(erc721SaleFactory.address, {
+      ...ERC721SALEFACTORY_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+    })
+    await verifier.verifyContract(erc1155SaleFactory.address, {
+      ...ERC1155SALEFACTORY_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+    })
     // Also deploy the TUBProxy for verification purposes
     const tubProxy = await singletonDeployer.deploy(
       'TransparentUpgradeableBeaconProxy',
@@ -473,6 +501,18 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     await verifier.verifyContract(erc1155ItemsImplementation, {
       ...ERC1155ITEMSFACTORY_VERIFICATION,
       contractToVerify: 'src/tokens/ERC1155/presets/items/ERC1155Items.sol:ERC1155Items',
+      waitForSuccess
+    })
+    const erc721SaleImplementation = await beacon.attach(await erc721SaleFactory.beacon()).implementation()
+    await verifier.verifyContract(erc721SaleImplementation, {
+      ...ERC721SALEFACTORY_VERIFICATION,
+      contractToVerify: 'src/tokens/ERC721/utility/sale/ERC721Sale.sol:ERC721Sale',
+      waitForSuccess
+    })
+    const erc1155SaleImplementation = await beacon.attach(await erc1155SaleFactory.beacon()).implementation()
+    await verifier.verifyContract(erc1155SaleImplementation, {
+      ...ERC1155SALEFACTORY_VERIFICATION,
+      contractToVerify: 'src/tokens/ERC1155/utility/sale/ERC1155Sale.sol:ERC1155Sale',
       waitForSuccess
     })
     // Proxies
