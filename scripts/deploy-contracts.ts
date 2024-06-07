@@ -554,9 +554,9 @@ const main = async () => {
   for (const { network, deployment } of deployments) {
     const err = await deployment
     if (err === null) {
-      console.log(`Successfully deployed to ${network}`)
+      console.log(`- [X] ${network}`)
     } else {
-      console.error(`Error deploying to ${network}: ${err.substring(0, 200)}`)
+      console.error(`- [ ] ${network}: ${err.substring(0, 200)}`)
     }
   }
 }
