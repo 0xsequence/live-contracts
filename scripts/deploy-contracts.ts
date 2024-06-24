@@ -49,6 +49,11 @@ import {
 import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
 import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
 import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
+import { MAIN_MODULE_UPGRADABLE_DUO_V2 } from './artifacts/SEQ0001/v2/MainModuleUpgradableDuo'
+import { getArtifactFactory } from './utils'
+import { MIGRATOR_TO_DUO_V2 } from './artifacts/SEQ0001/v2/MigratorToDuo'
+import { MAIN_MODULE_UPGRADABLE_DUO_V1 } from './artifacts/SEQ0001/v1/MainModuleUpgradableDuo'
+import { MIGRATOR_TO_DUO_V1 } from './artifacts/SEQ0001/v1/MigratorToDuo'
 
 interface Logger {
   log(message: string): void
@@ -220,6 +225,42 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const trustFactory = await singletonDeployer.deploy('TrustFactory', TrustFactory, 0, txParams)
 
     prompt.succeed(`Deployed V2 commons contracts\n`)
+
+    // SEQ-0001 patch
+    prompt.start("Deploying SEQ-0001 MainModuleUpgradableDuo v1\n")
+    const mainModuleUpgradableDuoV1 = await universalDeployer.deploy('MainModuleUpgradableDuo', getArtifactFactory(MAIN_MODULE_UPGRADABLE_DUO_V1), 0, txParams)
+    prompt.succeed("Deployed SEQ-0001 MainModuleUpgradableDuo v1: " + mainModuleUpgradableDuoV1.address + "\n")
+
+    prompt.start("Deploying SEQ-0001 MainModuleUpgradableDuo v2\n")
+    const mainModuleUpgradableDuoV2 = await singletonDeployer.deploy('MainModuleUpgradableDuo', getArtifactFactory(MAIN_MODULE_UPGRADABLE_DUO_V2), 0, txParams)
+    prompt.succeed("Deployed SEQ-0001 MainModuleUpgradableDuo v2: " + mainModuleUpgradableDuoV2.address + "\n")
+
+    prompt.start("Deploying migrator for SEQ-0001 v1\n")
+    const migratorToDuoV1 = await universalDeployer.deploy(
+      'MainModuleUpgradableDuoMigrator',
+      getArtifactFactory(MIGRATOR_TO_DUO_V1),
+      0,
+      txParams,
+      mainModuleUpgradableDuoV1.address,
+      "0x596aF90CecdBF9A768886E771178fd5561dD27Ab",
+      "0x5ca5d4cb6696df530c26b130a8fd86276a111f6696b3a8f2e76ff5edf94a2d84",
+      "0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128"
+    )
+    prompt.succeed("Deployed migrator for SEQ-0001 v1: " + migratorToDuoV1.address + "\n")
+
+    prompt.start("Deploying migrator for SEQ-0001 v2\n")
+    const migratorToDuoV2 = await singletonDeployer.deploy(
+      'MainModuleUpgradableDuoMigrator',
+      getArtifactFactory(MIGRATOR_TO_DUO_V2),
+      0,
+      txParams,
+      mainModuleUpgradableDuoV2.address,
+      "0x761f5e29944D79d76656323F106CF2efBF5F09e9",
+      "0xacb659ac7f85fbbce197005235ced2d040c7b02942a9dfae647582393d5a4e83",
+      "0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4"
+    )
+    prompt.succeed("Deployed migrator for SEQ-0001 v2: " + migratorToDuoV2.address + "\n")
+    
 
     // Sequence development multisig
 
