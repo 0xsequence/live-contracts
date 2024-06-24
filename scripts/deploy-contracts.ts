@@ -248,12 +248,12 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN
     ) // Use Universal deployer for consistency
     const niftyWrapper = await singletonDeployer.deploy('NiftyExchange20Wrapper', NiftyswapExchange20Wrapper, 0, txParams)
-    const marketFactory = await singletonDeployer.deploy('SequenceMarketFactory', SequenceMarketFactory)
+    const marketFactory = await singletonDeployer.deploy('SequenceMarketFactory', SequenceMarketFactory, 0, txParams)
     prompt.log(`Deploying SequenceMarket\n`)
     const salt = ethers.constants.HashZero
     const marketAddress = (await marketFactory.functions.predictAddress(salt, developerMultisig.address))[0]
     if (await signer.provider.getCode(marketAddress) === '0x') {
-      const marketDeployTx = await marketFactory.functions.deploy(salt, developerMultisig.address)
+      const marketDeployTx = await marketFactory.functions.deploy(salt, developerMultisig.address, txParams)
       await marketDeployTx.wait()
     }
     prompt.log(`Market deployed at ${marketAddress}\n`)
