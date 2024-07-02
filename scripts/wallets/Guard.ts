@@ -53,8 +53,11 @@ export const deployGuard = async (
           chainId: (await provider.getNetwork()).chainId,
           secret
         })
+        const tx: ethers.providers.TransactionRequest = txs
+        tx.gasPrice = tx.gasPrice ?? txParams?.gasPrice
+        tx.gasLimit = tx.gasLimit ?? txParams?.gasLimit
 
-        const response = await signer.sendTransaction(txs)
+        const response = await signer.sendTransaction(tx)
 
         const receipt = await response.wait()
 
