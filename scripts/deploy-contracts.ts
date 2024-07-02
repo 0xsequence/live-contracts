@@ -72,10 +72,6 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
   prompt.prefixText = config.networkName
 
   try {
-    if (!config.guardPatchSecret) {
-      throw new Error('Missing guard patch secret')
-    }
-
     const provider = new JsonRpcProvider({
       url: config.rpcUrl,
       timeout: 60000 // 1 minute timeout
