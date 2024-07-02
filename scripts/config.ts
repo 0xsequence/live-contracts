@@ -5,7 +5,7 @@ export type Config = {
   networkName: string
   rpcUrl: string
   deployerPk: string
-  guardPatchSecret: string
+  guardPatchSecret?: string
   verifierApiUrl?: string
   verifierApiKey?: string
   gasLimit?: BigNumberish

@@ -9,7 +9,7 @@ export const deployGuard = async (
   guardAddr: string,
   mainModuleAddr: string,
   salt: string,
-  secret: string,
+  secret?: string,
   txParams?: ethers.providers.TransactionRequest
 ): Promise<void> => {
   const guardAlias = `${guardEnv} guard v${guardVersion}`
@@ -41,28 +41,30 @@ export const deployGuard = async (
     }
   }
 
-  try {
-    const externalImageHash = await provider.call({ to: guardAddr, data: ethers.utils.hexDataSlice(ethers.utils.keccak256(ethers.utils.toUtf8Bytes('externalImageHash()')), 0, 4) })
+  if (secret) {
+    try {
+      const externalImageHash = await provider.call({ to: guardAddr, data: ethers.utils.hexDataSlice(ethers.utils.keccak256(ethers.utils.toUtf8Bytes('externalImageHash()')), 0, 4) })
 
-    if (externalImageHash === '0x') {
-      const guard = new Guard(`https://${guardEnv === 'prod' ? 'guard' : 'dev-guard'}.sequence.app`, global.fetch)
+      if (externalImageHash === '0x') {
+        const guard = new Guard(`https://${guardEnv === 'prod' ? 'guard' : 'dev-guard'}.sequence.app`, global.fetch)
 
-      const { txs } = await guard.patch({
-        signer: guardAddr,
-        chainId: (await provider.getNetwork()).chainId,
-        secret
-      })
+        const { txs } = await guard.patch({
+          signer: guardAddr,
+          chainId: (await provider.getNetwork()).chainId,
+          secret
+        })
 
-      const response = await signer.sendTransaction(txs)
+        const response = await signer.sendTransaction(txs)
 
-      const receipt = await response.wait()
+        const receipt = await response.wait()
 
-      o.info(`Migrated ${guardAlias} to dual image hash implementation in transaction ${receipt.transactionHash}`)
-    } else {
-      o.warn(`ALREADY MIGRATED: ${guardAlias}`)
+        o.info(`Migrated ${guardAlias} to dual image hash implementation in transaction ${receipt.transactionHash}`)
+      } else {
+        o.warn(`ALREADY MIGRATED: ${guardAlias}`)
+      }
+    } catch (error) {
+      o.warn(`UNSURE IF ALREADY MIGRATED: ${error}`)
     }
-  } catch (error) {
-    o.warn(`UNSURE IF ALREADY MIGRATED: ${error}`)
   }
 
   o.succeed(`Deployed ${guardAlias} at ${guardAddr}`)
