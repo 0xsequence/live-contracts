@@ -169,6 +169,7 @@ The contracts have been deployed on the following chains.
 - [Astar zkEVM](https://chainlist.org/chain/3776)
 - [Astar zKyoto](https://chainlist.org/chain/6038361)
 - [Xai](https://chainlist.org/chain/660279)
+- [Xai Sepolia](https://chainlist.org/chain/37714555429)
 - [Home Verse](https://chainlist.org/chain/19011)
 - [Home Verse Testnet](https://chainlist.org/chain/40875)
 - [Skale Calypso Hub Testnet](https://chainlist.org/chain/974399131)
