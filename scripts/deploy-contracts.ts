@@ -71,6 +71,10 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
   prompt.error = prompt.fail
   prompt.prefixText = config.networkName
 
+  if (!config.guardPatchSecret) {
+    prompt.warn('Missing patch secret, skipping guard migrations')
+  }
+
   try {
     const provider = new JsonRpcProvider({
       url: config.rpcUrl,
