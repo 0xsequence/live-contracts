@@ -86,6 +86,9 @@ export const deployDeveloperMultisig = async (
     o.warn(`Already deployed developer multisig wallet at ${wallet.address}`)
   } else {
     const tx = await wallet.deploy()
+    if (!tx) {
+      throw new Error(`Unable to deploy developer multisig wallet at ${wallet.address}`)
+    }
     await tx.wait()
   }
 
