@@ -1,5 +1,5 @@
 import axios from 'axios';
-import fs from 'fs';
+import fs from 'node:fs';
 
 type ApiAction = 'getsourcecode' | 'getabi'
 
@@ -17,7 +17,7 @@ async function downloadJsonFromApi(
       throw new Error(`HTTP error: ${response.status}`)
     }
 
-    let parsedJsonData
+    let parsedJsonData: unknown
     if (action === 'getsourcecode') {
       const jsonData = response.data.result[0].SourceCode
       const cleanedJsonData = jsonData.slice(1, -1) // Fix formatting

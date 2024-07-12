@@ -1,5 +1,5 @@
 import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
-import { ContractFactory, ethers } from 'ethers'
+import { ContractFactory, type ethers } from 'ethers'
 
 // https://github.com/0xsequence/contracts-library/blob/87eea5e3a8b4c58448b275efe856d4c80891cc8f/src/proxies/TransparentUpgradeableBeaconProxy.sol
 

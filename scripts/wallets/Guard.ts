@@ -1,5 +1,5 @@
 import { Guard } from '@0xsequence/guard'
-import { Contract, ethers } from 'ethers'
+import { type Contract, ethers } from 'ethers'
 import ora from 'ora'
 
 export const deployGuard = async (
@@ -14,7 +14,9 @@ export const deployGuard = async (
 ): Promise<void> => {
   const guardAlias = `${guardEnv} guard v${guardVersion}`
 
-  if (!factory.hasOwnProperty('deploy')) throw new Error('Factory must have a deploy method')
+  if (!('deploy' in factory)) {
+    throw new Error('Factory must have a deploy method')
+  }
 
   const { signer } = factory
   if (!signer) throw new Error('Factory must be connected to a signer')

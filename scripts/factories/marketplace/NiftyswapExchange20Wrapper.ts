@@ -1,5 +1,5 @@
 import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
-import { ContractFactory, ethers } from 'ethers'
+import { ContractFactory, type ethers } from 'ethers'
 
 // https://github.com/0xsequence/niftyswap/blob/b20a97da06504cf4ee2c309290a80447b14e3464/src/contracts/wrapper/NiftyswapExchange20Wrapper.sol
 

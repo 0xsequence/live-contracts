@@ -1,5 +1,5 @@
 import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
-import { ContractFactory, ethers } from 'ethers'
+import { ContractFactory, type ethers } from 'ethers'
 
 // https://github.com/0xsequence/contracts-library/blob/b32f88b298fc73ec1c4be5e845185de91f41c9ff/src/tokens/ERC721/presets/items/ERC721ItemsFactory.sol
 

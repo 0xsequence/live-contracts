@@ -55,7 +55,7 @@ export const deployDeveloperMultisig = async (
     throw new Error('Signer must be connected to a provider')
   }
 
-  const o = ora().start(`Deploying developer multisig wallet`)
+  const o = ora().start("Deploying developer multisig wallet")
 
   const walletConfig = v2.coders.config.fromSimple(WALLET_CONFIG)
   const address = commons.context.addressOf(context, v2.coders.config.imageHashOf(walletConfig))

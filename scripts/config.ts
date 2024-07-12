@@ -1,5 +1,5 @@
-import { BigNumberish } from 'ethers'
-import { readFile } from 'fs/promises'
+import type { BigNumberish } from 'ethers'
+import { readFile } from 'node:fs/promises'
 
 export type Config = {
   networkName: string

@@ -1,12 +1,16 @@
-import ora, { Ora } from 'ora'
+import ora, { type Ora } from 'ora'
 
 import { deployers, verifiers } from '@0xsequence/solidity-deployer'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { BigNumber, ethers } from 'ethers'
-import { writeFile } from 'fs/promises'
-import { argv } from 'process'
-import { Config, getConfigs } from './config'
-import { SEQUENCEMARKETFACTORY_VERIFICATION, SequenceMarketFactory, SequenceMarketInterface } from './factories/marketplace/SequenceMarketFactory'
+import { writeFile } from 'node:fs/promises'
+import { argv } from 'node:process'
+import { type Config, getConfigs } from './config'
+import {
+  SEQUENCEMARKETFACTORY_VERIFICATION,
+  SequenceMarketFactory,
+  SequenceMarketInterface
+} from './factories/marketplace/SequenceMarketFactory'
 import { ERC1155ITEMSFACTORY_VERIFICATION, ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
 import { ERC20ITEMSFACTORY_VERIFICATION, ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
 import { ERC721ITEMSFACTORY_VERIFICATION, ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
@@ -122,7 +126,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     } else {
       // v1
 
-      prompt.start(`Deploying V1 contracts\n`)
+      prompt.start('Deploying V1 contracts\n')
 
       const walletFactoryV1 = await universalDeployer.deploy('WalletFactory', FactoryV1, 0, txParams)
       const mainModuleV1 = await universalDeployer.deploy('MainModule', MainModuleV1, 0, txParams, walletFactoryV1.address)
@@ -145,39 +149,49 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       )
 
       // SEQ-0001 patch
-      prompt.start("Deploying SEQ-0001 MainModuleUpgradableDuo v1\n")
-      const mainModuleUpgradableDuoV1 = await universalDeployer.deploy('MainModuleUpgradableDuo', getArtifactFactory(MAIN_MODULE_UPGRADABLE_DUO_V1), 0, txParams)
-      prompt.succeed("Deployed SEQ-0001 MainModuleUpgradableDuo v1: " + mainModuleUpgradableDuoV1.address + "\n")
+      prompt.start('Deploying SEQ-0001 MainModuleUpgradableDuo v1\n')
+      const mainModuleUpgradableDuoV1 = await universalDeployer.deploy(
+        'MainModuleUpgradableDuo',
+        getArtifactFactory(MAIN_MODULE_UPGRADABLE_DUO_V1),
+        0,
+        txParams
+      )
+      prompt.succeed(`Deployed SEQ-0001 MainModuleUpgradableDuo v1: ${mainModuleUpgradableDuoV1.address}\n`)
 
-      prompt.start("Deploying SEQ-0001 MainModuleUpgradableDuo v2\n")
-      const mainModuleUpgradableDuoV2 = await singletonDeployer.deploy('MainModuleUpgradableDuo', getArtifactFactory(MAIN_MODULE_UPGRADABLE_DUO_V2), 0, txParams)
-      prompt.succeed("Deployed SEQ-0001 MainModuleUpgradableDuo v2: " + mainModuleUpgradableDuoV2.address + "\n")
+      prompt.start('Deploying SEQ-0001 MainModuleUpgradableDuo v2\n')
+      const mainModuleUpgradableDuoV2 = await singletonDeployer.deploy(
+        'MainModuleUpgradableDuo',
+        getArtifactFactory(MAIN_MODULE_UPGRADABLE_DUO_V2),
+        0,
+        txParams
+      )
+      prompt.succeed(`Deployed SEQ-0001 MainModuleUpgradableDuo v2: ${mainModuleUpgradableDuoV2.address}\n`)
 
-      prompt.start("Deploying migrator for SEQ-0001 v1\n")
+      prompt.start('Deploying migrator for SEQ-0001 v1\n')
       const migratorToDuoV1 = await universalDeployer.deploy(
         'MainModuleUpgradableDuoMigrator',
         getArtifactFactory(MIGRATOR_TO_DUO_V1),
         0,
         txParams,
         mainModuleUpgradableDuoV1.address,
-        "0x596aF90CecdBF9A768886E771178fd5561dD27Ab",
-        "0x5ca5d4cb6696df530c26b130a8fd86276a111f6696b3a8f2e76ff5edf94a2d84",
-        "0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128"
+        '0x596aF90CecdBF9A768886E771178fd5561dD27Ab',
+        '0x5ca5d4cb6696df530c26b130a8fd86276a111f6696b3a8f2e76ff5edf94a2d84',
+        '0xc99c1ab359199e4dcbd4603e9b2956d5681241ceb286359cf6a647ca56e6e128'
       )
-      prompt.succeed("Deployed migrator for SEQ-0001 v1: " + migratorToDuoV1.address + "\n")
+      prompt.succeed(`Deployed migrator for SEQ-0001 v1: ${migratorToDuoV1.address}\n`)
 
-      prompt.start("Deploying migrator for SEQ-0001 v2\n")
+      prompt.start('Deploying migrator for SEQ-0001 v2\n')
       const migratorToDuoV2 = await singletonDeployer.deploy(
         'MainModuleUpgradableDuoMigrator',
         getArtifactFactory(MIGRATOR_TO_DUO_V2),
         0,
         txParams,
         mainModuleUpgradableDuoV2.address,
-        "0x761f5e29944D79d76656323F106CF2efBF5F09e9",
-        "0xacb659ac7f85fbbce197005235ced2d040c7b02942a9dfae647582393d5a4e83",
-        "0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4"
+        '0x761f5e29944D79d76656323F106CF2efBF5F09e9',
+        '0xacb659ac7f85fbbce197005235ced2d040c7b02942a9dfae647582393d5a4e83',
+        '0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4'
       )
-      prompt.succeed("Deployed migrator for SEQ-0001 v2: " + migratorToDuoV2.address + "\n")
+      prompt.succeed(`Deployed migrator for SEQ-0001 v2: ${migratorToDuoV2.address}\n`)
 
       // v1 prod
 
@@ -205,11 +219,11 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
         txParams
       )
 
-      prompt.succeed(`Deployed V1 contracts\n`)
+      prompt.succeed('Deployed V1 contracts\n')
 
       // v2
 
-      prompt.start(`Deploying V2 contracts\n`)
+      prompt.start('Deploying V2 contracts\n')
 
       const walletFactoryV2 = await singletonDeployer.deploy('Factory', FactoryV2, 0, txParams)
       const mainModuleUpgradableV2 = await singletonDeployer.deploy('MainModuleUpgradable', MainModuleUpgradableV2, 0, txParams)
@@ -250,7 +264,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
         txParams
       )
 
-      prompt.succeed(`Deployed V2 contracts\n`)
+      prompt.succeed("Deployed V2 contracts\n")
 
       walletContextAddrs = {
         WalletFactoryV2: walletFactoryV2.address,
@@ -267,15 +281,15 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       }
     }
 
-    prompt.start(`Deploying V2 commons contracts\n`)
+    prompt.start("Deploying V2 commons contracts\n")
 
     const trustFactory = await singletonDeployer.deploy('TrustFactory', TrustFactory, 0, txParams)
 
-    prompt.succeed(`Deployed V2 commons contracts\n`)
+    prompt.succeed("Deployed V2 commons contracts\n")
 
     // Sequence development multisig
 
-    prompt.start(`Deploying Sequence development multisig\n`)
+    prompt.start("Deploying Sequence development multisig\n")
 
     const v2WalletContext = {
       version: 2,
@@ -287,11 +301,11 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       walletCreationCode: WALLET_CREATION_CODE
     }
     const developerMultisig = await deployDeveloperMultisig(signer, v2WalletContext, txParams)
-    prompt.succeed(`Deployed Sequence development multisig\n`)
+    prompt.succeed("Deployed Sequence development multisig\n")
 
     // Niftyswap and Market contracts
 
-    prompt.start(`Deploying Market contracts\n`)
+    prompt.start("Deploying Market contracts\n")
     const niftyFactory = await universalDeployer.deploy(
       'NiftyswapFactory20',
       NiftyswapFactory20,
@@ -301,19 +315,19 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     ) // Use Universal deployer for consistency
     const niftyWrapper = await singletonDeployer.deploy('NiftyExchange20Wrapper', NiftyswapExchange20Wrapper, 0, txParams)
     const marketFactory = await singletonDeployer.deploy('SequenceMarketFactory', SequenceMarketFactory, 0, txParams)
-    prompt.log(`Deploying SequenceMarket\n`)
+    prompt.log("Deploying SequenceMarket\n")
     const salt = ethers.constants.HashZero
     const marketAddress = (await marketFactory.functions.predictAddress(salt, developerMultisig.address))[0]
-    if (await signer.provider.getCode(marketAddress) === '0x') {
+    if ((await signer.provider.getCode(marketAddress)) === '0x') {
       const marketDeployTx = await marketFactory.functions.deploy(salt, developerMultisig.address, txParams)
       await marketDeployTx.wait()
     }
     prompt.log(`Market deployed at ${marketAddress}\n`)
-    prompt.succeed(`Deployed Market contracts\n`)
+    prompt.succeed("Deployed Market contracts\n")
 
     // Contracts library
 
-    prompt.start(`Deploying Library contracts\n`)
+    prompt.start("Deploying Library contracts\n")
     const erc20ItemsFactory = await singletonDeployer.deploy(
       'ERC20ItemsFactory',
       ERC20ItemsFactory,
@@ -349,7 +363,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       txParams,
       developerMultisig.address
     )
-    prompt.succeed(`Deployed Library contracts\n`)
+    prompt.succeed("Deployed Library contracts\n")
 
     // Output addresses
 
@@ -383,7 +397,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'ERC721ItemsFactory', address: erc721ItemsFactory.address },
           { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address },
           { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
-          { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address },
+          { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address }
         ],
         null,
         2
@@ -496,13 +510,16 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       ...SEQUENCEMARKETFACTORY_VERIFICATION,
       contractToVerify: 'lib/openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol:ERC1967Proxy',
       waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address', 'bytes'], [marketImplementationAddress, SequenceMarketInterface.encodeFunctionData('initialize', [developerMultisig.address])])
+      constructorArgs: defaultAbiCoder.encode(
+        ['address', 'bytes'],
+        [marketImplementationAddress, SequenceMarketInterface.encodeFunctionData('initialize', [developerMultisig.address])]
+      )
     })
     prompt.succeed('Verified Market contracts\n')
 
     // Library contracts
 
-    prompt.start(`Verifying Library contracts\n`)
+    prompt.start("Verifying Library contracts\n")
     // Factories
     await verifier.verifyContract(erc20ItemsFactory.address, {
       ...ERC20ITEMSFACTORY_VERIFICATION,
@@ -578,7 +595,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       waitForSuccess
     })
 
-    prompt.succeed(`Verified Library contracts\n`)
+    prompt.succeed("Verified Library contracts\n")
   } catch (error: unknown) {
     prompt.fail(`Error deploying contracts on ${config.networkName}: ${error}`)
     return (error as Error).message
