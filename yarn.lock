@@ -187,10 +187,10 @@
     "@0xsequence/core" "1.9.36"
     ethers "^5.5.2"
 
-"@0xsequence/solidity-deployer@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@0xsequence/solidity-deployer/-/solidity-deployer-0.0.6.tgz#6468cefed873a5997db03f1fa7103d22f08d4d75"
-  integrity sha512-N70a/Qal5WKYKiKUvcIHC6+ddntwXQ7PT+/ZeUFcR1Rycoiv09fdgorHkiXDXMjgx0Ihhg0ayBktxAm5hZqFqA==
+"@0xsequence/solidity-deployer@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@0xsequence/solidity-deployer/-/solidity-deployer-0.0.8.tgz#6c5c28bcbe19236e4185af8fc83165868b39d998"
+  integrity sha512-htU8G34pnI4PnJS1XppInRnuxQ2ynH0htQW7dYOT7pZenAMvBUXbyD5HONWDoR/h2sWMI78vNYgxa3KtVdw7HQ==
   dependencies:
     "@tenderly/sdk" "^0.1.14"
     axios "^1.3.5"
