@@ -180,3 +180,4 @@ The contracts have been deployed on the following chains.
 - [XR Sepolia](https://xr-one.gitbook.io/xr)
 - [Immutable zkEVM](https://chainlist.org/chain/13371)
 - [Immutable zkEVM Testnet](https://chainlist.org/chain/13473)
+- [ApeChain Testnet](https://ape-docs.vercel.app)
