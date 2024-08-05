@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, type ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 const abi = [
   {
@@ -85,9 +85,10 @@ export class TrustFactory extends ContractFactory {
   }
 }
 
-export const TRUST_FACTORY_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const TRUST_FACTORY_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'contracts/trust/TrustFactory.sol:TrustFactory',
   version: 'v0.8.18+commit.87f61d96',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {

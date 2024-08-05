@@ -1,19 +1,34 @@
 import ora, { type Ora } from 'ora'
 
-import { deployers, verifiers } from '@0xsequence/solidity-deployer'
-import { JsonRpcProvider } from '@ethersproject/providers'
-import { BigNumber, ethers } from 'ethers'
 import { writeFile } from 'node:fs/promises'
 import { argv } from 'node:process'
+import { deployers, verifiers as deploymentVerifiers } from '@0xsequence/solidity-deployer'
+import { JsonRpcProvider } from '@ethersproject/providers'
+import { BigNumber, ethers } from 'ethers'
+import { MAIN_MODULE_UPGRADABLE_DUO_V1 } from './artifacts/SEQ0001/v1/MainModuleUpgradableDuo'
+import { MIGRATOR_TO_DUO_V1 } from './artifacts/SEQ0001/v1/MigratorToDuo'
+import { MAIN_MODULE_UPGRADABLE_DUO_V2 } from './artifacts/SEQ0001/v2/MainModuleUpgradableDuo'
+import { MIGRATOR_TO_DUO_V2 } from './artifacts/SEQ0001/v2/MigratorToDuo'
 import { type Config, getConfigs } from './config'
+import {
+  NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION,
+  NiftyswapExchange20Wrapper
+} from './factories/marketplace/NiftyswapExchange20Wrapper'
+import {
+  NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN,
+  NIFTYSWAP_FACTORY_20_VERIFICATION,
+  NiftyswapFactory20
+} from './factories/marketplace/NiftyswapFactory20'
 import {
   SEQUENCEMARKETFACTORY_VERIFICATION,
   SequenceMarketFactory,
   SequenceMarketInterface
 } from './factories/marketplace/SequenceMarketFactory'
-import { ERC1155ITEMSFACTORY_VERIFICATION, ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
 import { ERC20ITEMSFACTORY_VERIFICATION, ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
 import { ERC721ITEMSFACTORY_VERIFICATION, ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
+import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
+import { ERC1155ITEMSFACTORY_VERIFICATION, ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
+import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
 import {
   TUBPROXY_VERIFICATION,
   TransparentUpgradeableBeaconProxy
@@ -39,25 +54,11 @@ import { GUEST_MODULE_V2_VERIFICATION } from './factories/v2/GuestModuleV2'
 import { MAIN_MODULE_UPGRADABLE_V2_VERIFICATION } from './factories/v2/MainModuleUpgradableV2'
 import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
+import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
+import type { VerificationRequest } from './types'
+import { getArtifactFactory } from './utils'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
-import {
-  NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN,
-  NIFTYSWAP_FACTORY_20_VERIFICATION,
-  NiftyswapFactory20
-} from './factories/marketplace/NiftyswapFactory20'
-import {
-  NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION,
-  NiftyswapExchange20Wrapper
-} from './factories/marketplace/NiftyswapExchange20Wrapper'
-import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
-import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
-import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
-import { MAIN_MODULE_UPGRADABLE_DUO_V2 } from './artifacts/SEQ0001/v2/MainModuleUpgradableDuo'
-import { getArtifactFactory } from './utils'
-import { MIGRATOR_TO_DUO_V2 } from './artifacts/SEQ0001/v2/MigratorToDuo'
-import { MAIN_MODULE_UPGRADABLE_DUO_V1 } from './artifacts/SEQ0001/v1/MainModuleUpgradableDuo'
-import { MIGRATOR_TO_DUO_V1 } from './artifacts/SEQ0001/v1/MigratorToDuo'
 
 interface Logger {
   log(message: string): void
@@ -407,16 +408,26 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     // Verify contracts
 
-    if (!config.verifierApiUrl || !config.verifierApiKey) {
+    if ((!config.etherscanApiUrl || !config.etherscanApiKey) && !config.blockscoutUrl) {
       prompt.warn('Skipping contract verification.\n')
       prompt.stop()
       // Exit early
       return null
     }
 
-    const verifier = new verifiers.EtherscanVerifier(config.verifierApiKey, config.verifierApiUrl, prompt)
-    const waitForSuccess = true // One at a time
+    const verifiers: (deploymentVerifiers.EtherscanVerifier|deploymentVerifiers.BlockscoutVerifier)[] = []
+    if (config.etherscanApiKey && config.etherscanApiUrl) {
+      verifiers.push(new deploymentVerifiers.EtherscanVerifier(config.etherscanApiKey, config.etherscanApiUrl, prompt))
+    }
+    if (config.blockscoutUrl) {
+      verifiers.push(new deploymentVerifiers.BlockscoutVerifier(config.blockscoutUrl, prompt))
+    }
+    const verifyContract = async (address: string, verification: VerificationRequest) => {
+      // Run these simultaneously
+      await Promise.all(verifiers.map(verifier => verifier.verifyContract(address, verification)))
+    }
 
+    const waitForSuccess = true // One at a time
     const { defaultAbiCoder } = ethers.utils
 
     if (config.skipWalletContext) {
@@ -426,18 +437,18 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
       prompt.start('Verifying V1 contracts\n')
 
-      await verifier.verifyContract(walletContextAddrs.WalletFactoryV1, { ...FACTORY_V1_VERIFICATION, waitForSuccess })
-      await verifier.verifyContract(walletContextAddrs.MainModuleV1, {
+      await verifyContract(walletContextAddrs.WalletFactoryV1, { ...FACTORY_V1_VERIFICATION, waitForSuccess })
+      await verifyContract(walletContextAddrs.MainModuleV1, {
         ...MAIN_MODULE_V1_VERIFICATION,
         constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.WalletFactoryV1]),
         waitForSuccess
       })
-      await verifier.verifyContract(walletContextAddrs.MainModuleUpgradableV1, {
+      await verifyContract(walletContextAddrs.MainModuleUpgradableV1, {
         ...MAIN_MODULE_UPGRADABLE_V1_VERIFICATION,
         waitForSuccess
       })
-      await verifier.verifyContract(walletContextAddrs.GuestModuleV1, { ...GUEST_MODULE_V1_VERIFICATION, waitForSuccess })
-      await verifier.verifyContract(walletContextAddrs.SequenceUtilsV1, {
+      await verifyContract(walletContextAddrs.GuestModuleV1, { ...GUEST_MODULE_V1_VERIFICATION, waitForSuccess })
+      await verifyContract(walletContextAddrs.SequenceUtilsV1, {
         ...SEQUENCE_UTILS_V1_VERIFICATION,
         constructorArgs: defaultAbiCoder.encode(
           ['address', 'address'],
@@ -445,7 +456,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
         ),
         waitForSuccess
       })
-      await verifier.verifyContract(walletContextAddrs.RequireFreshSignerLibV1, {
+      await verifyContract(walletContextAddrs.RequireFreshSignerLibV1, {
         ...REQUIRE_FRESH_SIGNER_V1_VERIFICATION,
         constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.SequenceUtilsV1]),
         waitForSuccess
@@ -457,12 +468,12 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
       prompt.start('Verifying V2 contracts\n')
 
-      await verifier.verifyContract(walletContextAddrs.WalletFactoryV2, { ...FACTORY_V2_VERIFICATION, waitForSuccess })
-      await verifier.verifyContract(walletContextAddrs.MainModuleUpgradableV2, {
+      await verifyContract(walletContextAddrs.WalletFactoryV2, { ...FACTORY_V2_VERIFICATION, waitForSuccess })
+      await verifyContract(walletContextAddrs.MainModuleUpgradableV2, {
         ...MAIN_MODULE_UPGRADABLE_V2_VERIFICATION,
         waitForSuccess
       })
-      await verifier.verifyContract(walletContextAddrs.MainModuleV2, {
+      await verifyContract(walletContextAddrs.MainModuleV2, {
         ...MAIN_MODULE_V2_VERIFICATION,
         constructorArgs: defaultAbiCoder.encode(
           ['address', 'address'],
@@ -470,8 +481,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
         ),
         waitForSuccess
       })
-      await verifier.verifyContract(walletContextAddrs.GuestModuleV2, { ...GUEST_MODULE_V2_VERIFICATION, waitForSuccess })
-      await verifier.verifyContract(walletContextAddrs.SequenceUtilsV2, {
+      await verifyContract(walletContextAddrs.GuestModuleV2, { ...GUEST_MODULE_V2_VERIFICATION, waitForSuccess })
+      await verifyContract(walletContextAddrs.SequenceUtilsV2, {
         ...SEQUENCE_UTILS_V2_VERIFICATION,
         waitForSuccess
       })
@@ -483,30 +494,30 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     prompt.start('Verifying V2 commons contracts\n')
 
-    await verifier.verifyContract(trustFactory.address, { ...TRUST_FACTORY_VERIFICATION, waitForSuccess })
+    await verifyContract(trustFactory.address, { ...TRUST_FACTORY_VERIFICATION, waitForSuccess })
 
     prompt.succeed('Verified V2 commons contracts\n')
 
     // Niftyswap and Market
 
     prompt.start('Verifying Market contracts\n')
-    await verifier.verifyContract(niftyFactory.address, {
+    await verifyContract(niftyFactory.address, {
       ...NIFTYSWAP_FACTORY_20_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN])
     })
-    await verifier.verifyContract(niftyWrapper.address, { ...NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION, waitForSuccess })
-    await verifier.verifyContract(marketFactory.address, {
+    await verifyContract(niftyWrapper.address, { ...NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION, waitForSuccess })
+    await verifyContract(marketFactory.address, {
       ...SEQUENCEMARKETFACTORY_VERIFICATION,
       waitForSuccess
     })
     const marketImplementationAddress = await marketFactory.implementation()
-    await verifier.verifyContract(marketImplementationAddress, {
+    await verifyContract(marketImplementationAddress, {
       ...SEQUENCEMARKETFACTORY_VERIFICATION,
       contractToVerify: 'contracts/SequenceMarket.sol:SequenceMarket',
       waitForSuccess
     })
-    await verifier.verifyContract(marketAddress, {
+    await verifyContract(marketAddress, {
       ...SEQUENCEMARKETFACTORY_VERIFICATION,
       contractToVerify: 'lib/openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol:ERC1967Proxy',
       waitForSuccess,
@@ -521,27 +532,27 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     prompt.start("Verifying Library contracts\n")
     // Factories
-    await verifier.verifyContract(erc20ItemsFactory.address, {
+    await verifyContract(erc20ItemsFactory.address, {
       ...ERC20ITEMSFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
-    await verifier.verifyContract(erc721ItemsFactory.address, {
+    await verifyContract(erc721ItemsFactory.address, {
       ...ERC721ITEMSFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
-    await verifier.verifyContract(erc1155ItemsFactory.address, {
+    await verifyContract(erc1155ItemsFactory.address, {
       ...ERC1155ITEMSFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
-    await verifier.verifyContract(erc721SaleFactory.address, {
+    await verifyContract(erc721SaleFactory.address, {
       ...ERC721SALEFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
-    await verifier.verifyContract(erc1155SaleFactory.address, {
+    await verifyContract(erc1155SaleFactory.address, {
       ...ERC1155SALEFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
@@ -555,42 +566,42 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     )
     // Token contracts deployed by the factories
     const beacon = new UpgradeableBeacon(signer)
-    await verifier.verifyContract(await beacon.attach(await erc20ItemsFactory.beacon()).implementation(), {
+    await verifyContract(await beacon.attach(await erc20ItemsFactory.beacon()).implementation(), {
       ...ERC20ITEMSFACTORY_VERIFICATION,
       contractToVerify: 'src/tokens/ERC20/presets/items/ERC20Items.sol:ERC20Items',
       waitForSuccess
     })
-    await verifier.verifyContract(await beacon.attach(await erc721ItemsFactory.beacon()).implementation(), {
+    await verifyContract(await beacon.attach(await erc721ItemsFactory.beacon()).implementation(), {
       ...ERC721ITEMSFACTORY_VERIFICATION,
       contractToVerify: 'src/tokens/ERC721/presets/items/ERC721Items.sol:ERC721Items',
       waitForSuccess
     })
     const erc1155ItemsBeacon = await erc1155ItemsFactory.beacon()
     const erc1155ItemsImplementation = await beacon.attach(erc1155ItemsBeacon).implementation()
-    await verifier.verifyContract(erc1155ItemsImplementation, {
+    await verifyContract(erc1155ItemsImplementation, {
       ...ERC1155ITEMSFACTORY_VERIFICATION,
       contractToVerify: 'src/tokens/ERC1155/presets/items/ERC1155Items.sol:ERC1155Items',
       waitForSuccess
     })
     const erc721SaleImplementation = await beacon.attach(await erc721SaleFactory.beacon()).implementation()
-    await verifier.verifyContract(erc721SaleImplementation, {
+    await verifyContract(erc721SaleImplementation, {
       ...ERC721SALEFACTORY_VERIFICATION,
       contractToVerify: 'src/tokens/ERC721/utility/sale/ERC721Sale.sol:ERC721Sale',
       waitForSuccess
     })
     const erc1155SaleImplementation = await beacon.attach(await erc1155SaleFactory.beacon()).implementation()
-    await verifier.verifyContract(erc1155SaleImplementation, {
+    await verifyContract(erc1155SaleImplementation, {
       ...ERC1155SALEFACTORY_VERIFICATION,
       contractToVerify: 'src/tokens/ERC1155/utility/sale/ERC1155Sale.sol:ERC1155Sale',
       waitForSuccess
     })
     // Proxies
-    await verifier.verifyContract(erc1155ItemsBeacon, {
+    await verifyContract(erc1155ItemsBeacon, {
       ...UPGRADEABLEBEACON_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [erc1155ItemsImplementation])
     })
-    await verifier.verifyContract(tubProxy.address, {
+    await verifyContract(tubProxy.address, {
       ...TUBPROXY_VERIFICATION,
       waitForSuccess
     })

@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, type ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 export class MainModuleUpgradableV2 extends ContractFactory {
   constructor(signer: ethers.Signer) {
@@ -1044,9 +1044,10 @@ export class MainModuleUpgradableV2 extends ContractFactory {
   }
 }
 
-export const MAIN_MODULE_UPGRADABLE_V2_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const MAIN_MODULE_UPGRADABLE_V2_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'contracts/modules/MainModuleUpgradable.sol:MainModuleUpgradable',
   version: 'v0.8.18+commit.87f61d96',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {

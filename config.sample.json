@@ -13,8 +13,9 @@
     "guardPatchSecret": "XXX",
     "gasLimit": 10000000,
     "gasPrice": 3000000000,
-    "verifierApiUrl": "https://api-sepolia.etherscan.io/api",
-    "verifierApiKey": "XXX",
+    "etherscanApiUrl": "https://api-sepolia.etherscan.io/api",
+    "etherscanApiKey": "XXX",
+    "blockscoutUrl": "https://eth-sepolia.blockscout.com",
     "skip": false
   }
 ]

@@ -6,8 +6,9 @@ export type Config = {
   rpcUrl: string
   deployerPk: string
   guardPatchSecret?: string
-  verifierApiUrl?: string
-  verifierApiKey?: string
+  etherscanApiUrl?: string
+  etherscanApiKey?: string
+  blockscoutUrl?: string
   gasLimit?: BigNumberish
   gasPrice?: BigNumberish
   skipWalletContext?: boolean

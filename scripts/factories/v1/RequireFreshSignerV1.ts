@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, type ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 export class RequireFreshSignerV1 extends ContractFactory {
   constructor(signer: ethers.Signer) {
@@ -49,9 +49,10 @@ export class RequireFreshSignerV1 extends ContractFactory {
   }
 }
 
-export const REQUIRE_FRESH_SIGNER_V1_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const REQUIRE_FRESH_SIGNER_V1_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'contracts/modules/utils/libs/RequireFreshSigner.sol:RequireFreshSigner',
   version: 'v0.7.6+commit.7338295f',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {

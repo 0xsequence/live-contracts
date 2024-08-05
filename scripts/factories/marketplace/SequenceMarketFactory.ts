@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 // https://github.com/0xsequence/marketplace-contracts/blob/c7edc81975d0321a701f84e102253f111d3fc63a/contracts/SequenceMarketFactory.sol
 
@@ -46,9 +46,10 @@ export class SequenceMarketFactory extends ContractFactory {
   }
 }
 
-export const SEQUENCEMARKETFACTORY_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const SEQUENCEMARKETFACTORY_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'contracts/SequenceMarketFactory.sol:SequenceMarketFactory',
   version: 'v0.8.19+commit.7dd6d404',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {

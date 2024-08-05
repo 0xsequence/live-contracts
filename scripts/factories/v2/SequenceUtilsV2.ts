@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, type ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 export class SequenceUtilsV2 extends ContractFactory {
   constructor(signer: ethers.Signer) {
@@ -372,9 +372,10 @@ export class SequenceUtilsV2 extends ContractFactory {
   }
 }
 
-export const SEQUENCE_UTILS_V2_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const SEQUENCE_UTILS_V2_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'contracts/modules/utils/SequenceUtils.sol:SequenceUtils',
   version: 'v0.8.18+commit.87f61d96',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {

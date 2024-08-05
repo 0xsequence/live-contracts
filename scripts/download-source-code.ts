@@ -36,9 +36,9 @@ async function downloadJsonFromApi(
 }
 
 //FIXME Change these values to match your contract
-const verifierApiUrl = 'https://api-sepolia.etherscan.io/api'
-const verifierApiKey = 'XXX'
+const etherscanApiUrl = 'https://api-sepolia.etherscan.io/api'
+const etherscanApiKey = 'XXX'
 const addr = '0x105430acDFE0bf65cD0331DFc2FB2420Ace73895'
 
-downloadJsonFromApi(verifierApiUrl, verifierApiKey, addr, 'getsourcecode', 'source_output.json')
-downloadJsonFromApi(verifierApiUrl, verifierApiKey, addr, 'getabi', 'source_abi.json')
+downloadJsonFromApi(etherscanApiUrl, etherscanApiKey, addr, 'getsourcecode', 'source_output.json')
+downloadJsonFromApi(etherscanApiUrl, etherscanApiKey, addr, 'getabi', 'source_abi.json')

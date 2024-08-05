@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, type ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 const abi = [
   {
@@ -54,9 +54,10 @@ export class FactoryV2 extends ContractFactory {
   }
 }
 
-export const FACTORY_V2_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const FACTORY_V2_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'contracts/Factory.sol:Factory',
   version: 'v0.8.18+commit.87f61d96',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {

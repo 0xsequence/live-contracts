@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, type ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 const abi = [
   {
@@ -98,9 +98,10 @@ export class UpgradeableBeacon extends ContractFactory {
   }
 }
 
-export const UPGRADEABLEBEACON_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const UPGRADEABLEBEACON_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'node_modules/@openzeppelin/contracts/proxy/beacon/UpgradeableBeacon.sol:UpgradeableBeacon',
   version: 'v0.8.19+commit.7dd6d404',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {

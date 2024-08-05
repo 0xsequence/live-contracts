@@ -101,8 +101,7 @@ Note: Using the `SingletonDeployer` is the preferred method for deploying contra
 
 If you have already deployed the contract with another script and want to migrate here, you can retrieve the source code from the Etherscan (or other compatible APIs).
 
-First, set the environment variables for `VERIFIER_API_URL` and `VERIFIER_API_KEY`.
-Then within `scripts/download-source-code.ts` replace the `addr` variable value with the address of the contract you want to retrieve.
+Within `scripts/download-source-code.ts` replace the `addr` variable value with the address of the contract you want to retrieve, and the `etherscanApiUrl` and `etherscanApiKey` variables for the already verified source location.
 
 Then run the following command:
 

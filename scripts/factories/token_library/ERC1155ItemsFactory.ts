@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, type ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 // https://github.com/0xsequence/contracts-library/blob/b32f88b298fc73ec1c4be5e845185de91f41c9ff/src/tokens/ERC1155/presets/items/ERC1155ItemsFactory.sol
 
@@ -123,9 +123,10 @@ export class ERC1155ItemsFactory extends ContractFactory {
   }
 }
 
-export const ERC1155ITEMSFACTORY_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const ERC1155ITEMSFACTORY_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'src/tokens/ERC1155/presets/items/ERC1155ItemsFactory.sol:ERC1155ItemsFactory',
   version: 'v0.8.19+commit.7dd6d404',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {

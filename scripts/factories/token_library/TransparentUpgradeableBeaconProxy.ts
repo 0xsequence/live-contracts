@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, type ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 // https://github.com/0xsequence/contracts-library/blob/87eea5e3a8b4c58448b275efe856d4c80891cc8f/src/proxies/TransparentUpgradeableBeaconProxy.sol
 
@@ -74,9 +74,10 @@ export class TransparentUpgradeableBeaconProxy extends ContractFactory {
   }
 }
 
-export const TUBPROXY_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const TUBPROXY_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'src/proxies/TransparentUpgradeableBeaconProxy.sol:TransparentUpgradeableBeaconProxy',
   version: 'v0.8.19+commit.7dd6d404',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {

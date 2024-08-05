@@ -1,5 +1,5 @@
-import type { EtherscanVerificationRequest } from '@0xsequence/solidity-deployer'
 import { ContractFactory, type ethers } from 'ethers'
+import type { VerificationRequest } from 'scripts/types'
 
 // https://github.com/0xsequence/niftyswap/blob/1d3f8370d0dce384ea4f3bb0944a2644011751b2/src/contracts/exchange/NiftyswapFactory20.sol
 
@@ -236,9 +236,10 @@ export class NiftyswapFactory20 extends ContractFactory {
   }
 }
 
-export const NIFTYSWAP_FACTORY_20_VERIFICATION: Omit<EtherscanVerificationRequest, 'waitForSuccess'> = {
+export const NIFTYSWAP_FACTORY_20_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'contracts/exchange/NiftyswapFactory20.sol:NiftyswapFactory20',
   version: 'v0.7.4+commit.3f05b770',
+  licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
     sources: {
