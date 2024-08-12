@@ -31,6 +31,7 @@ import { ERC20ITEMSFACTORY_VERIFICATION, ERC20ItemsFactory } from './factories/t
 import { ERC721ITEMSFACTORY_VERIFICATION, ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
 import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
 import { PaymentCombiner, PAYMENTCOMBINER_VERIFICATION } from './factories/token_library/PaymentCombiner'
+import { PAYMENTS_FACTORY_VERIFICATION, PaymentsFactory } from './factories/token_library/PaymentsFactory'
 import {
   TUBPROXY_VERIFICATION,
   TransparentUpgradeableBeaconProxy
@@ -65,6 +66,7 @@ import { ClawbackMetadata, CLAWBACKMETADATA_VERIFICATION } from './factories/tok
 import { Clawback, CLAWBACK_VERIFICATION } from './factories/token_library/Clawback'
 import { ERC721SoulboundFactory, ERC721SOULBOUNDFACTORY_VERIFICATION } from './factories/token_library/ERC721SoulboundFactory'
 import { ERC1155SoulboundFactory, ERC1155SOULBOUNDFACTORY_VERIFICATION } from './factories/token_library/ERC1155SoulboundFactory'
+import { type SignerEnvironment, deployPaymentsSigner } from './wallets/SequencePaymentsSigner'
 
 interface Logger {
   log(message: string): void
@@ -316,6 +318,39 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     const paymentCombiner = await singletonDeployer.deploy('PaymentCombiner', PaymentCombiner, 0, txParams)
 
+    type PaymentsDeployment = {
+      env: SignerEnvironment
+      signerAddr: string
+      paymentsAddr: string
+    }
+    const paymentsDeployments: PaymentsDeployment[] = []
+
+    const paymentsFactory = await universalDeployer.deploy(
+      'PaymentsFactory',
+      PaymentsFactory,
+      0,
+      txParams,
+      developerMultisig.address
+    )
+    for (const paymentsEnv of config.paymentsSignerEnvs) {
+      prompt.start(`Deploying Sequence ${paymentsEnv} Payments\n`)
+      const { address: paymentsSignerAddr } = await deployPaymentsSigner(paymentsEnv, signer, v2WalletContext, txParams)
+      const paymentsAddr = (
+        await paymentsFactory.functions.determineAddress(developerMultisig.address, developerMultisig.address, paymentsSignerAddr)
+      )[0]
+      if ((await signer.provider.getCode(paymentsAddr)) === '0x') {
+        const paymentsDeployTx = await paymentsFactory.functions.deploy(
+          developerMultisig.address,
+          developerMultisig.address,
+          paymentsSignerAddr,
+          txParams
+        )
+        await paymentsDeployTx.wait()
+      }
+      prompt.log(`Sequence ${paymentsEnv} Payments deployed at ${paymentsAddr}\n`)
+      paymentsDeployments.push({ env: paymentsEnv, signerAddr: paymentsSignerAddr, paymentsAddr })
+    }
+
     prompt.succeed('Deployed Sequence Payments contracts\n')
 
     // Niftyswap and Market contracts
@@ -407,47 +442,51 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     // Output addresses
 
     prompt.start(`Writing deployment information to output_${config.networkName}.json\n`)
-    await writeFile(
-      `./output_${config.networkName}.json`,
-      JSON.stringify(
-        [
-          { name: 'WalletFactoryV2', address: walletContextAddrs.WalletFactoryV2 },
-          { name: 'MainModuleV2', address: walletContextAddrs.MainModuleV2 },
-          { name: 'MainModuleUpgradableV2', address: walletContextAddrs.MainModuleUpgradableV2 },
-          { name: 'GuestModuleV2', address: walletContextAddrs.GuestModuleV2 },
-          { name: 'SequenceUtilsV2', address: walletContextAddrs.SequenceUtilsV2 },
-          { name: 'TrustFactory', address: trustFactory.address },
-          { name: 'WalletFactoryV1', address: walletContextAddrs.WalletFactoryV1 },
-          { name: 'MainModuleV1', address: walletContextAddrs.MainModuleV1 },
-          { name: 'MainModuleUpgradableV1', address: walletContextAddrs.MainModuleUpgradableV1 },
-          { name: 'GuestModuleV1', address: walletContextAddrs.GuestModuleV1 },
-          { name: 'SequenceUtilsV1', address: walletContextAddrs.SequenceUtilsV1 },
-          { name: 'RequireFreshSignerLibV1', address: walletContextAddrs.RequireFreshSignerLibV1 },
-          { name: 'ProdGuardV2', address: '0x761f5e29944D79d76656323F106CF2efBF5F09e9' },
-          { name: 'DevGuardV2', address: '0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0' },
-          { name: 'ProdGuardV1', address: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab' },
-          { name: 'DevGuardV1', address: '0x2ca2380dA88528C6061ACb70aD5222fe455F25DF' },
-          { name: 'DeveloperMultisig', address: developerMultisig.address },
-          { name: 'NiftyswapFactory20', address: niftyFactory.address },
-          { name: 'NiftyExchange20Wrapper', address: niftyWrapper.address },
-          { name: 'SequenceMarketFactoryV2', address: marketFactoryV2.address },
-          { name: 'SequenceMarketV2', address: marketV2Address },
-          { name: 'SequenceMarketV1', address: marketV1.address },
-          { name: 'ERC20ItemsFactory', address: erc20ItemsFactory.address },
-          { name: 'ERC721ItemsFactory', address: erc721ItemsFactory.address },
-          { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address },
-          { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
-          { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address },
-          { name: 'ERC721SoulboundFactory', address: erc721SoulboundFactory.address },
-          { name: 'ERC1155SoulboundFactory', address: erc1155SoulboundFactory.address },
-          { name: 'Clawback', address: clawback.address },
-          { name: 'ClawbackMetadata', address: clawbackMetadata.address },
-          { name: 'PaymentCombiner', address: paymentCombiner.address }
-        ],
-        null,
-        2
-      )
-    )
+    type ContractEntry = {
+      name: string
+      address: string
+    }
+    const contractEntries: ContractEntry[] = [
+      { name: 'WalletFactoryV2', address: walletContextAddrs.WalletFactoryV2 },
+      { name: 'MainModuleV2', address: walletContextAddrs.MainModuleV2 },
+      { name: 'MainModuleUpgradableV2', address: walletContextAddrs.MainModuleUpgradableV2 },
+      { name: 'GuestModuleV2', address: walletContextAddrs.GuestModuleV2 },
+      { name: 'SequenceUtilsV2', address: walletContextAddrs.SequenceUtilsV2 },
+      { name: 'TrustFactory', address: trustFactory.address },
+      { name: 'WalletFactoryV1', address: walletContextAddrs.WalletFactoryV1 },
+      { name: 'MainModuleV1', address: walletContextAddrs.MainModuleV1 },
+      { name: 'MainModuleUpgradableV1', address: walletContextAddrs.MainModuleUpgradableV1 },
+      { name: 'GuestModuleV1', address: walletContextAddrs.GuestModuleV1 },
+      { name: 'SequenceUtilsV1', address: walletContextAddrs.SequenceUtilsV1 },
+      { name: 'RequireFreshSignerLibV1', address: walletContextAddrs.RequireFreshSignerLibV1 },
+      { name: 'ProdGuardV2', address: '0x761f5e29944D79d76656323F106CF2efBF5F09e9' },
+      { name: 'DevGuardV2', address: '0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0' },
+      { name: 'ProdGuardV1', address: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab' },
+      { name: 'DevGuardV1', address: '0x2ca2380dA88528C6061ACb70aD5222fe455F25DF' },
+      { name: 'DeveloperMultisig', address: developerMultisig.address },
+      { name: 'NiftyswapFactory20', address: niftyFactory.address },
+      { name: 'NiftyExchange20Wrapper', address: niftyWrapper.address },
+      { name: 'SequenceMarketFactoryV2', address: marketFactoryV2.address },
+      { name: 'SequenceMarketV2', address: marketV2Address },
+      { name: 'SequenceMarketV1', address: marketV1.address },
+      { name: 'ERC20ItemsFactory', address: erc20ItemsFactory.address },
+      { name: 'ERC721ItemsFactory', address: erc721ItemsFactory.address },
+      { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address },
+      { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
+      { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address },
+      { name: 'ERC721SoulboundFactory', address: erc721SoulboundFactory.address },
+      { name: 'ERC1155SoulboundFactory', address: erc1155SoulboundFactory.address },
+      { name: 'Clawback', address: clawback.address },
+      { name: 'ClawbackMetadata', address: clawbackMetadata.address },
+      { name: 'PaymentCombiner', address: paymentCombiner.address },
+      { name: 'PaymentsFactory', address: paymentsFactory.address }
+    ]
+    for (const { env, signerAddr, paymentsAddr } of paymentsDeployments) {
+      contractEntries.push({ name: `SequencePaymentsSigner-${env}`, address: signerAddr })
+      contractEntries.push({ name: `SequencePayments-${env}`, address: paymentsAddr })
+    }
+
+    await writeFile(`./output_${config.networkName}.json`, JSON.stringify(contractEntries, null, 2))
     prompt.succeed(`Wrote deployment information to output_${config.networkName}.json\n`)
 
     // Verify contracts
@@ -552,6 +591,11 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       ...PAYMENTCOMBINER_VERIFICATION,
       contractToVerify: 'src/payments/PaymentSplitter.sol:PaymentSplitter',
       waitForSuccess
+    })
+    await verifyContract(paymentsFactory.address, {
+      ...PAYMENTS_FACTORY_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
 
     prompt.succeed('Verified Payments contracts\n')

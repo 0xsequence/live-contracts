@@ -1,11 +1,13 @@
 import type { BigNumberish } from 'ethers'
 import { readFile } from 'node:fs/promises'
+import type { SignerEnvironment } from './wallets/SequencePaymentsSigner'
 
 export type Config = {
   networkName: string
   rpcUrl: string
   deployerPk: string
   guardPatchSecret?: string
+  paymentsSignerEnvs: SignerEnvironment[]
   etherscanApiUrl?: string
   etherscanApiKey?: string
   blockscoutUrl?: string
@@ -22,6 +24,9 @@ export const getConfigs = async (): Promise<Config[]> => {
     if (!config.networkName) throw new Error('Missing networkName')
     if (!config.rpcUrl) throw new Error('Missing rpcUrl')
     if (!config.deployerPk) throw new Error('Missing deployerPk')
+    if (!config.paymentsSignerEnvs) {
+      config.paymentsSignerEnvs = ['dev'] // Default to dev only
+    }
   }
   return configs
 }

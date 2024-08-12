@@ -151,6 +151,9 @@ The following is a list of contracts that are deployed by this script.
 | Clawback                   | 0x6F9a2c3E11011b894fae691d5338748f8048467d |
 | ClawbackMetadata           | 0x335411eAA9D63251f8c0867600Be4d0C190a3b1f |
 | PaymentCombiner            | 0xfe0a269E288051B0815E05Fe192FC888118CB8a2 |
+| PaymentsFactory            | 0xdC8dC7d7F0AAfbc5901DA779Ed5aab779F3E7c14 |
+| SequencePaymentsSigner-dev | 0x40D9BDFfdF9409183fD6145b3e60c7d1beFf05fd |
+| SequencePayments-dev       | 0x5Cc52c35Df7316cDfdE519E89e557Efe20D56fD6 |
 
 ## Chains
 
