@@ -36,7 +36,7 @@ const abi = [
   }
 ]
 
-export class SequenceMarketFactory extends ContractFactory {
+export class SequenceMarketFactoryV2 extends ContractFactory {
   constructor(signer: ethers.Signer) {
     super(
       abi,
@@ -46,7 +46,7 @@ export class SequenceMarketFactory extends ContractFactory {
   }
 }
 
-export const SEQUENCEMARKETFACTORY_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
+export const SEQUENCEMARKETFACTORYV2_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'contracts/SequenceMarketFactory.sol:SequenceMarketFactory',
   version: 'v0.8.19+commit.7dd6d404',
   licenceType: 'Apache-2.0',
@@ -177,7 +177,7 @@ export const SEQUENCEMARKETFACTORY_VERIFICATION: Omit<VerificationRequest, 'wait
 }
 
 // Minimal interface for verification
-export const SequenceMarketInterface = new ethers.utils.Interface([
+export const SequenceMarketV2Interface = new ethers.utils.Interface([
   {
     "type": "function",
     "name": "initialize",
