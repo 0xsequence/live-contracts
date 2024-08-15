@@ -66,12 +66,6 @@ A successful run indicates the contracts are already deployer on the network, as
 
 ## Development
 
-After installing dependencies please install the git hooks.
-
-```sh
-yarn lint:init
-```
-
 Run a local chain with [Anvil](https://github.com/foundry-rs/foundry/blob/master/anvil/README.md).
 
 ```sh

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import fs from 'node:fs';
+import axios from 'axios'
+import fs from 'node:fs'
 
 type ApiAction = 'getsourcecode' | 'getabi'
 
