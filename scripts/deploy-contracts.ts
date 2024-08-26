@@ -30,6 +30,7 @@ import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories
 import { ERC20ITEMSFACTORY_VERIFICATION, ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
 import { ERC721ITEMSFACTORY_VERIFICATION, ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
 import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
+import { PaymentCombiner, PAYMENTCOMBINER_VERIFICATION } from './factories/token_library/PaymentCombiner'
 import {
   TUBPROXY_VERIFICATION,
   TransparentUpgradeableBeaconProxy
@@ -305,6 +306,14 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const developerMultisig = await deployDeveloperMultisig(signer, v2WalletContext, txParams)
     prompt.succeed('Deployed Sequence development multisig\n')
 
+    // Payments
+
+    prompt.start('Deploying Sequence Payments contracts\n')
+
+    const paymentCombiner = await singletonDeployer.deploy('PaymentCombiner', PaymentCombiner, 0, txParams)
+
+    prompt.succeed('Deployed Sequence Payments contracts\n')
+
     // Niftyswap and Market contracts
 
     prompt.start('Deploying Market contracts\n')
@@ -401,7 +410,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'ERC721ItemsFactory', address: erc721ItemsFactory.address },
           { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address },
           { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
-          { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address }
+          { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address },
+          { name: 'PaymentCombiner', address: paymentCombiner.address }
         ],
         null,
         2
@@ -500,6 +510,20 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     await verifyContract(trustFactory.address, { ...TRUST_FACTORY_VERIFICATION, waitForSuccess })
 
     prompt.succeed('Verified V2 commons contracts\n')
+
+    // Payments
+
+    prompt.start('Verifying Payments contracts\n')
+
+    await verifyContract(paymentCombiner.address, { ...PAYMENTCOMBINER_VERIFICATION, waitForSuccess })
+    // Verify the implementation
+    await verifyContract(await paymentCombiner.implementationAddress(), {
+      ...PAYMENTCOMBINER_VERIFICATION,
+      contractToVerify: 'src/payments/PaymentSplitter.sol:PaymentSplitter',
+      waitForSuccess
+    })
+
+    prompt.succeed('Verified Payments contracts\n')
 
     // Niftyswap and Market
 
