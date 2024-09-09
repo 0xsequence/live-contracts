@@ -177,3 +177,4 @@ The contracts have been deployed on the following chains.
 - [Immutable zkEVM Testnet](https://chainlist.org/chain/13473)
 - [ApeChain Testnet](https://ape-docs.vercel.app)
 - [B3 Sepolia](https://b3.fun)
+- [Soneium Minato Testnet](https://b3.fun)
