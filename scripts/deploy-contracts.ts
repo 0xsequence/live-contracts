@@ -61,6 +61,8 @@ import type { VerificationRequest } from './types'
 import { getArtifactFactory } from './utils'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
+import { ClawbackMetadata, CLAWBACKMETADATA_VERIFICATION } from './factories/token_library/ClawbackMetadata'
+import { Clawback, CLAWBACK_VERIFICATION } from './factories/token_library/Clawback'
 
 interface Logger {
   log(message: string): void
@@ -375,6 +377,15 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       txParams,
       developerMultisig.address
     )
+    const clawbackMetadata = await singletonDeployer.deploy('ClawbackMetadata', ClawbackMetadata, 0, txParams)
+    const clawback = await singletonDeployer.deploy(
+      'Clawback',
+      Clawback,
+      0,
+      txParams,
+      developerMultisig.address,
+      clawbackMetadata.address
+    )
     prompt.succeed('Deployed Library contracts\n')
 
     // Output addresses
@@ -411,6 +422,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address },
           { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
           { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address },
+          { name: 'Clawback', address: clawback.address },
+          { name: 'ClawbackMetadata', address: clawbackMetadata.address },
           { name: 'PaymentCombiner', address: paymentCombiner.address }
         ],
         null,
@@ -631,6 +644,16 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     })
     await verifyContract(tubProxy.address, {
       ...TUBPROXY_VERIFICATION,
+      waitForSuccess
+    })
+    // Clawback
+    await verifyContract(clawback.address, {
+      ...CLAWBACK_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address', 'address'], [developerMultisig.address, clawbackMetadata.address])
+    })
+    await verifyContract(clawbackMetadata.address, {
+      ...CLAWBACKMETADATA_VERIFICATION,
       waitForSuccess
     })
 

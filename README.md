@@ -138,6 +138,8 @@ The following is a list of contracts that are deployed by this script.
 | ERC1155ItemsFactory        | 0x7364fDEFe24385B2b3869504383c94cF083AcbD6 |
 | ERC721SaleFactory          | 0x4c4192D5b43B723eDbfce2434fA7b98402034513 |
 | ERC1155SaleFactory         | 0x64f1019bDC2F79688c5885Bc2bc4B57f7e88547c |
+| Clawback                   | 0x6F9a2c3E11011b894fae691d5338748f8048467d |
+| ClawbackMetadata           | 0x335411eAA9D63251f8c0867600Be4d0C190a3b1f |
 | PaymentCombiner            | 0xfe0a269E288051B0815E05Fe192FC888118CB8a2 |
 
 ## Chains
