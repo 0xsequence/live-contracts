@@ -63,6 +63,8 @@ import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
 import { ClawbackMetadata, CLAWBACKMETADATA_VERIFICATION } from './factories/token_library/ClawbackMetadata'
 import { Clawback, CLAWBACK_VERIFICATION } from './factories/token_library/Clawback'
+import { ERC721SoulboundFactory } from './factories/token_library/ERC721SoulboundFactory'
+import { ERC1155SoulboundFactory } from './factories/token_library/ERC1155SoulboundFactory'
 
 interface Logger {
   log(message: string): void
@@ -377,6 +379,20 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       txParams,
       developerMultisig.address
     )
+    const erc721SoulboundFactory = await singletonDeployer.deploy(
+      'ERC721SoulboundFactory',
+      ERC721SoulboundFactory,
+      0,
+      txParams,
+      developerMultisig.address
+    )
+    const erc1155SoulboundFactory = await singletonDeployer.deploy(
+      'ERC1155SoulboundFactory',
+      ERC1155SoulboundFactory,
+      0,
+      txParams,
+      developerMultisig.address
+    )
     const clawbackMetadata = await singletonDeployer.deploy('ClawbackMetadata', ClawbackMetadata, 0, txParams)
     const clawback = await singletonDeployer.deploy(
       'Clawback',
@@ -422,6 +438,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
           { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address },
           { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
           { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address },
+          { name: 'ERC721SoulboundFactory', address: erc721SoulboundFactory.address },
+          { name: 'ERC1155SoulboundFactory', address: erc1155SoulboundFactory.address },
           { name: 'Clawback', address: clawback.address },
           { name: 'ClawbackMetadata', address: clawbackMetadata.address },
           { name: 'PaymentCombiner', address: paymentCombiner.address }
@@ -594,6 +612,16 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
     await verifyContract(erc1155SaleFactory.address, {
+      ...ERC1155SALEFACTORY_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+    })
+    await verifyContract(erc721SoulboundFactory.address, {
+      ...ERC721SALEFACTORY_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+    })
+    await verifyContract(erc1155SoulboundFactory.address, {
       ...ERC1155SALEFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
