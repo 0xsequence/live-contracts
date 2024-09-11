@@ -6,4 +6,4 @@ pre-commit:
       run: yarn lint {staged_files}
     format:
       glob: '*.{js,ts,jsx,tsx,md,json}'
-      run: yarn format {staged_files}
+      run: yarn format {staged_files} && git add {staged_files}
