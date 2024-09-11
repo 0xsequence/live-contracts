@@ -63,8 +63,8 @@ import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
 import { ClawbackMetadata, CLAWBACKMETADATA_VERIFICATION } from './factories/token_library/ClawbackMetadata'
 import { Clawback, CLAWBACK_VERIFICATION } from './factories/token_library/Clawback'
-import { ERC721SoulboundFactory } from './factories/token_library/ERC721SoulboundFactory'
-import { ERC1155SoulboundFactory } from './factories/token_library/ERC1155SoulboundFactory'
+import { ERC721SoulboundFactory, ERC721SOULBOUNDFACTORY_VERIFICATION } from './factories/token_library/ERC721SoulboundFactory'
+import { ERC1155SoulboundFactory, ERC1155SOULBOUNDFACTORY_VERIFICATION } from './factories/token_library/ERC1155SoulboundFactory'
 
 interface Logger {
   log(message: string): void
@@ -617,12 +617,12 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
     await verifyContract(erc721SoulboundFactory.address, {
-      ...ERC721SALEFACTORY_VERIFICATION,
+      ...ERC721SOULBOUNDFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
     await verifyContract(erc1155SoulboundFactory.address, {
-      ...ERC1155SALEFACTORY_VERIFICATION,
+      ...ERC1155SOULBOUNDFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
     })
@@ -662,6 +662,18 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     await verifyContract(erc1155SaleImplementation, {
       ...ERC1155SALEFACTORY_VERIFICATION,
       contractToVerify: 'src/tokens/ERC1155/utility/sale/ERC1155Sale.sol:ERC1155Sale',
+      waitForSuccess
+    })
+    const erc721SoulboundImplementation = await beacon.attach(await erc721SoulboundFactory.beacon()).implementation()
+    await verifyContract(erc721SoulboundImplementation, {
+      ...ERC721SOULBOUNDFACTORY_VERIFICATION,
+      contractToVerify: 'src/tokens/ERC721/presets/soulbound/ERC721Soulbound.sol:ERC721Soulbound',
+      waitForSuccess
+    })
+    const erc1155SoulboundImplementation = await beacon.attach(await erc1155SoulboundFactory.beacon()).implementation()
+    await verifyContract(erc1155SoulboundImplementation, {
+      ...ERC1155SOULBOUNDFACTORY_VERIFICATION,
+      contractToVerify: 'src/tokens/ERC1155/presets/soulbound/ERC1155Soulbound.sol:ERC1155Soulbound',
       waitForSuccess
     })
     // Proxies
