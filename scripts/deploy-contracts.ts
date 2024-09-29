@@ -9,7 +9,7 @@ import { MAIN_MODULE_UPGRADABLE_DUO_V1 } from './artifacts/SEQ0001/v1/MainModule
 import { MIGRATOR_TO_DUO_V1 } from './artifacts/SEQ0001/v1/MigratorToDuo'
 import { MAIN_MODULE_UPGRADABLE_DUO_V2 } from './artifacts/SEQ0001/v2/MainModuleUpgradableDuo'
 import { MIGRATOR_TO_DUO_V2 } from './artifacts/SEQ0001/v2/MigratorToDuo'
-import { type Config, getConfigs } from './config'
+import { type Config, perConfig } from './config'
 import {
   NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION,
   NiftyswapExchange20Wrapper
@@ -706,24 +706,12 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 }
 
 const main = async () => {
-  let configs = await getConfigs()
-
-  if (argv.length > 2) {
-    // Filter network
-    const networkName = argv[2]
-    console.log(`Deploying to ${networkName} only`)
-    const networkRegex = new RegExp(`^${networkName}$`, 'i')
-    configs = configs.filter(config => networkRegex.test(config.networkName))
-  } else {
-    configs = configs.filter(config => config.skip !== true)
-    console.log(`Deploying to ${configs.length} networks`)
-  }
-  const deployments = configs.map(config => ({ network: config.networkName, deployment: deployContracts(config) }))
-  await Promise.all(deployments.map(({ deployment }) => deployment))
+  const filterNetwork = argv.length > 2 ? argv[2] : undefined
+  const deployments = await perConfig(deployContracts, undefined, filterNetwork)
 
   // List successful deployments
-  for (const { network, deployment } of deployments) {
-    const err = await deployment
+  for (const { network, result } of deployments) {
+    const err = result
     if (err === null) {
       console.log(`- [X] ${network}`)
     } else {

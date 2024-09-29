@@ -105,6 +105,14 @@ yarn source
 
 The source code will be downloaded to a file called `output.json`.
 
+### Check Deployment
+
+To check if a given contract address has been deployed all configured networks, run the check script with the expected deployment address.
+
+```sh
+yarn run check <contract_address>
+```
+
 ## Addresses
 
 The following is a list of contracts that are deployed by this script.
