@@ -512,6 +512,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     const waitForSuccess = true // One at a time
     const { defaultAbiCoder } = ethers.utils
+    const beacon = new UpgradeableBeacon(signer)
 
     if (config.skipWalletContext) {
       prompt.log('Skipping wallet context verification\n')
@@ -592,10 +593,17 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       contractToVerify: 'src/payments/PaymentSplitter.sol:PaymentSplitter',
       waitForSuccess
     })
+
     await verifyContract(paymentsFactory.address, {
       ...PAYMENTS_FACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
+    })
+    // Verify the implmentation
+    await verifyContract(await beacon.attach(await paymentsFactory.beacon()).implementation(), {
+      ...PAYMENTS_FACTORY_VERIFICATION,
+      contractToVerify: 'src/payments/Payments.sol:Payments',
+      waitForSuccess
     })
 
     prompt.succeed('Verified Payments contracts\n')
@@ -678,7 +686,6 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       txParams
     )
     // Token contracts deployed by the factories
-    const beacon = new UpgradeableBeacon(signer)
     await verifyContract(await beacon.attach(await erc20ItemsFactory.beacon()).implementation(), {
       ...ERC20ITEMSFACTORY_VERIFICATION,
       contractToVerify: 'src/tokens/ERC20/presets/items/ERC20Items.sol:ERC20Items',
