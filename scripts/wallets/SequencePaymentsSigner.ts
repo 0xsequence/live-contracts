@@ -11,7 +11,7 @@ export type WalletType = Wallet<
   v2.signature.UnrecoveredSignature | v2.signature.UnrecoveredChainedSignature
 >
 
-export type SignerEnvironment = 'dev' | 'test' | 'prod'
+export type SignerEnvironment = 'dev' | 'next' | 'prod'
 
 type SignerDetails = {
   eoa: string
@@ -23,13 +23,13 @@ const SIGNER_DETAILS: Record<SignerEnvironment, SignerDetails> = {
     eoa: '0x508D3586Be412e0C3888f6ae11907473b4A1A381',
     expectedAddress: '0x40D9BDFfdF9409183fD6145b3e60c7d1beFf05fd'
   },
-  test: {
-    eoa: '0x323Bb7d239bd5c5352b7E745A379971A0E9DB125',
-    expectedAddress: '0x84156d2BeA2A480573d571741b3C3979A66ab3f3'
+  next: {
+    eoa: '0x26Dae5f5Df64dba75D5b6b31d64ab9292f42db38',
+    expectedAddress: '0x51805F2d8719a833C28EAc68aE881B2Eb70c0330'
   },
   prod: {
-    eoa: 'TODO',
-    expectedAddress: 'TODO'
+    eoa: '0xd81aFb333fDA8A4A4E047EdeB0466884774774D4',
+    expectedAddress: '0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F'
   }
 }
 

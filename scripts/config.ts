@@ -25,7 +25,7 @@ export const getConfigs = async (): Promise<Config[]> => {
     if (!config.rpcUrl) throw new Error('Missing rpcUrl')
     if (!config.deployerPk) throw new Error('Missing deployerPk')
     if (!config.paymentsSignerEnvs) {
-      config.paymentsSignerEnvs = ['dev'] // Default to dev only
+      config.paymentsSignerEnvs = ['dev', 'next', 'prod'] // Default to all
     }
   }
   return configs
