@@ -7,6 +7,7 @@
     "deploy": "ts-node scripts/deploy-contracts.ts",
     "source": "ts-node scripts/download-source-code.ts",
     "check": "ts-node scripts/check-deployed.ts",
+    "funds": "ts-node scripts/check-funds.ts",
     "lint": "eslint -c .eslintrc.js \"./**/*.ts\"",
     "lint:fix": "eslint -c .eslintrc.js --fix \"./**/*.ts\"",
     "format": "prettier --write ./**/*.ts"
