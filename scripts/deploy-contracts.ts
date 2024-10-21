@@ -1,10 +1,8 @@
-import ora, { type Ora } from 'ora'
-
-import { deployers, verifiers as deploymentVerifiers } from '@0xsequence/solidity-deployer'
-import { JsonRpcProvider } from '@ethersproject/providers'
+import { Logger, deployers, verifiers as deploymentVerifiers } from '@0xsequence/solidity-deployer'
 import { BigNumber, ethers } from 'ethers'
 import { writeFile } from 'node:fs/promises'
 import { argv } from 'node:process'
+import ora, { type Ora } from 'ora'
 import { MAIN_MODULE_UPGRADABLE_DUO_V1 } from './artifacts/SEQ0001/v1/MainModuleUpgradableDuo'
 import { MIGRATOR_TO_DUO_V1 } from './artifacts/SEQ0001/v1/MigratorToDuo'
 import { MAIN_MODULE_UPGRADABLE_DUO_V2 } from './artifacts/SEQ0001/v2/MainModuleUpgradableDuo'
@@ -25,12 +23,16 @@ import {
   SequenceMarketV2Interface
 } from './factories/marketplace/SequenceMarketFactoryV2'
 import { SEQUENCEMARKETV1_VERIFICATION, SequenceMarketV1 } from './factories/marketplace/SequenceMarketV1'
+import { CLAWBACK_VERIFICATION, Clawback } from './factories/token_library/Clawback'
+import { CLAWBACKMETADATA_VERIFICATION, ClawbackMetadata } from './factories/token_library/ClawbackMetadata'
 import { ERC1155ITEMSFACTORY_VERIFICATION, ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
 import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
+import { ERC1155SOULBOUNDFACTORY_VERIFICATION, ERC1155SoulboundFactory } from './factories/token_library/ERC1155SoulboundFactory'
 import { ERC20ITEMSFACTORY_VERIFICATION, ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
 import { ERC721ITEMSFACTORY_VERIFICATION, ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
 import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
-import { PaymentCombiner, PAYMENTCOMBINER_VERIFICATION } from './factories/token_library/PaymentCombiner'
+import { ERC721SOULBOUNDFACTORY_VERIFICATION, ERC721SoulboundFactory } from './factories/token_library/ERC721SoulboundFactory'
+import { PAYMENTCOMBINER_VERIFICATION, PaymentCombiner } from './factories/token_library/PaymentCombiner'
 import { PAYMENTS_FACTORY_VERIFICATION, PaymentsFactory } from './factories/token_library/PaymentsFactory'
 import {
   TUBPROXY_VERIFICATION,
@@ -60,18 +62,12 @@ import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
 import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
 import type { VerificationRequest } from './types'
 import { getArtifactFactory } from './utils'
+import { LoggingProvider } from './utils/LoggingProvider'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
-import { ClawbackMetadata, CLAWBACKMETADATA_VERIFICATION } from './factories/token_library/ClawbackMetadata'
-import { Clawback, CLAWBACK_VERIFICATION } from './factories/token_library/Clawback'
-import { ERC721SoulboundFactory, ERC721SOULBOUNDFACTORY_VERIFICATION } from './factories/token_library/ERC721SoulboundFactory'
-import { ERC1155SoulboundFactory, ERC1155SOULBOUNDFACTORY_VERIFICATION } from './factories/token_library/ERC1155SoulboundFactory'
 import { type SignerEnvironment, deployPaymentsSigner } from './wallets/SequencePaymentsSigner'
 
-interface Logger {
-  log(message: string): void
-  error(message: string): void
-}
+const DEBUG = argv.includes('--debug')
 
 export const deployContracts = async (config: Config): Promise<string | null> => {
   const prompt = ora() as Ora & Logger
@@ -89,7 +85,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
   }
 
   try {
-    const provider = new JsonRpcProvider({
+    const provider = new LoggingProvider(DEBUG ? prompt : null, {
       url: config.rpcUrl,
       timeout: 60000 // 1 minute timeout
     })
@@ -757,6 +753,10 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 }
 
 const main = async () => {
+  if (DEBUG) {
+    argv.splice(argv.indexOf('--debug'), 1)
+  }
+
   const filterNetwork = argv.length > 2 ? argv[2] : undefined
   const deployments = await perConfig(deployContracts, undefined, filterNetwork)
 
