@@ -20,8 +20,8 @@ type SignerDetails = {
 
 const SIGNER_DETAILS: Record<SignerEnvironment, SignerDetails> = {
   dev: {
-    eoa: '0x508D3586Be412e0C3888f6ae11907473b4A1A381',
-    expectedAddress: '0x40D9BDFfdF9409183fD6145b3e60c7d1beFf05fd'
+    eoa: '0x7A0cC251fd0eF355B8A770aE643f8eC5961718E5',
+    expectedAddress: '0x498399DD85CAa29A42Af499f82b271f1629ba0D7'
   },
   next: {
     eoa: '0x26Dae5f5Df64dba75D5b6b31d64ab9292f42db38',
