@@ -66,7 +66,7 @@ A successful run indicates the contracts are already deployer on the network, as
 
 ## Development
 
-Run a local chain with [Anvil](https://github.com/foundry-rs/foundry/blob/master/anvil/README.md).
+Run a local chain with [Anvil](https://github.com/foundry-rs/foundry/tree/master/crates/anvil).
 
 ```sh
 anvil
