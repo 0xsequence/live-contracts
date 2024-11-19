@@ -79,6 +79,8 @@ Configure your environment variables for your local chain settings.
 To add a new contract, create a new contract factory in the `scripts/factories` directory.
 Include the contract's ABI, bytecode and deployment source in the factory.
 
+Add the contract name to the `ContractName` type in `scripts/types.ts`.
+
 Update `scripts/deploy-contracts.ts` to:
 
 - Deploy the contract using the factory

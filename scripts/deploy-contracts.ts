@@ -60,12 +60,12 @@ import { MAIN_MODULE_UPGRADABLE_V2_VERIFICATION } from './factories/v2/MainModul
 import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
 import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
-import type { VerificationRequest } from './types'
+import type { ContractEntry, SequenceEnvironment, VerificationRequest } from './types'
 import { getArtifactFactory } from './utils'
 import { LoggingProvider } from './utils/LoggingProvider'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
-import { type SignerEnvironment, deployPaymentsSigner } from './wallets/SequencePaymentsSigner'
+import { deployPaymentsSigner } from './wallets/SequencePaymentsSigner'
 
 const DEBUG = argv.includes('--debug')
 
@@ -315,7 +315,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const paymentCombiner = await singletonDeployer.deploy('PaymentCombiner', PaymentCombiner, 0, txParams)
 
     type PaymentsDeployment = {
-      env: SignerEnvironment
+      env: SequenceEnvironment
       signerAddr: string
       paymentsAddr: string
     }
@@ -438,10 +438,6 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     // Output addresses
 
     prompt.start(`Writing deployment information to output_${config.networkName}.json\n`)
-    type ContractEntry = {
-      name: string
-      address: string
-    }
     const contractEntries: ContractEntry[] = [
       { name: 'WalletFactoryV2', address: walletContextAddrs.WalletFactoryV2 },
       { name: 'MainModuleV2', address: walletContextAddrs.MainModuleV2 },
@@ -461,7 +457,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       { name: 'DevGuardV1', address: '0x2ca2380dA88528C6061ACb70aD5222fe455F25DF' },
       { name: 'DeveloperMultisig', address: developerMultisig.address },
       { name: 'NiftyswapFactory20', address: niftyFactory.address },
-      { name: 'NiftyExchange20Wrapper', address: niftyWrapper.address },
+      { name: 'NiftyswapExchange20Wrapper', address: niftyWrapper.address },
       { name: 'SequenceMarketFactoryV2', address: marketFactoryV2.address },
       { name: 'SequenceMarketV2', address: marketV2Address },
       { name: 'SequenceMarketV1', address: marketV1.address },

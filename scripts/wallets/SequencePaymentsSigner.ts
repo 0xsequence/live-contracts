@@ -1,9 +1,10 @@
-import { Wallet } from '@0xsequence/wallet'
-import type { ethers } from 'ethers'
-import { Orchestrator } from '@0xsequence/signhub'
 import { commons, v2 } from '@0xsequence/core'
 import { LocalRelayer } from '@0xsequence/relayer'
+import { Orchestrator } from '@0xsequence/signhub'
+import { Wallet } from '@0xsequence/wallet'
+import type { ethers } from 'ethers'
 import ora from 'ora'
+import type { SequenceEnvironment } from 'scripts/types'
 
 export type WalletType = Wallet<
   v2.config.WalletConfig,
@@ -11,14 +12,12 @@ export type WalletType = Wallet<
   v2.signature.UnrecoveredSignature | v2.signature.UnrecoveredChainedSignature
 >
 
-export type SignerEnvironment = 'dev' | 'next' | 'prod'
-
 type SignerDetails = {
   eoa: string
   expectedAddress: string
 }
 
-const SIGNER_DETAILS: Record<SignerEnvironment, SignerDetails> = {
+const SIGNER_DETAILS: Record<SequenceEnvironment, SignerDetails> = {
   dev: {
     eoa: '0x7A0cC251fd0eF355B8A770aE643f8eC5961718E5',
     expectedAddress: '0x498399DD85CAa29A42Af499f82b271f1629ba0D7'
@@ -51,7 +50,7 @@ const createWalletConfig = (eoa: string) => {
  * This wallet is the default signer for a sequence payments contract.
  */
 export const deployPaymentsSigner = async (
-  signerEnv: SignerEnvironment,
+  signerEnv: SequenceEnvironment,
   relayer: ethers.Signer,
   context: commons.context.WalletContext,
   txParams?: ethers.providers.TransactionRequest

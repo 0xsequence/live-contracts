@@ -1,13 +1,13 @@
 import type { BigNumberish } from 'ethers'
 import { readFile } from 'node:fs/promises'
-import type { SignerEnvironment } from './wallets/SequencePaymentsSigner'
+import { SequenceEnvironment } from './types'
 
 export type Config = {
   networkName: string
   rpcUrl: string
   deployerPk: string
   guardPatchSecret?: string
-  paymentsSignerEnvs: SignerEnvironment[]
+  paymentsSignerEnvs: SequenceEnvironment[]
   etherscanApiUrl?: string
   etherscanApiKey?: string
   blockscoutUrl?: string
