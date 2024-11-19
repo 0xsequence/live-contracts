@@ -1,4 +1,4 @@
-import { Logger, deployers } from '@0xsequence/solidity-deployer'
+import { deployers, Logger } from '@0xsequence/solidity-deployer'
 import { BigNumber, ethers } from 'ethers'
 import { writeFile } from 'node:fs/promises'
 import { argv } from 'node:process'
@@ -32,6 +32,8 @@ import {
   SequenceUtilsV1
 } from './factories/v1'
 import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2, TrustFactory } from './factories/v2'
+import { EternalFactory } from './factories/v2/commons/EternalFactory'
+import { MainModuleWebAuthnOnly } from './factories/v2/commons/MainModuleWebAuthnOnly'
 import { WALLET_CREATION_CODE } from './factories/v2/FactoryV2'
 import type { ContractEntry, SequenceEnvironment } from './types'
 import { getArtifactFactory } from './utils'
@@ -263,6 +265,14 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     prompt.start('Deploying V2 commons contracts\n')
 
     const trustFactory = await singletonDeployer.deploy('TrustFactory', TrustFactory, 0, txParams)
+    const eternalFactory = await singletonDeployer.deploy('EternalFactory', EternalFactory, 0, txParams)
+    const mainModuleWebAuthnOnly = await singletonDeployer.deploy(
+      'MainModuleWebAuthnOnly',
+      MainModuleWebAuthnOnly,
+      0,
+      txParams,
+      eternalFactory.address
+    )
 
     prompt.succeed('Deployed V2 commons contracts\n')
 
@@ -419,6 +429,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       GuestModuleV2: walletContextAddrs.GuestModuleV2,
       SequenceUtilsV2: walletContextAddrs.SequenceUtilsV2,
       TrustFactory: trustFactory.address,
+      EternalFactory: eternalFactory.address,
+      MainModuleWebAuthnOnly: mainModuleWebAuthnOnly.address,
       WalletFactoryV1: walletContextAddrs.WalletFactoryV1,
       MainModuleV1: walletContextAddrs.MainModuleV1,
       MainModuleUpgradableV1: walletContextAddrs.MainModuleUpgradableV1,

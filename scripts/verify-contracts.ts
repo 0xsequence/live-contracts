@@ -36,6 +36,8 @@ import { GUEST_MODULE_V2_VERIFICATION } from './factories/v2/GuestModuleV2'
 import { MAIN_MODULE_UPGRADABLE_V2_VERIFICATION } from './factories/v2/MainModuleUpgradableV2'
 import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
+import { ETERNALFACTORY_VERIFICATION } from './factories/v2/commons/EternalFactory'
+import { MAINMODULEWEBAUTHNONLY_VERIFICATION } from './factories/v2/commons/MainModuleWebAuthnOnly'
 import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
 import type { ContractEntry, VerificationRequest } from './types'
 
@@ -154,6 +156,14 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
     prompt.start('Verifying V2 commons contracts\n')
 
     await verifyContract(walletContextAddrs.TrustFactory, { ...TRUST_FACTORY_VERIFICATION, waitForSuccess })
+    await verifyContract(walletContextAddrs.EternalFactory, { ...ETERNALFACTORY_VERIFICATION, waitForSuccess })
+    if (walletContextAddrs.EternalFactory) {
+      await verifyContract(walletContextAddrs.MainModuleWebAuthnOnly, {
+        ...MAINMODULEWEBAUTHNONLY_VERIFICATION,
+        waitForSuccess,
+        constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.EternalFactory])
+      })
+    }
 
     prompt.succeed('Verified V2 commons contracts\n')
 

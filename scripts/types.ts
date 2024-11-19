@@ -11,6 +11,8 @@ export type ContractName =
   | 'GuestModuleV2'
   | 'SequenceUtilsV2'
   | 'TrustFactory'
+  | 'EternalFactory'
+  | 'MainModuleWebAuthnOnly'
   | 'WalletFactoryV1'
   | 'MainModuleV1'
   | 'MainModuleUpgradableV1'
