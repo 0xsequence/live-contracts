@@ -198,3 +198,6 @@ The contracts have been deployed on the following chains.
 - [ApeChain Testnet](https://ape-docs.vercel.app)
 - [B3 Sepolia](https://b3.fun)
 - [Soneium Minato Testnet](https://b3.fun)
+- [Root Network](https://www.therootnetwork.com/)
+- [Root Network Porcini](https://www.therootnetwork.com/)
+- [Root Network Sprout](https://www.therootnetwork.com/)
