@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "deploy": "ts-node scripts/deploy-contracts.ts",
+    "verify": "ts-node scripts/verify-contracts.ts",
     "source": "ts-node scripts/download-source-code.ts",
     "check": "ts-node scripts/check-deployed.ts",
     "funds": "ts-node scripts/check-funds.ts",

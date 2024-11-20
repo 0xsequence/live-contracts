@@ -1,4 +1,4 @@
-import { Logger, deployers, verifiers as deploymentVerifiers } from '@0xsequence/solidity-deployer'
+import { Logger, deployers } from '@0xsequence/solidity-deployer'
 import { BigNumber, ethers } from 'ethers'
 import { writeFile } from 'node:fs/promises'
 import { argv } from 'node:process'
@@ -8,37 +8,21 @@ import { MIGRATOR_TO_DUO_V1 } from './artifacts/SEQ0001/v1/MigratorToDuo'
 import { MAIN_MODULE_UPGRADABLE_DUO_V2 } from './artifacts/SEQ0001/v2/MainModuleUpgradableDuo'
 import { MIGRATOR_TO_DUO_V2 } from './artifacts/SEQ0001/v2/MigratorToDuo'
 import { type Config, perConfig } from './config'
-import {
-  NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION,
-  NiftyswapExchange20Wrapper
-} from './factories/marketplace/NiftyswapExchange20Wrapper'
-import {
-  NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN,
-  NIFTYSWAP_FACTORY_20_VERIFICATION,
-  NiftyswapFactory20
-} from './factories/marketplace/NiftyswapFactory20'
-import {
-  SEQUENCEMARKETFACTORYV2_VERIFICATION,
-  SequenceMarketFactoryV2,
-  SequenceMarketV2Interface
-} from './factories/marketplace/SequenceMarketFactoryV2'
-import { SEQUENCEMARKETV1_VERIFICATION, SequenceMarketV1 } from './factories/marketplace/SequenceMarketV1'
-import { CLAWBACK_VERIFICATION, Clawback } from './factories/token_library/Clawback'
-import { CLAWBACKMETADATA_VERIFICATION, ClawbackMetadata } from './factories/token_library/ClawbackMetadata'
-import { ERC1155ITEMSFACTORY_VERIFICATION, ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
-import { ERC1155SALEFACTORY_VERIFICATION, ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
-import { ERC1155SOULBOUNDFACTORY_VERIFICATION, ERC1155SoulboundFactory } from './factories/token_library/ERC1155SoulboundFactory'
-import { ERC20ITEMSFACTORY_VERIFICATION, ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
-import { ERC721ITEMSFACTORY_VERIFICATION, ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
-import { ERC721SALEFACTORY_VERIFICATION, ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
-import { ERC721SOULBOUNDFACTORY_VERIFICATION, ERC721SoulboundFactory } from './factories/token_library/ERC721SoulboundFactory'
-import { PAYMENTCOMBINER_VERIFICATION, PaymentCombiner } from './factories/token_library/PaymentCombiner'
-import { PAYMENTS_FACTORY_VERIFICATION, PaymentsFactory } from './factories/token_library/PaymentsFactory'
-import {
-  TUBPROXY_VERIFICATION,
-  TransparentUpgradeableBeaconProxy
-} from './factories/token_library/TransparentUpgradeableBeaconProxy'
-import { UPGRADEABLEBEACON_VERIFICATION, UpgradeableBeacon } from './factories/token_library/UpgradeableBeacon'
+import { NiftyswapExchange20Wrapper } from './factories/marketplace/NiftyswapExchange20Wrapper'
+import { NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN, NiftyswapFactory20 } from './factories/marketplace/NiftyswapFactory20'
+import { SequenceMarketFactoryV2 } from './factories/marketplace/SequenceMarketFactoryV2'
+import { SequenceMarketV1 } from './factories/marketplace/SequenceMarketV1'
+import { Clawback } from './factories/token_library/Clawback'
+import { ClawbackMetadata } from './factories/token_library/ClawbackMetadata'
+import { ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
+import { ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
+import { ERC1155SoulboundFactory } from './factories/token_library/ERC1155SoulboundFactory'
+import { ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
+import { ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
+import { ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
+import { ERC721SoulboundFactory } from './factories/token_library/ERC721SoulboundFactory'
+import { PaymentCombiner } from './factories/token_library/PaymentCombiner'
+import { PaymentsFactory } from './factories/token_library/PaymentsFactory'
 import {
   FactoryV1,
   GuestModuleV1,
@@ -47,22 +31,12 @@ import {
   RequireFreshSignerV1,
   SequenceUtilsV1
 } from './factories/v1'
-import { FACTORY_V1_VERIFICATION } from './factories/v1/FactoryV1'
-import { GUEST_MODULE_V1_VERIFICATION } from './factories/v1/GuestModuleV1'
-import { MAIN_MODULE_UPGRADABLE_V1_VERIFICATION } from './factories/v1/MainModuleUpgradableV1'
-import { MAIN_MODULE_V1_VERIFICATION } from './factories/v1/MainModuleV1'
-import { REQUIRE_FRESH_SIGNER_V1_VERIFICATION } from './factories/v1/RequireFreshSignerV1'
-import { SEQUENCE_UTILS_V1_VERIFICATION } from './factories/v1/SequenceUtilsV1'
 import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2, TrustFactory } from './factories/v2'
-import { FACTORY_V2_VERIFICATION, WALLET_CREATION_CODE } from './factories/v2/FactoryV2'
-import { GUEST_MODULE_V2_VERIFICATION } from './factories/v2/GuestModuleV2'
-import { MAIN_MODULE_UPGRADABLE_V2_VERIFICATION } from './factories/v2/MainModuleUpgradableV2'
-import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
-import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
-import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
-import type { ContractEntry, SequenceEnvironment, VerificationRequest } from './types'
+import { WALLET_CREATION_CODE } from './factories/v2/FactoryV2'
+import type { ContractEntry, SequenceEnvironment } from './types'
 import { getArtifactFactory } from './utils'
 import { LoggingProvider } from './utils/LoggingProvider'
+import { verifyContracts } from './verify-contracts'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
 import { deployPaymentsSigner } from './wallets/SequencePaymentsSigner'
@@ -438,310 +412,53 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     // Output addresses
 
     prompt.start(`Writing deployment information to output_${config.networkName}.json\n`)
-    const contractEntries: ContractEntry[] = [
-      { name: 'WalletFactoryV2', address: walletContextAddrs.WalletFactoryV2 },
-      { name: 'MainModuleV2', address: walletContextAddrs.MainModuleV2 },
-      { name: 'MainModuleUpgradableV2', address: walletContextAddrs.MainModuleUpgradableV2 },
-      { name: 'GuestModuleV2', address: walletContextAddrs.GuestModuleV2 },
-      { name: 'SequenceUtilsV2', address: walletContextAddrs.SequenceUtilsV2 },
-      { name: 'TrustFactory', address: trustFactory.address },
-      { name: 'WalletFactoryV1', address: walletContextAddrs.WalletFactoryV1 },
-      { name: 'MainModuleV1', address: walletContextAddrs.MainModuleV1 },
-      { name: 'MainModuleUpgradableV1', address: walletContextAddrs.MainModuleUpgradableV1 },
-      { name: 'GuestModuleV1', address: walletContextAddrs.GuestModuleV1 },
-      { name: 'SequenceUtilsV1', address: walletContextAddrs.SequenceUtilsV1 },
-      { name: 'RequireFreshSignerLibV1', address: walletContextAddrs.RequireFreshSignerLibV1 },
-      { name: 'ProdGuardV2', address: '0x761f5e29944D79d76656323F106CF2efBF5F09e9' },
-      { name: 'DevGuardV2', address: '0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0' },
-      { name: 'ProdGuardV1', address: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab' },
-      { name: 'DevGuardV1', address: '0x2ca2380dA88528C6061ACb70aD5222fe455F25DF' },
-      { name: 'DeveloperMultisig', address: developerMultisig.address },
-      { name: 'NiftyswapFactory20', address: niftyFactory.address },
-      { name: 'NiftyswapExchange20Wrapper', address: niftyWrapper.address },
-      { name: 'SequenceMarketFactoryV2', address: marketFactoryV2.address },
-      { name: 'SequenceMarketV2', address: marketV2Address },
-      { name: 'SequenceMarketV1', address: marketV1.address },
-      { name: 'ERC20ItemsFactory', address: erc20ItemsFactory.address },
-      { name: 'ERC721ItemsFactory', address: erc721ItemsFactory.address },
-      { name: 'ERC1155ItemsFactory', address: erc1155ItemsFactory.address },
-      { name: 'ERC721SaleFactory', address: erc721SaleFactory.address },
-      { name: 'ERC1155SaleFactory', address: erc1155SaleFactory.address },
-      { name: 'ERC721SoulboundFactory', address: erc721SoulboundFactory.address },
-      { name: 'ERC1155SoulboundFactory', address: erc1155SoulboundFactory.address },
-      { name: 'Clawback', address: clawback.address },
-      { name: 'ClawbackMetadata', address: clawbackMetadata.address },
-      { name: 'PaymentCombiner', address: paymentCombiner.address },
-      { name: 'PaymentsFactory', address: paymentsFactory.address }
-    ]
+    const contractEntries: ContractEntry = {
+      WalletFactoryV2: walletContextAddrs.WalletFactoryV2,
+      MainModuleV2: walletContextAddrs.MainModuleV2,
+      MainModuleUpgradableV2: walletContextAddrs.MainModuleUpgradableV2,
+      GuestModuleV2: walletContextAddrs.GuestModuleV2,
+      SequenceUtilsV2: walletContextAddrs.SequenceUtilsV2,
+      TrustFactory: trustFactory.address,
+      WalletFactoryV1: walletContextAddrs.WalletFactoryV1,
+      MainModuleV1: walletContextAddrs.MainModuleV1,
+      MainModuleUpgradableV1: walletContextAddrs.MainModuleUpgradableV1,
+      GuestModuleV1: walletContextAddrs.GuestModuleV1,
+      SequenceUtilsV1: walletContextAddrs.SequenceUtilsV1,
+      RequireFreshSignerLibV1: walletContextAddrs.RequireFreshSignerLibV1,
+      ProdGuardV2: '0x761f5e29944D79d76656323F106CF2efBF5F09e9',
+      DevGuardV2: '0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0',
+      ProdGuardV1: '0x596aF90CecdBF9A768886E771178fd5561dD27Ab',
+      DevGuardV1: '0x2ca2380dA88528C6061ACb70aD5222fe455F25DF',
+      DeveloperMultisig: developerMultisig.address,
+      NiftyswapFactory20: niftyFactory.address,
+      NiftyswapExchange20Wrapper: niftyWrapper.address,
+      SequenceMarketFactoryV2: marketFactoryV2.address,
+      SequenceMarketV2: marketV2Address,
+      SequenceMarketV1: marketV1.address,
+      ERC20ItemsFactory: erc20ItemsFactory.address,
+      ERC721ItemsFactory: erc721ItemsFactory.address,
+      ERC1155ItemsFactory: erc1155ItemsFactory.address,
+      ERC721SaleFactory: erc721SaleFactory.address,
+      ERC1155SaleFactory: erc1155SaleFactory.address,
+      ERC721SoulboundFactory: erc721SoulboundFactory.address,
+      ERC1155SoulboundFactory: erc1155SoulboundFactory.address,
+      Clawback: clawback.address,
+      ClawbackMetadata: clawbackMetadata.address,
+      PaymentCombiner: paymentCombiner.address,
+      PaymentsFactory: paymentsFactory.address
+    }
     for (const { env, signerAddr, paymentsAddr } of paymentsDeployments) {
-      contractEntries.push({ name: `SequencePaymentsSigner-${env}`, address: signerAddr })
-      contractEntries.push({ name: `SequencePayments-${env}`, address: paymentsAddr })
+      contractEntries[`SequencePaymentsSigner-${env}`] = signerAddr
+      contractEntries[`SequencePayments-${env}`] = paymentsAddr
     }
 
     await writeFile(`./output_${config.networkName}.json`, JSON.stringify(contractEntries, null, 2))
     prompt.succeed(`Wrote deployment information to output_${config.networkName}.json\n`)
 
     // Verify contracts
-
-    if ((!config.etherscanApiUrl || !config.etherscanApiKey) && !config.blockscoutUrl) {
-      prompt.warn('Skipping contract verification.\n')
-      prompt.stop()
-      // Exit early
-      return null
-    }
-
-    const verifiers: (deploymentVerifiers.EtherscanVerifier | deploymentVerifiers.BlockscoutVerifier)[] = []
-    if (config.etherscanApiKey && config.etherscanApiUrl) {
-      verifiers.push(new deploymentVerifiers.EtherscanVerifier(config.etherscanApiKey, config.etherscanApiUrl, prompt))
-    }
-    if (config.blockscoutUrl) {
-      verifiers.push(new deploymentVerifiers.BlockscoutVerifier(config.blockscoutUrl, prompt))
-    }
-    const verifyContract = async (address: string, verification: VerificationRequest) => {
-      // Run these simultaneously
-      await Promise.all(verifiers.map(verifier => verifier.verifyContract(address, verification)))
-    }
-
-    const waitForSuccess = true // One at a time
-    const { defaultAbiCoder } = ethers.utils
-    const beacon = new UpgradeableBeacon(signer)
-
-    if (config.skipWalletContext) {
-      prompt.log('Skipping wallet context verification\n')
-    } else {
-      // v1
-
-      prompt.start('Verifying V1 contracts\n')
-
-      await verifyContract(walletContextAddrs.WalletFactoryV1, { ...FACTORY_V1_VERIFICATION, waitForSuccess })
-      await verifyContract(walletContextAddrs.MainModuleV1, {
-        ...MAIN_MODULE_V1_VERIFICATION,
-        constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.WalletFactoryV1]),
-        waitForSuccess
-      })
-      await verifyContract(walletContextAddrs.MainModuleUpgradableV1, {
-        ...MAIN_MODULE_UPGRADABLE_V1_VERIFICATION,
-        waitForSuccess
-      })
-      await verifyContract(walletContextAddrs.GuestModuleV1, { ...GUEST_MODULE_V1_VERIFICATION, waitForSuccess })
-      await verifyContract(walletContextAddrs.SequenceUtilsV1, {
-        ...SEQUENCE_UTILS_V1_VERIFICATION,
-        constructorArgs: defaultAbiCoder.encode(
-          ['address', 'address'],
-          [walletContextAddrs.WalletFactoryV1, walletContextAddrs.MainModuleV1]
-        ),
-        waitForSuccess
-      })
-      await verifyContract(walletContextAddrs.RequireFreshSignerLibV1, {
-        ...REQUIRE_FRESH_SIGNER_V1_VERIFICATION,
-        constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.SequenceUtilsV1]),
-        waitForSuccess
-      })
-
-      prompt.succeed('Verified V1 contracts\n')
-
-      // v2
-
-      prompt.start('Verifying V2 contracts\n')
-
-      await verifyContract(walletContextAddrs.WalletFactoryV2, { ...FACTORY_V2_VERIFICATION, waitForSuccess })
-      await verifyContract(walletContextAddrs.MainModuleUpgradableV2, {
-        ...MAIN_MODULE_UPGRADABLE_V2_VERIFICATION,
-        waitForSuccess
-      })
-      await verifyContract(walletContextAddrs.MainModuleV2, {
-        ...MAIN_MODULE_V2_VERIFICATION,
-        constructorArgs: defaultAbiCoder.encode(
-          ['address', 'address'],
-          [walletContextAddrs.WalletFactoryV2, walletContextAddrs.MainModuleUpgradableV2]
-        ),
-        waitForSuccess
-      })
-      await verifyContract(walletContextAddrs.GuestModuleV2, { ...GUEST_MODULE_V2_VERIFICATION, waitForSuccess })
-      await verifyContract(walletContextAddrs.SequenceUtilsV2, {
-        ...SEQUENCE_UTILS_V2_VERIFICATION,
-        waitForSuccess
-      })
-
-      prompt.succeed('Verified V2 contracts\n')
-    }
-
-    // v2 commons
-
-    prompt.start('Verifying V2 commons contracts\n')
-
-    await verifyContract(trustFactory.address, { ...TRUST_FACTORY_VERIFICATION, waitForSuccess })
-
-    prompt.succeed('Verified V2 commons contracts\n')
-
-    // Payments
-
-    prompt.start('Verifying Payments contracts\n')
-
-    await verifyContract(paymentCombiner.address, { ...PAYMENTCOMBINER_VERIFICATION, waitForSuccess })
-    // Verify the implementation
-    await verifyContract(await paymentCombiner.implementationAddress(), {
-      ...PAYMENTCOMBINER_VERIFICATION,
-      contractToVerify: 'src/payments/PaymentSplitter.sol:PaymentSplitter',
-      waitForSuccess
-    })
-
-    await verifyContract(paymentsFactory.address, {
-      ...PAYMENTS_FACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
-    // Verify the implmentation
-    await verifyContract(await beacon.attach(await paymentsFactory.beacon()).implementation(), {
-      ...PAYMENTS_FACTORY_VERIFICATION,
-      contractToVerify: 'src/payments/Payments.sol:Payments',
-      waitForSuccess
-    })
-
-    prompt.succeed('Verified Payments contracts\n')
-
-    // Niftyswap and Market
-
-    prompt.start('Verifying Market contracts\n')
-    await verifyContract(niftyFactory.address, {
-      ...NIFTYSWAP_FACTORY_20_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN])
-    })
-    await verifyContract(niftyWrapper.address, { ...NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION, waitForSuccess })
-    await verifyContract(marketV1.address, { ...SEQUENCEMARKETV1_VERIFICATION, waitForSuccess })
-    await verifyContract(marketFactoryV2.address, {
-      ...SEQUENCEMARKETFACTORYV2_VERIFICATION,
-      waitForSuccess
-    })
-    const marketV2ImplementationAddress = await marketFactoryV2.implementation()
-    await verifyContract(marketV2ImplementationAddress, {
-      ...SEQUENCEMARKETFACTORYV2_VERIFICATION,
-      contractToVerify: 'contracts/SequenceMarket.sol:SequenceMarket',
-      waitForSuccess
-    })
-    await verifyContract(marketV2Address, {
-      ...SEQUENCEMARKETFACTORYV2_VERIFICATION,
-      contractToVerify: 'lib/openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol:ERC1967Proxy',
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(
-        ['address', 'bytes'],
-        [marketV2ImplementationAddress, SequenceMarketV2Interface.encodeFunctionData('initialize', [developerMultisig.address])]
-      )
-    })
-    prompt.succeed('Verified Market contracts\n')
-
-    // Library contracts
-
-    prompt.start('Verifying Library contracts\n')
-    // Factories
-    await verifyContract(erc20ItemsFactory.address, {
-      ...ERC20ITEMSFACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
-    await verifyContract(erc721ItemsFactory.address, {
-      ...ERC721ITEMSFACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
-    await verifyContract(erc1155ItemsFactory.address, {
-      ...ERC1155ITEMSFACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
-    await verifyContract(erc721SaleFactory.address, {
-      ...ERC721SALEFACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
-    await verifyContract(erc1155SaleFactory.address, {
-      ...ERC1155SALEFACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
-    await verifyContract(erc721SoulboundFactory.address, {
-      ...ERC721SOULBOUNDFACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
-    await verifyContract(erc1155SoulboundFactory.address, {
-      ...ERC1155SOULBOUNDFACTORY_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [developerMultisig.address])
-    })
-    // Also deploy the TUBProxy for verification purposes
-    const tubProxy = await singletonDeployer.deploy(
-      'TransparentUpgradeableBeaconProxy',
-      TransparentUpgradeableBeaconProxy,
-      0,
-      txParams
-    )
-    // Token contracts deployed by the factories
-    await verifyContract(await beacon.attach(await erc20ItemsFactory.beacon()).implementation(), {
-      ...ERC20ITEMSFACTORY_VERIFICATION,
-      contractToVerify: 'src/tokens/ERC20/presets/items/ERC20Items.sol:ERC20Items',
-      waitForSuccess
-    })
-    await verifyContract(await beacon.attach(await erc721ItemsFactory.beacon()).implementation(), {
-      ...ERC721ITEMSFACTORY_VERIFICATION,
-      contractToVerify: 'src/tokens/ERC721/presets/items/ERC721Items.sol:ERC721Items',
-      waitForSuccess
-    })
-    const erc1155ItemsBeacon = await erc1155ItemsFactory.beacon()
-    const erc1155ItemsImplementation = await beacon.attach(erc1155ItemsBeacon).implementation()
-    await verifyContract(erc1155ItemsImplementation, {
-      ...ERC1155ITEMSFACTORY_VERIFICATION,
-      contractToVerify: 'src/tokens/ERC1155/presets/items/ERC1155Items.sol:ERC1155Items',
-      waitForSuccess
-    })
-    const erc721SaleImplementation = await beacon.attach(await erc721SaleFactory.beacon()).implementation()
-    await verifyContract(erc721SaleImplementation, {
-      ...ERC721SALEFACTORY_VERIFICATION,
-      contractToVerify: 'src/tokens/ERC721/utility/sale/ERC721Sale.sol:ERC721Sale',
-      waitForSuccess
-    })
-    const erc1155SaleImplementation = await beacon.attach(await erc1155SaleFactory.beacon()).implementation()
-    await verifyContract(erc1155SaleImplementation, {
-      ...ERC1155SALEFACTORY_VERIFICATION,
-      contractToVerify: 'src/tokens/ERC1155/utility/sale/ERC1155Sale.sol:ERC1155Sale',
-      waitForSuccess
-    })
-    const erc721SoulboundImplementation = await beacon.attach(await erc721SoulboundFactory.beacon()).implementation()
-    await verifyContract(erc721SoulboundImplementation, {
-      ...ERC721SOULBOUNDFACTORY_VERIFICATION,
-      contractToVerify: 'src/tokens/ERC721/presets/soulbound/ERC721Soulbound.sol:ERC721Soulbound',
-      waitForSuccess
-    })
-    const erc1155SoulboundImplementation = await beacon.attach(await erc1155SoulboundFactory.beacon()).implementation()
-    await verifyContract(erc1155SoulboundImplementation, {
-      ...ERC1155SOULBOUNDFACTORY_VERIFICATION,
-      contractToVerify: 'src/tokens/ERC1155/presets/soulbound/ERC1155Soulbound.sol:ERC1155Soulbound',
-      waitForSuccess
-    })
-    // Proxies
-    await verifyContract(erc1155ItemsBeacon, {
-      ...UPGRADEABLEBEACON_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address'], [erc1155ItemsImplementation])
-    })
-    await verifyContract(tubProxy.address, {
-      ...TUBPROXY_VERIFICATION,
-      waitForSuccess
-    })
-    // Clawback
-    await verifyContract(clawback.address, {
-      ...CLAWBACK_VERIFICATION,
-      waitForSuccess,
-      constructorArgs: defaultAbiCoder.encode(['address', 'address'], [developerMultisig.address, clawbackMetadata.address])
-    })
-    await verifyContract(clawbackMetadata.address, {
-      ...CLAWBACKMETADATA_VERIFICATION,
-      waitForSuccess
-    })
-
-    prompt.succeed('Verified Library contracts\n')
+    await verifyContracts(config, contractEntries)
   } catch (error: unknown) {
+    console.error('Error deploying contracts on', config.networkName, error)
     prompt.fail(`Error deploying contracts on ${config.networkName}: ${error}`)
     return (error as Error).message
   }
@@ -767,11 +484,13 @@ const main = async () => {
   }
 }
 
-main()
-  .then(() => {
-    process.exit(0)
-  })
-  .catch(error => {
-    console.error(error)
-    process.exit(1)
-  })
+if (require.main === module) {
+  main()
+    .then(() => {
+      process.exit(0)
+    })
+    .catch(error => {
+      console.error(error)
+      process.exit(1)
+    })
+}
