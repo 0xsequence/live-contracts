@@ -203,3 +203,5 @@ The contracts have been deployed on the following chains.
 - [Root Network](https://www.therootnetwork.com/)
 - [Root Network Porcini](https://www.therootnetwork.com/)
 - [Root Network Sprout](https://www.therootnetwork.com/)
+- [Laos](https://laosnetwork.io/)
+- [Laos Sigma Testnet](https://laosnetwork.io/)
