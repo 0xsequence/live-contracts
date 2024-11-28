@@ -1,5 +1,6 @@
-import { Logger, deployers } from '@0xsequence/solidity-deployer'
+import { deployers, Logger } from '@0xsequence/solidity-deployer'
 import { BigNumber, ethers } from 'ethers'
+import { defaultAbiCoder, Interface } from 'ethers/lib/utils'
 import { writeFile } from 'node:fs/promises'
 import { argv } from 'node:process'
 import ora, { type Ora } from 'ora'
@@ -10,8 +11,10 @@ import { MIGRATOR_TO_DUO_V2 } from './artifacts/SEQ0001/v2/MigratorToDuo'
 import { type Config, perConfig } from './config'
 import { NiftyswapExchange20Wrapper } from './factories/marketplace/NiftyswapExchange20Wrapper'
 import { NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN, NiftyswapFactory20 } from './factories/marketplace/NiftyswapFactory20'
+import { SequenceMarketBatchPayableFactoryV2 } from './factories/marketplace/SequenceMarketBatchPayableFactoryV2'
 import { SequenceMarketFactoryV2 } from './factories/marketplace/SequenceMarketFactoryV2'
 import { SequenceMarketV1 } from './factories/marketplace/SequenceMarketV1'
+import { UUPSUpgradeableABI } from './factories/marketplace/UUPSUpgradeable'
 import { Clawback } from './factories/token_library/Clawback'
 import { ClawbackMetadata } from './factories/token_library/ClawbackMetadata'
 import { ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
@@ -280,6 +283,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       walletCreationCode: WALLET_CREATION_CODE
     }
     const developerMultisig = await deployDeveloperMultisig(signer, v2WalletContext, txParams)
+
     prompt.succeed('Deployed Sequence development multisig\n')
 
     // Payments
@@ -336,14 +340,54 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const niftyWrapper = await singletonDeployer.deploy('NiftyExchange20Wrapper', NiftyswapExchange20Wrapper, 0, txParams)
     const marketV1 = await singletonDeployer.deploy('SequenceMarket', SequenceMarketV1, 0, txParams, developerMultisig.address)
     const marketFactoryV2 = await singletonDeployer.deploy('SequenceMarketFactory', SequenceMarketFactoryV2, 0, txParams)
+    const marketBatchPayableFactoryV2 = await singletonDeployer.deploy(
+      'SequenceMarketBatchPayableFactoryV2',
+      SequenceMarketBatchPayableFactoryV2,
+      0,
+      txParams
+    )
     prompt.log('Deploying SequenceMarketV2\n')
     const salt = ethers.constants.HashZero
     const marketV2Address = (await marketFactoryV2.functions.predictAddress(salt, developerMultisig.address))[0]
-    if ((await signer.provider.getCode(marketV2Address)) === '0x') {
+    if ((await provider.getCode(marketV2Address)) === '0x') {
       const marketV2DeployTx = await marketFactoryV2.functions.deploy(salt, developerMultisig.address, txParams)
       await marketV2DeployTx.wait()
     }
-    prompt.log(`SequenceMarketV2 deployed at ${marketV2Address}\n`)
+    // Upgrade MarketV2 to use batch payable
+    const marketBatchPayableImplementation = await marketBatchPayableFactoryV2.implementation()
+    const marketV2ImplementationStorage = await provider.getStorageAt(
+      marketV2Address,
+      '0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc'
+    )
+    const marketV2ImplementationStorageAddress = defaultAbiCoder.decode(['address'], marketV2ImplementationStorage)[0]
+    if (marketV2ImplementationStorageAddress === marketBatchPayableImplementation) {
+      prompt.log('MarketV2 already upgraded to batch payable\n')
+    } else {
+      prompt.log(`Upgrading MarketV2 to batch payable\n`)
+      const marketV2 = new Interface(UUPSUpgradeableABI)
+      const upgradeToData = marketV2.encodeFunctionData('upgradeTo', [marketBatchPayableImplementation])
+      const signedBundle /*: SignedTransactionBundle*/ = {
+        intent: {
+          id: '0x8ef8e3dbe293da3ff22e23d52e6286088152c8a65bb64f3a0058ac79273b4608',
+          wallet: developerMultisig.address
+        },
+        chainId: BigNumber.from(0),
+        transactions: [
+          {
+            to: marketV2Address,
+            data: upgradeToData,
+            revertOnError: true
+          }
+        ],
+        entrypoint: developerMultisig.address,
+        nonce: BigNumber.from(0), // FIXME: Use a space addressed nonce
+        signature:
+          '0x020001000000000001463f2ae32dee38cc8db446a2e649d8d82bfdbd5a2db35354197f66fdef65870e04ec09a5bf1a122eed6bc21487f602bb4c891ee9f1a48609369b1cde20bc7c201c02'
+      }
+      const tx = await developerMultisig.sendSignedTransaction(signedBundle)
+      await tx.wait()
+      prompt.log('Upgraded MarketV2 to use batch payable\n')
+    }
     prompt.succeed('Deployed Market contracts\n')
 
     // Contracts library
@@ -432,6 +476,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       DeveloperMultisig: developerMultisig.address,
       NiftyswapFactory20: niftyFactory.address,
       NiftyswapExchange20Wrapper: niftyWrapper.address,
+      SequenceMarketBatchPayableFactoryV2: marketBatchPayableFactoryV2.address,
       SequenceMarketFactoryV2: marketFactoryV2.address,
       SequenceMarketV2: marketV2Address,
       SequenceMarketV1: marketV1.address,

@@ -24,6 +24,7 @@ export type ContractName =
   | 'DeveloperMultisig'
   | 'NiftyswapFactory20'
   | 'NiftyswapExchange20Wrapper'
+  | 'SequenceMarketBatchPayableFactoryV2'
   | 'SequenceMarketFactoryV2'
   | 'SequenceMarketV2'
   | 'SequenceMarketV1'

@@ -8,6 +8,10 @@ import { type Config, perConfig } from './config'
 import { NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION } from './factories/marketplace/NiftyswapExchange20Wrapper'
 import { NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN, NIFTYSWAP_FACTORY_20_VERIFICATION } from './factories/marketplace/NiftyswapFactory20'
 import {
+  SequenceMarketBatchPayableFactoryV2,
+  SEQUENCEMARKETBATCHPAYABLEFACTORYV2_VERIFICATION
+} from './factories/marketplace/SequenceMarketBatchPayableFactoryV2'
+import {
   SequenceMarketFactoryV2,
   SEQUENCEMARKETFACTORYV2_VERIFICATION,
   SequenceMarketV2Interface
@@ -213,6 +217,10 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
       ...SEQUENCEMARKETFACTORYV2_VERIFICATION,
       waitForSuccess
     })
+    await verifyContract(walletContextAddrs.SequenceMarketBatchPayableFactoryV2, {
+      ...SEQUENCEMARKETBATCHPAYABLEFACTORYV2_VERIFICATION,
+      waitForSuccess
+    })
     if (provider && walletContextAddrs.SequenceMarketFactoryV2) {
       const marketV2Factory = new SequenceMarketFactoryV2().attach(walletContextAddrs.SequenceMarketFactoryV2).connect(provider)
       const marketV2ImplementationAddress = await marketV2Factory.implementation()
@@ -232,6 +240,18 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
             SequenceMarketV2Interface.encodeFunctionData('initialize', [walletContextAddrs.DeveloperMultisig])
           ]
         )
+      })
+    }
+    if (provider && walletContextAddrs.SequenceMarketBatchPayableFactoryV2) {
+      const factory = new SequenceMarketBatchPayableFactoryV2()
+        .attach(walletContextAddrs.SequenceMarketBatchPayableFactoryV2)
+        .connect(provider)
+      const implementationAddress = await factory.implementation()
+      console.log('implementationAddress', implementationAddress)
+      await verifyContract(implementationAddress, {
+        ...SEQUENCEMARKETBATCHPAYABLEFACTORYV2_VERIFICATION,
+        contractToVerify: 'contracts/SequenceMarketBatchPayable.sol:SequenceMarketBatchPayable',
+        waitForSuccess
       })
     }
     prompt.succeed('Verified Market contracts\n')
