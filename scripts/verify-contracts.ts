@@ -5,6 +5,7 @@ import { readFile } from 'fs/promises'
 import { argv } from 'node:process'
 import ora, { type Ora } from 'ora'
 import { type Config, perConfig } from './config'
+import { BATCHPAYABLEHELPER_VERIFICATION } from './factories/marketplace/BatchPayableHelper'
 import { NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION } from './factories/marketplace/NiftyswapExchange20Wrapper'
 import { NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN, NIFTYSWAP_FACTORY_20_VERIFICATION } from './factories/marketplace/NiftyswapFactory20'
 import {
@@ -25,6 +26,8 @@ import { ERC721SoulboundFactory, ERC721SOULBOUNDFACTORY_VERIFICATION } from './f
 import { PaymentCombiner, PAYMENTCOMBINER_VERIFICATION } from './factories/token_library/PaymentCombiner'
 import { PAYMENTS_FACTORY_VERIFICATION, PaymentsFactory } from './factories/token_library/PaymentsFactory'
 import { UpgradeableBeacon, UPGRADEABLEBEACON_VERIFICATION } from './factories/token_library/UpgradeableBeacon'
+import { ERC1155OPERATORENFORCEDFACTORY_VERIFICATION } from './factories/token_library/immutable/ERC1155OperatorEnforcedFactory'
+import { ERC721OPERATORENFORCEDFACTORY_VERIFICATION } from './factories/token_library/immutable/ERC721OperatorEnforcedFactory'
 import { FACTORY_V1_VERIFICATION } from './factories/v1/FactoryV1'
 import { GUEST_MODULE_V1_VERIFICATION } from './factories/v1/GuestModuleV1'
 import { MAIN_MODULE_UPGRADABLE_V1_VERIFICATION } from './factories/v1/MainModuleUpgradableV1'
@@ -38,7 +41,6 @@ import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
 import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
 import type { ContractEntry, VerificationRequest } from './types'
-import { BATCHPAYABLEHELPER_VERIFICATION } from './factories/marketplace/BatchPayableHelper'
 
 export const verifyContracts = async (config: Config, walletContextAddrs: ContractEntry): Promise<string | null> => {
   const prompt = ora() as Ora & Logger
@@ -277,6 +279,16 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
     })
     await verifyContract(walletContextAddrs.ERC1155SoulboundFactory, {
       ...ERC1155SOULBOUNDFACTORY_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.DeveloperMultisig])
+    })
+    await verifyContract(walletContextAddrs.ERC721OperatorEnforcedFactory, {
+      ...ERC721OPERATORENFORCEDFACTORY_VERIFICATION,
+      waitForSuccess,
+      constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.DeveloperMultisig])
+    })
+    await verifyContract(walletContextAddrs.ERC1155OperatorEnforcedFactory, {
+      ...ERC1155OPERATORENFORCEDFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.DeveloperMultisig])
     })
