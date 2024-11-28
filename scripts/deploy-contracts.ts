@@ -8,6 +8,8 @@ import { MIGRATOR_TO_DUO_V1 } from './artifacts/SEQ0001/v1/MigratorToDuo'
 import { MAIN_MODULE_UPGRADABLE_DUO_V2 } from './artifacts/SEQ0001/v2/MainModuleUpgradableDuo'
 import { MIGRATOR_TO_DUO_V2 } from './artifacts/SEQ0001/v2/MigratorToDuo'
 import { type Config, perConfig } from './config'
+import { ImmutableERC1155Factory } from './factories/immutable/ImmutableERC1155Factory'
+import { ImmutableERC721Factory } from './factories/immutable/ImmutableERC721Factory'
 import { NiftyswapExchange20Wrapper } from './factories/marketplace/NiftyswapExchange20Wrapper'
 import { NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN, NiftyswapFactory20 } from './factories/marketplace/NiftyswapFactory20'
 import { SequenceMarketFactoryV2 } from './factories/marketplace/SequenceMarketFactoryV2'
@@ -398,6 +400,19 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       txParams,
       developerMultisig.address
     )
+    let immutableERC721FactoryAddress: string | undefined
+    let immutableERC1155FactoryAddress: string | undefined
+    if (config.immutableFactories) {
+      const immutableERC721Factory = await singletonDeployer.deploy('ImmutableERC721Factory', ImmutableERC721Factory, 0, txParams)
+      immutableERC721FactoryAddress = immutableERC721Factory.address
+      const immutableERC1155Factory = await singletonDeployer.deploy(
+        'ImmutableERC1155Factory',
+        ImmutableERC1155Factory,
+        0,
+        txParams
+      )
+      immutableERC1155FactoryAddress = immutableERC1155Factory.address
+    }
     const clawbackMetadata = await singletonDeployer.deploy('ClawbackMetadata', ClawbackMetadata, 0, txParams)
     const clawback = await singletonDeployer.deploy(
       'Clawback',
@@ -442,6 +457,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       ERC1155SaleFactory: erc1155SaleFactory.address,
       ERC721SoulboundFactory: erc721SoulboundFactory.address,
       ERC1155SoulboundFactory: erc1155SoulboundFactory.address,
+      ImmutableERC721Factory: immutableERC721FactoryAddress,
+      ImmutableERC1155Factory: immutableERC1155FactoryAddress,
       Clawback: clawback.address,
       ClawbackMetadata: clawbackMetadata.address,
       PaymentCombiner: paymentCombiner.address,

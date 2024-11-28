@@ -148,8 +148,10 @@ The following is a list of contracts that are deployed by this script.
 | ERC1155ItemsFactory         | 0x7364fDEFe24385B2b3869504383c94cF083AcbD6 |
 | ERC721SaleFactory           | 0x4c4192D5b43B723eDbfce2434fA7b98402034513 |
 | ERC1155SaleFactory          | 0x64f1019bDC2F79688c5885Bc2bc4B57f7e88547c |
-| ERC721SoulboundFactory      | 0x2fBFF6fd3C978ab1bBd21b878262c5289a14b6c1 |
-| ERC1155SoulboundFactory     | 0xaB069C041FaCAB8f4D747D91EEda5705b5caAB76 |
+| ERC721SoulboundFactory      | 0xC12f398c810bEBAe69B9F827822FDb4889732BFc |
+| ERC1155SoulboundFactory     | 0xcb5EcB8e2C8B93CbFe747f2Ca3478c050f162a47 |
+| ImmutableERC721Factory      | 0x8a625268359e3b4762828C9Fc1bC7491E666d7E4 |
+| ImmutableERC1155Factory     | 0x7B36688710E0D75D60Be4F2C91F85b06e0D763c7 |
 | Clawback                    | 0x6F9a2c3E11011b894fae691d5338748f8048467d |
 | ClawbackMetadata            | 0x335411eAA9D63251f8c0867600Be4d0C190a3b1f |
 | PaymentCombiner             | 0xfe0a269E288051B0815E05Fe192FC888118CB8a2 |
@@ -160,6 +162,8 @@ The following is a list of contracts that are deployed by this script.
 | SequencePayments-next       | 0x7AaC049C94E60a71E1aeDA4E1390F6812685eA4f |
 | SequencePaymentsSigner-prod | 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F |
 | SequencePayments-prod       | 0x5afd8f6a09FfaD13c914b5977aF48b244279BFc7 |
+
+> [!NOTE] > `ImmutableERC721Factory` and `ImmutableERC1155Factory` are only deployed to Immutable's chains.
 
 ## Chains
 

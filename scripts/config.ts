@@ -15,6 +15,7 @@ export type Config = {
   gasPrice?: BigNumberish
   skipWalletContext?: boolean
   skip?: boolean // Don't deploy
+  immutableFactories?: boolean
 }
 
 export const getConfigs = async (): Promise<Config[]> => {

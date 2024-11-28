@@ -34,6 +34,8 @@ export type ContractName =
   | 'ERC1155SaleFactory'
   | 'ERC721SoulboundFactory'
   | 'ERC1155SoulboundFactory'
+  | 'ImmutableERC721Factory'
+  | 'ImmutableERC1155Factory'
   | 'Clawback'
   | 'ClawbackMetadata'
   | 'PaymentCombiner'

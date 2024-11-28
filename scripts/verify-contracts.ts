@@ -5,6 +5,8 @@ import { readFile } from 'fs/promises'
 import { argv } from 'node:process'
 import ora, { type Ora } from 'ora'
 import { type Config, perConfig } from './config'
+import { IMMUTABLEERC1155FACTORY_VERIFICATION } from './factories/immutable/ImmutableERC1155Factory'
+import { IMMUTABLEERC721FACTORY_VERIFICATION } from './factories/immutable/ImmutableERC721Factory'
 import { NIFTYSWAP_EXCHANGE_20_WRAPPER_VERIFICATION } from './factories/marketplace/NiftyswapExchange20Wrapper'
 import { NIFTYSWAP_FACTORY_20_DEFAULT_ADMIN, NIFTYSWAP_FACTORY_20_VERIFICATION } from './factories/marketplace/NiftyswapFactory20'
 import {
@@ -274,6 +276,14 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
       ...ERC1155SOULBOUNDFACTORY_VERIFICATION,
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.DeveloperMultisig])
+    })
+    await verifyContract(walletContextAddrs.ImmutableERC721Factory, {
+      ...IMMUTABLEERC721FACTORY_VERIFICATION,
+      waitForSuccess
+    })
+    await verifyContract(walletContextAddrs.ImmutableERC1155Factory, {
+      ...IMMUTABLEERC1155FACTORY_VERIFICATION,
+      waitForSuccess
     })
     // FIXME Also deploy the TUBProxy for verification purposes
     // const tubProxy = await singletonDeployer.deploy(
