@@ -27,6 +27,7 @@ export type ContractName =
   | 'SequenceMarketFactoryV2'
   | 'SequenceMarketV2'
   | 'SequenceMarketV1'
+  | 'BatchPayableHelper'
   | 'ERC20ItemsFactory'
   | 'ERC721ItemsFactory'
   | 'ERC1155ItemsFactory'

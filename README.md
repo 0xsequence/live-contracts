@@ -143,6 +143,7 @@ The following is a list of contracts that are deployed by this script.
 | SequenceMarketFactoryV2     | 0xBDC76d15eA28beB6AF2Cc69b4EFBb4Aa4FB77689 |
 | SequenceMarketV2            | 0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712 |
 | SequenceMarketV1            | 0xB537a160472183f2150d42EB1c3DD6684A55f74c |
+| BatchPayableHelper          | 0x6166c1952c54dEd6b070B4616797E61b6c48A117 |
 | ERC20ItemsFactory           | 0x1063cBEe6b3Cd69B49f1B922A0D402f484b39855 |
 | ERC721ItemsFactory          | 0x29BCF1043Ca4B2c95aB28082143587896D39D22D |
 | ERC1155ItemsFactory         | 0x7364fDEFe24385B2b3869504383c94cF083AcbD6 |

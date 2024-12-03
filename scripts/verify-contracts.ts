@@ -38,6 +38,7 @@ import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
 import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
 import type { ContractEntry, VerificationRequest } from './types'
+import { BATCHPAYABLEHELPER_VERIFICATION } from './factories/marketplace/BatchPayableHelper'
 
 export const verifyContracts = async (config: Config, walletContextAddrs: ContractEntry): Promise<string | null> => {
   const prompt = ora() as Ora & Logger
@@ -234,6 +235,10 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
         )
       })
     }
+    await verifyContract(walletContextAddrs.BatchPayableHelper, {
+      ...BATCHPAYABLEHELPER_VERIFICATION,
+      waitForSuccess
+    })
     prompt.succeed('Verified Market contracts\n')
 
     // Library contracts

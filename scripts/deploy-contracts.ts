@@ -40,6 +40,7 @@ import { verifyContracts } from './verify-contracts'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
 import { deployPaymentsSigner } from './wallets/SequencePaymentsSigner'
+import { BatchPayableHelper } from './factories/marketplace/BatchPayableHelper'
 
 const DEBUG = argv.includes('--debug')
 
@@ -344,6 +345,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       await marketV2DeployTx.wait()
     }
     prompt.log(`SequenceMarketV2 deployed at ${marketV2Address}\n`)
+    const batchPayableHelper = await singletonDeployer.deploy('BatchPayableHelper', BatchPayableHelper, 0, txParams)
     prompt.succeed('Deployed Market contracts\n')
 
     // Contracts library
@@ -435,6 +437,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       SequenceMarketFactoryV2: marketFactoryV2.address,
       SequenceMarketV2: marketV2Address,
       SequenceMarketV1: marketV1.address,
+      BatchPayableHelper: batchPayableHelper.address,
       ERC20ItemsFactory: erc20ItemsFactory.address,
       ERC721ItemsFactory: erc721ItemsFactory.address,
       ERC1155ItemsFactory: erc1155ItemsFactory.address,
