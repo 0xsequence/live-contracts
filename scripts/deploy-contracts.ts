@@ -67,11 +67,6 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const signer = new ethers.Wallet(config.deployerPk, provider)
     provider.getSigner = () => signer as unknown as ethers.providers.JsonRpcSigner
 
-    if ((await signer.getTransactionCount('pending')) !== (await signer.getTransactionCount())) {
-      prompt.fail('Signer has pending transactions, aborting')
-      return 'Signer has pending transactions'
-    }
-
     const txParams = {
       gasPrice: config.gasPrice ? BigNumber.from(config.gasPrice) : undefined, // Automated gas price
       // gasPrice: (await provider.getGasPrice()).mul(3).div(2), // 1.5x gas price
@@ -88,6 +83,11 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     prompt.info(`Gas limit (used): ${txParams.gasLimit ?? 'auto'}`)
     prompt.info(`Local Deployer Address: ${await signer.getAddress()}`)
     prompt.info(`Local Deployer Balance: ${await signer.getBalance()}`)
+
+    if ((await signer.getTransactionCount('pending')) !== (await signer.getTransactionCount())) {
+      prompt.fail('Signer has pending transactions, aborting')
+      return 'Signer has pending transactions'
+    }
 
     const universalDeployer = new deployers.UniversalDeployer(signer, prompt) //, undefined, BigNumber.from('35000000000000000'))
     const singletonDeployer = new deployers.SingletonDeployer(signer, prompt) //, undefined, BigNumber.from('30000000000000000'))
