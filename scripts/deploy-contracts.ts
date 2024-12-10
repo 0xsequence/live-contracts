@@ -67,6 +67,11 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const signer = new ethers.Wallet(config.deployerPk, provider)
     provider.getSigner = () => signer as unknown as ethers.providers.JsonRpcSigner
 
+    if ((await signer.getTransactionCount('pending')) !== (await signer.getTransactionCount())) {
+      prompt.fail('Signer has pending transactions, aborting')
+      return 'Signer has pending transactions'
+    }
+
     const txParams = {
       gasPrice: config.gasPrice ? BigNumber.from(config.gasPrice) : undefined, // Automated gas price
       // gasPrice: (await provider.getGasPrice()).mul(3).div(2), // 1.5x gas price
