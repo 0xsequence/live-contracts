@@ -3,7 +3,7 @@ pre-commit:
   commands:
     lint:
       glob: '*.{js,ts,jsx,tsx}'
-      run: yarn lint {staged_files}
+      run: yarn eslint -c .eslintrc.js {staged_files}
     format:
       glob: '*.{js,ts,jsx,tsx,md,json}'
-      run: yarn format {staged_files} && git add {staged_files}
+      run: yarn prettier --write {staged_files} && git add {staged_files}
