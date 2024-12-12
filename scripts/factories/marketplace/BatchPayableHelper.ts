@@ -1,25 +1,56 @@
 import { ContractFactory, type ethers } from 'ethers'
 import type { VerificationRequest } from 'scripts/types'
 
-// https://github.com/0xsequence/niftyswap/blob/26ed8e0142ce0458baab30adec7e96dd1587cdf0/src/contracts/BatchPayableHelper.sol
+// https://github.com/0xsequence/marketplace-contracts/blob/26ed8e0142ce0458baab30adec7e96dd1587cdf0/contracts/BatchPayableHelper.sol
 
 const abi = [
-  { type: 'receive', stateMutability: 'payable' },
   {
-    type: 'function',
-    name: 'acceptRequestBatch',
-    inputs: [
-      { name: 'market', type: 'address', internalType: 'contract ISequenceMarketFunctions' },
-      { name: 'requestIds', type: 'uint256[]', internalType: 'uint256[]' },
-      { name: 'quantities', type: 'uint256[]', internalType: 'uint256[]' },
-      { name: 'recipients', type: 'address[]', internalType: 'address[]' },
-      { name: 'additionalFees', type: 'uint256[]', internalType: 'uint256[]' },
-      { name: 'additionalFeeRecipients', type: 'address[]', internalType: 'address[]' }
-    ],
-    outputs: [],
-    stateMutability: 'payable'
+    inputs: [],
+    name: 'InvalidBatchRequest',
+    type: 'error'
   },
-  { type: 'error', name: 'InvalidBatchRequest', inputs: [] }
+  {
+    inputs: [
+      {
+        internalType: 'contract ISequenceMarketFunctions',
+        name: 'market',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256[]',
+        name: 'requestIds',
+        type: 'uint256[]'
+      },
+      {
+        internalType: 'uint256[]',
+        name: 'quantities',
+        type: 'uint256[]'
+      },
+      {
+        internalType: 'address[]',
+        name: 'recipients',
+        type: 'address[]'
+      },
+      {
+        internalType: 'uint256[]',
+        name: 'additionalFees',
+        type: 'uint256[]'
+      },
+      {
+        internalType: 'address[]',
+        name: 'additionalFeeRecipients',
+        type: 'address[]'
+      }
+    ],
+    name: 'acceptRequestBatch',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function'
+  },
+  {
+    stateMutability: 'payable',
+    type: 'receive'
+  }
 ]
 
 export class BatchPayableHelper extends ContractFactory {
@@ -33,8 +64,8 @@ export class BatchPayableHelper extends ContractFactory {
 }
 
 export const BATCHPAYABLEHELPER_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
-  contractToVerify: 'src/contracts/BatchPayableHelper.sol:BatchPayableHelper',
-  version: 'v0.8.22+commit.4fc1097e',
+  contractToVerify: 'contracts/BatchPayableHelper.sol:BatchPayableHelper',
+  version: 'v0.8.19+commit.7dd6d404',
   licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
@@ -68,7 +99,7 @@ export const BATCHPAYABLEHELPER_VERIFICATION: Omit<VerificationRequest, 'waitFor
         runs: 200
       },
       metadata: {
-        useLiteralContent: false,
+        useLiteralContent: true,
         bytecodeHash: 'ipfs',
         appendCBOR: true
       },
@@ -78,6 +109,7 @@ export const BATCHPAYABLEHELPER_VERIFICATION: Omit<VerificationRequest, 'waitFor
         }
       },
       evmVersion: 'paris',
+      viaIR: true,
       libraries: {}
     }
   }
