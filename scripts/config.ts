@@ -1,6 +1,7 @@
 import type { BigNumberish } from 'ethers'
 import { readFile } from 'node:fs/promises'
 import { SequenceEnvironment } from './types'
+import { config as dotenvConfig } from 'dotenv'
 
 export type Config = {
   networkName: string
@@ -19,12 +20,21 @@ export type Config = {
 }
 
 export const getConfigs = async (): Promise<Config[]> => {
+  dotenvConfig()
+
   const configs = JSON.parse(await readFile('./config.json', 'utf8'))
   if (!Array.isArray(configs)) throw new Error('Invalid config')
+
   for (const config of configs) {
     if (!config.networkName) throw new Error('Missing networkName')
     if (!config.rpcUrl) throw new Error('Missing rpcUrl')
+
+    if (process.env.DEPLOYER_PRIVATE_KEY) {
+      // Override deployerPk in config with env var
+      config.deployerPk = process.env.DEPLOYER_PRIVATE_KEY
+    }
     if (!config.deployerPk) throw new Error('Missing deployerPk')
+
     if (!config.paymentsSignerEnvs) {
       config.paymentsSignerEnvs = ['dev', 'next', 'prod'] // Default to all
     }

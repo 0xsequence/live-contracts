@@ -3,3 +3,4 @@ source*.json
 node_modules
 dist
 config.json
+.env
