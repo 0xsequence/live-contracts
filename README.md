@@ -211,3 +211,5 @@ The contracts have been deployed on the following chains.
 - [Root Network Sprout](https://www.therootnetwork.com/)
 - [Laos](https://laosnetwork.io/)
 - [Laos Sigma Testnet](https://laosnetwork.io/)
+- [Etherlink](https://etherlink.com/)
+- [Etherlink Testnet](https://etherlink.com/)
