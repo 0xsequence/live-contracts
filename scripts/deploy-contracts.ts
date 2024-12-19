@@ -36,6 +36,7 @@ import {
 } from './factories/v1'
 import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2, TrustFactory } from './factories/v2'
 import { WALLET_CREATION_CODE } from './factories/v2/FactoryV2'
+import { WalletProxyHook } from './factories/v2/hooks/WalletProxyHook'
 import type { ContractEntry, SequenceEnvironment } from './types'
 import { getArtifactFactory } from './utils'
 import { LoggingProvider } from './utils/LoggingProvider'
@@ -274,6 +275,14 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     prompt.succeed('Deployed V2 commons contracts\n')
 
+    let walletProxyHookAddress: string | undefined
+    if (config.immutableFactories) {
+      prompt.start('Deploying V2 hooks contracts\n')
+      // This hook is only relevant for immutable networks
+      walletProxyHookAddress = (await singletonDeployer.deploy('WalletProxyHook', WalletProxyHook, 0, txParams)).address
+      prompt.succeed('Deployed V2 hooks contracts\n')
+    }
+
     // Sequence development multisig
 
     prompt.start('Deploying Sequence development multisig\n')
@@ -448,6 +457,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       GuestModuleV2: walletContextAddrs.GuestModuleV2,
       SequenceUtilsV2: walletContextAddrs.SequenceUtilsV2,
       TrustFactory: trustFactory.address,
+      WalletProxyHook: walletProxyHookAddress,
       WalletFactoryV1: walletContextAddrs.WalletFactoryV1,
       MainModuleV1: walletContextAddrs.MainModuleV1,
       MainModuleUpgradableV1: walletContextAddrs.MainModuleUpgradableV1,

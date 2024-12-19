@@ -127,6 +127,7 @@ The following is a list of contracts that are deployed by this script.
 | GuestModuleV2                  | 0xfea230Ee243f88BC698dD8f1aE93F8301B6cdfaE |
 | SequenceUtilsV2                | 0xdbbFa3cB3B087B64F4ef5E3D20Dda2488AA244e6 |
 | TrustFactory                   | 0x4483FaA9dEEDd6D6FaCFee9c686f1E394A1280f9 |
+| WalletProxyHook                | 0x1f56dbAD5e8319F0DE9a323E24A31b5077dEB1a4 |
 | WalletFactoryV1                | 0xf9D09D634Fb818b05149329C1dcCFAeA53639d96 |
 | MainModuleV1                   | 0xd01F11855bCcb95f88D7A48492F66410d4637313 |
 | MainModuleUpgradableV1         | 0x7EFE6cE415956c5f80C6530cC6cc81b4808F6118 |
@@ -164,7 +165,7 @@ The following is a list of contracts that are deployed by this script.
 | SequencePaymentsSigner-prod    | 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F |
 | SequencePayments-prod          | 0x5afd8f6a09FfaD13c914b5977aF48b244279BFc7 |
 
-> [!NOTE] > `ERC721OperatorEnforcedFactory` and `ERC1155OperatorEnforcedFactory` are only deployed to Immutable's chains.
+> [!NOTE] > `ERC721OperatorEnforcedFactory`, `ERC1155OperatorEnforcedFactory` and `WalletProxyHook` are only deployed to Immutable's chains.
 
 ## Chains
 
