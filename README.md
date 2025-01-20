@@ -199,6 +199,7 @@ The contracts have been deployed on the following chains.
 - [Skale Nebula Gaming Hub Testnet](https://chainlist.org/chain/37084624)
 - [Skale Titan AI Hub Testnet](https://chainlist.org/chain/1020352220)
 - [Telos](https://www.telos.net/)
+- [Telos Testnet](https://www.telos.net/)
 - [XR Sepolia](https://xr-one.gitbook.io/xr)
 - [Immutable zkEVM](https://chainlist.org/chain/13371)
 - [Immutable zkEVM Testnet](https://chainlist.org/chain/13473)
@@ -214,3 +215,5 @@ The contracts have been deployed on the following chains.
 - [Laos Sigma Testnet](https://laosnetwork.io/)
 - [Etherlink](https://etherlink.com/)
 - [Etherlink Testnet](https://etherlink.com/)
+- [Moonbeam](https://moonbeam.network/)
+- [Moonbase Alpha](https://moonbeam.network/)
