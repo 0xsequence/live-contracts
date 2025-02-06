@@ -217,3 +217,4 @@ The contracts have been deployed on the following chains.
 - [Etherlink Testnet](https://etherlink.com/)
 - [Moonbeam](https://moonbeam.network/)
 - [Moonbase Alpha](https://moonbeam.network/)
+- [XR One](https://xrone.network/)
