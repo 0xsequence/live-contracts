@@ -164,6 +164,7 @@ The following is a list of contracts that are deployed by this script.
 | SequencePayments-next          | 0x7AaC049C94E60a71E1aeDA4E1390F6812685eA4f |
 | SequencePaymentsSigner-prod    | 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F |
 | SequencePayments-prod          | 0x5afd8f6a09FfaD13c914b5977aF48b244279BFc7 |
+| ERC1155LootboxFactory          | 0xF63A3Def9543Eb6c94F97568932d1709Fbe4Aba7 |
 
 > [!NOTE] > `ERC721OperatorEnforcedFactory`, `ERC1155OperatorEnforcedFactory` and `WalletProxyHook` are only deployed to Immutable's chains.
 
