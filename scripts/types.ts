@@ -45,5 +45,6 @@ export type ContractName =
   | `SequencePaymentsSigner-${SequenceEnvironment}`
   | `SequencePayments-${SequenceEnvironment}`
   | 'ERC1155LootboxFactory'
-
+  | 'Stage1Module'
+  | 'Guest'
 export type ContractEntry = Partial<Record<ContractName, string>>

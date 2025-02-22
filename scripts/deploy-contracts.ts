@@ -45,6 +45,8 @@ import { verifyContracts } from './verify-contracts'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
 import { deployPaymentsSigner } from './wallets/SequencePaymentsSigner'
+import { Stage1Module } from './factories/v3/Stage1Module'
+import { Guest } from './factories/v3/Guest'
 
 const DEBUG = argv.includes('--debug')
 
@@ -455,6 +457,12 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     )
     prompt.succeed('Deployed Library contracts\n')
 
+    // v3 contracts
+    prompt.start('Deploying v3 contracts\n')
+    const stage1module = await singletonDeployer.deploy('Stage1Module', Stage1Module, 0, txParams, v2WalletContext.factory)
+    const guest = await singletonDeployer.deploy('Guest', Guest, 0, txParams)
+    prompt.succeed('Deployed v3 contracts\n')
+
     // Output addresses
 
     prompt.start(`Writing deployment information to output_${config.networkName}.json\n`)
@@ -496,7 +504,9 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       ClawbackMetadata: clawbackMetadata.address,
       PaymentCombiner: paymentCombiner.address,
       PaymentsFactory: paymentsFactory.address,
-      ERC1155LootboxFactory: erc1155LootboxFactory.address
+      ERC1155LootboxFactory: erc1155LootboxFactory.address,
+      Guest: guest.address,
+      Stage1Module: stage1module.address
     }
     for (const { env, signerAddr, paymentsAddr } of paymentsDeployments) {
       contractEntries[`SequencePaymentsSigner-${env}`] = signerAddr
