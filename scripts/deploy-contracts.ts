@@ -453,7 +453,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       txParams,
       developerMultisig.address
     )
-    console.log(erc1155ItemsFactory.address)
+
     prompt.succeed('Deployed Library contracts\n')
 
     // Output addresses

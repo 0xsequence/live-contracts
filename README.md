@@ -152,7 +152,7 @@ The following is a list of contracts that are deployed by this script.
 | ERC1155SaleFactory             | 0x64f1019bDC2F79688c5885Bc2bc4B57f7e88547c |
 | ERC721SoulboundFactory         | 0x2fBFF6fd3C978ab1bBd21b878262c5289a14b6c1 |
 | ERC1155SoulboundFactory        | 0xaB069C041FaCAB8f4D747D91EEda5705b5caAB76 |
-| ERC1155LootboxFactory          | 0xA85aAc2163fD8F57Eca8DfF1af33d1d85Ad68586 |
+| ERC1155PackFactory             | 0xA85aAc2163fD8F57Eca8DfF1af33d1d85Ad68586 |
 | ERC721OperatorEnforcedFactory  | 0x5fD880b092bD285873b16335a454D11c062a4689 |
 | ERC1155OperatorEnforcedFactory | 0xc89f63389ef3B53D07649D52D47F9E4afcAbb1fB |
 | Clawback                       | 0x6F9a2c3E11011b894fae691d5338748f8048467d |
@@ -170,52 +170,4 @@ The following is a list of contracts that are deployed by this script.
 
 ## Chains
 
-The contracts have been deployed on the following chains.
-
-- [Ethereum Mainnet](https://chainlist.org/chain/1)
-- [Sepolia](https://chainlist.org/chain/11155111)
-- [Polygon](https://chainlist.org/chain/137)
-- [Polygon ZK](https://chainlist.org/chain/1101)
-- [Polygon Amoy](https://chainlist.org/chain/80002)
-- [Optimism](https://chainlist.org/chain/10)
-- [Optimism Sepolia](https://chainlist.org/chain/11155420)
-- [Base](https://chainlist.org/chain/8453)
-- [Base Sepolia](https://chainlist.org/chain/84532)
-- [Arbitrum One](https://chainlist.org/chain/42161)
-- [Arbitrum Nova](https://chainlist.org/chain/42170)
-- [Arbitrum Sepolia](https://chainlist.org/chain/421614)
-- [Avalanche Fuji](https://chainlist.org/chain/43113)
-- [Avalanche](https://chainlist.org/chain/43114)
-- [Binance Smart Chain](https://chainlist.org/chain/56)
-- [Binance Smart Chain Testnet](https://chainlist.org/chain/97)
-- [Gnosis](https://chainlist.org/chain/100)
-- [Astar zkEVM](https://chainlist.org/chain/3776)
-- [Astar zKyoto](https://chainlist.org/chain/6038361)
-- [Xai](https://chainlist.org/chain/660279)
-- [Xai Sepolia](https://chainlist.org/chain/37714555429)
-- [Home Verse](https://chainlist.org/chain/19011)
-- [Home Verse Testnet](https://chainlist.org/chain/40875)
-- [Skale Calypso Hub Testnet](https://chainlist.org/chain/974399131)
-- [Skale Europa Liquidity Hub Testnet](https://chainlist.org/chain/1444673419)
-- [Skale Nebula Gaming Hub Testnet](https://chainlist.org/chain/37084624)
-- [Skale Titan AI Hub Testnet](https://chainlist.org/chain/1020352220)
-- [Telos](https://www.telos.net/)
-- [Telos Testnet](https://www.telos.net/)
-- [XR Sepolia](https://xr-one.gitbook.io/xr)
-- [Immutable zkEVM](https://chainlist.org/chain/13371)
-- [Immutable zkEVM Testnet](https://chainlist.org/chain/13473)
-- [ApeChain](https://ape-docs.vercel.app)
-- [ApeChain Testnet](https://ape-docs.vercel.app)
-- [B3 Sepolia](https://b3.fun)
-- [Soneium](https://soneium.org)
-- [Soneium Minato Testnet](https://soneium.org)
-- [Root Network](https://www.therootnetwork.com/)
-- [Root Network Porcini](https://www.therootnetwork.com/)
-- [Root Network Sprout](https://www.therootnetwork.com/)
-- [Laos](https://laosnetwork.io/)
-- [Laos Sigma Testnet](https://laosnetwork.io/)
-- [Etherlink](https://etherlink.com/)
-- [Etherlink Testnet](https://etherlink.com/)
-- [Moonbeam](https://moonbeam.network/)
-- [Moonbase Alpha](https://moonbeam.network/)
-- [XR One](https://xrone.network/)
+For a full list of supported chains, see the [Sequence Status Dashboard](https://status.sequence.info/).

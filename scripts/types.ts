@@ -36,6 +36,7 @@ export type ContractName =
   | 'ERC1155SaleFactory'
   | 'ERC721SoulboundFactory'
   | 'ERC1155SoulboundFactory'
+  | 'ERC1155PackFactory'
   | 'ERC721OperatorEnforcedFactory'
   | 'ERC1155OperatorEnforcedFactory'
   | 'Clawback'
@@ -44,6 +45,5 @@ export type ContractName =
   | 'PaymentsFactory'
   | `SequencePaymentsSigner-${SequenceEnvironment}`
   | `SequencePayments-${SequenceEnvironment}`
-  | 'ERC1155PackFactory'
 
 export type ContractEntry = Partial<Record<ContractName, string>>

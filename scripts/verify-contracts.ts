@@ -470,7 +470,7 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
         })
       }
     }
-
+    
     prompt.succeed('Verified Library contracts\n')
   } catch (error: unknown) {
     prompt.fail(`Error verifying contracts on ${config.networkName}: ${error}`)
