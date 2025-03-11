@@ -405,6 +405,18 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
         waitForSuccess
       })
     }
+    if (provider && walletContextAddrs.ERC1155PackFactory) {
+      const erc1155PackFactory = new ERC1155PackFactory()
+        .attach(walletContextAddrs.ERC1155PackFactory)
+        .connect(provider)
+      const erc1155PackBeacon = await erc1155PackFactory.beacon()
+      const erc1155PackImplementation = await beacon.attach(erc1155PackBeacon).connect(provider).implementation()
+      await verifyContract(erc1155PackImplementation, {
+        ...ERC1155PACKFACTORY_VERIFICATION,
+        contractToVerify: 'src/tokens/ERC1155/presets/pack/ERC1155Pack.sol:ERC1155Pack',
+        waitForSuccess
+      })
+    }
     if (provider && walletContextAddrs.ERC721OperatorEnforcedFactory) {
       const erc721OperatorEnforcedFactory = new ERC721OperatorEnforcedFactory()
         .attach(walletContextAddrs.ERC721OperatorEnforcedFactory)
@@ -450,25 +462,6 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
         ...CLAWBACKMETADATA_VERIFICATION,
         waitForSuccess
       })
-    }
-    // Pack
-    if (provider && walletContextAddrs.ERC1155PackFactory) {
-      const erc1155PackFactory = new ERC1155PackFactory().attach(walletContextAddrs.ERC1155PackFactory).connect(provider)
-      const erc1155PackBeacon = await erc1155PackFactory.beacon()
-      const erc1155PackImplementation = await beacon.attach(erc1155PackBeacon).connect(provider).implementation()
-      await verifyContract(erc1155PackImplementation, {
-        ...ERC1155PACKFACTORY_VERIFICATION,
-        contractToVerify: 'src/tokens/ERC1155/presets/pack/ERC1155Pack.sol:ERC1155Pack',
-        waitForSuccess
-      })
-      if (erc1155PackImplementation) {
-        // Also verify the proxy
-        await verifyContract(erc1155PackBeacon, {
-          ...UPGRADEABLEBEACON_VERIFICATION,
-          waitForSuccess,
-          constructorArgs: defaultAbiCoder.encode(['address'], [erc1155PackImplementation])
-        })
-      }
     }
     
     prompt.succeed('Verified Library contracts\n')
