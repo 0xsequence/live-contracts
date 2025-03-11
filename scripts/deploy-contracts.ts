@@ -18,7 +18,7 @@ import { ClawbackMetadata } from './factories/token_library/ClawbackMetadata'
 import { ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
 import { ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
 import { ERC1155SoulboundFactory } from './factories/token_library/ERC1155SoulboundFactory'
-import { ERC1155LootboxFactory } from './factories/token_library/ERC1155LootboxFactory'
+import { ERC1155PackFactory } from './factories/token_library/ERC1155PackFactory'
 import { ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
 import { ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
 import { ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
@@ -446,13 +446,14 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       developerMultisig.address,
       clawbackMetadata.address
     )
-    const erc1155LootboxFactory = await singletonDeployer.deploy(
-      'ERC1155LootboxFactory',
-      ERC1155LootboxFactory,
+    const erc1155PackFactory = await singletonDeployer.deploy(
+      'ERC1155PackFactory',
+      ERC1155PackFactory,
       0,
       txParams,
       developerMultisig.address
     )
+    console.log(erc1155ItemsFactory.address)
     prompt.succeed('Deployed Library contracts\n')
 
     // Output addresses
@@ -496,7 +497,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       ClawbackMetadata: clawbackMetadata.address,
       PaymentCombiner: paymentCombiner.address,
       PaymentsFactory: paymentsFactory.address,
-      ERC1155LootboxFactory: erc1155LootboxFactory.address
+      ERC1155PackFactory: erc1155PackFactory.address
     }
     for (const { env, signerAddr, paymentsAddr } of paymentsDeployments) {
       contractEntries[`SequencePaymentsSigner-${env}`] = signerAddr
