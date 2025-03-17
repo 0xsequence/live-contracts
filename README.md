@@ -152,7 +152,7 @@ The following is a list of contracts that are deployed by this script.
 | ERC1155SaleFactory             | 0x64f1019bDC2F79688c5885Bc2bc4B57f7e88547c |
 | ERC721SoulboundFactory         | 0x2fBFF6fd3C978ab1bBd21b878262c5289a14b6c1 |
 | ERC1155SoulboundFactory        | 0xaB069C041FaCAB8f4D747D91EEda5705b5caAB76 |
-| ERC1155PackFactory             | 0xA85aAc2163fD8F57Eca8DfF1af33d1d85Ad68586 |
+| ERC1155PackFactory             | 0x305197A57961CB16Df8D7F829Baf6aaF4bfD0d48 |
 | ERC721OperatorEnforcedFactory  | 0x5fD880b092bD285873b16335a454D11c062a4689 |
 | ERC1155OperatorEnforcedFactory | 0xc89f63389ef3B53D07649D52D47F9E4afcAbb1fB |
 | Clawback                       | 0x6F9a2c3E11011b894fae691d5338748f8048467d |

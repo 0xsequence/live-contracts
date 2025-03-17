@@ -406,9 +406,7 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
       })
     }
     if (provider && walletContextAddrs.ERC1155PackFactory) {
-      const erc1155PackFactory = new ERC1155PackFactory()
-        .attach(walletContextAddrs.ERC1155PackFactory)
-        .connect(provider)
+      const erc1155PackFactory = new ERC1155PackFactory().attach(walletContextAddrs.ERC1155PackFactory).connect(provider)
       const erc1155PackBeacon = await erc1155PackFactory.beacon()
       const erc1155PackImplementation = await beacon.attach(erc1155PackBeacon).connect(provider).implementation()
       await verifyContract(erc1155PackImplementation, {
@@ -463,7 +461,7 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
         waitForSuccess
       })
     }
-    
+
     prompt.succeed('Verified Library contracts\n')
   } catch (error: unknown) {
     prompt.fail(`Error verifying contracts on ${config.networkName}: ${error}`)
