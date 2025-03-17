@@ -38,7 +38,7 @@ async function downloadJsonFromApi(
 //FIXME Change these values to match your contract
 const etherscanApiUrl = 'https://api-sepolia.arbiscan.io/api'
 const etherscanApiKey = 'XXX'
-const addr = '0x9C178866cedef70955Ae9819C8Da9c892F8B3A70'
+const addr = '0x4240E4605cA550ea682E5ef4d1A13A132bc7fB4D'
 
 downloadJsonFromApi(etherscanApiUrl, etherscanApiKey, addr, 'getsourcecode', 'source_output.json')
 downloadJsonFromApi(etherscanApiUrl, etherscanApiKey, addr, 'getabi', 'source_abi.json')
