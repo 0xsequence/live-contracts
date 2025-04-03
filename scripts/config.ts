@@ -29,6 +29,11 @@ export const getConfigs = async (): Promise<Config[]> => {
     if (!config.networkName) throw new Error('Missing networkName')
     if (!config.rpcUrl) throw new Error('Missing rpcUrl')
 
+    if (!config.guardPatchSecret && process.env.GUARD_PATCH_SECRET) {
+      // Override guardPatchSecret in config with env var
+      config.guardPatchSecret = process.env.GUARD_PATCH_SECRET
+    }
+
     if (process.env.DEPLOYER_PRIVATE_KEY) {
       // Override deployerPk in config with env var
       config.deployerPk = process.env.DEPLOYER_PRIVATE_KEY
