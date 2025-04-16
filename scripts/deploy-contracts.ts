@@ -93,6 +93,16 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       return 'Signer has pending transactions'
     }
 
+    // Run a test deployment to check if the deployers will work without bricking them...
+    try {
+      const testDeployer = new deployers.TestDeployer(signer, prompt)
+      await testDeployer.deploy('WalletFactory', FactoryV1, 0, txParams)
+    } catch (e) {
+      prompt.fail('Test deployment failed, aborting')
+      console.error(e)
+      return 'Test deployment failed'
+    }
+
     const universalDeployer = new deployers.UniversalDeployer(signer, prompt) //, undefined, BigNumber.from('35000000000000000'))
     const singletonDeployer = new deployers.SingletonDeployer(signer, prompt) //, undefined, BigNumber.from('30000000000000000'))
 
