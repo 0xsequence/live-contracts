@@ -148,8 +148,8 @@ The following is a list of contracts that are deployed by this script.
 | ERC20ItemsFactory              | 0x1063cBEe6b3Cd69B49f1B922A0D402f484b39855 |
 | ERC721ItemsFactory             | 0x29BCF1043Ca4B2c95aB28082143587896D39D22D |
 | ERC1155ItemsFactory            | 0x7364fDEFe24385B2b3869504383c94cF083AcbD6 |
-| ERC721SaleFactory              | 0x4c4192D5b43B723eDbfce2434fA7b98402034513 |
-| ERC1155SaleFactory             | 0x64f1019bDC2F79688c5885Bc2bc4B57f7e88547c |
+| ERC721SaleFactory              | 0xc412172a99e657609f5f7D4b9Bea37684B8eEE4E |
+| ERC1155SaleFactory             | 0x87Aed5A2eAd1d1528EddCd30790441828e21B614 |
 | ERC721SoulboundFactory         | 0x2fBFF6fd3C978ab1bBd21b878262c5289a14b6c1 |
 | ERC1155SoulboundFactory        | 0xaB069C041FaCAB8f4D747D91EEda5705b5caAB76 |
 | ERC1155PackFactory             | 0x305197A57961CB16Df8D7F829Baf6aaF4bfD0d48 |
