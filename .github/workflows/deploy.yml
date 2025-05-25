@@ -27,28 +27,42 @@ jobs:
           - name: Arbitrum
             chain: arbitrum
             rpcUrl: https://nodes.sequence.app/arbitrum
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        
-    - name: Install dependencies
-      run: yarn install
+      - uses: actions/checkout@v3
 
-    - name: Set env vars
-      run: |
-        echo "DEFAULT_TIMEOUT_MS=1000000" >> $GITHUB_ENV
-        echo "DEPLOYER_PRIVATE_KEY=0x0000000000000000000000000000000000000000000000000000000000000000" >> $GITHUB_ENV
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Write config
-      run: |
-        echo '[{"networkName": "${{ matrix.name }}", "rpcUrl": "${{ matrix.rpcUrl }}"}]' > config.json
-        
-    - name: Deploy to ${{ matrix.name }}
-      run: |
-        echo "Deploying to ${{ matrix.name }}..."
-        yarn deploy ${{ matrix.name }}
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Set env vars
+        run: |
+          echo "DEFAULT_TIMEOUT_MS=1000000" >> $GITHUB_ENV
+          echo "DEPLOYER_PRIVATE_KEY=0x0000000000000000000000000000000000000000000000000000000000000000" >> $GITHUB_ENV
+
+      - name: Write config
+        run: |
+          echo '[{"networkName": "${{ matrix.name }}", "rpcUrl": "${{ matrix.rpcUrl }}"}]' > config.json
+
+      - name: Deploy to ${{ matrix.name }}
+        id: deploy
+        run: |
+          echo "Deploying to ${{ matrix.name }}..."
+          output=$(yarn deploy ${{ matrix.name }})
+          echo "output<<EOF" >> $GITHUB_OUTPUT
+          echo "$output" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Report success
+        run: |
+          if echo "${{ steps.deploy.outputs.output }}" | grep -q "- [X] ${{ matrix.name }}"; then
+            echo "Success: true"
+            exit 0
+          else
+            echo "Success: false"
+            exit 1
+          fi
