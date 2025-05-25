@@ -24,7 +24,7 @@ jobs:
           - name: Telos
             chain: telos
           - name: BNB Smart Chain
-            chain: bnb
+            chain: bsc
           - name: Gnosis Chain
             chain: gnosis
           - name: Polygon
@@ -67,7 +67,7 @@ jobs:
           - name: Telos Testnet
             chain: telos-testnet
           - name: BNB Smart Chain Testnet
-            chain: bnb-testnet
+            chain: bsc-testnet
           - name: Moonbase Alpha
             chain: moonbase-alpha
           - name: Soneium Minato (Testnet)
