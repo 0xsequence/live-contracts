@@ -42,7 +42,7 @@ jobs:
       - name: Set env vars
         run: |
           echo "DEFAULT_TIMEOUT_MS=1000000" >> $GITHUB_ENV
-          echo "DEPLOYER_PRIVATE_KEY=0x0000000000000000000000000000000000000000000000000000000000000000" >> $GITHUB_ENV
+          echo "DEPLOYER_PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80" >> $GITHUB_ENV
 
       - name: Write config
         run: |
