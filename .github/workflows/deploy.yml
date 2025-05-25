@@ -20,103 +20,98 @@ jobs:
         include:
           # Mainnets
           - name: Optimism
-            rpcUrl: https://nodes.sequence.app/optimism
+            chain: optimism
           - name: Telos
-            rpcUrl: https://nodes.sequence.app/telos
+            chain: telos
           - name: BNB Smart Chain
-            rpcUrl: https://nodes.sequence.app/bnb
+            chain: bnb
           - name: Gnosis Chain
-            rpcUrl: https://nodes.sequence.app/gnosis
+            chain: gnosis
           - name: Polygon
-            rpcUrl: https://nodes.sequence.app/polygon
+            chain: polygon
           - name: Polygon zkEVM
-            rpcUrl: https://nodes.sequence.app/polygon-zkevm
+            chain: polygon-zkevm
           - name: Moonbeam
-            rpcUrl: https://nodes.sequence.app/moonbeam
+            chain: moonbeam
           - name: Soneium
-            rpcUrl: https://nodes.sequence.app/soneium
+            chain: soneium
           - name: LAOS
-            rpcUrl: https://nodes.sequence.app/laos
+            chain: laos
           - name: The Root Network
-            rpcUrl: https://nodes.sequence.app/rootnet
+            chain: rootnet
           - name: B3
-            rpcUrl: https://nodes.sequence.app/b3
+            chain: b3
           - name: Base (Coinbase)
-            rpcUrl: https://nodes.sequence.app/base
+            chain: base
           - name: Immutable zkEVM
-            rpcUrl: https://nodes.sequence.app/immutable-zkevm
+            chain: immutable-zkevm
           - name: Oasys Homeverse
-            rpcUrl: https://nodes.sequence.app/homeverse
+            chain: homeverse
           - name: APE Chain
-            rpcUrl: https://nodes.sequence.app/apechain
+            chain: apechain
           - name: Arbitrum One
-            rpcUrl: https://nodes.sequence.app/arbitrum
+            chain: arbitrum
           - name: Arbitrum Nova
-            rpcUrl: https://nodes.sequence.app/arbitrum-nova
+            chain: arbitrum-nova
           - name: Etherlink
-            rpcUrl: https://nodes.sequence.app/etherlink
+            chain: etherlink
           - name: Avalanche
-            rpcUrl: https://nodes.sequence.app/avalanche
+            chain: avalanche
           - name: Blast
-            rpcUrl: https://nodes.sequence.app/blast
+            chain: blast
           - name: Xai
-            rpcUrl: https://nodes.sequence.app/xai
+            chain: xai
           - name: SKALE Nebula Gaming Hub
-            rpcUrl: https://nodes.sequence.app/skale-nebula
+            chain: skale-nebula
           # Testnets
           - name: Telos Testnet
-            rpcUrl: https://nodes.sequence.app/telos-testnet
+            chain: telos-testnet
           - name: BNB Smart Chain Testnet
-            rpcUrl: https://nodes.sequence.app/bnb-testnet
+            chain: bnb-testnet
           - name: Moonbase Alpha
-            rpcUrl: https://nodes.sequence.app/moonbase-alpha
+            chain: moonbase-alpha
           - name: Soneium Minato (Testnet)
-            rpcUrl: https://nodes.sequence.app/soneium-minato
+            chain: soneium-minato
           - name: B3 Sepolia
-            rpcUrl: https://nodes.sequence.app/b3-sepolia
+            chain: b3-sepolia
           - name: The Root Network Porcini Testnet
-            rpcUrl: https://nodes.sequence.app/rootnet-porcini
+            chain: rootnet-porcini
           - name: Monad Testnet
-            rpcUrl: https://nodes.sequence.app/monad-testnet
+            chain: monad-testnet
           - name: Immutable zkEVM Testnet
-            rpcUrl: https://nodes.sequence.app/immutable-zkevm-testnet
+            chain: immutable-zkevm-testnet
           - name: APE Chain Testnet
-            rpcUrl: https://nodes.sequence.app/apechain-testnet
+            chain: apechain-testnet
           - name: Oasys Homeverse Testnet
-            rpcUrl: https://nodes.sequence.app/homeverse-testnet
+            chain: homeverse-testnet
           - name: Avalanche Testnet
-            rpcUrl: https://nodes.sequence.app/avalanche-testnet
+            chain: avalanche-testnet
           - name: Somnia Testnet
-            rpcUrl: https://nodes.sequence.app/somnia-testnet
+            chain: somnia-testnet
           - name: Frequency Testnet
-            rpcUrl: https://nodes.sequence.app/frequency-testnet
+            chain: frequency-testnet
           - name: LAOS Sigma Testnet
-            rpcUrl: https://nodes.sequence.app/laos-sigma-testnet
+            chain: laos-sigma-testnet
           - name: Polygon Amoy
-            rpcUrl: https://nodes.sequence.app/amoy
+            chain: amoy
           - name: Base Sepolia
-            rpcUrl: https://nodes.sequence.app/base-sepolia
+            chain: base-sepolia
           - name: Etherlink Testnet
-            rpcUrl: https://nodes.sequence.app/etherlink-testnet
+            chain: etherlink-testnet
           - name: Arbitrum Sepolia
-            rpcUrl: https://nodes.sequence.app/arbitrum-sepolia
+            chain: arbitrum-sepolia
           - name: Sepolia
-            rpcUrl: https://nodes.sequence.app/sepolia
+            chain: sepolia
           - name: Optimism Sepolia
-            rpcUrl: https://nodes.sequence.app/optimism-sepolia
+            chain: optimism-sepolia
           - name: TOY (Testnet)
-            rpcUrl: https://nodes.sequence.app/toy-testnet
+            chain: toy-testnet
           - name: SKALE Nebula Gaming Hub Testnet
-            rpcUrl: https://nodes.sequence.app/skale-nebula-testnet
+            chain: skale-nebula-testnet
           - name: Blast Sepolia
-            rpcUrl: https://nodes.sequence.app/blast-sepolia
+            chain: blast-sepolia
           - name: XAI Sepolia
-            rpcUrl: https://nodes.sequence.app/xai-sepolia
-          # Incomplete Support
-          - name: XR1
-            rpcUrl: https://xr1.calderachain.xyz/http
-          - name: XR Sepolia
-            rpcUrl: https://xr-sepolia-testnet.rpc.caldera.xyz/http
+            chain: xai-sepolia
 
     steps:
       - uses: actions/checkout@v3
@@ -136,16 +131,16 @@ jobs:
 
       - name: Write config
         run: |
-          echo '[{"networkName": "${{ matrix.name }}", "rpcUrl": "${{ matrix.rpcUrl }}"}]' > config.json
+          echo '[{"networkName": "${{ matrix.chain }}", "rpcUrl": "https://nodes.sequence.app/${{ matrix.chain }}"}]' > config.json
 
       - name: Deploy to ${{ matrix.name }}
         run: |
           echo "Deploying to ${{ matrix.name }}..."
-          yarn deploy ${{ matrix.name }}
+          yarn deploy ${{ matrix.chain }}
 
       - name: Report success
         run: |
-          output_file="output_${{ matrix.name }}.json"
+          output_file="output_${{ matrix.chain }}.json"
           if [ -f "$output_file" ]; then
             echo "Success: true"
             echo "Output file contents:"
