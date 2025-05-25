@@ -14,6 +14,7 @@ export type Config = {
   blockscoutUrl?: string
   gasLimit?: BigNumberish
   gasPrice?: BigNumberish
+  timeoutMs?: number
   skipWalletContext?: boolean
   skip?: boolean // Don't deploy
   immutableFactories?: boolean
@@ -43,6 +44,10 @@ export const getConfigs = async (): Promise<Config[]> => {
     if (!config.paymentsSignerEnvs) {
       config.paymentsSignerEnvs = ['dev', 'next', 'prod'] // Default to all
     }
+
+    if (!config.timeoutMs && process.env.DEFAULT_TIMEOUT_MS) {
+      config.timeoutMs = parseInt(process.env.DEFAULT_TIMEOUT_MS, 10)
+    }
   }
   return configs
 }
@@ -65,9 +70,27 @@ export const perConfig = async <T, Args>(
   console.log(`Using ${configs.length} networks`)
 
   return await Promise.all(
-    configs.map(async config => ({
-      network: config.networkName,
-      result: await fn(config, args)
-    }))
+    configs.map(async config => {
+      if (!config.timeoutMs) {
+        // No timeout configured, just run the function
+        const result = await fn(config, args)
+        return {
+          network: config.networkName,
+          result
+        }
+      }
+
+      // Timeout is configured, use Promise.race
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => {
+          reject(new Error(`Operation timed out after ${config.timeoutMs}ms for network ${config.networkName}`))
+        }, config.timeoutMs)
+      })
+      const result = await Promise.race([fn(config, args), timeoutPromise])
+      return {
+        network: config.networkName,
+        result
+      }
+    })
   )
 }
