@@ -49,20 +49,20 @@ jobs:
           echo '[{"networkName": "${{ matrix.name }}", "rpcUrl": "${{ matrix.rpcUrl }}"}]' > config.json
 
       - name: Deploy to ${{ matrix.name }}
-        id: deploy
         run: |
           echo "Deploying to ${{ matrix.name }}..."
-          output=$(yarn deploy ${{ matrix.name }})
-          echo "output<<EOF" >> $GITHUB_OUTPUT
-          echo "$output" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          yarn deploy ${{ matrix.name }}
 
       - name: Report success
         run: |
-          if echo "${{ steps.deploy.outputs.output }}" | grep -q "- [X] ${{ matrix.name }}"; then
+          output_file="output_${{ matrix.name }}.json"
+          if [ -f "$output_file" ]; then
             echo "Success: true"
+            echo "Output file contents:"
+            cat "$output_file"
             exit 0
           else
             echo "Success: false"
+            echo "Output file $output_file not found"
             exit 1
           fi
