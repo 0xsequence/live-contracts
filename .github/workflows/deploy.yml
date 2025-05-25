@@ -1,0 +1,54 @@
+name: Deploy Check
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Polygon
+            chain: polygon
+            rpcUrl: https://nodes.sequence.app/polygon
+          - name: Base
+            chain: base
+            rpcUrl: https://nodes.sequence.app/base
+          - name: Arbitrum
+            chain: arbitrum
+            rpcUrl: https://nodes.sequence.app/arbitrum
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Set env vars
+      run: |
+        echo "DEFAULT_TIMEOUT_MS=1000000" >> $GITHUB_ENV
+        echo "DEPLOYER_PRIVATE_KEY=0x0000000000000000000000000000000000000000000000000000000000000000" >> $GITHUB_ENV
+
+    - name: Write config
+      run: |
+        echo '[{"networkName": "${{ matrix.name }}", "rpcUrl": "${{ matrix.rpcUrl }}"}]' > config.json
+        
+    - name: Deploy to ${{ matrix.name }}
+      run: |
+        echo "Deploying to ${{ matrix.name }}..."
+        yarn deploy ${{ matrix.name }}
