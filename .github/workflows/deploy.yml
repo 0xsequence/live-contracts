@@ -86,8 +86,8 @@ jobs:
             chain: avalanche-testnet
           - name: Somnia Testnet
             chain: somnia-testnet
-          - name: Frequency Testnet
-            chain: frequency-testnet
+          - name: Incentiv Testnet
+            chain: incentiv-testnet
           - name: LAOS Sigma Testnet
             chain: laos-sigma-testnet
           - name: Polygon Amoy
