@@ -88,8 +88,10 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     prompt.info(`Local Deployer Address: ${await signer.getAddress()}`)
     prompt.info(`Local Deployer Balance: ${await signer.getBalance()}`)
 
-    if ((await signer.getTransactionCount('pending')) !== (await signer.getTransactionCount())) {
-      prompt.fail('Signer has pending transactions, aborting')
+    const pendingNonce = await signer.getTransactionCount('pending')
+    const nonce = await signer.getTransactionCount()
+    if (nonce !== pendingNonce) {
+      prompt.fail(`Signer has pending transactions, ${nonce} !== ${pendingNonce}, aborting`)
       return 'Signer has pending transactions'
     }
 

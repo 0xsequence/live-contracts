@@ -4,6 +4,10 @@ This repository keeps a running record of deployed Sequence contracts and contai
 
 This can be used to deploy the Sequence stack on a new chain.
 
+Our CI checks that all contracts are correctly deployed on [Sequence's supported chains](https://status.sequence.info).
+
+[![Deploy CI](https://github.com/0xsequence/live-contracts/actions/workflows/deploy.yml/badge.svg)](https://github.com/0xsequence/live-contracts/actions/workflows/deploy.yml)
+
 ## Usage
 
 ### Set Up
