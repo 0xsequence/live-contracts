@@ -61,13 +61,23 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
   prompt.error = prompt.fail
   prompt.prefixText = config.networkName
 
+  let provider: JsonRpcProvider | undefined
+  let etherscanApiUrl: string | undefined
+  if (config.rpcUrl) {
+    provider = new JsonRpcProvider(config.rpcUrl)
+    if (config.etherscanApiKey) {
+      const network = await provider.getNetwork()
+      etherscanApiUrl = deploymentVerifiers.EtherscanVerifier.getEtherscanApiFromChainId(network.chainId)
+    }
+  }
+
   prompt.info(`Network Name:           ${config.networkName}`)
   prompt.info(`Blockscout:             ${config.blockscoutUrl ?? 'N/A'}`)
-  prompt.info(`Etherscan:              ${config.etherscanApiUrl ?? 'N/A'}`)
+  prompt.info(`Etherscan:              ${etherscanApiUrl ?? 'N/A'}`)
 
   // Verify contracts
 
-  if ((!config.etherscanApiUrl || !config.etherscanApiKey) && !config.blockscoutUrl) {
+  if (!config.etherscanApiKey && !config.blockscoutUrl) {
     prompt.warn('Skipping contract verification.\n')
     prompt.stop()
     // Exit early
@@ -75,8 +85,8 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
   }
 
   const verifiers: (deploymentVerifiers.EtherscanVerifier | deploymentVerifiers.BlockscoutVerifier)[] = []
-  if (config.etherscanApiKey && config.etherscanApiUrl) {
-    verifiers.push(new deploymentVerifiers.EtherscanVerifier(config.etherscanApiKey, config.etherscanApiUrl, prompt))
+  if (config.etherscanApiKey && etherscanApiUrl) {
+    verifiers.push(new deploymentVerifiers.EtherscanVerifier(config.etherscanApiKey, etherscanApiUrl, prompt))
   }
   if (config.blockscoutUrl) {
     verifiers.push(new deploymentVerifiers.BlockscoutVerifier(config.blockscoutUrl, prompt))
@@ -88,11 +98,6 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
     }
     // Run these simultaneously
     await Promise.all(verifiers.map(verifier => verifier.verifyContract(address, verification)))
-  }
-
-  let provider: JsonRpcProvider | undefined
-  if (config.rpcUrl) {
-    provider = new JsonRpcProvider(config.rpcUrl)
   }
 
   const waitForSuccess = true // One at a time

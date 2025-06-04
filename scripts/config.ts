@@ -9,7 +9,6 @@ export type Config = {
   deployerPk: string
   guardPatchSecret?: string
   paymentsSignerEnvs: SequenceEnvironment[]
-  etherscanApiUrl?: string
   etherscanApiKey?: string
   blockscoutUrl?: string
   gasLimit?: BigNumberish
@@ -30,13 +29,16 @@ export const getConfigs = async (): Promise<Config[]> => {
     if (!config.networkName) throw new Error('Missing networkName')
     if (!config.rpcUrl) throw new Error('Missing rpcUrl')
 
+    // Set using env vars if not set in config
     if (!config.guardPatchSecret && process.env.GUARD_PATCH_SECRET) {
-      // Override guardPatchSecret in config with env var
       config.guardPatchSecret = process.env.GUARD_PATCH_SECRET
     }
+    if (config.etherscanApiKey === undefined && process.env.ETHERSCAN_API_KEY) {
+      config.etherscanApiKey = process.env.ETHERSCAN_API_KEY
+    }
 
+    // Override config with env var
     if (process.env.DEPLOYER_PRIVATE_KEY) {
-      // Override deployerPk in config with env var
       config.deployerPk = process.env.DEPLOYER_PRIVATE_KEY
     }
     if (!config.deployerPk) throw new Error('Missing deployerPk')
