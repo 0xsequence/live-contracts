@@ -49,6 +49,7 @@ import { Stage1Module } from './factories/v3/Stage1Module'
 import { Guest } from './factories/v3/Guest'
 import { FactoryV3 } from './factories/v3/Factory'
 import { Passkeys } from './factories/v3/Passkeys'
+import { Recovery } from './factories/v3/Recovery'
 
 const DEBUG = argv.includes('--debug')
 
@@ -465,6 +466,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const v3Stage1module = await singletonDeployer.deploy('Stage1Module', Stage1Module, 0, txParams, v3Factory.address)
     const v3Guest = await singletonDeployer.deploy('Guest', Guest, 0, txParams)
     const v3Passkeys = await singletonDeployer.deploy('Passkeys', Passkeys, 0, txParams)
+    const v3Recovery = await singletonDeployer.deploy('Recovery', Recovery, 0, txParams)
     prompt.succeed('Deployed v3 contracts\n')
 
     // Output addresses
@@ -512,7 +514,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       GuestV3: v3Guest.address,
       Stage1ModuleV3: v3Stage1module.address,
       FactoryV3: v3Factory.address,
-      PasskeysV3: v3Passkeys.address
+      PasskeysV3: v3Passkeys.address,
+      RecoveryV3: v3Recovery.address
     }
     for (const { env, signerAddr, paymentsAddr } of paymentsDeployments) {
       contractEntries[`SequencePaymentsSigner-${env}`] = signerAddr
