@@ -456,7 +456,9 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       0,
       txParams,
       developerMultisig.address,
-      clawbackMetadata.address
+      clawbackMetadata.address,
+      ethers.constants.AddressZero,
+      '0x0000000000000000000000000000000000000000000000000000000000000000'
     )
     const erc1155PackFactory = await singletonDeployer.deploy(
       'ERC1155PackFactory',

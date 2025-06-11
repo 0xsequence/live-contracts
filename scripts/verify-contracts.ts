@@ -453,18 +453,25 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
     }
     // Clawback
     if (walletContextAddrs.ClawbackMetadata) {
-      await verifyContract(walletContextAddrs.Clawback, {
-        ...CLAWBACK_VERIFICATION,
-        waitForSuccess,
-        constructorArgs: defaultAbiCoder.encode(
-          ['address', 'address'],
-          [walletContextAddrs.DeveloperMultisig, walletContextAddrs.ClawbackMetadata]
-        )
-      })
       await verifyContract(walletContextAddrs.ClawbackMetadata, {
         ...CLAWBACKMETADATA_VERIFICATION,
         waitForSuccess
       })
+      if (walletContextAddrs.Clawback) {
+        await verifyContract(walletContextAddrs.Clawback, {
+          ...CLAWBACK_VERIFICATION,
+          waitForSuccess,
+          constructorArgs: defaultAbiCoder.encode(
+            ['address', 'address', 'address', 'bytes32'],
+            [
+              walletContextAddrs.DeveloperMultisig,
+              walletContextAddrs.ClawbackMetadata,
+              ethers.constants.AddressZero,
+              '0x0000000000000000000000000000000000000000000000000000000000000000'
+            ]
+          )
+        })
+      }
     }
 
     prompt.succeed('Verified Library contracts\n')
