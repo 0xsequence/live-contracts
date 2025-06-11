@@ -1,3 +1,4 @@
+import { verifiers } from '@0xsequence/solidity-deployer'
 import axios from 'axios'
 import fs from 'node:fs'
 
@@ -10,7 +11,7 @@ async function downloadJsonFromApi(
   action: ApiAction,
   outputFile: string
 ): Promise<void> {
-  const apiUrl = `${apiUrlBase}?module=contract&action=${action}&apikey=${apiKey}&address=${contractAddr}`
+  const apiUrl = `${apiUrlBase}&module=contract&action=${action}&apikey=${apiKey}&address=${contractAddr}`
   try {
     const response = await axios.get(apiUrl)
     if (response.status !== 200) {
@@ -36,7 +37,7 @@ async function downloadJsonFromApi(
 }
 
 //FIXME Change these values to match your contract
-const etherscanApiUrl = 'https://api-sepolia.arbiscan.io/api'
+const etherscanApiUrl = verifiers.EtherscanVerifier.getEtherscanApiFromChainId(421614)
 const etherscanApiKey = 'XXX'
 const addr = '0x4240E4605cA550ea682E5ef4d1A13A132bc7fB4D'
 
