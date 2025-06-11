@@ -45,5 +45,6 @@ export type ContractName =
   | 'PaymentsFactory'
   | `SequencePaymentsSigner-${SequenceEnvironment}`
   | `SequencePayments-${SequenceEnvironment}`
+  | 'ImplicitProjectRegistry'
 
 export type ContractEntry = Partial<Record<ContractName, string>>

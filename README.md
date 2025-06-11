@@ -142,6 +142,7 @@ The following is a list of contracts that are deployed by this script.
 | DevGuardV2                     | 0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0 |
 | ProdGuardV1                    | 0x596aF90CecdBF9A768886E771178fd5561dD27Ab |
 | DevGuardV1                     | 0x2ca2380dA88528C6061ACb70aD5222fe455F25DF |
+| ImplicitProjectRegistry        | 0x652d9299715E22820222247E8b780144771404Fe |
 | DeveloperMultisig              | 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 |
 | NiftyswapFactory20             | 0x9196b852437D9Ed92d95715dCbdA4533ffC479E0 |
 | NiftyswapExchange20Wrapper     | 0x2c944F28965F9A2cd5E69bA7e7520CbbD928258a |

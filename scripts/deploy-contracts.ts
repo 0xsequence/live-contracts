@@ -16,9 +16,9 @@ import { SequenceMarketV1 } from './factories/marketplace/SequenceMarketV1'
 import { Clawback } from './factories/token_library/Clawback'
 import { ClawbackMetadata } from './factories/token_library/ClawbackMetadata'
 import { ERC1155ItemsFactory } from './factories/token_library/ERC1155ItemsFactory'
+import { ERC1155PackFactory } from './factories/token_library/ERC1155PackFactory'
 import { ERC1155SaleFactory } from './factories/token_library/ERC1155SaleFactory'
 import { ERC1155SoulboundFactory } from './factories/token_library/ERC1155SoulboundFactory'
-import { ERC1155PackFactory } from './factories/token_library/ERC1155PackFactory'
 import { ERC20ItemsFactory } from './factories/token_library/ERC20ItemsFactory'
 import { ERC721ItemsFactory } from './factories/token_library/ERC721ItemsFactory'
 import { ERC721SaleFactory } from './factories/token_library/ERC721SaleFactory'
@@ -38,6 +38,7 @@ import {
 import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2, TrustFactory } from './factories/v2'
 import { WALLET_CREATION_CODE } from './factories/v2/FactoryV2'
 import { WalletProxyHook } from './factories/v2/hooks/WalletProxyHook'
+import { ImplicitProjectRegistry } from './factories/v3/implicit/ImplicitProjectRegistry'
 import type { ContractEntry, SequenceEnvironment } from './types'
 import { getArtifactFactory } from './utils'
 import { LoggingProvider } from './utils/LoggingProvider'
@@ -296,6 +297,19 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       prompt.succeed('Deployed V2 hooks contracts\n')
     }
 
+    // v3
+
+    prompt.start('Deploying V3 contracts\n')
+
+    const implicitProjectRegistry = await singletonDeployer.deploy(
+      'ImplicitProjectRegistry',
+      ImplicitProjectRegistry,
+      0,
+      txParams
+    )
+
+    prompt.succeed('Deployed V3 contracts\n')
+
     // Sequence development multisig
 
     prompt.start('Deploying Sequence development multisig\n')
@@ -511,7 +525,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       ClawbackMetadata: clawbackMetadata.address,
       PaymentCombiner: paymentCombiner.address,
       PaymentsFactory: paymentsFactory.address,
-      ERC1155PackFactory: erc1155PackFactory.address
+      ERC1155PackFactory: erc1155PackFactory.address,
+      ImplicitProjectRegistry: implicitProjectRegistry.address
     }
     for (const { env, signerAddr, paymentsAddr } of paymentsDeployments) {
       contractEntries[`SequencePaymentsSigner-${env}`] = signerAddr
