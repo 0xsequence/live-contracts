@@ -47,6 +47,7 @@ export type ContractName =
   | `SequencePayments-${SequenceEnvironment}`
   | 'FactoryV3'
   | 'Stage1ModuleV3'
+  | 'Stage1ModuleV3_4337'
   | 'GuestV3'
   | 'PasskeysV3'
   | 'RecoveryV3'
