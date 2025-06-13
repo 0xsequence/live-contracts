@@ -51,5 +51,9 @@ export type ContractName =
   | 'GuestV3'
   | 'PasskeysV3'
   | 'RecoveryV3'
+  | 'FactoryV3Dev1'
+  | 'Stage1ModuleV3Dev1'
+  | 'GuestV3Dev1'
+  | 'PasskeysV3Dev1'
 
 export type ContractEntry = Partial<Record<ContractName, string>>
