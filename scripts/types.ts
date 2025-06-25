@@ -56,4 +56,4 @@ export type ContractName =
   | 'GuestV3Dev1'
   | 'PasskeysV3Dev1'
 
-export type ContractEntry = Partial<Record<ContractName, string>>
+export type ContractEntry = Partial<Record<ContractName, string>> & { misc?: Record<string, string> }
