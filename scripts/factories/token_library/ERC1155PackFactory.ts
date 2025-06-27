@@ -1,7 +1,7 @@
 import { ContractFactory, type ethers } from 'ethers'
 import type { VerificationRequest } from 'scripts/types'
 
-// https://github.com/0xsequence/contracts-library/blob/d1718c6ae4289ae482ee427164672de60fc0cade/src/tokens/ERC1155/presets/pack/ERC1155PackFactory.sol
+// https://github.com/0xsequence/contracts-library/blob/216bab070290b115c0e78e61fd6c445e9e53fadf/src/tokens/ERC1155/presets/pack/ERC1155PackFactory.sol
 
 const abi = [
   {
