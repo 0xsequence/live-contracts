@@ -5,87 +5,224 @@ import type { VerificationRequest } from 'scripts/types'
 
 const abi = [
   {
-    type: 'constructor',
-    inputs: [{ name: 'factoryOwner', type: 'address', internalType: 'address' }],
-    stateMutability: 'nonpayable'
-  },
-  {
-    type: 'function',
-    name: 'beacon',
-    inputs: [],
-    outputs: [{ name: '', type: 'address', internalType: 'contract UpgradeableBeacon' }],
-    stateMutability: 'view'
-  },
-  {
-    type: 'function',
-    name: 'deploy',
     inputs: [
-      { name: 'proxyOwner', type: 'address', internalType: 'address' },
-      { name: 'tokenOwner', type: 'address', internalType: 'address' },
-      { name: 'name', type: 'string', internalType: 'string' },
-      { name: 'baseURI', type: 'string', internalType: 'string' },
-      { name: 'contractURI', type: 'string', internalType: 'string' },
-      { name: 'royaltyReceiver', type: 'address', internalType: 'address' },
-      { name: 'royaltyFeeNumerator', type: 'uint96', internalType: 'uint96' },
-      { name: 'implicitModeValidator', type: 'address', internalType: 'address' },
-      { name: 'implicitModeProjectId', type: 'bytes32', internalType: 'bytes32' }
+      {
+        internalType: 'address',
+        name: 'factoryOwner',
+        type: 'address'
+      }
     ],
-    outputs: [{ name: 'proxyAddr', type: 'address', internalType: 'address' }],
-    stateMutability: 'nonpayable'
+    stateMutability: 'nonpayable',
+    type: 'constructor'
   },
   {
-    type: 'function',
-    name: 'determineAddress',
+    anonymous: false,
     inputs: [
-      { name: 'proxyOwner', type: 'address', internalType: 'address' },
-      { name: 'tokenOwner', type: 'address', internalType: 'address' },
-      { name: 'name', type: 'string', internalType: 'string' },
-      { name: 'baseURI', type: 'string', internalType: 'string' },
-      { name: 'contractURI', type: 'string', internalType: 'string' },
-      { name: 'royaltyReceiver', type: 'address', internalType: 'address' },
-      { name: 'royaltyFeeNumerator', type: 'uint96', internalType: 'uint96' },
-      { name: 'implicitModeValidator', type: 'address', internalType: 'address' },
-      { name: 'implicitModeProjectId', type: 'bytes32', internalType: 'bytes32' }
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'proxyAddr',
+        type: 'address'
+      }
     ],
-    outputs: [{ name: 'proxyAddr', type: 'address', internalType: 'address' }],
-    stateMutability: 'view'
-  },
-  {
-    type: 'function',
-    name: 'owner',
-    inputs: [],
-    outputs: [{ name: '', type: 'address', internalType: 'address' }],
-    stateMutability: 'view'
-  },
-  { type: 'function', name: 'renounceOwnership', inputs: [], outputs: [], stateMutability: 'nonpayable' },
-  {
-    type: 'function',
-    name: 'transferOwnership',
-    inputs: [{ name: 'newOwner', type: 'address', internalType: 'address' }],
-    outputs: [],
-    stateMutability: 'nonpayable'
-  },
-  {
-    type: 'function',
-    name: 'upgradeBeacon',
-    inputs: [{ name: 'implementation', type: 'address', internalType: 'address' }],
-    outputs: [],
-    stateMutability: 'nonpayable'
-  },
-  {
-    type: 'event',
     name: 'ERC1155PackDeployed',
-    inputs: [{ name: 'proxyAddr', type: 'address', indexed: false, internalType: 'address' }],
-    anonymous: false
+    type: 'event'
   },
   {
-    type: 'event',
-    name: 'OwnershipTransferred',
+    anonymous: false,
     inputs: [
-      { name: 'previousOwner', type: 'address', indexed: true, internalType: 'address' },
-      { name: 'newOwner', type: 'address', indexed: true, internalType: 'address' }
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'previousOwner',
+        type: 'address'
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'newOwner',
+        type: 'address'
+      }
     ],
-    anonymous: false
+    name: 'OwnershipTransferred',
+    type: 'event'
+  },
+  {
+    inputs: [],
+    name: 'beacon',
+    outputs: [
+      {
+        internalType: 'contract UpgradeableBeacon',
+        name: '',
+        type: 'address'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'proxyOwner',
+        type: 'address'
+      },
+      {
+        internalType: 'address',
+        name: 'tokenOwner',
+        type: 'address'
+      },
+      {
+        internalType: 'string',
+        name: 'name',
+        type: 'string'
+      },
+      {
+        internalType: 'string',
+        name: 'baseURI',
+        type: 'string'
+      },
+      {
+        internalType: 'string',
+        name: 'contractURI',
+        type: 'string'
+      },
+      {
+        internalType: 'address',
+        name: 'royaltyReceiver',
+        type: 'address'
+      },
+      {
+        internalType: 'uint96',
+        name: 'royaltyFeeNumerator',
+        type: 'uint96'
+      },
+      {
+        internalType: 'address',
+        name: 'implicitModeValidator',
+        type: 'address'
+      },
+      {
+        internalType: 'bytes32',
+        name: 'implicitModeProjectId',
+        type: 'bytes32'
+      }
+    ],
+    name: 'deploy',
+    outputs: [
+      {
+        internalType: 'address',
+        name: 'proxyAddr',
+        type: 'address'
+      }
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'proxyOwner',
+        type: 'address'
+      },
+      {
+        internalType: 'address',
+        name: 'tokenOwner',
+        type: 'address'
+      },
+      {
+        internalType: 'string',
+        name: 'name',
+        type: 'string'
+      },
+      {
+        internalType: 'string',
+        name: 'baseURI',
+        type: 'string'
+      },
+      {
+        internalType: 'string',
+        name: 'contractURI',
+        type: 'string'
+      },
+      {
+        internalType: 'address',
+        name: 'royaltyReceiver',
+        type: 'address'
+      },
+      {
+        internalType: 'uint96',
+        name: 'royaltyFeeNumerator',
+        type: 'uint96'
+      },
+      {
+        internalType: 'address',
+        name: 'implicitModeValidator',
+        type: 'address'
+      },
+      {
+        internalType: 'bytes32',
+        name: 'implicitModeProjectId',
+        type: 'bytes32'
+      }
+    ],
+    name: 'determineAddress',
+    outputs: [
+      {
+        internalType: 'address',
+        name: 'proxyAddr',
+        type: 'address'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [],
+    name: 'owner',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [],
+    name: 'renounceOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'newOwner',
+        type: 'address'
+      }
+    ],
+    name: 'transferOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'implementation',
+        type: 'address'
+      }
+    ],
+    name: 'upgradeBeacon',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
   }
 ]
 
@@ -101,7 +238,7 @@ export class ERC1155PackFactory extends ContractFactory {
 
 export const ERC1155PACKFACTORY_VERIFICATION: Omit<VerificationRequest, 'waitForSuccess'> = {
   contractToVerify: 'src/tokens/ERC1155/presets/pack/ERC1155PackFactory.sol:ERC1155PackFactory',
-  version: 'v0.8.19+commit.7dd6d404',
+  version: 'v0.8.27+commit.40a35a09',
   licenceType: 'Apache-2.0',
   compilerInput: {
     language: 'Solidity',
@@ -313,20 +450,16 @@ export const ERC1155PACKFACTORY_VERIFICATION: Omit<VerificationRequest, 'waitFor
     },
     settings: {
       remappings: [
-        '0xsequence/=lib/0xsequence/',
         '@openzeppelin/contracts/=lib/murky/lib/openzeppelin-contracts/contracts/',
-        'chiru-labs/=lib/chiru-labs/',
-        'ds-test/=lib/murky/lib/forge-std/lib/ds-test/src/',
-        'erc-1155/=lib/erc-1155/',
+        'ds-test/=lib/openzeppelin-contracts-upgradeable/lib/forge-std/lib/ds-test/src/',
         'erc2470-libs/=lib/erc2470-libs/',
-        'erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/',
-        'erc721a/=lib/erc721a/contracts/',
+        'erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/',
         'forge-std/=lib/forge-std/src/',
         'halmos-cheatcodes/=lib/signals-implicit-mode/lib/sequence-v3/lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/',
         'murky/=lib/murky/',
         'openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/',
         'openzeppelin-contracts/=lib/openzeppelin-contracts/',
-        'openzeppelin/=lib/openzeppelin/',
+        'openzeppelin/=lib/openzeppelin-contracts-upgradeable/contracts/',
         'sequence-v3/=lib/signals-implicit-mode/lib/sequence-v3/',
         'signals-implicit-mode/=lib/signals-implicit-mode/',
         'solady/=lib/solady/src/'
@@ -345,7 +478,7 @@ export const ERC1155PACKFACTORY_VERIFICATION: Omit<VerificationRequest, 'waitFor
           '*': ['evm.bytecode', 'evm.deployedBytecode', 'devdoc', 'userdoc', 'metadata', 'abi']
         }
       },
-      evmVersion: 'prague',
+      evmVersion: 'cancun',
       viaIR: true,
       libraries: {}
     }
