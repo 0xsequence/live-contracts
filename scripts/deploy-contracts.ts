@@ -74,10 +74,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const txParams = {
       gasPrice: config.gasPrice ? BigNumber.from(config.gasPrice) : undefined, // Automated gas price
       // gasPrice: (await provider.getGasPrice()).mul(3).div(2), // 1.5x gas price
-      gasLimit: config.gasLimit
-        ? BigNumber.from(config.gasLimit)
-        : await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10))
-      // gasPrice: BigNumber.from(10).pow(8).mul(16)
+      gasLimit: config.gasLimit ? BigNumber.from(config.gasLimit) : undefined // Automated gas limit
+      // gasLimit: await provider.getBlock('latest').then(b => b.gasLimit.mul(4).div(10)),
     }
 
     prompt.info(`Network Name:           ${config.networkName}`)
