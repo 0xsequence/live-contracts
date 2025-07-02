@@ -33,6 +33,8 @@ jobs:
             chain: moonbeam
           - name: Soneium
             chain: soneium
+          - name: Somnia
+            chain: somnia
           - name: LAOS
             chain: laos
           - name: The Root Network
