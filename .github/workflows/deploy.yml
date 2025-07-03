@@ -80,8 +80,8 @@ jobs:
             chain: immutable-zkevm-testnet
           - name: APE Chain Testnet
             chain: apechain-testnet
-          - name: Oasys Homeverse Testnet
-            chain: homeverse-testnet
+          # - name: Oasys Homeverse Testnet
+          #   chain: homeverse-testnet
           - name: Avalanche Testnet
             chain: avalanche-testnet
           - name: Somnia Testnet
