@@ -92,7 +92,18 @@ export const deployPaymentsSigner = async (
   if (await wallet.reader().isDeployed(wallet.address)) {
     o.warn(`Already deployed ${signerEnv} payments signer wallet at ${wallet.address}`)
   } else {
-    const tx = await wallet.deploy()
+    const deployTx = await wallet.buildDeployTransaction()
+    if (!deployTx) {
+      throw new Error(`Unable to build deploy transaction for developer multisig wallet at ${wallet.address}`)
+    }
+    const txContent = deployTx.transactions[0]
+    const tx = await relayer.sendTransaction({
+      to: txContent.to,
+      data: txContent.data,
+      gasLimit: txParams?.gasLimit,
+      gasPrice: txParams?.gasPrice
+    })
+    // const tx = await wallet.deploy()
     if (!tx) {
       throw new Error(`Unable to deploy ${signerEnv} payments signer wallet at ${wallet.address}`)
     }
