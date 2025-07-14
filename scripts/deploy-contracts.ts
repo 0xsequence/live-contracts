@@ -38,6 +38,16 @@ import {
 import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2, TrustFactory } from './factories/v2'
 import { WALLET_CREATION_CODE } from './factories/v2/FactoryV2'
 import { WalletProxyHook } from './factories/v2/hooks/WalletProxyHook'
+import { FactoryV3 } from './factories/v3/Factory'
+import { Guest } from './factories/v3/Guest'
+import { Passkeys } from './factories/v3/Passkeys'
+import { Recovery } from './factories/v3/Recovery'
+import { SessionManager } from './factories/v3/SessionManager'
+import { Stage1Module } from './factories/v3/Stage1Module'
+import { FactoryV3Dev1 } from './factories/v3_dev1/Factory'
+import { GuestV3Dev1 } from './factories/v3_dev1/Guest'
+import { PasskeysV3Dev1 } from './factories/v3_dev1/Passkeys'
+import { Stage1ModuleV3Dev1 } from './factories/v3_dev1/Stage1Module'
 import type { ContractEntry, SequenceEnvironment } from './types'
 import { getArtifactFactory } from './utils'
 import { LoggingProvider } from './utils/LoggingProvider'
@@ -466,6 +476,45 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     prompt.succeed('Deployed Library contracts\n')
 
+    // v3 contracts (dev1)
+    prompt.start('Deploying v3 contracts (dev1)\n')
+    const v3Dev1Factory = await singletonDeployer.deploy('Factory', FactoryV3Dev1, 0, txParams)
+    const v3Dev1Stage1module = await singletonDeployer.deploy(
+      'Stage1Module',
+      Stage1ModuleV3Dev1,
+      0,
+      txParams,
+      v3Dev1Factory.address
+    )
+    const v3Dev1Guest = await singletonDeployer.deploy('Guest', GuestV3Dev1, 0, txParams)
+    const v3Dev1Passkeys = await singletonDeployer.deploy('Passkeys', PasskeysV3Dev1, 0, txParams)
+    prompt.succeed('Deployed v3 contracts (dev1)\n')
+
+    // v3 contracts
+    prompt.start('Deploying v3 contracts\n')
+    const v3Factory = await singletonDeployer.deploy('Factory', FactoryV3, 0, txParams)
+    const v3Stage1module = await singletonDeployer.deploy(
+      'Stage1Module',
+      Stage1Module,
+      0,
+      txParams,
+      v3Factory.address,
+      '0x0000000000000000000000000000000000000000'
+    ) // Non-4337 version
+    const v3Stage1module4337 = await singletonDeployer.deploy(
+      'Stage1Module',
+      Stage1Module,
+      0,
+      txParams,
+      v3Factory.address,
+      '0x0000000071727De22E5E9d8BAf0edAc6f37da032'
+    ) // 4337 version (0.7.0 entrypoint)
+    const v3Guest = await singletonDeployer.deploy('Guest', Guest, 0, txParams)
+    const v3Passkeys = await singletonDeployer.deploy('Passkeys', Passkeys, 0, txParams)
+    const v3Recovery = await singletonDeployer.deploy('Recovery', Recovery, 0, txParams)
+    const v3SessionManager = await singletonDeployer.deploy('SessionManager', SessionManager, 0, txParams)
+    prompt.succeed('Deployed v3 contracts\n')
+
     // Output addresses
 
     prompt.start(`Writing deployment information to output_${config.networkName}.json\n`)
@@ -507,7 +556,18 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       ClawbackMetadata: clawbackMetadata.address,
       PaymentCombiner: paymentCombiner.address,
       PaymentsFactory: paymentsFactory.address,
-      ERC1155PackFactory: erc1155PackFactory.address
+      ERC1155PackFactory: erc1155PackFactory.address,
+      GuestV3: v3Guest.address,
+      Stage1ModuleV3: v3Stage1module.address,
+      Stage1ModuleV3_4337: v3Stage1module4337.address,
+      FactoryV3: v3Factory.address,
+      PasskeysV3: v3Passkeys.address,
+      RecoveryV3: v3Recovery.address,
+      SessionManagerV3: v3SessionManager.address,
+      FactoryV3Dev1: v3Dev1Factory.address,
+      Stage1ModuleV3Dev1: v3Dev1Stage1module.address,
+      GuestV3Dev1: v3Dev1Guest.address,
+      PasskeysV3Dev1: v3Dev1Passkeys.address
     }
     for (const { env, signerAddr, paymentsAddr } of paymentsDeployments) {
       contractEntries[`SequencePaymentsSigner-${env}`] = signerAddr
