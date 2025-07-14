@@ -48,6 +48,7 @@ import { MAIN_MODULE_V2_VERIFICATION } from './factories/v2/MainModuleV2'
 import { SEQUENCE_UTILS_V2_VERIFICATION } from './factories/v2/SequenceUtilsV2'
 import { TRUST_FACTORY_VERIFICATION } from './factories/v2/commons/TrustFactory'
 import { WALLETPROXYHOOK_VERIFICATION } from './factories/v2/hooks/WalletProxyHook'
+import { SESSION_MANAGER_VERIFICATION } from './factories/v3/SessionManager'
 import type { ContractEntry, VerificationRequest } from './types'
 
 export const verifyContracts = async (config: Config, walletContextAddrs: ContractEntry): Promise<string | null> => {
@@ -180,6 +181,14 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
     await verifyContract(walletContextAddrs.WalletProxyHook, { ...WALLETPROXYHOOK_VERIFICATION, waitForSuccess })
 
     prompt.succeed('Verified V2 hooks contracts\n')
+
+    // v3
+
+    prompt.start('Verifying V3 contracts\n')
+
+    await verifyContract(walletContextAddrs.SessionManagerV3, { ...SESSION_MANAGER_VERIFICATION, waitForSuccess })
+
+    prompt.succeed('Verified V3 contracts\n')
 
     // Payments
 

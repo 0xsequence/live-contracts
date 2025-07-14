@@ -38,6 +38,16 @@ import {
 import { FactoryV2, GuestModuleV2, MainModuleUpgradableV2, MainModuleV2, SequenceUtilsV2, TrustFactory } from './factories/v2'
 import { WALLET_CREATION_CODE } from './factories/v2/FactoryV2'
 import { WalletProxyHook } from './factories/v2/hooks/WalletProxyHook'
+import { FactoryV3 } from './factories/v3/Factory'
+import { Guest } from './factories/v3/Guest'
+import { Passkeys } from './factories/v3/Passkeys'
+import { Recovery } from './factories/v3/Recovery'
+import { SessionManager } from './factories/v3/SessionManager'
+import { Stage1Module } from './factories/v3/Stage1Module'
+import { FactoryV3Dev1 } from './factories/v3_dev1/Factory'
+import { GuestV3Dev1 } from './factories/v3_dev1/Guest'
+import { PasskeysV3Dev1 } from './factories/v3_dev1/Passkeys'
+import { Stage1ModuleV3Dev1 } from './factories/v3_dev1/Stage1Module'
 import type { ContractEntry, SequenceEnvironment } from './types'
 import { getArtifactFactory } from './utils'
 import { LoggingProvider } from './utils/LoggingProvider'
@@ -45,15 +55,6 @@ import { verifyContracts } from './verify-contracts'
 import { deployDeveloperMultisig } from './wallets/DeveloperMultisig'
 import { deployGuard } from './wallets/Guard'
 import { deployPaymentsSigner } from './wallets/SequencePaymentsSigner'
-import { Stage1Module } from './factories/v3/Stage1Module'
-import { Guest } from './factories/v3/Guest'
-import { FactoryV3 } from './factories/v3/Factory'
-import { Passkeys } from './factories/v3/Passkeys'
-import { Recovery } from './factories/v3/Recovery'
-import { FactoryV3Dev1 } from './factories/v3_dev1/Factory'
-import { Stage1ModuleV3Dev1 } from './factories/v3_dev1/Stage1Module'
-import { GuestV3Dev1 } from './factories/v3_dev1/Guest'
-import { PasskeysV3Dev1 } from './factories/v3_dev1/Passkeys'
 
 const DEBUG = argv.includes('--debug')
 
@@ -511,6 +512,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const v3Guest = await singletonDeployer.deploy('Guest', Guest, 0, txParams)
     const v3Passkeys = await singletonDeployer.deploy('Passkeys', Passkeys, 0, txParams)
     const v3Recovery = await singletonDeployer.deploy('Recovery', Recovery, 0, txParams)
+    const v3SessionManager = await singletonDeployer.deploy('SessionManager', SessionManager, 0, txParams)
     prompt.succeed('Deployed v3 contracts\n')
 
     // Output addresses
@@ -561,6 +563,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       FactoryV3: v3Factory.address,
       PasskeysV3: v3Passkeys.address,
       RecoveryV3: v3Recovery.address,
+      SessionManagerV3: v3SessionManager.address,
       FactoryV3Dev1: v3Dev1Factory.address,
       Stage1ModuleV3Dev1: v3Dev1Stage1module.address,
       GuestV3Dev1: v3Dev1Guest.address,
