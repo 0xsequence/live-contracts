@@ -61,6 +61,8 @@ jobs:
             chain: xai
           - name: SKALE Nebula Gaming Hub
             chain: skale-nebula
+          - name: SEI
+            chain: sei
           # Testnets
           - name: Telos Testnet
             chain: telos-testnet
@@ -110,6 +112,8 @@ jobs:
             chain: blast-sepolia
           - name: XAI Sepolia
             chain: xai-sepolia
+          - name: SEI Testnet
+            chain: sei-testnet
 
     steps:
       - uses: actions/checkout@v3
