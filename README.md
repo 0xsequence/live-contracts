@@ -125,6 +125,13 @@ The following is a list of contracts that are deployed by this script.
 
 | Name                           | Address                                    |
 | ------------------------------ | ------------------------------------------ |
+| GuestV3                        | 0xf3c7175460BeD3340A1c4dc700fD6C8Cd3F56250 |
+| Stage1ModuleV3                 | 0xC906F90A51705d57F3b924ca4563c0C5E138AaB6 |
+| Stage1ModuleV3_4337            | 0x8Ae58FCc0Ee9b32994CA52c9854deb969DC8fa2A |
+| FactoryV3                      | 0xFE14B91dE3c5Ca74c4D24608EBcD4B2848aA6010 |
+| PasskeysV3                     | 0x4491845806B757D67BE05BbD877Cab101B9bee5C |
+| RecoveryV3                     | 0xdED857b9b5142832634129aFfc1D67cD106b927c |
+| SessionManagerV3               | 0x06aa3a8F781F2be39b888Ac8a639c754aEe9dA29 |
 | WalletFactoryV2                | 0xFaA5c0b14d1bED5C888Ca655B9a8A5911F78eF4A |
 | MainModuleV2                   | 0xfBf8f1A5E00034762D928f46d438B947f5d4065d |
 | MainModuleUpgradableV2         | 0x4222dcA3974E39A8b41c411FeDDE9b09Ae14b911 |
