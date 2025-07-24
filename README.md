@@ -149,13 +149,13 @@ The following is a list of contracts that are deployed by this script.
 | SequenceMarketV2               | 0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712 |
 | SequenceMarketV1               | 0xB537a160472183f2150d42EB1c3DD6684A55f74c |
 | BatchPayableHelper             | 0x6166c1952c54dEd6b070B4616797E61b6c48A117 |
-| ERC20ItemsFactory              | 0x1063cBEe6b3Cd69B49f1B922A0D402f484b39855 |
+| ERC20ItemsFactory              | 0x434c9C50b0Ca6b67AbB71F667C822d5451265062 |
 | ERC721ItemsFactory             | 0xC6064FfBaDB0687Da29721C8EC02ACa71e735a3e |
-| ERC1155ItemsFactory            | 0x7364fDEFe24385B2b3869504383c94cF083AcbD6 |
+| ERC1155ItemsFactory            | 0x024b9949FeD1c8dd7154DE653456d64Aa1093384 |
 | ERC721SaleFactory              | 0x2Ce46243FAb9d688CcC2B1F1B8D2c464e87A2076 |
 | ERC1155SaleFactory             | 0xFb89C8A7DF9A1e0299088C3fC46fd87D3FcbcDBd |
-| ERC721SoulboundFactory         | 0x2fBFF6fd3C978ab1bBd21b878262c5289a14b6c1 |
-| ERC1155SoulboundFactory        | 0xaB069C041FaCAB8f4D747D91EEda5705b5caAB76 |
+| ERC721SoulboundFactory         | 0x718476DcFf820113B30fE4196905c7720F3c8a4e |
+| ERC1155SoulboundFactory        | 0xCCbB517AaCAb6680A2ad08ef5A593677dDE17284 |
 | ERC1155PackFactory             | 0x5B2f47ee798eee52cE184C9eC4d60873185836d8 |
 | ERC721OperatorEnforcedFactory  | 0x5fD880b092bD285873b16335a454D11c062a4689 |
 | ERC1155OperatorEnforcedFactory | 0xc89f63389ef3B53D07649D52D47F9E4afcAbb1fB |

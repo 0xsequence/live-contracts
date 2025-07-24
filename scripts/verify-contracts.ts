@@ -26,7 +26,7 @@ import { ERC721SaleFactory, ERC721SALEFACTORY_VERIFICATION } from './factories/t
 import { ERC721SoulboundFactory, ERC721SOULBOUNDFACTORY_VERIFICATION } from './factories/token_library/ERC721SoulboundFactory'
 import { PaymentCombiner, PAYMENTCOMBINER_VERIFICATION } from './factories/token_library/PaymentCombiner'
 import { PAYMENTS_FACTORY_VERIFICATION, PaymentsFactory } from './factories/token_library/PaymentsFactory'
-import { UpgradeableBeacon, UPGRADEABLEBEACON_VERIFICATION } from './factories/token_library/UpgradeableBeacon'
+import { UpgradeableBeacon } from './factories/token_library/UpgradeableBeacon'
 // import {
 //   ERC1155OperatorEnforcedFactory,
 //   ERC1155OPERATORENFORCEDFACTORY_VERIFICATION
@@ -318,17 +318,6 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
       waitForSuccess,
       constructorArgs: defaultAbiCoder.encode(['address'], [walletContextAddrs.DeveloperMultisig])
     })
-    // FIXME Also deploy the TUBProxy for verification purposes
-    // const tubProxy = await singletonDeployer.deploy(
-    //   'TransparentUpgradeableBeaconProxy',
-    //   TransparentUpgradeableBeaconProxy,
-    //   0,
-    //   txParams
-    // )
-    // await verifyContract(tubProxy.address, {
-    //   ...TUBPROXY_VERIFICATION,
-    //   waitForSuccess
-    // })
     // Token contracts deployed by the factories
     if (provider && walletContextAddrs.ERC20ItemsFactory) {
       const erc20ItemsFactory = new ERC20ItemsFactory().attach(walletContextAddrs.ERC20ItemsFactory).connect(provider)
@@ -357,14 +346,6 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
         contractToVerify: 'src/tokens/ERC1155/presets/items/ERC1155Items.sol:ERC1155Items',
         waitForSuccess
       })
-      if (erc1155ItemsImplementation) {
-        // Also verify the proxy
-        await verifyContract(erc1155ItemsBeacon, {
-          ...UPGRADEABLEBEACON_VERIFICATION,
-          waitForSuccess,
-          constructorArgs: defaultAbiCoder.encode(['address'], [erc1155ItemsImplementation])
-        })
-      }
     }
     if (provider && walletContextAddrs.ERC721SaleFactory) {
       const erc721SaleFactory = new ERC721SaleFactory().attach(walletContextAddrs.ERC721SaleFactory).connect(provider)
