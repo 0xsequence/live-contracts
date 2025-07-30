@@ -521,8 +521,31 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     await verifyContracts(config, contractEntries)
   } catch (error: unknown) {
     console.error('Error deploying contracts on', config.networkName, error)
+
+    // Check for insufficient funds error
+    const errorMessage = (error as Error).message ?? ''
+    const fundsErrorMatches = [
+      /insufficient funds for gas \* price \+ value: balance (\d+), tx cost (\d+), overshot (\d+)/i,
+      /insufficient funds for gas \* price \+ value:.*?have (\d+) want (\d+)/i
+    ]
+
+    for (const pattern of fundsErrorMatches) {
+      const match = errorMessage.match(pattern)
+      if (match) {
+        try {
+          const balance = BigNumber.from(match[1])
+          const txCost = BigNumber.from(match[2])
+          const shortMessage = `Insufficient funds: need ${ethers.utils.formatEther(txCost)} native tokens, have ${ethers.utils.formatEther(balance)} native tokens`
+          prompt.fail(`Error deploying contracts on ${config.networkName}: ${shortMessage}`)
+          return shortMessage
+        } catch (error) {
+          console.error('Error parsing funds error message:', error)
+        }
+      }
+    }
+
     prompt.fail(`Error deploying contracts on ${config.networkName}: ${error}`)
-    return (error as Error).message
+    return errorMessage
   }
   return null
 }
