@@ -27,6 +27,8 @@ import { ERC1155OperatorEnforcedFactory } from './factories/token_library/immuta
 import { ERC721OperatorEnforcedFactory } from './factories/token_library/immutable/ERC721OperatorEnforcedFactory'
 import { PaymentCombiner } from './factories/token_library/PaymentCombiner'
 import { PaymentsFactory } from './factories/token_library/PaymentsFactory'
+import { TrailsMulticall3Router } from './factories/trails/TrailsMulticall3Router'
+import { TrailsWaletContextTxs } from './factories/trails/Walletv3'
 import {
   FactoryV1,
   GuestModuleV1,
@@ -375,6 +377,30 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
     const batchPayableHelper = await singletonDeployer.deploy('BatchPayableHelper', BatchPayableHelper, 0, txParams)
     prompt.succeed('Deployed Market contracts\n')
 
+    // Trails
+
+    prompt.start('Deploying Trails contracts\n')
+    const trailsMulticall3Router = await singletonDeployer.deploy('TrailsMulticall3Router', TrailsMulticall3Router, 0, txParams)
+    for (const trailsWalletContextTx of TrailsWaletContextTxs) {
+      let code = await signer.provider.getCode(trailsWalletContextTx.checkAddr)
+      if (code === '0x') {
+        const tx = await signer.sendTransaction({
+          to: trailsWalletContextTx.to,
+          data: trailsWalletContextTx.data,
+          ...txParams
+        })
+        await tx.wait()
+        code = await signer.provider.getCode(trailsWalletContextTx.checkAddr)
+        if (code === '0x') {
+          throw new Error(`Trails ${trailsWalletContextTx.checkAddr} not deployed with tx ${tx.hash}`)
+        }
+        prompt.log(`Trails ${trailsWalletContextTx.checkAddr} deployed with tx ${tx.hash}\n`)
+      } else {
+        prompt.log(`Trails ${trailsWalletContextTx.checkAddr} already deployed\n`)
+      }
+    }
+    prompt.succeed('Deployed Trails contracts\n')
+
     // Contracts library
 
     prompt.start('Deploying Library contracts\n')
@@ -494,6 +520,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       SequenceMarketV2: marketV2Address,
       SequenceMarketV1: marketV1.address,
       BatchPayableHelper: batchPayableHelper.address,
+      TrailsMulticall3Router: trailsMulticall3Router.address,
       ERC20ItemsFactory: erc20ItemsFactory.address,
       ERC721ItemsFactory: erc721ItemsFactory.address,
       ERC1155ItemsFactory: erc1155ItemsFactory.address,

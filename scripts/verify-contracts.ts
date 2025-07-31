@@ -35,6 +35,7 @@ import { UpgradeableBeacon, UPGRADEABLEBEACON_VERIFICATION } from './factories/t
 //   ERC721OperatorEnforcedFactory,
 //   ERC721OPERATORENFORCEDFACTORY_VERIFICATION
 // } from './factories/token_library/immutable/ERC721OperatorEnforcedFactory'
+import { TRAILSMULTICALL3ROUTER_VERIFICATION } from './factories/trails/TrailsMulticall3Router'
 import { FACTORY_V1_VERIFICATION } from './factories/v1/FactoryV1'
 import { GUEST_MODULE_V1_VERIFICATION } from './factories/v1/GuestModuleV1'
 import { MAIN_MODULE_UPGRADABLE_V1_VERIFICATION } from './factories/v1/MainModuleUpgradableV1'
@@ -263,6 +264,15 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
       waitForSuccess
     })
     prompt.succeed('Verified Market contracts\n')
+
+    // Trails
+
+    prompt.start('Verifying Trails contracts\n')
+    await verifyContract(walletContextAddrs.TrailsMulticall3Router, {
+      ...TRAILSMULTICALL3ROUTER_VERIFICATION,
+      waitForSuccess
+    })
+    prompt.succeed('Verified Trails contracts\n')
 
     // Library contracts
 
