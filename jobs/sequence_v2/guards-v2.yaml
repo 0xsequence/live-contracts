@@ -1,0 +1,18 @@
+name: "guards-v2"
+version: "1"
+description: "Deploy Sequence.app v2 guard contracts, prod & dev"
+depends_on: ["sequence-v2"]
+
+actions:
+  - name: "prod-guard"
+    template: "deploy-wallet-v2"
+    arguments:
+      implementation: "{{sequence-v2.main-module.address}}"
+      salt: "0x6e2f52838722eda7d569b52db277d0d87d36991a6aa9b9657ef9d8f09b0c33f4"
+
+  - name: "dev-guard"
+    template: "deploy-wallet-v2"
+    arguments:
+      implementation: "{{sequence-v2.main-module.address}}"
+      salt: "0x5106c13e87f7f4f67c44fee666525c1859ad193b997694fd294c53d7c2a465f6"
+  

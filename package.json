@@ -1,38 +1,12 @@
 {
   "name": "@0xsequence/live-contracts",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
-    "deploy": "ts-node scripts/deploy-contracts.ts",
-    "verify": "ts-node scripts/verify-contracts.ts",
-    "source": "ts-node scripts/download-source-code.ts",
-    "check": "ts-node scripts/check-deployed.ts",
-    "cancel": "ts-node scripts/cancel-transaction.ts",
-    "funds": "ts-node scripts/check-funds.ts",
-    "lint": "eslint -c .eslintrc.js \"./**/*.ts\"",
-    "lint:fix": "eslint -c .eslintrc.js --fix \"./**/*.ts\"",
-    "format": "prettier --write ./**/*.ts"
+    "dry-run": "catapult dry-run"
   },
   "dependencies": {
-    "0xsequence": "^1.2.3",
-    "@0xsequence/solidity-deployer": "^0.2.1",
-    "@typechain/ethers-v5": "^7.0.1",
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
-    "dotenv": "^16.4.7",
-    "eslint": "^7.22.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "ethers": "^5.7.2",
-    "ora": "^5.4.1",
-    "prettier": "^3.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.7.4"
-  },
-  "devDependencies": {
-    "@types/node": "^20.4.2",
-    "lefthook": "^1.7.12"
+    "catapult": "link:../live-contracts-2"
   }
 }
