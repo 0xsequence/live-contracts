@@ -1,0 +1,27 @@
+name: "clawback"
+version: "1"
+description: "Contracts for the clawback functionality"
+
+actions:
+  - name: "clawback-metadata"
+    type: "erc-2470"
+    arguments:
+      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      creationCode: "{{Contract(./artifacts/clawback-metadata.json).creationCode}}"
+    output: true
+
+  - name: "clawback"
+    type: "erc-2470"
+    arguments:
+      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./artifacts/clawback.json).creationCode}}"
+          types: ["address", "address"]
+          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4", "{{clawback-metadata.address}}"]
+    output: true
+
+  # I could not find working build-info for these contracts
+  # so I did not implement verification, they are already verified
+  # on etherscan

@@ -27,3 +27,17 @@ actions:
       - type: "contract-exists"
         arguments:
           address: "0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712"
+
+  - name: "batch-payable-helper"
+    template: "erc-2470"
+    arguments:
+      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      creationCode: "{{Contract(./build-info/batch-payable-helper.json:BatchPayableHelper).creationCode}}"
+    output: true
+
+  - name: "verify-batch-payable-helper"
+    depends_on: ["batch-payable-helper"]
+    template: "verify-contract"
+    arguments:
+      address: "{{batch-payable-helper.address}}"
+      contract: "{{Contract(./build-info/batch-payable-helper.json:BatchPayableHelper)}}"

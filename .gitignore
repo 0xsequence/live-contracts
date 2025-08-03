@@ -5,4 +5,4 @@ dist
 config.json
 .env
 
-./output
+output
