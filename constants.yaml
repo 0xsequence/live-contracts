@@ -1,0 +1,4 @@
+type: "constants"
+
+constants:
+  developer-multisig-01: "0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"

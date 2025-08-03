@@ -21,7 +21,7 @@ actions:
           signature: "deploy(bytes32 salt,address owner)"
           values:
             - "0x0000000000000000000000000000000000000000000000000000000000000000"
-            - "0x000000000000000000000000007a47e6bf40c1e0ed5c01ae42fdc75879140bc4"
+            - "{{developer-multisig-01}}"
     output: true
     skip_condition:
       - type: "contract-exists"

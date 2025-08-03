@@ -12,7 +12,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/ERC20-factory.json:ERC20ItemsFactory).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "erc721-factory"
@@ -24,7 +24,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/ERC721-factory.json:ERC721ItemsFactory).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "erc1155-factory"
@@ -36,7 +36,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/ERC1155-factory.json:ERC1155ItemsFactory).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "erc721-sale-factory"
@@ -48,7 +48,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/ERC721-Sale-factory.json:ERC721SaleFactory).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "erc1155-sale-factory"
@@ -60,7 +60,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/ERC1155-Sale-factory.json:ERC1155SaleFactory).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "erc721-soulbound-factory"
@@ -72,7 +72,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/ERC721-Soulbound-factory.json:ERC721SoulboundFactory).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "erc1155-soulbound-factory"
@@ -84,7 +84,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/ERC1155-Soulbound-factory.json:ERC1155SoulboundFactory).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "erc1155-lootbox-factory" # Seems unused? couldn't find from where it comes from
@@ -96,7 +96,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./artifacts/ERC1155-Lootbox-factory.json).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "erc1155-pack-factory"
@@ -108,7 +108,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/ERC1155-Pack-factory.json:ERC1155PackFactory).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "verify-erc20-factory"
@@ -121,7 +121,7 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: false
 
   - name: "verify-erc721-factory"
@@ -134,7 +134,7 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: false
 
   - name: "verify-erc1155-factory"
@@ -147,7 +147,7 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: false
 
   - name: "verify-erc721-sale-factory"
@@ -160,7 +160,7 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: false
 
   - name: "verify-erc1155-sale-factory"
@@ -173,7 +173,7 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: false
 
   - name: "verify-erc721-soulbound-factory"
@@ -186,7 +186,7 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: false
 
   - name: "verify-erc1155-soulbound-factory"
@@ -199,7 +199,7 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: false
 
   - name: "verify-erc1155-pack-factory"
@@ -212,5 +212,5 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: false

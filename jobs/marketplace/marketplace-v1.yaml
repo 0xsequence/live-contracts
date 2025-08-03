@@ -12,7 +12,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/marketplace-v1.json:SequenceMarket).creationCode}}"
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: true
 
   - name: "verify-market"
@@ -25,5 +25,5 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"]
+          values: ["{{developer-multisig-01}}"]
     output: false
