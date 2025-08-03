@@ -1,0 +1,17 @@
+{
+  "jobName": "waas-trust-factory",
+  "jobVersion": "1",
+  "lastRun": "2025-08-01T16:51:54.596Z",
+  "networks": [
+    {
+      "status": "success",
+      "chainIds": [
+        "42161",
+        "42170"
+      ],
+      "outputs": {
+        "trust-factory.address": "0x4483FaA9dEEDd6D6FaCFee9c686f1E394A1280f9"
+      }
+    }
+  ]
+}

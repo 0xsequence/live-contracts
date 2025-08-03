@@ -1,0 +1,25 @@
+name: "niftyswap"
+version: "1"
+description: ""
+
+actions:
+  - name: "factory-20"
+    template: "sequence-universal-deployer-2"
+    arguments:
+      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/niftyswap-factory-20.json:NiftyswapFactory20).creationCode}}"
+          types: ["address"]
+          values: ["0xec32359f21cF24e7d5097813577eE1F2C22fA57b"] # Niftyswap deployer address
+    output: true
+    # Verification is not available because this contract uses Solidity 0.7
+
+  - name: "exchange-20-wrapper"
+    template: "erc-2470"
+    arguments:
+      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      creationCode: "{{Contract(./artifacts/niftyswap-exchange-20-wrapper.json).creationCode}}"
+    output: true
+    # Verification is not available because I cannot find the build-info for this contract

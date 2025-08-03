@@ -1,0 +1,20 @@
+name: "waas-trust-factory"
+version: "1"
+description: "The Trust Factory is used by WaaS to deploy the recovery contracts, that allow either the partner or Sequence to recover a whole set of wallets"
+depends_on: []
+
+actions:
+  - name: "trust-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      creationCode: "{{Contract(./build-info/trust-factory.json:TrustFactory).creationCode}}"
+    output: true
+
+  - name: "verify-trust-factory"
+    type: "verify-contract"
+    depends_on: ["trust-factory"]
+    arguments:
+      address: "{{trust-factory.address}}"
+      contract: "{{Contract(./build-info/trust-factory.json:TrustFactory)}}"
+    output: false

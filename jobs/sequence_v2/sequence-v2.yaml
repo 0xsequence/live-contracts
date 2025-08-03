@@ -73,3 +73,19 @@ actions:
           types: ["address", "address"]
           values: ["{{factory.address}}", "{{main-module-upgradable.address}}"]
     output: false
+
+  - name: "verify-sequence-utils"
+    type: "verify-contract"
+    depends_on: ["sequence-utils"]
+    arguments:
+      address: "{{sequence-utils.address}}"
+      contract: "{{Contract(./build-info/sequence-utils-v2.json:SequenceUtils)}}"
+    output: false
+
+  - name: "verify-guest-module"
+    type: "verify-contract"
+    depends_on: ["guest-module"]
+    arguments:
+      address: "{{guest-module.address}}"
+      contract: "{{Contract(./build-info/sequence-guest-module-v2.json:GuestModule)}}"
+    output: false

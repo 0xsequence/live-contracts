@@ -1,0 +1,29 @@
+name: "marketplace-v2"
+version: "1"
+description: ""
+
+actions:
+  - name: "market-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      creationCode: "{{Contract(./artifacts/market-factory-v2.json).creationCode}}"
+    output: true
+
+  - name: "market"
+    depends_on: ["market-factory"]
+    template: "send-transaction"
+    arguments:
+      to: "{{market-factory.address}}"
+      data:
+        type: "abi-encode"
+        arguments:
+          signature: "deploy(bytes32 salt,address owner)"
+          values:
+            - "0x0000000000000000000000000000000000000000000000000000000000000000"
+            - "0x000000000000000000000000007a47e6bf40c1e0ed5c01ae42fdc75879140bc4"
+    output: true
+    skip_condition:
+      - type: "contract-exists"
+        arguments:
+          address: "0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712"
