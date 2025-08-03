@@ -6,3 +6,4 @@ config.json
 .env
 
 output
+*.tmp
