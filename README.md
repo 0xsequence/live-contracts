@@ -163,6 +163,7 @@ The following is a list of contracts that are deployed by this script.
 | ClawbackMetadata               | 0x335411eAA9D63251f8c0867600Be4d0C190a3b1f |
 | PaymentCombiner                | 0xfe0a269E288051B0815E05Fe192FC888118CB8a2 |
 | PaymentsFactory                | 0xdC8dC7d7F0AAfbc5901DA779Ed5aab779F3E7c14 |
+| ValueForwarder                 | 0xABAAd93EeE2a569cF0632f39B10A9f5D734777ca |
 | SequencePaymentsSigner-dev     | 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 |
 | SequencePayments-dev           | 0xDE280948Af8A9762B6984995C8c3c7F5AEB921Bf |
 | SequencePaymentsSigner-next    | 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 |

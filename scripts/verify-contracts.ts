@@ -35,6 +35,7 @@ import { UpgradeableBeacon } from './factories/token_library/UpgradeableBeacon'
 //   ERC721OperatorEnforcedFactory,
 //   ERC721OPERATORENFORCEDFACTORY_VERIFICATION
 // } from './factories/token_library/immutable/ERC721OperatorEnforcedFactory'
+import { VALUEFORWARDER_VERIFICATION } from './factories/token_library/ValueForwarder'
 import { FACTORY_V1_VERIFICATION } from './factories/v1/FactoryV1'
 import { GUEST_MODULE_V1_VERIFICATION } from './factories/v1/GuestModuleV1'
 import { MAIN_MODULE_UPGRADABLE_V1_VERIFICATION } from './factories/v1/MainModuleUpgradableV1'
@@ -184,6 +185,8 @@ export const verifyContracts = async (config: Config, walletContextAddrs: Contra
     // Payments
 
     prompt.start('Verifying Payments contracts\n')
+
+    await verifyContract(walletContextAddrs.ValueForwarder, { ...VALUEFORWARDER_VERIFICATION, waitForSuccess })
 
     await verifyContract(walletContextAddrs.PaymentCombiner, { ...PAYMENTCOMBINER_VERIFICATION, waitForSuccess })
     // Verify the implementation

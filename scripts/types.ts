@@ -43,6 +43,7 @@ export type ContractName =
   | 'ClawbackMetadata'
   | 'PaymentCombiner'
   | 'PaymentsFactory'
+  | 'ValueForwarder'
   | `SequencePaymentsSigner-${SequenceEnvironment}`
   | `SequencePayments-${SequenceEnvironment}`
 

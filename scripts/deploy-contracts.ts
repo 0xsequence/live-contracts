@@ -27,6 +27,7 @@ import { ERC1155OperatorEnforcedFactory } from './factories/token_library/immuta
 import { ERC721OperatorEnforcedFactory } from './factories/token_library/immutable/ERC721OperatorEnforcedFactory'
 import { PaymentCombiner } from './factories/token_library/PaymentCombiner'
 import { PaymentsFactory } from './factories/token_library/PaymentsFactory'
+import { ValueForwarder } from './factories/token_library/ValueForwarder'
 import {
   FactoryV1,
   GuestModuleV1,
@@ -314,6 +315,8 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
 
     prompt.start('Deploying Sequence Payments contracts\n')
 
+    const valueForwarder = await singletonDeployer.deploy('ValueForwarder', ValueForwarder, 0, txParams)
+
     const paymentCombiner = await singletonDeployer.deploy('PaymentCombiner', PaymentCombiner, 0, txParams)
 
     type PaymentsDeployment = {
@@ -507,6 +510,7 @@ export const deployContracts = async (config: Config): Promise<string | null> =>
       ClawbackMetadata: clawbackMetadata.address,
       PaymentCombiner: paymentCombiner.address,
       PaymentsFactory: paymentsFactory.address,
+      ValueForwarder: valueForwarder.address,
       ERC1155PackFactory: erc1155PackFactory.address
     }
     for (const { env, signerAddr, paymentsAddr } of paymentsDeployments) {
