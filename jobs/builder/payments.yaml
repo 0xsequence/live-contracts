@@ -61,13 +61,11 @@ actions:
       data:
         type: "abi-encode"
         arguments:
-          function: "deploy(address,address,address)"
-          types: ["address", "address", "address"]
-          values: [
-            "{{developer-multisig-01}}",
-            "{{developer-multisig-01}}",
-            "{{payment-signer-dev.address}}"
-          ]
+          signature: "deploy(address,address,address)"
+          values:
+            - "{{developer-multisig-01}}"
+            - "{{developer-multisig-01}}"
+            - "{{payment-signer-dev.address}}"
 
   - name: "payments-next"
     template: "send-transaction"
@@ -83,13 +81,11 @@ actions:
       data:
         type: "abi-encode"
         arguments:
-          function: "deploy(address,address,address)"
-          types: ["address", "address", "address"]
-          values: [
-            "{{developer-multisig-01}}",
-            "{{developer-multisig-01}}",
-            "{{payment-signer-next.address}}"
-          ]
+          signature: "deploy(address,address,address)"
+          values:
+            - "{{developer-multisig-01}}"
+            - "{{developer-multisig-01}}"
+            - "{{payment-signer-next.address}}"
 
   - name: "payments-prod"
     template: "send-transaction"
@@ -105,13 +101,11 @@ actions:
       data:
         type: "abi-encode"
         arguments:
-          function: "deploy(address,address,address)"
-          types: ["address", "address", "address"]
-          values: [
-            "{{developer-multisig-01}}",
-            "{{developer-multisig-01}}",
-            "{{payment-signer-prod.address}}"
-          ]
+          signature: "deploy(address,address,address)"
+          values:
+            - "{{developer-multisig-01}}"
+            - "{{developer-multisig-01}}"
+            - "{{payment-signer-prod.address}}"
 
   - name: "verify-payments-factory"
     depends_on: ["payments-factory"]
