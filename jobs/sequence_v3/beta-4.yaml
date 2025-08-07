@@ -34,6 +34,20 @@ actions:
           values: ["{{factory.address}}", "{{entrypoint-4337-07}}"]
     output: true
 
+  - name: "guest"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/sequence-v3-beta-4.json:Guest).creationCode}}"
+    output: true
+
+  - name: "passkeys"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/sequence-v3-beta-4.json:Passkeys).creationCode}}"
+    output: true
+
   - name: "verify-factory"
     type: "verify-contract"
     depends_on: ["factory"]
@@ -104,4 +118,20 @@ actions:
         arguments:
           types: ["address"]
           values: ["{{entrypoint-4337-07}}"]
+    output: false
+
+  - name: "verify-guest"
+    type: "verify-contract"
+    depends_on: ["guest"]
+    arguments:
+      address: "{{guest.address}}"
+      contract: "{{Contract(./build-info/sequence-v3-beta-4.json:Guest)}}"
+    output: false
+
+  - name: "verify-passkeys"
+    type: "verify-contract"
+    depends_on: ["passkeys"]
+    arguments:
+      address: "{{passkeys.address}}"
+      contract: "{{Contract(./build-info/sequence-v3-beta-4.json:Passkeys)}}"
     output: false
