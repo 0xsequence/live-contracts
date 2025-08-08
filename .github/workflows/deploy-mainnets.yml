@@ -1,0 +1,84 @@
+name: Deploy mainnets
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-mainnets-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  discover-matrix:
+    name: Discover mainnet matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts
+
+      - id: build-matrix
+        name: Build matrix from Catapult networks (mainnets only)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          CHAIN_IDS=$(pnpm exec catapult list networks --simple-chain-ids --only-non-testnets)
+
+          MATRIX_ITEMS=()
+          while IFS= read -r CHAIN_ID; do
+            [[ -z "${CHAIN_ID}" ]] && continue
+            NETWORK_NAME=$(pnpm exec catapult utils chain-id-to-name "${CHAIN_ID}")
+            NETWORK_NAME_ESCAPED=${NETWORK_NAME//\"/\\\"}
+            MATRIX_ITEMS+=("{\"chainId\": ${CHAIN_ID}, \"networkName\": \"${NETWORK_NAME_ESCAPED}\"}")
+          done <<< "${CHAIN_IDS}"
+
+          if [[ ${#MATRIX_ITEMS[@]} -eq 0 ]]; then
+            echo "No mainnets discovered" >&2
+            echo "matrix={\"include\":[]}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          printf -v MATRIX_JSON '{"include":[%s]}' "$(IFS=,; echo "${MATRIX_ITEMS[*]}")"
+
+          echo "Discovered matrix: ${MATRIX_JSON}"
+          echo "matrix=${MATRIX_JSON}" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    name: "Deploy to ${{ matrix.networkName }} (${{ matrix.chainId }})"
+    needs: discover-matrix
+    runs-on: ubuntu-latest
+    environment:
+      name: mainnet
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.discover-matrix.outputs.matrix) }}
+    steps:
+      - name: Placeholder
+        env:
+          NETWORK_NAME: ${{ matrix.networkName }}
+          CHAIN_ID: ${{ matrix.chainId }}
+        run: |
+          echo "TODO: mainnet deployment for $NETWORK_NAME ($CHAIN_ID)"
+
+

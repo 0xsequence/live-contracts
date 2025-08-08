@@ -1,4 +1,4 @@
-name: Deploy per network
+name: Deploy testnets
 
 on:
   push:
@@ -10,12 +10,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: deploy-per-network-${{ github.workflow }}-${{ github.ref }}
+  group: deploy-testnets-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   discover-matrix:
-    name: Discover networks matrix
+    name: Discover testnet matrix
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.build-matrix.outputs.matrix }}
@@ -38,32 +38,23 @@ jobs:
           pnpm install --frozen-lockfile --ignore-scripts
 
       - id: build-matrix
-        name: Build matrix from Catapult networks
+        name: Build matrix from Catapult networks (testnets only)
         shell: bash
         run: |
           set -euo pipefail
 
-          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" || "${GITHUB_REF_NAME}" != "master" ]]; then
-            FILTER="--only-testnets"
-          else
-            FILTER=""
-          fi
+          CHAIN_IDS=$(pnpm exec catapult list networks --simple-chain-ids --only-testnets)
 
-          # List chain IDs (one per line)
-          CHAIN_IDS=$(pnpm exec catapult list networks --simple-chain-ids ${FILTER})
-
-          # Build JSON array for matrix: [{"chainId": 1, "networkName": "Ethereum"}, ...]
           MATRIX_ITEMS=()
           while IFS= read -r CHAIN_ID; do
             [[ -z "${CHAIN_ID}" ]] && continue
             NETWORK_NAME=$(pnpm exec catapult utils chain-id-to-name "${CHAIN_ID}")
-            # Escape double quotes in network name just in case
             NETWORK_NAME_ESCAPED=${NETWORK_NAME//\"/\\\"}
             MATRIX_ITEMS+=("{\"chainId\": ${CHAIN_ID}, \"networkName\": \"${NETWORK_NAME_ESCAPED}\"}")
           done <<< "${CHAIN_IDS}"
 
           if [[ ${#MATRIX_ITEMS[@]} -eq 0 ]]; then
-            echo "No networks discovered" >&2
+            echo "No testnets discovered" >&2
             echo "matrix={\"include\":[]}" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -86,6 +77,6 @@ jobs:
           NETWORK_NAME: ${{ matrix.networkName }}
           CHAIN_ID: ${{ matrix.chainId }}
         run: |
-          echo "TODO: implement deployment for $NETWORK_NAME ($CHAIN_ID)"
+          echo "TODO: testnet deployment for $NETWORK_NAME ($CHAIN_ID)"
 
 
