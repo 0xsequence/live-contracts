@@ -1,0 +1,86 @@
+name: Deploy per network
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-per-network-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  discover-matrix:
+    name: Discover networks matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          npm ci --no-audit --no-fund --ignore-scripts
+
+      - id: build-matrix
+        name: Build matrix from Catapult networks
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" || "${GITHUB_REF_NAME}" != "master" ]]; then
+            FILTER="--only-testnets"
+          else
+            FILTER=""
+          fi
+
+          # List chain IDs (one per line)
+          CHAIN_IDS=$(./node_modules/.bin/catapult list networks --simple-chain-ids ${FILTER})
+
+          # Build JSON array for matrix: [{"chainId": 1, "networkName": "Ethereum"}, ...]
+          MATRIX_ITEMS=()
+          while IFS= read -r CHAIN_ID; do
+            [[ -z "${CHAIN_ID}" ]] && continue
+            NETWORK_NAME=$(./node_modules/.bin/catapult utils chain-id-to-name "${CHAIN_ID}")
+            # Escape double quotes in network name just in case
+            NETWORK_NAME_ESCAPED=${NETWORK_NAME//\"/\\\"}
+            MATRIX_ITEMS+=("{\"chainId\": ${CHAIN_ID}, \"networkName\": \"${NETWORK_NAME_ESCAPED}\"}")
+          done <<< "${CHAIN_IDS}"
+
+          if [[ ${#MATRIX_ITEMS[@]} -eq 0 ]]; then
+            echo "No networks discovered" >&2
+            echo "matrix={\"include\":[]}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          printf -v MATRIX_JSON '{"include":[%s]}' "$(IFS=,; echo "${MATRIX_ITEMS[*]}")"
+
+          echo "Discovered matrix: ${MATRIX_JSON}"
+          echo "matrix=${MATRIX_JSON}" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    name: "Deploy to ${{ matrix.networkName }} (${{ matrix.chainId }})"
+    needs: discover-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.discover-matrix.outputs.matrix) }}
+    steps:
+      - name: Placeholder
+        env:
+          NETWORK_NAME: ${{ matrix.networkName }}
+          CHAIN_ID: ${{ matrix.chainId }}
+        run: |
+          echo "TODO: implement deployment for $NETWORK_NAME ($CHAIN_ID)"
+
+

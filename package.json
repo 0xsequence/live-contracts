@@ -7,6 +7,6 @@
     "dry-run": "catapult dry-run"
   },
   "dependencies": {
-    "catapult": "link:../live-contracts-2"
+    "@0xsequence/catapult": "^1.1.0"
   }
 }
