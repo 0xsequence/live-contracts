@@ -141,6 +141,8 @@ jobs:
         env:
           NETWORK_NAME: ${{ matrix.networkName }}
           CHAIN_ID: ${{ matrix.chainId }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
         run: |
           set -euo pipefail
           ./node_modules/.bin/catapult run -vvv -n "${CHAIN_ID}"
