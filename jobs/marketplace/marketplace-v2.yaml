@@ -22,7 +22,8 @@ actions:
           values:
             - "0x0000000000000000000000000000000000000000000000000000000000000000"
             - "{{developer-multisig-01}}"
-    output: true
+    output:
+      address: "0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712"
     skip_condition:
       - type: "contract-exists"
         arguments:
