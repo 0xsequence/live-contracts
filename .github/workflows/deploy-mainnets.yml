@@ -98,7 +98,7 @@ jobs:
     timeout-minutes: 20
     strategy:
       fail-fast: false
-      max-parallel: 3
+      max-parallel: 2
       matrix: ${{ fromJSON(needs.discover-matrix.outputs.matrix) }}
     steps:
       - name: Checkout
