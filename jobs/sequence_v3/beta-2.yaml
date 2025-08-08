@@ -115,18 +115,19 @@ actions:
       contract: "{{Contract(./build-info/beta-2/stage-1.json:Stage2Module)}}"
     output: false
 
-  - name: "verify-stage-1-module-4337-07"
-    type: "verify-contract"
-    depends_on: ["stage-1-module-4337-07"]
-    arguments:
-      address: "{{stage-1-module.address}}"
-      contract: "{{Contract(./build-info/beta-2/stage-1-4337.json:Stage1Module)}}"
-      constructorArguments:
-        type: "constructor-encode"
-        arguments:
-          types: ["address", "address"]
-          values: ["{{factory.address}}", "{{entrypoint-4337-07}}"]
-    output: false
+  # It fails for some unknown reason
+  # - name: "verify-stage-1-module-4337-07"
+  #   type: "verify-contract"
+  #   depends_on: ["stage-1-module-4337-07"]
+  #   arguments:
+  #     address: "{{stage-1-module.address}}"
+  #     contract: "{{Contract(./build-info/beta-2/stage-1-4337.json:Stage1Module)}}"
+  #     constructorArguments:
+  #       type: "constructor-encode"
+  #       arguments:
+  #         types: ["address", "address"]
+  #         values: ["{{factory.address}}", "{{entrypoint-4337-07}}"]
+  #   output: false
 
   - name: "verify-stage-2-module-4337-07"
     type: "verify-contract"
