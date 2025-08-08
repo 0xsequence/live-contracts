@@ -1,51 +1,89 @@
 name: "sequence_v3/beta_4"
 version: "1"
-description: "Sequence v2 contracts (beta 4)"
+description: "Sequence v2 contracts (beta 4) (commit 3581eaf02817f0345ad554aca6fa0dc1efd6e23d)"
 
 actions:
   - name: "factory"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/sequence-v3-beta-4.json:Factory).creationCode}}"
+      creationCode: "{{Contract(./build-info/beta-4/all-contracts.json:Factory).creationCode}}"
     output: true
 
-  - name: "stage-1-module-no-4337"
+  - name: "stage-1-module"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/sequence-v3-beta-4.json:Stage1Module).creationCode}}"
+          creationCode: "{{Contract(./build-info/beta-4/all-contracts.json:Stage1Module).creationCode}}"
           types: ["address", "address"]
           values: ["{{factory.address}}", "{{address-zero}}"]
     output: true
 
-  - name: "stage-1-module-4337-0-7"
+  - name: "stage-1-module-4337-07"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/sequence-v3-beta-4.json:Stage1Module).creationCode}}"
+          creationCode: "{{Contract(./build-info/beta-4/all-contracts.json:Stage1Module).creationCode}}"
           types: ["address", "address"]
           values: ["{{factory.address}}", "{{entrypoint-4337-07}}"]
+    output: true
+
+  - name: "stage-2-module"
+    depends_on: ["stage-1-module"]
+    template: "static"
+    arguments:
+      value:
+        type: "call"
+        arguments:
+          to: "{{stage-1-module.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+    output: true
+
+  - name: "stage-2-module-4337-07"
+    depends_on: ["stage-1-module-4337-07"]
+    template: "static"
+    arguments:
+      value:
+        type: "call"
+        arguments:
+          to: "{{stage-1-module-4337-07.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
     output: true
 
   - name: "guest"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/sequence-v3-beta-4.json:Guest).creationCode}}"
+      creationCode: "{{Contract(./build-info/beta-4/all-contracts.json:Guest).creationCode}}"
     output: true
 
   - name: "passkeys"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/sequence-v3-beta-4.json:Passkeys).creationCode}}"
+      creationCode: "{{Contract(./build-info/beta-4/all-contracts.json:Passkeys).creationCode}}"
+    output: true
+
+  - name: "recovery"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-4/all-contracts.json:Recovery).creationCode}}"
+    output: true
+
+  - name: "sessions"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-4/all-contracts.json:SessionManager).creationCode}}"
     output: true
 
   - name: "verify-factory"
@@ -53,15 +91,15 @@ actions:
     depends_on: ["factory"]
     arguments:
       address: "{{factory.address}}"
-      contract: "{{Contract(./build-info/sequence-v3-beta-4.json:Factory)}}"
+      contract: "{{Contract(./build-info/beta-4/all-contracts.json:Factory)}}"
     output: false
 
-  - name: "verify-stage-1-module-no-4337"
+  - name: "verify-stage-1-module"
     type: "verify-contract"
-    depends_on: ["stage-1-module-no-4337"]
+    depends_on: ["stage-1-module"]
     arguments:
-      address: "{{stage-1-module-no-4337.address}}"
-      contract: "{{Contract(./build-info/sequence-v3-beta-4.json:Stage1Module)}}"
+      address: "{{stage-1-module.address}}"
+      contract: "{{Contract(./build-info/beta-4/all-contracts.json:Stage1Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -69,18 +107,17 @@ actions:
           values: ["{{factory.address}}", "{{address-zero}}"]
     output: false
 
-  - name: "verify-stage-2-module-no-4337"
+  - name: "verify-stage-2-module"
     type: "verify-contract"
-    depends_on: ["stage-1-module-no-4337"]
+    depends_on: ["stage-1-module"]
     arguments:
-      platform: "etherscan_v2" # Sourcify is failing due to partial match
       address:
         type: "call"
         arguments:
-          to: "{{stage-1-module-no-4337.address}}"
+          to: "{{stage-1-module.address}}"
           signature: "STAGE_2_IMPLEMENTATION() returns (address)"
           values: []
-      contract: "{{Contract(./build-info/sequence-v3-beta-4.json:Stage2Module)}}"
+      contract: "{{Contract(./build-info/beta-4/all-contracts.json:Stage2Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -88,12 +125,12 @@ actions:
           values: ["{{address-zero}}"]
     output: false
 
-  - name: "verify-stage-1-module-4337-0-7"
+  - name: "verify-stage-1-module-4337-07"
     type: "verify-contract"
-    depends_on: ["stage-1-module-4337-0-7"]
+    depends_on: ["stage-1-module-4337-07"]
     arguments:
-      address: "{{stage-1-module-4337-0-7.address}}"
-      contract: "{{Contract(./build-info/sequence-v3-beta-4.json:Stage1Module)}}"
+      address: "{{stage-1-module-4337-07.address}}"
+      contract: "{{Contract(./build-info/beta-4/all-contracts.json:Stage1Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -101,18 +138,17 @@ actions:
           values: ["{{factory.address}}", "{{entrypoint-4337-07}}"]
     output: false
 
-  - name: "verify-stage-2-module-4337-0-7"
+  - name: "verify-stage-2-module-4337-07"
     type: "verify-contract"
-    depends_on: ["stage-1-module-4337-0-7"]
+    depends_on: ["stage-1-module-4337-07"]
     arguments:
-      platform: "etherscan_v2" # Sourcify is failing due to partial match
       address:
         type: "call"
         arguments:
-          to: "{{stage-1-module-4337-0-7.address}}"
+          to: "{{stage-1-module-4337-07.address}}"
           signature: "STAGE_2_IMPLEMENTATION() returns (address)"
           values: []
-      contract: "{{Contract(./build-info/sequence-v3-beta-4.json:Stage2Module)}}"
+      contract: "{{Contract(./build-info/beta-4/all-contracts.json:Stage2Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -125,7 +161,7 @@ actions:
     depends_on: ["guest"]
     arguments:
       address: "{{guest.address}}"
-      contract: "{{Contract(./build-info/sequence-v3-beta-4.json:Guest)}}"
+      contract: "{{Contract(./build-info/beta-4/all-contracts.json:Guest)}}"
     output: false
 
   - name: "verify-passkeys"
@@ -133,5 +169,21 @@ actions:
     depends_on: ["passkeys"]
     arguments:
       address: "{{passkeys.address}}"
-      contract: "{{Contract(./build-info/sequence-v3-beta-4.json:Passkeys)}}"
+      contract: "{{Contract(./build-info/beta-4/all-contracts.json:Passkeys)}}"
+    output: false
+
+  - name: "verify-recovery"
+    type: "verify-contract"
+    depends_on: ["recovery"]
+    arguments:
+      address: "{{recovery.address}}"
+      contract: "{{Contract(./build-info/beta-4/all-contracts.json:Recovery)}}"
+    output: false
+
+  - name: "verify-sessions"
+    type: "verify-contract"
+    depends_on: ["sessions"]
+    arguments:
+      address: "{{sessions.address}}"
+      contract: "{{Contract(./build-info/beta-4/all-contracts.json:SessionManager)}}"
     output: false
