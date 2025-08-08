@@ -7,14 +7,14 @@ actions:
   - name: "sequence-main-module-upgradable-duo-v1"
     template: "sequence-universal-deployer-2"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/sequence-main-module-upgradable-duo-v1.json:MainModuleUpgradableDuo).creationCode}}"
     output: true
 
   - name: "sequence-main-module-upgradable-duo-v2"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/sequence-main-module-upgradable-duo-v2.json:MainModuleUpgradableDuo).creationCode}}"
     output: true
 

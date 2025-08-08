@@ -6,14 +6,14 @@ actions:
   - name: "clawback-metadata"
     type: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./artifacts/clawback-metadata.json).creationCode}}"
     output: true
 
   - name: "clawback"
     type: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:

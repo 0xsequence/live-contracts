@@ -6,7 +6,7 @@ actions:
   - name: "market"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:

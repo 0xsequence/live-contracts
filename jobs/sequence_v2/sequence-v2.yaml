@@ -7,14 +7,14 @@ actions:
   - name: "factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/sequence-factory-v2.json:Factory).creationCode}}"
     output: true
 
   - name: "main-module-upgradable"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/sequence-main-module-upgradable-v2.json:MainModuleUpgradable).creationCode}}"
     output: true
 
@@ -22,7 +22,7 @@ actions:
     template: "erc-2470"
     depends_on: ["factory", "main-module-upgradable"]
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -34,14 +34,14 @@ actions:
   - name: "sequence-utils"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/sequence-utils-v2.json:SequenceUtils).creationCode}}"
     output: true
 
   - name: "guest-module"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/sequence-guest-module-v2.json:GuestModule).creationCode}}"
     output: true
 

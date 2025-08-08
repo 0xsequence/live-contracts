@@ -8,7 +8,7 @@ actions:
   - name: "payments-factory"
     template: "sequence-universal-deployer-2"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -20,7 +20,7 @@ actions:
   - name: "payment-combiner"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./artifacts/payment-combiner.json).creationCode}}"
     output: true
     # Can't verify payment-combiner because the build-info I generate

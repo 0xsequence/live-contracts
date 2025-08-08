@@ -6,7 +6,7 @@ actions:
   - name: "erc20-factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -18,7 +18,7 @@ actions:
   - name: "erc721-factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -30,7 +30,7 @@ actions:
   - name: "erc1155-factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -42,7 +42,7 @@ actions:
   - name: "erc721-sale-factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -54,7 +54,7 @@ actions:
   - name: "erc1155-sale-factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -66,7 +66,7 @@ actions:
   - name: "erc721-soulbound-factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -78,7 +78,7 @@ actions:
   - name: "erc1155-soulbound-factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -90,7 +90,7 @@ actions:
   - name: "erc1155-lootbox-factory" # Seems unused? couldn't find from where it comes from
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -102,7 +102,7 @@ actions:
   - name: "erc1155-pack-factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:

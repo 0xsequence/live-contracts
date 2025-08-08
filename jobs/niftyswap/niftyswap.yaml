@@ -6,7 +6,7 @@ actions:
   - name: "factory-20"
     template: "sequence-universal-deployer-2"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -19,7 +19,7 @@ actions:
   - name: "exchange-20-wrapper"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./artifacts/niftyswap-exchange-20-wrapper.json).creationCode}}"
     output: true
     # Verification is not available because I cannot find the build-info for this contract

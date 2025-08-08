@@ -6,7 +6,7 @@ actions:
   - name: "market-factory"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./artifacts/market-factory-v2.json).creationCode}}"
     output: true
 
@@ -32,7 +32,7 @@ actions:
   - name: "batch-payable-helper"
     template: "erc-2470"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/batch-payable-helper.json:BatchPayableHelper).creationCode}}"
     output: true
 

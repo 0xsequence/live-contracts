@@ -7,14 +7,14 @@ actions:
   - name: "factory"
     template: "sequence-universal-deployer-2"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/sequence-factory-v1.json:Factory).creationCode}}"
     output: true
 
   - name: "guest-module"
     template: "sequence-universal-deployer-2"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/sequence-guest-module-v1.json:GuestModule).creationCode}}"
     output: true
 
@@ -22,7 +22,7 @@ actions:
     template: "sequence-universal-deployer-2"
     depends_on: ["factory"]
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -34,7 +34,7 @@ actions:
   - name: "main-module-upgradeable"
     template: "sequence-universal-deployer-2"
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode: "{{Contract(./build-info/sequence-main-module-upgradable-v1.json:MainModuleUpgradable).creationCode}}"
     output: true
 
@@ -42,7 +42,7 @@ actions:
     template: "sequence-universal-deployer-2"
     depends_on: ["factory", "main-module"]
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -55,7 +55,7 @@ actions:
     template: "sequence-universal-deployer-2"
     depends_on: ["sequence-utils"]
     arguments:
-      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
