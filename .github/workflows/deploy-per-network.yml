@@ -28,9 +28,14 @@ jobs:
         with:
           node-version: 20
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Install dependencies
         run: |
-          npm ci --no-audit --no-fund --ignore-scripts
+          pnpm install --frozen-lockfile --ignore-scripts
 
       - id: build-matrix
         name: Build matrix from Catapult networks
@@ -45,13 +50,13 @@ jobs:
           fi
 
           # List chain IDs (one per line)
-          CHAIN_IDS=$(./node_modules/.bin/catapult list networks --simple-chain-ids ${FILTER})
+          CHAIN_IDS=$(pnpm exec catapult list networks --simple-chain-ids ${FILTER})
 
           # Build JSON array for matrix: [{"chainId": 1, "networkName": "Ethereum"}, ...]
           MATRIX_ITEMS=()
           while IFS= read -r CHAIN_ID; do
             [[ -z "${CHAIN_ID}" ]] && continue
-            NETWORK_NAME=$(./node_modules/.bin/catapult utils chain-id-to-name "${CHAIN_ID}")
+            NETWORK_NAME=$(pnpm exec catapult utils chain-id-to-name "${CHAIN_ID}")
             # Escape double quotes in network name just in case
             NETWORK_NAME_ESCAPED=${NETWORK_NAME//\"/\\\"}
             MATRIX_ITEMS+=("{\"chainId\": ${CHAIN_ID}, \"networkName\": \"${NETWORK_NAME_ESCAPED}\"}")
