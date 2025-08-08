@@ -1,9 +1,287 @@
-- name: "Arbitrum One"
-  chainId: 42161
-  rpcUrl: "https://nodes.sequence.app/arbitrum"
-  supports: ["etherscan_v2", "sourcify"]
+- name: Ethereum Mainnet
+  chainId: 1
+  rpcUrl: https://nodes.sequence.app/mainnet
+  supports:
+    - etherscan_v2
+    - sourcify
 
-- name: "Arbitrum Nova"
+- name: Optimism
+  chainId: 10
+  rpcUrl: https://nodes.sequence.app/optimism
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: Telos EVM
+  chainId: 40
+  rpcUrl: https://nodes.sequence.app/telos
+  supports:
+    - sourcify
+
+- name: Telos Testnet
+  chainId: 41
+  rpcUrl: https://nodes.sequence.app/telos-testnet
+  supports:
+    - sourcify
+  testnet: true
+
+- name: BNB Smart Chain
+  chainId: 56
+  rpcUrl: https://nodes.sequence.app/bsc
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: BNB Smart Chain Testnet
+  chainId: 97
+  rpcUrl: https://nodes.sequence.app/bsc-testnet
+  supports:
+    - etherscan_v2
+    - sourcify
+  testnet: true
+
+- name: Gnosis Chain
+  chainId: 100
+  rpcUrl: https://nodes.sequence.app/gnosis
+  supports:
+    - sourcify
+
+- name: Polygon
+  chainId: 137
+  rpcUrl: https://nodes.sequence.app/polygon
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: Polygon zkEVM
+  chainId: 1101
+  rpcUrl: https://nodes.sequence.app/polygon-zkevm
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: Moonbeam
+  chainId: 1284
+  rpcUrl: https://nodes.sequence.app/moonbeam
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: Moonbase Alpha
+  chainId: 1287
+  rpcUrl: https://nodes.sequence.app/moonbase-alpha
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: Soneium
+  chainId: 1868
+  rpcUrl: https://nodes.sequence.app/soneium
+
+- name: Soneium Minato
+  chainId: 1946
+  rpcUrl: https://nodes.sequence.app/soneium-minato
+  testnet: true
+
+- name: B3 Sepolia
+  chainId: 1993
+  rpcUrl: https://nodes.sequence.app/b3-sepolia
+  testnet: true
+
+- name: LAOS
+  chainId: 6283
+  rpcUrl: https://nodes.sequence.app/laos
+
+- name: Rootnet
+  chainId: 7668
+  rpcUrl: https://nodes.sequence.app/rootnet
+  supports:
+    - sourcify
+
+- name: Rootnet Porcini
+  chainId: 7672
+  rpcUrl: https://nodes.sequence.app/rootnet-porcini
+  supports:
+    - sourcify
+  testnet: true
+
+- name: B3
+  chainId: 8333
+  rpcUrl: https://nodes.sequence.app/b3
+
+- name: Base
+  chainId: 8453
+  rpcUrl: https://nodes.sequence.app/base
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: Monad Testnet
+  chainId: 10143
+  rpcUrl: https://nodes.sequence.app/monad-testnet
+  testnet: true
+
+- name: Immutable zkEVM
+  chainId: 13371
+  rpcUrl: https://nodes.sequence.app/immutable-zkevm
+
+- name: Immutable zkEVM Testnet
+  chainId: 13473
+  rpcUrl: https://nodes.sequence.app/immutable-zkevm-testnet
+  testnet: true
+
+- name: HOMEVERSE
+  chainId: 19011
+  rpcUrl: https://nodes.sequence.app/homeverse
+  supports:
+    - sourcify
+
+- name: ApeChain Testnet
+  chainId: 33111
+  rpcUrl: https://nodes.sequence.app/apechain-testnet
+  supports:
+    - sourcify
+  testnet: true
+
+- name: ApeChain
+  chainId: 33139
+  rpcUrl: https://nodes.sequence.app/apechain
+
+- name: HOMEVERSE Testnet
+  chainId: 40875
+  rpcUrl: https://nodes.sequence.app/homeverse-testnet
+  testnet: true
+
+- name: Arbitrum One
+  chainId: 42161
+  rpcUrl: https://nodes.sequence.app/arbitrum
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: Arbitrum Nova
   chainId: 42170
-  rpcUrl: "https://nodes.sequence.app/arbitrum-nova"
-  supports: ["etherscan_v2", "sourcify"]
+  rpcUrl: https://nodes.sequence.app/arbitrum-nova
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: Etherlink
+  chainId: 42793
+  rpcUrl: https://nodes.sequence.app/etherlink
+  supports:
+    - sourcify
+
+- name: Avalanche Fuji
+  chainId: 43113
+  rpcUrl: https://nodes.sequence.app/avalanche-testnet
+  supports:
+    - etherscan_v2
+    - sourcify
+  testnet: true
+
+- name: Avalanche C-Chain
+  chainId: 43114
+  rpcUrl: https://nodes.sequence.app/avalanche
+  supports:
+    - etherscan_v2
+    - sourcify
+
+- name: Somnia Testnet
+  chainId: 50312
+  rpcUrl: https://nodes.sequence.app/somnia-testnet
+  testnet: true
+
+- name: LAOS Sigma Testnet
+  chainId: 62850
+  rpcUrl: https://nodes.sequence.app/laos-sigma-testnet
+  testnet: true
+
+- name: Polygon Amoy
+  chainId: 80002
+  rpcUrl: https://nodes.sequence.app/amoy
+  supports:
+    - sourcify
+  testnet: true
+
+- name: Blast
+  chainId: 81457
+  rpcUrl: https://nodes.sequence.app/blast
+
+- name: Base Sepolia
+  chainId: 84532
+  rpcUrl: https://nodes.sequence.app/base-sepolia
+  supports:
+    - etherscan_v2
+    - sourcify
+  testnet: true
+
+- name: Borne Testnet
+  chainId: 94984
+  rpcUrl: https://nodes.sequence.app/borne-testnet
+  testnet: true
+
+- name: Etherlink Testnet
+  chainId: 128123
+  rpcUrl: https://nodes.sequence.app/etherlink-testnet
+  supports:
+    - sourcify
+  testnet: true
+
+- name: Arbitrum Sepolia
+  chainId: 421614
+  rpcUrl: https://nodes.sequence.app/arbitrum-sepolia
+  supports:
+    - etherscan_v2
+    - sourcify
+  testnet: true
+
+- name: Xai
+  chainId: 660279
+  rpcUrl: https://nodes.sequence.app/xai
+  supports:
+    - sourcify
+
+- name: Sepolia
+  chainId: 11155111
+  rpcUrl: https://nodes.sequence.app/sepolia
+  supports:
+    - etherscan_v2
+    - sourcify
+  testnet: true
+
+- name: Optimism Sepolia
+  chainId: 11155420
+  rpcUrl: https://nodes.sequence.app/optimism-sepolia
+  supports:
+    - etherscan_v2
+    - sourcify
+  testnet: true
+
+- name: Toy Testnet
+  chainId: 21000000
+  rpcUrl: https://nodes.sequence.app/toy-testnet
+  supports:
+    - sourcify
+  testnet: true
+
+- name: SKALE Nebula Testnet
+  chainId: 37084624
+  rpcUrl: https://nodes.sequence.app/skale-nebula-testnet
+  testnet: true
+
+- name: Blast Sepolia
+  chainId: 168587773
+  rpcUrl: https://nodes.sequence.app/blast-sepolia
+  testnet: true
+
+- name: SKALE Nebula
+  chainId: 1482601649
+  rpcUrl: https://nodes.sequence.app/skale-nebula
+
+- name: Xai Sepolia
+  chainId: 37714555429
+  rpcUrl: https://nodes.sequence.app/xai-sepolia
+  supports:
+    - sourcify
+  testnet: true
