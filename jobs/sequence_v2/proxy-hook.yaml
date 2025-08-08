@@ -2,7 +2,10 @@ name: "proxy-hook"
 version: "1"
 description: "Immutable chains require proxies to have an implementation method, this hook implements it."
 
-skip_networks: [1]
+only_networks:
+  - 13371   # Immutable zkEVM Mainnet
+  - 13473   # Immutable zkEVM Testnet
+  - 15003   # Immutable zkEVM Devnet
 
 actions:
   - name: "wallet-proxy-hook"
