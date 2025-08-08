@@ -2,6 +2,8 @@ name: "sequence_v3/beta_2"
 version: "1"
 description: "Sequence v2 contracts (beta 2) (dev2 on sequence.js)"
 
+min_evm_version: "shanghai"
+
 actions:
   - name: "factory"
     template: "erc-2470"

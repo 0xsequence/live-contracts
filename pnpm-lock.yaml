@@ -9,13 +9,13 @@ importers:
   .:
     dependencies:
       '@0xsequence/catapult':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.2.1
+        version: 1.2.1
 
 packages:
 
-  '@0xsequence/catapult@1.1.0':
-    resolution: {integrity: sha512-zkdZSduVz0IBoaDEk8ETWYM1U4DLduLVDcV4ranqgn++Hfh8tXD66LmSzZOO7YfN9cAG2pC297ZdFHAnFh68Pw==}
+  '@0xsequence/catapult@1.2.1':
+    resolution: {integrity: sha512-5AuPMLXH/82Dbo1TM7DaEZiiBoCwHMsmkQY9rjSxJKhh6FkPZNaMW120Ihw9MD1oLCH2aKq9cm7+kkcwdLxCmQ==}
     engines: {node: '>=16.0.0'}
     hasBin: true
 
@@ -181,7 +181,7 @@ packages:
 
 snapshots:
 
-  '@0xsequence/catapult@1.1.0':
+  '@0xsequence/catapult@1.2.1':
     dependencies:
       chalk: 4.1.2
       commander: 11.1.0

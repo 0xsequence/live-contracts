@@ -1,40 +1,39 @@
 - name: Ethereum Mainnet
   chainId: 1
-  rpcUrl: https://nodes.sequence.app/mainnet
+  rpcUrl: "https://nodes.sequence.app/mainnet/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Optimism
   chainId: 10
-  rpcUrl: https://nodes.sequence.app/optimism
+  rpcUrl: "https://nodes.sequence.app/optimism/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Telos EVM
   chainId: 40
-  rpcUrl: https://nodes.sequence.app/telos
+  rpcUrl: "https://nodes.sequence.app/telos/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
 
 - name: Telos Testnet
   chainId: 41
-  rpcUrl: https://nodes.sequence.app/telos-testnet
-  supports:
-    - sourcify
+  rpcUrl: "https://nodes.sequence.app/telos-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
+  evmVersion: "paris"
 
 - name: BNB Smart Chain
   chainId: 56
-  rpcUrl: https://nodes.sequence.app/bsc
+  rpcUrl: "https://nodes.sequence.app/bsc/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: BNB Smart Chain Testnet
   chainId: 97
-  rpcUrl: https://nodes.sequence.app/bsc-testnet
+  rpcUrl: "https://nodes.sequence.app/bsc-testnet/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
@@ -42,139 +41,139 @@
 
 - name: Gnosis Chain
   chainId: 100
-  rpcUrl: https://nodes.sequence.app/gnosis
+  rpcUrl: "https://nodes.sequence.app/gnosis/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
 
 - name: Polygon
   chainId: 137
-  rpcUrl: https://nodes.sequence.app/polygon
+  rpcUrl: "https://nodes.sequence.app/polygon/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Polygon zkEVM
   chainId: 1101
-  rpcUrl: https://nodes.sequence.app/polygon-zkevm
+  rpcUrl: "https://nodes.sequence.app/polygon-zkevm/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Moonbeam
   chainId: 1284
-  rpcUrl: https://nodes.sequence.app/moonbeam
+  rpcUrl: "https://nodes.sequence.app/moonbeam/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Moonbase Alpha
   chainId: 1287
-  rpcUrl: https://nodes.sequence.app/moonbase-alpha
+  rpcUrl: "https://nodes.sequence.app/moonbase-alpha/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Soneium
   chainId: 1868
-  rpcUrl: https://nodes.sequence.app/soneium
+  rpcUrl: "https://nodes.sequence.app/soneium/{{RPC_BUILDER_KEY}}"
 
 - name: Soneium Minato
   chainId: 1946
-  rpcUrl: https://nodes.sequence.app/soneium-minato
+  rpcUrl: "https://nodes.sequence.app/soneium-minato/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: B3 Sepolia
   chainId: 1993
-  rpcUrl: https://nodes.sequence.app/b3-sepolia
+  rpcUrl: "https://nodes.sequence.app/b3-sepolia/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: LAOS
   chainId: 6283
-  rpcUrl: https://nodes.sequence.app/laos
+  rpcUrl: "https://nodes.sequence.app/laos/{{RPC_BUILDER_KEY}}"
 
 - name: Rootnet
   chainId: 7668
-  rpcUrl: https://nodes.sequence.app/rootnet
+  rpcUrl: "https://nodes.sequence.app/rootnet/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
 
 - name: Rootnet Porcini
   chainId: 7672
-  rpcUrl: https://nodes.sequence.app/rootnet-porcini
+  rpcUrl: "https://nodes.sequence.app/rootnet-porcini/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
   testnet: true
 
 - name: B3
   chainId: 8333
-  rpcUrl: https://nodes.sequence.app/b3
+  rpcUrl: "https://nodes.sequence.app/b3/{{RPC_BUILDER_KEY}}"
 
 - name: Base
   chainId: 8453
-  rpcUrl: https://nodes.sequence.app/base
+  rpcUrl: "https://nodes.sequence.app/base/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Monad Testnet
   chainId: 10143
-  rpcUrl: https://nodes.sequence.app/monad-testnet
+  rpcUrl: "https://nodes.sequence.app/monad-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: Immutable zkEVM
   chainId: 13371
-  rpcUrl: https://nodes.sequence.app/immutable-zkevm
+  rpcUrl: "https://nodes.sequence.app/immutable-zkevm/{{RPC_BUILDER_KEY}}"
 
 - name: Immutable zkEVM Testnet
   chainId: 13473
-  rpcUrl: https://nodes.sequence.app/immutable-zkevm-testnet
+  rpcUrl: "https://nodes.sequence.app/immutable-zkevm-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: HOMEVERSE
   chainId: 19011
-  rpcUrl: https://nodes.sequence.app/homeverse
+  rpcUrl: "https://nodes.sequence.app/homeverse/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
 
 - name: ApeChain Testnet
   chainId: 33111
-  rpcUrl: https://nodes.sequence.app/apechain-testnet
+  rpcUrl: "https://nodes.sequence.app/apechain-testnet/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
   testnet: true
 
 - name: ApeChain
   chainId: 33139
-  rpcUrl: https://nodes.sequence.app/apechain
+  rpcUrl: "https://nodes.sequence.app/apechain/{{RPC_BUILDER_KEY}}"
 
 - name: HOMEVERSE Testnet
   chainId: 40875
-  rpcUrl: https://nodes.sequence.app/homeverse-testnet
+  rpcUrl: "https://nodes.sequence.app/homeverse-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: Arbitrum One
   chainId: 42161
-  rpcUrl: https://nodes.sequence.app/arbitrum
+  rpcUrl: "https://nodes.sequence.app/arbitrum/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Arbitrum Nova
   chainId: 42170
-  rpcUrl: https://nodes.sequence.app/arbitrum-nova
+  rpcUrl: "https://nodes.sequence.app/arbitrum-nova/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Etherlink
   chainId: 42793
-  rpcUrl: https://nodes.sequence.app/etherlink
+  rpcUrl: "https://nodes.sequence.app/etherlink/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
 
 - name: Avalanche Fuji
   chainId: 43113
-  rpcUrl: https://nodes.sequence.app/avalanche-testnet
+  rpcUrl: "https://nodes.sequence.app/avalanche-testnet/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
@@ -182,35 +181,35 @@
 
 - name: Avalanche C-Chain
   chainId: 43114
-  rpcUrl: https://nodes.sequence.app/avalanche
+  rpcUrl: "https://nodes.sequence.app/avalanche/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
 
 - name: Somnia Testnet
   chainId: 50312
-  rpcUrl: https://nodes.sequence.app/somnia-testnet
+  rpcUrl: "https://nodes.sequence.app/somnia-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: LAOS Sigma Testnet
   chainId: 62850
-  rpcUrl: https://nodes.sequence.app/laos-sigma-testnet
+  rpcUrl: "https://nodes.sequence.app/laos-sigma-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: Polygon Amoy
   chainId: 80002
-  rpcUrl: https://nodes.sequence.app/amoy
+  rpcUrl: "https://nodes.sequence.app/amoy/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
   testnet: true
 
 - name: Blast
   chainId: 81457
-  rpcUrl: https://nodes.sequence.app/blast
+  rpcUrl: "https://nodes.sequence.app/blast/{{RPC_BUILDER_KEY}}"
 
 - name: Base Sepolia
   chainId: 84532
-  rpcUrl: https://nodes.sequence.app/base-sepolia
+  rpcUrl: "https://nodes.sequence.app/base-sepolia/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
@@ -218,19 +217,19 @@
 
 - name: Borne Testnet
   chainId: 94984
-  rpcUrl: https://nodes.sequence.app/borne-testnet
+  rpcUrl: "https://nodes.sequence.app/borne-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: Etherlink Testnet
   chainId: 128123
-  rpcUrl: https://nodes.sequence.app/etherlink-testnet
+  rpcUrl: "https://nodes.sequence.app/etherlink-testnet/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
   testnet: true
 
 - name: Arbitrum Sepolia
   chainId: 421614
-  rpcUrl: https://nodes.sequence.app/arbitrum-sepolia
+  rpcUrl: "https://nodes.sequence.app/arbitrum-sepolia/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
@@ -238,13 +237,13 @@
 
 - name: Xai
   chainId: 660279
-  rpcUrl: https://nodes.sequence.app/xai
+  rpcUrl: "https://nodes.sequence.app/xai/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
 
 - name: Sepolia
   chainId: 11155111
-  rpcUrl: https://nodes.sequence.app/sepolia
+  rpcUrl: "https://nodes.sequence.app/sepolia/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
@@ -252,7 +251,7 @@
 
 - name: Optimism Sepolia
   chainId: 11155420
-  rpcUrl: https://nodes.sequence.app/optimism-sepolia
+  rpcUrl: "https://nodes.sequence.app/optimism-sepolia/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
     - sourcify
@@ -260,28 +259,28 @@
 
 - name: Toy Testnet
   chainId: 21000000
-  rpcUrl: https://nodes.sequence.app/toy-testnet
+  rpcUrl: "https://nodes.sequence.app/toy-testnet/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
   testnet: true
 
 - name: SKALE Nebula Testnet
   chainId: 37084624
-  rpcUrl: https://nodes.sequence.app/skale-nebula-testnet
+  rpcUrl: "https://nodes.sequence.app/skale-nebula-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: Blast Sepolia
   chainId: 168587773
-  rpcUrl: https://nodes.sequence.app/blast-sepolia
+  rpcUrl: "https://nodes.sequence.app/blast-sepolia/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: SKALE Nebula
   chainId: 1482601649
-  rpcUrl: https://nodes.sequence.app/skale-nebula
+  rpcUrl: "https://nodes.sequence.app/skale-nebula/{{RPC_BUILDER_KEY}}"
 
 - name: Xai Sepolia
   chainId: 37714555429
-  rpcUrl: https://nodes.sequence.app/xai-sepolia
+  rpcUrl: "https://nodes.sequence.app/xai-sepolia/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
   testnet: true

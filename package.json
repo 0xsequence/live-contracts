@@ -7,6 +7,6 @@
     "dry-run": "catapult dry-run"
   },
   "dependencies": {
-    "@0xsequence/catapult": "^1.1.0"
+    "@0xsequence/catapult": "^1.2.1"
   }
 }
