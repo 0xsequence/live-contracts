@@ -22,7 +22,6 @@
   chainId: 41
   rpcUrl: "https://nodes.sequence.app/telos-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
-  evmVersion: "paris"
 
 - name: BNB Smart Chain
   chainId: 56
