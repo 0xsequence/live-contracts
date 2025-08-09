@@ -4,9 +4,12 @@
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
-    "dry-run": "catapult dry-run"
+    "deploy": "catapult run",
+    "dry-run": "catapult dry-run",
+    "download-build-info": "catapult etherscan source",
+    "gen-table": "catapult utils gen-table ./output"
   },
   "dependencies": {
-    "@0xsequence/catapult": "^1.2.1"
+    "@0xsequence/catapult": "^1.3.1"
   }
 }
