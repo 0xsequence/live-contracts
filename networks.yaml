@@ -214,11 +214,6 @@
     - sourcify
   testnet: true
 
-- name: Borne Testnet
-  chainId: 94984
-  rpcUrl: "https://nodes.sequence.app/borne-testnet/{{RPC_BUILDER_KEY}}"
-  testnet: true
-
 - name: Etherlink Testnet
   chainId: 128123
   rpcUrl: "https://nodes.sequence.app/etherlink-testnet/{{RPC_BUILDER_KEY}}"
