@@ -283,3 +283,12 @@
   chainId: 11690
   rpcUrl: "https://nodes.sequence.app/incentiv-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
+
+- name: SEI Testnet
+  chainId: 1328
+  rpcUrl: "https://nodes.sequence.app/sei-testnet/{{RPC_BUILDER_KEY}}"
+  testnet: true
+
+- name: SEI
+  chainId: 1329
+  rpcUrl: "https://nodes.sequence.app/sei/{{RPC_BUILDER_KEY}}"
