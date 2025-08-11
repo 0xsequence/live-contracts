@@ -278,3 +278,8 @@
   supports:
     - sourcify
   testnet: true
+
+- name: Incentiv Testnet
+  chainId: 11690
+  rpcUrl: "https://nodes.sequence.app/incentiv-testnet/{{RPC_BUILDER_KEY}}"
+  testnet: true
