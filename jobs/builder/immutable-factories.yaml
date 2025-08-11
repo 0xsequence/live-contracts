@@ -6,6 +6,7 @@ only_networks:
   - 13371   # Immutable zkEVM Mainnet
   - 13473   # Immutable zkEVM Testnet
   - 15003   # Immutable zkEVM Devnet
+  - 31337   # Anvil
 
 actions:
   - name: "erc712-operator-enforced-factory"
