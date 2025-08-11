@@ -1,0 +1,29 @@
+name: "marketplace-v1"
+version: "1"
+description: ""
+
+actions:
+  - name: "market"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/marketplace-v1.json:SequenceMarket).creationCode}}"
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: true
+
+  - name: "verify-market"
+    type: "verify-contract"
+    depends_on: ["market"]
+    arguments:
+      address: "{{market.address}}"
+      contract: "{{Contract(./build-info/marketplace-v1.json:SequenceMarket)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: false

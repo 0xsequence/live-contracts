@@ -1,0 +1,16 @@
+name: "proxy-hook"
+version: "1"
+description: "Immutable chains require proxies to have an implementation method, this hook implements it."
+
+only_networks:
+  - 13371   # Immutable zkEVM Mainnet
+  - 13473   # Immutable zkEVM Testnet
+  - 15003   # Immutable zkEVM Devnet
+
+actions:
+  - name: "wallet-proxy-hook"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./artifacts/proxy-hook.json).creationCode}}"
+    output: true

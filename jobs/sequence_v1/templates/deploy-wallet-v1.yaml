@@ -1,0 +1,71 @@
+name: "deploy-wallet-v1"
+version: "2"
+type: "template"
+
+arguments:
+  implementation:
+    type: "address"
+  salt:
+    type: "bytes32"
+
+returns:
+  address:
+    type: "address"
+
+setup:
+  - type: "job-completed"
+    arguments:
+      job: "sequence-v1"
+
+# Use assured-deployment wrapper to ensure top-level revert on failed deploy (improves gas estimation)
+actions:
+  - name: "deploy"
+    type: "assured-deployment"
+    arguments:
+      targetAddress:
+        type: "compute-create2"
+        arguments:
+          deployerAddress: "{{sequence-v1.factory.address}}"
+          salt: "{{salt}}"
+          initCode:
+            type: "constructor-encode"
+            arguments:
+              creationCode: "0x603a600e3d39601a805130553df3363d3d373d3d3d363d30545af43d82803e903d91601857fd5bf3"
+              types: ["address"]
+              values: ["{{implementation}}"]
+      factoryAddress: "{{sequence-v1.factory.address}}"
+      callData:
+        type: "abi-encode"
+        arguments:
+          signature: "deploy(address,bytes32)"
+          values:
+            - "{{implementation}}"
+            - "{{salt}}"
+
+skip_condition:
+  - type: "contract-exists"
+    arguments:
+      address:
+        type: "compute-create2"
+        arguments:
+          deployerAddress: "{{sequence-v1.factory.address}}"
+          salt: "{{salt}}"
+          initCode:
+            type: "constructor-encode"
+            arguments:
+              creationCode: "0x603a600e3d39601a805130553df3363d3d373d3d3d363d30545af43d82803e903d91601857fd5bf3"
+              types: ["address"]
+              values: ["{{implementation}}"]
+
+outputs:
+  address:
+    type: "compute-create2"
+    arguments:
+      deployerAddress: "{{sequence-v1.factory.address}}"
+      salt: "{{salt}}"
+      initCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "0x603a600e3d39601a805130553df3363d3d373d3d3d363d30545af43d82803e903d91601857fd5bf3"
+          types: ["address"]
+          values: ["{{implementation}}"]

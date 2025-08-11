@@ -1,0 +1,12 @@
+name: "developer-multisig"
+version: "1"
+description: "Deploys a multisig that is used as owner of other contracts"
+depends_on: ["sequence-v2"]
+
+actions:
+  - name: "developer-multisig"
+    template: "deploy-wallet-v2"
+    arguments:
+      implementation: "{{sequence-v2.main-module.address}}"
+      salt: "0x6562ac5c1205604d224a28401931308d58d852d725ebc6dcf4e3c20c2037fd12"
+    output: true

@@ -1,0 +1,86 @@
+name: "sequence_v3/beta_3"
+version: "1"
+description: "Sequence v2 contracts (beta 3) (Contracts used by dev version of Trails/Anypay)"
+
+min_evm_version: "shanghai"
+
+actions:
+  - name: "factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-3/factory.json:Factory).creationCode}}"
+    output: true
+
+  - name: "stage-1-module"
+    template: "erc-2470"
+    depends_on: ["factory"]
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/beta-3/stage-1.json:Stage1Module).creationCode}}"
+          types: ["address"]
+          values: ["{{factory.address}}"]
+    output: true
+
+  - name: "stage-2-module"
+    depends_on: ["stage-1-module"]
+    template: "static"
+    arguments:
+      value:
+        type: "call"
+        arguments:
+          to: "{{stage-1-module.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+    output: true
+
+  - name: "guest"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./artifacts/beta-3/guest.json).creationCode}}"
+    output: true
+
+  - name: "sessions"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./artifacts/beta-3/sessions.json).creationCode}}"
+    output: true
+
+  - name: "verify-factory"
+    type: "verify-contract"
+    depends_on: ["factory"]
+    arguments:
+      address: "{{factory.address}}"
+      contract: "{{Contract(./build-info/beta-3/factory.json:Factory)}}"
+    output: false
+
+  - name: "verify-stage-1-module"
+    type: "verify-contract"
+    depends_on: ["stage-1-module"]
+    arguments:
+      address: "{{stage-1-module.address}}"
+      contract: "{{Contract(./build-info/beta-3/stage-1.json:Stage1Module)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{factory.address}}"]
+    output: false
+
+  - name: "verify-stage-2"
+    type: "verify-contract"
+    depends_on: ["stage-1-module"]
+    arguments:
+      address:
+        type: "call"
+        arguments:
+          to: "{{stage-1-module.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+      contract: "{{Contract(./build-info/beta-3/stage-2.json:Stage2Module)}}"
+    output: false

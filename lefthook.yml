@@ -1,9 +1,6 @@
 pre-commit:
   parallel: false
   commands:
-    lint:
-      glob: '*.{js,ts,jsx,tsx}'
-      run: yarn eslint -c .eslintrc.js {staged_files}
-    format:
-      glob: '*.{js,ts,jsx,tsx,md,json}'
-      run: yarn prettier --write {staged_files} && git add {staged_files}
+    dry-run:
+      glob: '*.{yaml,yml}'
+      run: pnpm run dry-run

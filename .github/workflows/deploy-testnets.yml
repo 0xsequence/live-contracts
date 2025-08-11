@@ -1,0 +1,212 @@
+name: Deploy testnets
+
+on:
+  push:
+    branches:
+      - "**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-testnets-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  discover-matrix:
+    name: Discover testnet matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Determine pnpm store path
+        id: pnpm-store
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-node-20-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-20-pnpm-store-
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-20-node_modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-20-node_modules-
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts
+
+      - id: build-matrix
+        name: Build matrix from Catapult networks (testnets only)
+        shell: bash
+        env:
+          RPC_BUILDER_KEY: ${{ secrets.RPC_BUILDER_KEY }}
+        run: |
+          set -euo pipefail
+
+          CHAIN_IDS=$(pnpm exec catapult list networks --simple-chain-ids --only-testnets)
+
+          MATRIX_ITEMS=()
+          while IFS= read -r CHAIN_ID; do
+            [[ -z "${CHAIN_ID}" ]] && continue
+            NETWORK_NAME=$(pnpm exec catapult utils chain-id-to-name "${CHAIN_ID}")
+            NETWORK_NAME_ESCAPED=${NETWORK_NAME//\"/\\\"}
+            MATRIX_ITEMS+=("{\"chainId\": ${CHAIN_ID}, \"networkName\": \"${NETWORK_NAME_ESCAPED}\"}")
+          done <<< "${CHAIN_IDS}"
+
+          if [[ ${#MATRIX_ITEMS[@]} -eq 0 ]]; then
+            echo "No testnets discovered" >&2
+            echo "matrix={\"include\":[]}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          printf -v MATRIX_JSON '{"include":[%s]}' "$(IFS=,; echo "${MATRIX_ITEMS[*]}")"
+
+          echo "Discovered matrix: ${MATRIX_JSON}"
+          echo "matrix=${MATRIX_JSON}" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    name: "Deploy to ${{ matrix.networkName }} (${{ matrix.chainId }})"
+    needs: discover-matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix: ${{ fromJSON(needs.discover-matrix.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Determine pnpm store path
+        id: pnpm-store
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-node-20-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-20-pnpm-store-
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-20-node_modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-20-node_modules-
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Run Catapult
+        env:
+          NETWORK_NAME: ${{ matrix.networkName }}
+          CHAIN_ID: ${{ matrix.chainId }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+          RPC_BUILDER_KEY: ${{ secrets.RPC_BUILDER_KEY }}
+        run: |
+          set -euo pipefail
+          ./node_modules/.bin/catapult run -vvv -n "${CHAIN_ID}"
+
+      - name: Upload outputs artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: catapult-outputs-${{ matrix.networkName }}-${{ matrix.chainId }}
+          path: outputs/**
+          if-no-files-found: ignore
+
+
+  dry-run:
+    name: Catapult dry-run
+    if: ${{ always() }}
+    needs:
+      - discover-matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Determine pnpm store path
+        id: pnpm-store
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-node-20-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-20-pnpm-store-
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-20-node_modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-20-node_modules-
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Run Catapult dry-run
+        run: |
+          set -euo pipefail
+          RPC_BUILDER_KEY=test ./node_modules/.bin/catapult dry-run -vvv
+

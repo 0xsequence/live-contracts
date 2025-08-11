@@ -1,0 +1,81 @@
+name: "sequence-v1"
+version: "1"
+description: "Deploy Sequence v1 wallet contracts"
+depends_on: []
+
+actions:
+  - name: "factory"
+    template: "sequence-universal-deployer-2"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/sequence-factory-v1.json:Factory).creationCode}}"
+    output: true
+
+  - name: "guest-module"
+    template: "sequence-universal-deployer-2"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/sequence-guest-module-v1.json:GuestModule).creationCode}}"
+    output: true
+
+  - name: "main-module"
+    template: "sequence-universal-deployer-2"
+    depends_on: ["factory"]
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/sequence-main-module-v1.json:MainModule).creationCode}}"
+          types: ["address"]
+          values: ["{{factory.address}}"]
+    output: true
+
+  - name: "main-module-upgradeable"
+    template: "sequence-universal-deployer-2"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/sequence-main-module-upgradable-v1.json:MainModuleUpgradable).creationCode}}"
+    output: true
+
+  - name: "sequence-utils"
+    template: "sequence-universal-deployer-2"
+    depends_on: ["factory", "main-module"]
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/sequence-utils-v1.json:SequenceUtils).creationCode}}"
+          types: ["address", "address"]
+          values: ["{{factory.address}}", "{{main-module.address}}"]
+    output: true
+
+  - name: "require-fresh-signer"
+    template: "sequence-universal-deployer-2"
+    depends_on: ["sequence-utils"]
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/sequence-fresh-signer-v1.json:RequireFreshSigner).creationCode}}"
+          types: ["address"]
+          values: ["{{sequence-utils.address}}"]
+    output: true
+
+  # I can't find the correct build-info for the V1 contracts
+  # but they are already verified on most networks, so it is not critical
+  #
+  # - name: "verify-factory"
+  #   type: "verify-contract"
+  #   arguments:
+  #     address: "{{factory.address}}"
+  #     contract: "{{Contract(./build-info/sequence-factory-v1.json:Factory)}}"
+  #   output: false
+  # - name: "verify-guest-module"
+  #   type: "verify-contract"
+  #   arguments:
+  #     address: "{{guest-module.address}}"
+  #     contract: "{{Contract(./build-info/sequence-guest-module-v1.json:GuestModule)}}"
+  #   output: false

@@ -1,0 +1,83 @@
+name: "sequence_v3/beta_1"
+version: "1"
+description: "Sequence v2 contracts (beta 1) (dev1 on sequence.js)"
+
+skip_networks: [1]
+min_evm_version: "shanghai"
+
+actions:
+  - name: "factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./artifacts/beta-1/factory.json).creationCode}}"
+    output: true
+
+  - name: "stage-1"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./artifacts/beta-1/stage-1.json).creationCode}}"
+          types: ["address"]
+          values: ["{{factory.address}}"]
+    output: true
+
+  - name: "stage-2"
+    depends_on: ["stage-1"]
+    template: "static"
+    arguments:
+      value:
+        type: "call"
+        arguments:
+          to: "{{stage-1.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+    output: true
+
+  - name: "recovery"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-1/recovery.json:Recovery).creationCode}}"
+    output: true
+
+  - name: "passkeys"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-1/passkeys.json:Passkeys).creationCode}}"
+    output: true
+
+  - name: "sessions"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-1/sessions.json:SessionManager).creationCode}}"
+    output: true
+
+  - name: "verify-recovery"
+    type: "verify-contract"
+    depends_on: ["recovery"]
+    arguments:
+      address: "{{recovery.address}}"
+      contract: "{{Contract(./build-info/beta-1/recovery.json:Recovery)}}"
+    output: false
+
+  - name: "verify-passkeys"
+    type: "verify-contract"
+    depends_on: ["passkeys"]
+    arguments:
+      address: "{{passkeys.address}}"
+      contract: "{{Contract(./build-info/beta-1/passkeys.json:Passkeys)}}"
+    output: false
+
+  - name: "verify-sessions"
+    type: "verify-contract"
+    depends_on: ["sessions"]
+    arguments:
+      address: "{{sessions.address}}"
+      contract: "{{Contract(./build-info/beta-1/sessions.json:SessionManager)}}"
+    output: false

@@ -1,0 +1,19 @@
+name: "value-forwarder"
+version: "1"
+description: "ValueForwarder contract for forwarding value to other addresses"
+
+actions:
+  - name: "value-forwarder"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/ValueForwarder.json:ValueForwarder).creationCode}}"
+    output: true
+
+  - name: "verify-value-forwarder"
+    template: "verify-contract"
+    depends_on: ["value-forwarder"]
+    arguments:
+      address: "{{value-forwarder.address}}"
+      contract: "{{Contract(./build-info/ValueForwarder.json:ValueForwarder)}}"
+    output: false

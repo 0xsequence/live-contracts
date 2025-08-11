@@ -1,0 +1,102 @@
+name: "sequence_v3/beta_0"
+version: "1"
+description: "Sequence v2 contracts (beta 0) (dev1 on live-contracts)"
+
+skip_networks: [1]
+min_evm_version: "shanghai"
+
+actions:
+  - name: "factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-0/factory.json:Factory).creationCode}}"
+    output: true
+
+  - name: "stage-1"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/beta-0/stage-1.json:Stage1Module).creationCode}}"
+          types: ["address"]
+          values: ["{{factory.address}}"]
+    output: true
+
+  - name: "stage-2"
+    depends_on: ["stage-1"]
+    template: "static"
+    arguments:
+      value:
+        type: "call"
+        arguments:
+          to: "{{stage-1.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+    output: true
+
+  - name: "guest"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-0/guest.json:Guest).creationCode}}"
+    output: true
+
+  - name: "passkeys"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-0/passkeys.json:Passkeys).creationCode}}"
+    output: true
+
+  - name: "verify-factory"
+    type: "verify-contract"
+    depends_on: ["factory"]
+    arguments:
+      address: "{{factory.address}}"
+      contract: "{{Contract(./build-info/beta-0/factory.json:Factory)}}"
+    output: false
+
+  - name: "verify-stage-1"
+    type: "verify-contract"
+    depends_on: ["stage-1"]
+    arguments:
+      address: "{{stage-1.address}}"
+      contract: "{{Contract(./build-info/beta-0/stage-1.json:Stage1Module)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{factory.address}}"]
+    output: false
+
+  - name: "verify-stage-2"
+    type: "verify-contract"
+    depends_on: ["stage-1"]
+    arguments:
+      address:
+        type: "call"
+        arguments:
+          to: "{{stage-1.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+      contract: "{{Contract(./build-info/beta-0/stage-1.json:Stage2Module)}}"
+    output: false
+
+  - name: "verify-guest"
+    type: "verify-contract"
+    depends_on: ["guest"]
+    arguments:
+      address: "{{guest.address}}"
+      contract: "{{Contract(./build-info/beta-0/guest.json:Guest)}}"
+    output: false
+
+  - name: "verify-passkeys"
+    type: "verify-contract"
+    depends_on: ["passkeys"]
+    arguments:
+      address: "{{passkeys.address}}"
+      contract: "{{Contract(./build-info/beta-0/passkeys.json:Passkeys)}}"
+    output: false

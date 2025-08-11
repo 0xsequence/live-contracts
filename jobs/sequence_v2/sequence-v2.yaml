@@ -1,0 +1,91 @@
+name: "sequence-v2"
+version: "1"
+description: "Deploy Sequence v2 wallet contracts"
+depends_on: []
+
+actions:
+  - name: "factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/sequence-factory-v2.json:Factory).creationCode}}"
+    output: true
+
+  - name: "main-module-upgradable"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/sequence-main-module-upgradable-v2.json:MainModuleUpgradable).creationCode}}"
+    output: true
+
+  - name: "main-module"
+    template: "erc-2470"
+    depends_on: ["factory", "main-module-upgradable"]
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/sequence-main-module-v2.json:MainModule).creationCode}}"
+          types: ["address", "address"]
+          values: ["{{factory.address}}", "{{main-module-upgradable.address}}"]
+    output: true
+
+  - name: "sequence-utils"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/sequence-utils-v2.json:SequenceUtils).creationCode}}"
+    output: true
+
+  - name: "guest-module"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/sequence-guest-module-v2.json:GuestModule).creationCode}}"
+    output: true
+
+  - name: "verify-factory"
+    type: "verify-contract"
+    depends_on: ["factory"]
+    arguments:
+      address: "{{factory.address}}"
+      contract: "{{Contract(./build-info/sequence-factory-v2.json:Factory)}}"
+    output: false
+
+  - name: "verify-main-module-upgradable"
+    type: "verify-contract"
+    depends_on: ["main-module-upgradable"]
+    arguments:
+      address: "{{main-module-upgradable.address}}"
+      contract: "{{Contract(./build-info/sequence-main-module-upgradable-v2.json:MainModuleUpgradable)}}"
+    output: false
+
+  - name: "verify-main-module"
+    type: "verify-contract"
+    depends_on: ["main-module"]
+    arguments:
+      address: "{{main-module.address}}"
+      contract: "{{Contract(./build-info/sequence-main-module-v2.json:MainModule)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address"]
+          values: ["{{factory.address}}", "{{main-module-upgradable.address}}"]
+    output: false
+
+  - name: "verify-sequence-utils"
+    type: "verify-contract"
+    depends_on: ["sequence-utils"]
+    arguments:
+      address: "{{sequence-utils.address}}"
+      contract: "{{Contract(./build-info/sequence-utils-v2.json:SequenceUtils)}}"
+    output: false
+
+  - name: "verify-guest-module"
+    type: "verify-contract"
+    depends_on: ["guest-module"]
+    arguments:
+      address: "{{guest-module.address}}"
+      contract: "{{Contract(./build-info/sequence-guest-module-v2.json:GuestModule)}}"
+    output: false

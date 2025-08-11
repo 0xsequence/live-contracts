@@ -1,0 +1,44 @@
+name: "marketplace-v2"
+version: "1"
+description: ""
+
+actions:
+  - name: "market-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./artifacts/market-factory-v2.json).creationCode}}"
+    output: true
+
+  - name: "market"
+    depends_on: ["market-factory"]
+    template: "send-transaction"
+    arguments:
+      to: "{{market-factory.address}}"
+      data:
+        type: "abi-encode"
+        arguments:
+          signature: "deploy(bytes32 salt,address owner)"
+          values:
+            - "0x0000000000000000000000000000000000000000000000000000000000000000"
+            - "{{developer-multisig-01}}"
+    output:
+      address: "0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712"
+    skip_condition:
+      - type: "contract-exists"
+        arguments:
+          address: "0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712"
+
+  - name: "batch-payable-helper"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/batch-payable-helper.json:BatchPayableHelper).creationCode}}"
+    output: true
+
+  - name: "verify-batch-payable-helper"
+    depends_on: ["batch-payable-helper"]
+    template: "verify-contract"
+    arguments:
+      address: "{{batch-payable-helper.address}}"
+      contract: "{{Contract(./build-info/batch-payable-helper.json:BatchPayableHelper)}}"
