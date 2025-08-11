@@ -16,7 +16,7 @@ actions:
       creationCode: 
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./artifacts/ERC721-Operator-Enforced-factory.json).creationCode}}"
+          creationCode: "{{Contract(./artifacts/v0/ERC721-Operator-Enforced-factory.json).creationCode}}"
           types: ["address"]
           values: ["{{developer-multisig-01}}"]
     output: true
@@ -28,7 +28,7 @@ actions:
       creationCode: 
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./artifacts/ERC1155-Operator-Enforced-factory.json).creationCode}}"
+          creationCode: "{{Contract(./artifacts/v0/ERC1155-Operator-Enforced-factory.json).creationCode}}"
           types: ["address"]
           values: ["{{developer-multisig-01}}"]
     output: true
