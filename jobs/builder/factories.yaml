@@ -87,18 +87,6 @@ actions:
           values: ["{{developer-multisig-01}}"]
     output: true
 
-  - name: "erc1155-lootbox-factory" # Seems unused? couldn't find from where it comes from
-    template: "erc-2470"
-    arguments:
-      salt: "{{salt-zero}}"
-      creationCode:
-        type: "constructor-encode"
-        arguments:
-          creationCode: "{{Contract(./artifacts/ERC1155-Lootbox-factory.json).creationCode}}"
-          types: ["address"]
-          values: ["{{developer-multisig-01}}"]
-    output: true
-
   - name: "erc1155-pack-factory"
     template: "erc-2470"
     arguments:
