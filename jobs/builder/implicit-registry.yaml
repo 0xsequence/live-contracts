@@ -6,7 +6,7 @@ actions:
   - name: "implicit-registry"
     template: "erc-2470"
     arguments:
-      salt: "{{salt-zero}}"
+      salt: "{{salt-one}}"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -16,7 +16,7 @@ actions:
   - name: "implicit-registry-dev"
     template: "erc-2470"
     arguments:
-      salt: "{{salt-dev}}"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
