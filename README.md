@@ -184,6 +184,7 @@ The following is a list of contracts that are deployed by this script.
 │ immutable-factories │ Erc1155OperatorEnforcedFactory    │ 0xc89f63389ef3B53D07649D52D47F9E4afcAbb1fB │
 │ immutable-factories │ Erc712OperatorEnforcedFactory     │ 0x5fD880b092bD285873b16335a454D11c062a4689 │
 │ implicit-registry   │ ImplicitRegistry                  │ 0x652d9299715E22820222247E8b780144771404Fe │
+│ implicit-registry   │ ImplicitRegistryDev               │ 0x0D9Ff8C6c3C7E0f32bE6B2DbE1d8cF20BE3d13F4 │
 │ marketplace-v1      │ MarketV1                          │ 0xB537a160472183f2150d42EB1c3DD6684A55f74c │
 │ marketplace-v2      │ BatchPayableHelperV2              │ 0x6166c1952c54dEd6b070B4616797E61b6c48A117 │
 │ marketplace-v2      │ MarketFactoryV2                   │ 0xBDC76d15eA28beB6AF2Cc69b4EFBb4Aa4FB77689 │

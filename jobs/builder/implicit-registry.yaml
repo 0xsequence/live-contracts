@@ -13,10 +13,28 @@ actions:
           creationCode: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry).creationCode}}"
     output: true
 
+  - name: "implicit-registry-dev"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-dev}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry).creationCode}}"
+    output: true
+
   - name: "verify-implicit-registry"
     depends_on: ["implicit-registry"]
     template: "verify-contract"
     arguments:
       address: "{{implicit-registry.address}}"
+      contract: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry)}}"
+    output: false
+
+  - name: "verify-implicit-registry-dev"
+    depends_on: ["implicit-registry-dev"]
+    template: "verify-contract"
+    arguments:
+      address: "{{implicit-registry-dev.address}}"
       contract: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry)}}"
     output: false
