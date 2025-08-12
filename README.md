@@ -169,15 +169,14 @@ The following is a list of contracts that are deployed by this script.
 │ clawback            │ Clawback                          │ 0x6F9a2c3E11011b894fae691d5338748f8048467d │
 │ clawback            │ ClawbackMetadata                  │ 0x335411eAA9D63251f8c0867600Be4d0C190a3b1f │
 │ developer-multisig  │ DeveloperMultisig                 │ 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 │
-│ factories           │ Erc1155Factory                    │ 0x7364fDEFe24385B2b3869504383c94cF083AcbD6 │
-│ factories           │ Erc1155LootboxFactory             │ 0xF63A3Def9543Eb6c94F97568932d1709Fbe4Aba7 │
+│ factories           │ Erc1155Factory                    │ 0x024b9949FeD1c8dd7154DE653456d64Aa1093384 │
 │ factories           │ Erc1155PackFactory                │ 0x5B2f47ee798eee52cE184C9eC4d60873185836d8 │
-│ factories           │ Erc1155SaleFactory                │ 0x64f1019bDC2F79688c5885Bc2bc4B57f7e88547c │
-│ factories           │ Erc1155SoulboundFactory           │ 0xaB069C041FaCAB8f4D747D91EEda5705b5caAB76 │
+│ factories           │ Erc1155SaleFactory                │ 0xFb89C8A7DF9A1e0299088C3fC46fd87D3FcbcDBd │
+│ factories           │ Erc1155SoulboundFactory           │ 0xCCbB517AaCAb6680A2ad08ef5A593677dDE17284 │
 │ factories           │ Erc20Factory                      │ 0x1063cBEe6b3Cd69B49f1B922A0D402f484b39855 │
-│ factories           │ Erc721Factory                     │ 0x29BCF1043Ca4B2c95aB28082143587896D39D22D │
-│ factories           │ Erc721SaleFactory                 │ 0x4c4192D5b43B723eDbfce2434fA7b98402034513 │
-│ factories           │ Erc721SoulboundFactory            │ 0x2fBFF6fd3C978ab1bBd21b878262c5289a14b6c1 │
+│ factories           │ Erc721Factory                     │ 0xC6064FfBaDB0687Da29721C8EC02ACa71e735a3e │
+│ factories           │ Erc721SaleFactory                 │ 0x2Ce46243FAb9d688CcC2B1F1B8D2c464e87A2076 │
+│ factories           │ Erc721SoulboundFactory            │ 0x718476DcFf820113B30fE4196905c7720F3c8a4e │
 │ guards-v1           │ DevGuardV1                        │ 0x2ca2380dA88528C6061ACb70aD5222fe455F25DF │
 │ guards-v1           │ ProdGuardV1                       │ 0x596aF90CecdBF9A768886E771178fd5561dD27Ab │
 │ guards-v2           │ DevGuardV2                        │ 0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0 │
@@ -245,6 +244,7 @@ The following is a list of contracts that are deployed by this script.
 │ sequence-v2         │ MainModuleV2                      │ 0xfBf8f1A5E00034762D928f46d438B947f5d4065d │
 │ sequence-v2         │ SequenceFactoryV2                 │ 0xFaA5c0b14d1bED5C888Ca655B9a8A5911F78eF4A │
 │ sequence-v2         │ SequenceUtilsV2                   │ 0xdbbFa3cB3B087B64F4ef5E3D20Dda2488AA244e6 │
+│ value-forwarder     │ ValueForwarder                    │ 0xABAAd93EeE2a569cF0632f39B10A9f5D734777ca │
 │ waas-trust-factory  │ TrustFactory                      │ 0x4483FaA9dEEDd6D6FaCFee9c686f1E394A1280f9 │
 └─────────────────────┴───────────────────────────────────┴────────────────────────────────────────────┘
 ```
