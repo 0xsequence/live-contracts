@@ -2,6 +2,8 @@ name: "sequence_v3/beta_4"
 version: "1"
 description: "Sequence v2 contracts (beta 4) (commit 3581eaf02817f0345ad554aca6fa0dc1efd6e23d)"
 
+deprecated: true
+
 actions:
   - name: "factory"
     template: "erc-2470"
