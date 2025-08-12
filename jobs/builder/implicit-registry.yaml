@@ -1,0 +1,22 @@
+name: "implicit-registry"
+version: "1"
+description: "Implicit registry"
+
+actions:
+  - name: "implicit-registry"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry).creationCode}}"
+    output: true
+
+  - name: "verify-implicit-registry"
+    depends_on: ["implicit-registry"]
+    template: "verify-contract"
+    arguments:
+      address: "{{implicit-registry.address}}"
+      contract: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry)}}"
+    output: false
