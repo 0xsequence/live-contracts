@@ -3,6 +3,7 @@ version: "1"
 description: "Sequence v2 contracts (beta 2) (dev2 on sequence.js)"
 
 min_evm_version: "shanghai"
+deprecated: true
 
 actions:
   - name: "factory"

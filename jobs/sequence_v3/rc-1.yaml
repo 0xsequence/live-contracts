@@ -2,6 +2,8 @@ name: "sequence_v3/rc_1"
 version: "1"
 description: "Sequence v2 contracts (release candidate 1) (commit 3f6f8aba437d72f2de4ab8790af15b7bc696e825)"
 
+deprecated: true
+
 actions:
   - name: "factory"
     template: "erc-2470"

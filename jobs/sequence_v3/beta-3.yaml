@@ -3,6 +3,7 @@ version: "1"
 description: "Sequence v2 contracts (beta 3) (Contracts used by dev version of Trails/Anypay)"
 
 min_evm_version: "shanghai"
+deprecated: true
 
 actions:
   - name: "factory"
