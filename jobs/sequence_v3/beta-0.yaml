@@ -4,6 +4,7 @@ description: "Sequence v2 contracts (beta 0) (dev1 on live-contracts)"
 
 skip_networks: [1]
 min_evm_version: "shanghai"
+deprecated: true
 
 actions:
   - name: "factory"
