@@ -1,13 +1,13 @@
 name: "sequence_v3/rc_2"
-version: "1"
-description: "Sequence v2 contracts (release candidate 2) (commit d079c33cd348c30fc553ae41949664f030a69c7d) (evm paris)"
+version: "2"
+description: "Sequence v2 contracts (release candidate 2) (commit a43da236ec7827be9721cdd882f92521a2742d07) (evm paris)"
 
 actions:
   - name: "factory"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Factory).creationCode}}"
+      creationCode: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Factory).creationCode}}"
     output: true
 
   - name: "stage-1-module"
@@ -17,7 +17,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Stage1Module).creationCode}}"
+          creationCode: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Stage1Module).creationCode}}"
           types: ["address", "address"]
           values: ["{{factory.address}}", "{{address-zero}}"]
     output: true
@@ -29,7 +29,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Stage1Module).creationCode}}"
+          creationCode: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Stage1Module).creationCode}}"
           types: ["address", "address"]
           values: ["{{factory.address}}", "{{entrypoint-4337-07}}"]
     output: true
@@ -62,28 +62,28 @@ actions:
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Guest).creationCode}}"
+      creationCode: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Guest).creationCode}}"
     output: true
 
   - name: "passkeys"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Passkeys).creationCode}}"
+      creationCode: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Passkeys).creationCode}}"
     output: true
 
   - name: "recovery"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Recovery).creationCode}}"
+      creationCode: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Recovery).creationCode}}"
     output: true
 
   - name: "sessions"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:SessionManager).creationCode}}"
+      creationCode: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:SessionManager).creationCode}}"
     output: true
 
   - name: "verify-factory"
@@ -91,7 +91,7 @@ actions:
     depends_on: ["factory"]
     arguments:
       address: "{{factory.address}}"
-      contract: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Factory)}}"
+      contract: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Factory)}}"
     output: false
 
   - name: "verify-stage-1-module"
@@ -99,7 +99,7 @@ actions:
     depends_on: ["stage-1-module"]
     arguments:
       address: "{{stage-1-module.address}}"
-      contract: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Stage1Module)}}"
+      contract: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Stage1Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -117,7 +117,7 @@ actions:
           to: "{{stage-1-module.address}}"
           signature: "STAGE_2_IMPLEMENTATION() returns (address)"
           values: []
-      contract: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Stage2Module)}}"
+      contract: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Stage2Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -130,7 +130,7 @@ actions:
     depends_on: ["stage-1-module-4337-07"]
     arguments:
       address: "{{stage-1-module-4337-07.address}}"
-      contract: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Stage1Module)}}"
+      contract: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Stage1Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -148,7 +148,7 @@ actions:
           to: "{{stage-1-module-4337-07.address}}"
           signature: "STAGE_2_IMPLEMENTATION() returns (address)"
           values: []
-      contract: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Stage2Module)}}"
+      contract: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Stage2Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -161,7 +161,7 @@ actions:
     depends_on: ["guest"]
     arguments:
       address: "{{guest.address}}"
-      contract: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Guest)}}"
+      contract: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Guest)}}"
     output: false
 
   - name: "verify-passkeys"
@@ -169,7 +169,7 @@ actions:
     depends_on: ["passkeys"]
     arguments:
       address: "{{passkeys.address}}"
-      contract: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Passkeys)}}"
+      contract: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Passkeys)}}"
     output: false
 
   - name: "verify-recovery"
@@ -177,7 +177,7 @@ actions:
     depends_on: ["recovery"]
     arguments:
       address: "{{recovery.address}}"
-      contract: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:Recovery)}}"
+      contract: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:Recovery)}}"
     output: false
 
   - name: "verify-sessions"
@@ -185,5 +185,5 @@ actions:
     depends_on: ["sessions"]
     arguments:
       address: "{{sessions.address}}"
-      contract: "{{Contract(./build-info/rc-2/c22268a8c4e4475e.json:SessionManager)}}"
+      contract: "{{Contract(./build-info/rc-2/cce77855f22d1743.json:SessionManager)}}"
     output: false
