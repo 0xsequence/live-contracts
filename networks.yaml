@@ -292,3 +292,7 @@
 - name: SEI
   chainId: 1329
   rpcUrl: "https://nodes.sequence.app/sei/{{RPC_BUILDER_KEY}}"
+
+- name: Katana
+  chainId: 747474
+  rpcUrl: "https://nodes.sequence.app/katana/{{RPC_BUILDER_KEY}}"
