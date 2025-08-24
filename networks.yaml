@@ -279,9 +279,9 @@
     - sourcify
   testnet: true
 
-- name: Incentiv Testnet
-  chainId: 11690
-  rpcUrl: "https://nodes.sequence.app/incentiv-testnet/{{RPC_BUILDER_KEY}}"
+- name: Incentiv Testnet v2
+  chainId: 28802
+  rpcUrl: "https://nodes.sequence.app/incentiv-testnet-v2/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: SEI Testnet
