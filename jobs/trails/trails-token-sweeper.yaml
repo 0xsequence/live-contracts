@@ -1,0 +1,11 @@
+name: "trails-token-sweeper"
+version: "1"
+description: "Deploy TrailsTokenSweeper via SingletonFactory (EIP-2470)"
+
+actions:
+  - name: "trails-token-sweeper"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/token-sweeper.json).bytecode.object}}"
+    output: true
