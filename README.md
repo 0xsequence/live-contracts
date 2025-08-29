@@ -137,7 +137,7 @@ actions:
     depends_on: ["name-of-your-task"]
     arguments:
       address: "{{name-of-your-task.address}}"
-      contract: "{{Contract(./build-info/your-build-info.json:YourContractName).creationCode}}"
+      contract: "{{Contract(./build-info/your-build-info.json:YourContractName)}}"
       constructorArguments: # Do not include `constructorArguments` if the contract has no constructor
         type: "constructor-encode"
         arguments:
