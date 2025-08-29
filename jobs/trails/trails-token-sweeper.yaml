@@ -9,3 +9,11 @@ actions:
       salt: "{{salt-zero}}"
       creationCode: "{{Contract(./artifacts/token-sweeper.json).creationCode}}"
     output: true
+
+  - name: "verify-trails-token-sweeper"
+    type: "verify-contract"
+    depends_on: ["trails-token-sweeper"]
+    arguments:
+      address: "{{trails-token-sweeper.address}}"
+      contract: "{{Contract(./artifacts/token-sweeper.json)}}"
+    output: false
