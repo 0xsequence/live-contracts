@@ -7,5 +7,5 @@ actions:
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/token-sweeper.json).bytecode.object}}"
+      creationCode: "{{Contract(./artifacts/token-sweeper.json).creationCode}}"
     output: true
