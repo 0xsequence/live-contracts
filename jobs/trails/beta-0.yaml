@@ -1,0 +1,19 @@
+name: "trails-token-sweeper"
+version: "1"
+description: "Deploy TrailsTokenSweeper via SingletonFactory (EIP-2470)"
+
+actions:
+  - name: "trails-token-sweeper"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-0/all-contracts.json:TrailsTokenSweeper).creationCode}}"
+    output: true
+
+  - name: "verify-trails-token-sweeper"
+    type: "verify-contract"
+    depends_on: ["trails-token-sweeper"]
+    arguments:
+      address: "{{trails-token-sweeper.address}}"
+      contract: "{{Contract(./build-info/beta-0/all-contracts.json:TrailsTokenSweeper)}}"
+    output: false
