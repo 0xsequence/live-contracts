@@ -1,0 +1,16 @@
+name: "era-evm-predeploy-universal"
+version: "1"
+description: "Deploy Universal deployer on ZKStack chains"
+
+only_networks:
+  - 324 # ZKSync Mainnet
+  - 300 # ZKSync Sepolia
+  - 6252 # Sandbox Testnet
+
+actions:
+  - name: "predeploy-universal-deployer"
+    template: "era-evm-predeploy"
+    arguments:
+      evmPredeployManager: "{{era-evm-predeploy-manager}}"
+      address: "0x1B926fBB24A9F78DCDd3272f2d86F5D0660E59c0"
+      bytecode: "0x6080604052348015600f57600080fd5b50609980601d6000396000f3fe60a06020601f369081018290049091028201604052608081815260009260609284918190838280828437600092018290525084519495509392505060208401905034f5604080516001600160a01b0383168152905191935081900360200190a0505000fea26469706673582212205a310755225e3c740b2f013fb6343f4c205e7141fcdf15947f5f0e0e818727fb64736f6c634300060a0033"

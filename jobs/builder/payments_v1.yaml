@@ -3,7 +3,7 @@ version: "1"
 description: "Sequence payments"
 deprecated: true
 
-depends_on: ["sequence-v2"]
+depends_on: ["era-evm-predeploy-erc2470", "era-evm-predeploy-universal", "sequence-v2"]
 
 actions:
   - name: "payments-factory"
