@@ -17,3 +17,18 @@ actions:
       address: "{{trails-token-sweeper.address}}"
       contract: "{{Contract(./build-info/beta-1/all-contracts.json:TrailsTokenSweeper)}}"
     output: false
+
+  - name: "trails-multicall3-router"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-1/all-contracts.json:TrailsMulticall3Router).creationCode}}"
+    output: true
+
+  - name: "verify-trails-multicall3-router"
+    type: "verify-contract"
+    depends_on: ["trails-multicall3-router"]
+    arguments:
+      address: "{{trails-multicall3-router.address}}"
+      contract: "{{Contract(./build-info/beta-1/all-contracts.json:TrailsMulticall3Router)}}"
+    output: false
