@@ -1,6 +1,6 @@
 name: "sequence_v3/rc_3"
 version: "1"
-description: "Sequence v3 contracts (release candidate 3) (commit df0afedbd9a1f082d27fdc9efe47338488b514e0) (evm paris)"
+description: "Sequence v3 contracts (release candidate 3) (commit 49559600a79258293a41e956f9b239e64bf135a6) (evm paris)"
 
 actions:
   - name: "factory"
@@ -13,7 +13,7 @@ actions:
   - name: "stage-1-module"
     template: "erc-2470"
     arguments:
-      salt: "0x989c994f1a6f6e17d68307ac7b92f9264b24196fcd5cbcf90cd9c80b80e10729"
+      salt: "0x4c25b4c26fd796e4d664148ab98d8a3ce15d9f48efcacc770f9275702bc1afae"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -25,7 +25,7 @@ actions:
   - name: "stage-1-module-4337-07"
     template: "erc-2470"
     arguments:
-      salt: "{{salt-zero}}"
+      salt: "0x5c643ec0d811646982427becab45669de1c267ccca107600c237a59ec6688431"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -56,6 +56,35 @@ actions:
           to: "{{stage-1-module-4337-07.address}}"
           signature: "STAGE_2_IMPLEMENTATION() returns (address)"
           values: []
+    output: true
+
+  - name: "guest"
+    template: "erc-2470"
+    arguments:
+      salt: "0x5c11a7895a309fa08b06f53784721316f1c7615a976337cd3b9b6251cd25ab9f"
+      creationCode: "{{Contract(./build-info/rc-3/guest.json:Guest).creationCode}}"
+    output: true
+
+  - name: "passkeys"
+    template: "erc-2470"
+    arguments:
+      salt: "0xa7a24f9823fbc7cd2679235e68fb31422123290d6fb5e2dd8bd697f8d059e179"
+      creationCode: "{{Contract(./build-info/rc-3/passkeys.json:Passkeys).creationCode}}"
+    output: true
+
+  - name: "recovery"
+    template: "erc-2470"
+    arguments:
+      salt: "0xbf540d938665f3478571647ba4c25eacce75512e9d27fee5d9871a25ba6c43c0"
+      creationCode: "{{Contract(./build-info/rc-3/recovery.json:Recovery).creationCode}}"
+    output: true
+
+
+  - name: "sessions"
+    template: "erc-2470"
+    arguments:
+      salt: "0x591c8d7d940ef56ed6d1e78d9c4bc56dbee2a2de33caff17cdf18f7be16d9467"
+      creationCode: "{{Contract(./build-info/rc-3/sessions.json:SessionManager).creationCode}}"
     output: true
 
   - name: "verify-factory"
@@ -128,3 +157,34 @@ actions:
           values: ["{{entrypoint-4337-07}}"]
     output: false
 
+  - name: "verify-guest"
+    type: "verify-contract"
+    depends_on: ["guest"]
+    arguments:
+      address: "{{guest.address}}"
+      contract: "{{Contract(./build-info/rc-3/guest.json:Guest)}}"
+    output: false
+
+  - name: "verify-passkeys"
+    type: "verify-contract"
+    depends_on: ["passkeys"]
+    arguments:
+      address: "{{passkeys.address}}"
+      contract: "{{Contract(./build-info/rc-3/passkeys.json:Passkeys)}}"
+    output: false
+
+  - name: "verify-recovery"
+    type: "verify-contract"
+    depends_on: ["recovery"]
+    arguments:
+      address: "{{recovery.address}}"
+      contract: "{{Contract(./build-info/rc-3/recovery.json:Recovery)}}"
+    output: false
+
+  - name: "verify-sessions"
+    type: "verify-contract"
+    depends_on: ["sessions"]
+    arguments:
+      address: "{{sessions.address}}"
+      contract: "{{Contract(./build-info/rc-3/sessions.json:SessionManager)}}"
+    output: false
