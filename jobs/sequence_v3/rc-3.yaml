@@ -1,0 +1,190 @@
+name: "sequence_v3/rc_3"
+version: "1"
+description: "Sequence v3 contracts (release candidate 3) (commit 49559600a79258293a41e956f9b239e64bf135a6) (evm paris)"
+
+actions:
+  - name: "factory"
+    template: "erc-2470"
+    arguments:
+      salt: "0xd4d338c5d1f6a77bd065d147e9cacd6ac7ed4c6e361a26baf7896a465ed661b4"
+      creationCode: "{{Contract(./build-info/rc-3/factory.json:Factory).creationCode}}"
+    output: true
+
+  - name: "stage-1-module"
+    template: "erc-2470"
+    arguments:
+      salt: "0x4c25b4c26fd796e4d664148ab98d8a3ce15d9f48efcacc770f9275702bc1afae"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/rc-3/stage1.json:Stage1Module).creationCode}}"
+          types: ["address", "address"]
+          values: ["{{factory.address}}", "{{address-zero}}"]
+    output: true
+
+  - name: "stage-1-module-4337-07"
+    template: "erc-2470"
+    arguments:
+      salt: "0x5c643ec0d811646982427becab45669de1c267ccca107600c237a59ec6688431"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/rc-3/stage1.json:Stage1Module).creationCode}}"
+          types: ["address", "address"]
+          values: ["{{factory.address}}", "{{entrypoint-4337-07}}"]
+    output: true
+
+  - name: "stage-2-module"
+    depends_on: ["stage-1-module"]
+    template: "static"
+    arguments:
+      value:
+        type: "call"
+        arguments:
+          to: "{{stage-1-module.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+    output: true
+
+  - name: "stage-2-module-4337-07"
+    depends_on: ["stage-1-module-4337-07"]
+    template: "static"
+    arguments:
+      value:
+        type: "call"
+        arguments:
+          to: "{{stage-1-module-4337-07.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+    output: true
+
+  - name: "guest"
+    template: "erc-2470"
+    arguments:
+      salt: "0x5c11a7895a309fa08b06f53784721316f1c7615a976337cd3b9b6251cd25ab9f"
+      creationCode: "{{Contract(./build-info/rc-3/guest.json:Guest).creationCode}}"
+    output: true
+
+  - name: "passkeys"
+    template: "erc-2470"
+    arguments:
+      salt: "0xa7a24f9823fbc7cd2679235e68fb31422123290d6fb5e2dd8bd697f8d059e179"
+      creationCode: "{{Contract(./build-info/rc-3/passkeys.json:Passkeys).creationCode}}"
+    output: true
+
+  - name: "recovery"
+    template: "erc-2470"
+    arguments:
+      salt: "0xbf540d938665f3478571647ba4c25eacce75512e9d27fee5d9871a25ba6c43c0"
+      creationCode: "{{Contract(./build-info/rc-3/recovery.json:Recovery).creationCode}}"
+    output: true
+
+
+  - name: "sessions"
+    template: "erc-2470"
+    arguments:
+      salt: "0x591c8d7d940ef56ed6d1e78d9c4bc56dbee2a2de33caff17cdf18f7be16d9467"
+      creationCode: "{{Contract(./build-info/rc-3/sessions.json:SessionManager).creationCode}}"
+    output: true
+
+  - name: "verify-factory"
+    type: "verify-contract"
+    depends_on: ["factory"]
+    arguments:
+      address: "{{factory.address}}"
+      contract: "{{Contract(./build-info/rc-3/factory.json:Factory)}}"
+    output: false
+
+  - name: "verify-stage-1-module"
+    type: "verify-contract"
+    depends_on: ["stage-1-module"]
+    arguments:
+      address: "{{stage-1-module.address}}"
+      contract: "{{Contract(./build-info/rc-3/stage1.json:Stage1Module)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address"]
+          values: ["{{factory.address}}", "{{address-zero}}"]
+    output: false
+
+  - name: "verify-stage-2-module"
+    type: "verify-contract"
+    depends_on: ["stage-1-module"]
+    arguments:
+      address:
+        type: "call"
+        arguments:
+          to: "{{stage-1-module.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+      contract: "{{Contract(./build-info/rc-3/stage1.json:Stage2Module)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{address-zero}}"]
+    output: false
+
+  - name: "verify-stage-1-module-4337-07"
+    type: "verify-contract"
+    depends_on: ["stage-1-module-4337-07"]
+    arguments:
+      address: "{{stage-1-module-4337-07.address}}"
+      contract: "{{Contract(./build-info/rc-3/stage1.json:Stage1Module)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address"]
+          values: ["{{factory.address}}", "{{entrypoint-4337-07}}"]
+    output: false
+
+  - name: "verify-stage-2-module-4337-07"
+    type: "verify-contract"
+    depends_on: ["stage-1-module-4337-07"]
+    arguments:
+      address:
+        type: "call"
+        arguments:
+          to: "{{stage-1-module-4337-07.address}}"
+          signature: "STAGE_2_IMPLEMENTATION() returns (address)"
+          values: []
+      contract: "{{Contract(./build-info/rc-3/stage1.json:Stage2Module)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{entrypoint-4337-07}}"]
+    output: false
+
+  - name: "verify-guest"
+    type: "verify-contract"
+    depends_on: ["guest"]
+    arguments:
+      address: "{{guest.address}}"
+      contract: "{{Contract(./build-info/rc-3/guest.json:Guest)}}"
+    output: false
+
+  - name: "verify-passkeys"
+    type: "verify-contract"
+    depends_on: ["passkeys"]
+    arguments:
+      address: "{{passkeys.address}}"
+      contract: "{{Contract(./build-info/rc-3/passkeys.json:Passkeys)}}"
+    output: false
+
+  - name: "verify-recovery"
+    type: "verify-contract"
+    depends_on: ["recovery"]
+    arguments:
+      address: "{{recovery.address}}"
+      contract: "{{Contract(./build-info/rc-3/recovery.json:Recovery)}}"
+    output: false
+
+  - name: "verify-sessions"
+    type: "verify-contract"
+    depends_on: ["sessions"]
+    arguments:
+      address: "{{sessions.address}}"
+      contract: "{{Contract(./build-info/rc-3/sessions.json:SessionManager)}}"
+    output: false
