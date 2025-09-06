@@ -1,6 +1,7 @@
 name: "factories"
 version: "2"
 description: "Factory contracts for the builder"
+depends_on: ["era-evm-predeploy-erc2470"]
 
 actions:
   - name: "erc20-factory"
