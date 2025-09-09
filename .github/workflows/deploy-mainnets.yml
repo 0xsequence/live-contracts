@@ -95,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: mainnet
-    timeout-minutes: 20
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       max-parallel: 2
