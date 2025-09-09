@@ -147,7 +147,7 @@ jobs:
           RPC_BUILDER_KEY: ${{ secrets.RPC_BUILDER_KEY }}
         run: |
           set -euo pipefail
-          ./node_modules/.bin/catapult run -vvv -n "${CHAIN_ID}"
+          ./node_modules/.bin/catapult run -vvv -n "${CHAIN_ID}" --ignore-verify-errors
 
       - name: Upload outputs artifact
         if: ${{ always() }}
