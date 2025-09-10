@@ -193,13 +193,9 @@ The following is a list of contracts that are deployed by this script.
 │ niftyswap           │ Exchange20Wrapper                 │ 0x2c944F28965F9A2cd5E69bA7e7520CbbD928258a │
 │ niftyswap           │ Factory20                         │ 0x9196b852437D9Ed92d95715dCbdA4533ffC479E0 │
 │ payments            │ PaymentCombiner                   │ 0xfe0a269E288051B0815E05Fe192FC888118CB8a2 │
-│ payments            │ PaymentsDev                       │ 0xDE280948Af8A9762B6984995C8c3c7F5AEB921Bf │
-│ payments            │ PaymentsFactory                   │ 0xdC8dC7d7F0AAfbc5901DA779Ed5aab779F3E7c14 │
 │ payments            │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
 │ payments            │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
 │ payments            │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
-│ payments            │ PaymentsNext                      │ 0x7AaC049C94E60a71E1aeDA4E1390F6812685eA4f │
-│ payments            │ PaymentsProd                      │ 0x5afd8f6a09FfaD13c914b5977aF48b244279BFc7 │
 │ proxy-hook          │ WalletProxyHook                   │ 0x1f56dbAD5e8319F0DE9a323E24A31b5077dEB1a4 │
 │ SEQ-0001            │ SequenceMainModuleUpgradableDuoV1 │ 0x94Fb1E5196B4eE5A1c9ad737a505CE12bAe7Ca85 │
 │ SEQ-0001            │ SequenceMainModuleUpgradableDuoV2 │ 0x4f8ce847174b32cBe21b3887Be894e0DEBC28952 │
