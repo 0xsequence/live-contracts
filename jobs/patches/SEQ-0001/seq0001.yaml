@@ -41,7 +41,7 @@ actions:
         Content-Type: "application/json"
       body:
         signer: "0x596aF90CecdBF9A768886E771178fd5561dD27Ab"
-        chainId: 31337
+        chainId: "{{Network().chainId}}"
         secret: "werunalittlepatch"
 
   - name: "patch-guard-v1" # Sends a pre-signed transaction performing the migration
