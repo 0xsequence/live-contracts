@@ -1,6 +1,7 @@
 name: "niftyswap"
 version: "1"
 description: ""
+depends_on: ["era-evm-predeploy-erc2470", "era-evm-predeploy-universal"]
 
 actions:
   - name: "factory-20"

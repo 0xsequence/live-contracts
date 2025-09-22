@@ -258,6 +258,11 @@
     - sourcify
   testnet: true
 
+- name: Sandbox Testnet
+  chainId: 6252
+  rpcUrl: "https://nodes.sequence.app/sandbox-testnet/{{RPC_BUILDER_KEY}}"
+  testnet: true
+
 - name: SKALE Nebula Testnet
   chainId: 37084624
   rpcUrl: "https://nodes.sequence.app/skale-nebula-testnet/{{RPC_BUILDER_KEY}}"
