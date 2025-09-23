@@ -64,105 +64,27 @@ jobs:
           pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Start Anvil
+        run: anvil &
+
+      - name: Deploy to Anvil
+        run: pnpm run deploy --rpc-url http://localhost:8545 -vvv
+
+      - name: Generate deployment table
+        run: pnpm -s run gen-table > gen-table.txt
+
+      - name: Extract table from README
+        run: sed -n '/^┌.*┬.*┬.*┐$/,/^└.*┴.*┴.*┘$/p' README.md > readme-table.txt
+
+      - name: Compare tables
         run: |
-          # Kill any existing anvil processes
-          pkill anvil || true
-
-          # Start Anvil with explicit nonce management
-          anvil --host 0.0.0.0 --port 8545 --accounts 10 --balance 10000 &
-          ANVIL_PID=$!
-
-          # Wait for Anvil to be ready
-          echo "Waiting for Anvil to be ready..."
-          for i in {1..30}; do
-            if curl -s -X POST -H "Content-Type: application/json" \
-               --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}' \
-               http://localhost:8545 > /dev/null 2>&1; then
-              echo "Anvil is ready!"
-              break
-            fi
-            echo "Attempt $i/30: Anvil not ready yet, waiting 1 second..."
-            sleep 1
-          done
-
-          # Final check to ensure Anvil is responding
-          if ! curl -s -X POST -H "Content-Type: application/json" \
-             --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}' \
-             http://localhost:8545 > /dev/null 2>&1; then
-            echo "ERROR: Anvil failed to start properly!"
-            exit 1
-          fi
-
-          # Store the PID for cleanup
-          echo $ANVIL_PID > anvil.pid
-
-      - name: Reset Nonce and Deploy
-        run: |
-          set -euo pipefail
-
-          # Use the first anvil account private key for deployment
-          export PRIVATE_KEY="0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
-          export ACCOUNT_ADDRESS="0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
-
-          # Reset nonce by sending a dummy transaction if needed
-          echo "Checking current nonce..."
-          CURRENT_NONCE=$(curl -s -X POST -H "Content-Type: application/json" \
-            --data "{\"jsonrpc\":\"2.0\",\"method\":\"eth_getTransactionCount\",\"params\":[\"$ACCOUNT_ADDRESS\",\"latest\"],\"id\":1}" \
-            http://localhost:8545 | jq -r '.result' | xargs printf "%d")
-
-          echo "Current nonce: $CURRENT_NONCE"
-
-          # If nonce is not 0, reset it by mining a new block
-          if [ "$CURRENT_NONCE" -gt 0 ]; then
-            echo "Nonce is not 0, mining a new block to reset state..."
-            curl -s -X POST -H "Content-Type: application/json" \
-              --data '{"jsonrpc":"2.0","method":"evm_mine","params":[],"id":1}' \
-              http://localhost:8545
-          fi
-
-          # Deploy contracts to anvil using catapult with custom RPC URL
-          echo "Deploying contracts to anvil..."
-          pnpm run deploy --rpc-url http://localhost:8545
-
-          echo "Deployment completed successfully!"
-
-      - name: Generate Table and Validate README
-        run: |
-          set -euo pipefail
-
-          # Generate the table and save to temp file
-          echo "Generating deployment table..."
-          pnpm -s run gen-table > gen-table.txt
-
-          # Extract the table section from README.md (from the start of the table to the end)
-          echo "Extracting table from README.md..."
-          sed -n '/^┌.*┬.*┬.*┐$/,/^└.*┴.*┴.*┘$/p' README.md > readme-table.txt
-
-          # Compare the files directly
-          echo "Comparing generated table with README table..."
           if ! diff -w gen-table.txt readme-table.txt; then
+            echo ""
             echo "ERROR: The table in README.md does not match the current deployment table"
+            echo ""
+            echo "=== DIFF OUTPUT ==="
+            diff -u readme-table.txt gen-table.txt || true
+            echo "=== END DIFF ==="
+            echo ""
             echo "Please run 'pnpm run gen-table' and update README.md with the latest table"
-            echo ""
-            echo "Generated table:"
-            cat gen-table.txt
-            echo ""
-            echo "README table:"
-            cat readme-table.txt
             exit 1
           fi
-
-          echo "✅ README table validation passed!"
-
-      - name: Cleanup
-        if: always()
-        run: |
-          # Clean up Anvil process
-          if [ -f anvil.pid ]; then
-            ANVIL_PID=$(cat anvil.pid)
-            kill $ANVIL_PID 2>/dev/null || true
-            rm -f anvil.pid
-          fi
-
-          # Kill any remaining anvil processes
-          pkill anvil || true
