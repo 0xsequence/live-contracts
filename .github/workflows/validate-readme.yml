@@ -1,0 +1,90 @@
+name: Validate README
+
+on:
+  push:
+    branches:
+      - "**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-readme-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: "Validate README"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Determine pnpm store path
+        id: pnpm-store
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-node-20-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-20-pnpm-store-
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-20-node_modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-20-node_modules-
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Start Anvil
+        run: anvil &
+
+      - name: Deploy to Anvil
+        run: pnpm run deploy --rpc-url http://localhost:8545 -vvv
+
+      - name: Generate deployment table
+        run: pnpm -s run gen-table > gen-table.txt
+
+      - name: Extract table from README
+        run: sed -n '/^┌.*┬.*┬.*┐$/,/^└.*┴.*┴.*┘$/p' README.md > readme-table.txt
+
+      - name: Compare tables
+        run: |
+          if ! diff -w gen-table.txt readme-table.txt; then
+            echo ""
+            echo "ERROR: The table in README.md does not match the current deployment table"
+            echo ""
+            echo "=== DIFF OUTPUT ==="
+            diff -u readme-table.txt gen-table.txt || true
+            echo "=== END DIFF ==="
+            echo ""
+            echo "Please run 'pnpm run gen-table' and update README.md with the latest table"
+            exit 1
+          fi
