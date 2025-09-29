@@ -93,8 +93,8 @@
 - name: Rootnet
   chainId: 7668
   rpcUrl: "https://nodes.sequence.app/rootnet/{{RPC_BUILDER_KEY}}"
-  supports:
-    - sourcify
+  # supports:
+  #   - sourcify
 
 - name: Rootnet Porcini
   chainId: 7672
