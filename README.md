@@ -231,7 +231,8 @@ The following is a list of contracts that are deployed by this script.
 
 > `ERC721OperatorEnforcedFactory`, `ERC1155OperatorEnforcedFactory` and `WalletProxyHook` are only deployed on Immutable's chains.
 
-> To obtain this table, run the deployment (without errors) and then run `pnpm -s run gen-table`.
+> To obtain this table for a specific deployment, run the deployment (without errors) and then run `pnpm -s run gen-table`.
+> To update this table, run `pnpm -s run update-readme`.
 
 ## Chains
 
