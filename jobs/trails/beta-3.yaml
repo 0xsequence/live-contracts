@@ -1,0 +1,65 @@
+name: "trails-beta-3"
+version: "beta-3"
+description: "Deploy Trails contracts (beta 3)"
+
+actions:
+  - name: "trails-token-sweeper"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsTokenSweeper).creationCode}}"
+    output: true
+
+  - name: "verify-trails-token-sweeper"
+    type: "verify-contract"
+    depends_on: ["trails-token-sweeper"]
+    arguments:
+      address: "{{trails-token-sweeper.address}}"
+      contract: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsTokenSweeper)}}"
+    output: false
+
+  - name: "trails-multicall3-router"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsMulticall3Router).creationCode}}"
+    output: true
+
+  - name: "verify-trails-multicall3-router"
+    type: "verify-contract"
+    depends_on: ["trails-multicall3-router"]
+    arguments:
+      address: "{{trails-multicall3-router.address}}"
+      contract: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsMulticall3Router)}}"
+    output: false
+
+  - name: "trails-balance-injector"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsBalanceInjector).creationCode}}"
+    output: true
+
+  - name: "verify-trails-balance-injector"
+    type: "verify-contract"
+    depends_on: ["trails-balance-injector"]
+    arguments:
+      address: "{{trails-balance-injector.address}}"
+      contract: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsBalanceInjector)}}"
+    output: false
+
+  - name: "trails-router-shim"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsRouterShim).creationCode}}"
+    output: true
+
+  - name: "verify-trails-router-shim"
+    type: "verify-contract"
+    depends_on: ["trails-router-shim"]
+    arguments:
+      address: "{{trails-router-shim.address}}"
+      contract: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsRouterShim)}}"
+    output: false
+  
