@@ -52,7 +52,12 @@ actions:
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsRouterShim).creationCode}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsRouterShim).creationCode}}"
+          types: ["address"]
+          values: ["{{trails-multicall3-router.address}}"]
     output: true
 
   - name: "verify-trails-router-shim"
@@ -61,5 +66,10 @@ actions:
     arguments:
       address: "{{trails-router-shim.address}}"
       contract: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsRouterShim)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{trails-multicall3-router.address}}"]
     output: false
   
