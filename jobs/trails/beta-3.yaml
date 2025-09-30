@@ -7,7 +7,7 @@ actions:
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsTokenSweeper).creationCode}}"
+      creationCode: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsTokenSweeper).creationCode}}"
     output: true
 
   - name: "verify-trails-token-sweeper"
@@ -15,14 +15,14 @@ actions:
     depends_on: ["trails-token-sweeper"]
     arguments:
       address: "{{trails-token-sweeper.address}}"
-      contract: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsTokenSweeper)}}"
+      contract: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsTokenSweeper)}}"
     output: false
 
   - name: "trails-multicall3-router"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsMulticall3Router).creationCode}}"
+      creationCode: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsMulticall3Router).creationCode}}"
     output: true
 
   - name: "verify-trails-multicall3-router"
@@ -30,14 +30,14 @@ actions:
     depends_on: ["trails-multicall3-router"]
     arguments:
       address: "{{trails-multicall3-router.address}}"
-      contract: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsMulticall3Router)}}"
+      contract: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsMulticall3Router)}}"
     output: false
 
   - name: "trails-balance-injector"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsBalanceInjector).creationCode}}"
+      creationCode: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsBalanceInjector).creationCode}}"
     output: true
 
   - name: "verify-trails-balance-injector"
@@ -45,14 +45,14 @@ actions:
     depends_on: ["trails-balance-injector"]
     arguments:
       address: "{{trails-balance-injector.address}}"
-      contract: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsBalanceInjector)}}"
+      contract: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsBalanceInjector)}}"
     output: false
 
   - name: "trails-router-shim"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsRouterShim).creationCode}}"
+      creationCode: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsRouterShim).creationCode}}"
     output: true
 
   - name: "verify-trails-router-shim"
@@ -60,6 +60,6 @@ actions:
     depends_on: ["trails-router-shim"]
     arguments:
       address: "{{trails-router-shim.address}}"
-      contract: "{{Contract(./build-info/beta-2/all-contracts.json:TrailsRouterShim)}}"
+      contract: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsRouterShim)}}"
     output: false
   
