@@ -95,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: mainnet
-    timeout-minutes: 30
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       max-parallel: 2
@@ -150,7 +150,7 @@ jobs:
           RPC_BUILDER_KEY: ${{ secrets.RPC_BUILDER_KEY }}
         run: |
           set -euo pipefail
-          ./node_modules/.bin/catapult run -vvv -n "${CHAIN_ID}" --ignore-verify-errors
+          ./node_modules/.bin/catapult run -vvv -n "${CHAIN_ID}"
 
       - name: Upload outputs artifact
         if: ${{ always() }}

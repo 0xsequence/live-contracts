@@ -1,36 +1,36 @@
 name: "implicit-registry"
-version: "2"
+version: "1"
 description: "Implicit registry"
 
 actions:
   - name: "implicit-registry-dev"
     template: "erc-2470"
     arguments:
-      salt: "0x00000000000000000000000000000000000000000000000000000000011b828e"
+      salt: "{{salt-zero}}"
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/v1/implicit-registry.json:ImplicitProjectRegistry).creationCode}}"
+          creationCode: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry).creationCode}}"
     output: true
 
   - name: "implicit-registry-next"
     template: "erc-2470"
     arguments:
-      salt: "0x1a18c790399f92ad753747e74b5078c7fa8e035573202a5196b2659868d959e8"
+      salt: "{{salt-two}}"
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/v1/implicit-registry.json:ImplicitProjectRegistry).creationCode}}"
+          creationCode: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry).creationCode}}"
     output: true
 
   - name: "implicit-registry-prod"
     template: "erc-2470"
     arguments:
-      salt: "0xa26b93c55cae82e6d6854e7e58e1449cf9391eb3492172b8651c0c76c594caa7"
+      salt: "{{salt-one}}"
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/v1/implicit-registry.json:ImplicitProjectRegistry).creationCode}}"
+          creationCode: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry).creationCode}}"
     output: true
 
   - name: "verify-implicit-registry-dev"
@@ -38,7 +38,7 @@ actions:
     template: "verify-contract"
     arguments:
       address: "{{implicit-registry-dev.address}}"
-      contract: "{{Contract(./build-info/v1/implicit-registry.json:ImplicitProjectRegistry)}}"
+      contract: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry)}}"
     output: false
 
   - name: "verify-implicit-registry-next"
@@ -46,7 +46,7 @@ actions:
     template: "verify-contract"
     arguments:
       address: "{{implicit-registry-next.address}}"
-      contract: "{{Contract(./build-info/v1/implicit-registry.json:ImplicitProjectRegistry)}}"
+      contract: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry)}}"
     output: false
 
   - name: "verify-implicit-registry-prod"
@@ -54,5 +54,5 @@ actions:
     template: "verify-contract"
     arguments:
       address: "{{implicit-registry-prod.address}}"
-      contract: "{{Contract(./build-info/v1/implicit-registry.json:ImplicitProjectRegistry)}}"
+      contract: "{{Contract(./build-info/implicit-registry.json:ImplicitProjectRegistry)}}"
     output: false

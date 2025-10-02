@@ -1,7 +1,6 @@
 name: "value-forwarder"
 version: "1"
 description: "ValueForwarder contract for forwarding value to other addresses"
-depends_on: ["era-evm-predeploy-erc2470"]
 
 actions:
   - name: "value-forwarder"

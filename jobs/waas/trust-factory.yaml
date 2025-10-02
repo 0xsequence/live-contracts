@@ -1,7 +1,7 @@
 name: "waas-trust-factory"
 version: "1"
 description: "The Trust Factory is used by WaaS to deploy the recovery contracts, that allow either the partner or Sequence to recover a whole set of wallets"
-depends_on: ["era-evm-predeploy-erc2470"]
+depends_on: []
 
 actions:
   - name: "trust-factory"

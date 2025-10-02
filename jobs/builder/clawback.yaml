@@ -1,7 +1,6 @@
 name: "clawback"
 version: "1"
 description: "Contracts for the clawback functionality"
-depends_on: ["era-evm-predeploy-erc2470"]
 
 actions:
   - name: "clawback-metadata"

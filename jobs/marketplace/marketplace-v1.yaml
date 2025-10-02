@@ -1,7 +1,6 @@
 name: "marketplace-v1"
 version: "1"
 description: ""
-depends_on: ["era-evm-predeploy-erc2470"]
 
 actions:
   - name: "market"

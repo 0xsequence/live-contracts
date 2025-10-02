@@ -90,6 +90,19 @@
   chainId: 6283
   rpcUrl: "https://nodes.sequence.app/laos/{{RPC_BUILDER_KEY}}"
 
+- name: Rootnet
+  chainId: 7668
+  rpcUrl: "https://nodes.sequence.app/rootnet/{{RPC_BUILDER_KEY}}"
+  supports:
+    - sourcify
+
+- name: Rootnet Porcini
+  chainId: 7672
+  rpcUrl: "https://nodes.sequence.app/rootnet-porcini/{{RPC_BUILDER_KEY}}"
+  supports:
+    - sourcify
+  testnet: true
+
 - name: B3
   chainId: 8333
   rpcUrl: "https://nodes.sequence.app/b3/{{RPC_BUILDER_KEY}}"
@@ -245,11 +258,6 @@
     - sourcify
   testnet: true
 
-- name: Sandbox Testnet
-  chainId: 6252
-  rpcUrl: "https://nodes.sequence.app/sandbox-testnet/{{RPC_BUILDER_KEY}}"
-  testnet: true
-
 - name: SKALE Nebula Testnet
   chainId: 37084624
   rpcUrl: "https://nodes.sequence.app/skale-nebula-testnet/{{RPC_BUILDER_KEY}}"
@@ -271,9 +279,9 @@
     - sourcify
   testnet: true
 
-- name: Incentiv Testnet v2
-  chainId: 28802
-  rpcUrl: "https://nodes.sequence.app/incentiv-testnet-v2/{{RPC_BUILDER_KEY}}"
+- name: Incentiv Testnet
+  chainId: 11690
+  rpcUrl: "https://nodes.sequence.app/incentiv-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
 - name: SEI Testnet
