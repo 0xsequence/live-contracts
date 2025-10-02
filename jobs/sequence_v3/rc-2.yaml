@@ -1,6 +1,9 @@
 name: "sequence_v3/rc_2"
 version: "2"
 description: "Sequence v2 contracts (release candidate 2) (commit a43da236ec7827be9721cdd882f92521a2742d07) (evm paris)"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+deprecated: true
 
 actions:
   - name: "factory"

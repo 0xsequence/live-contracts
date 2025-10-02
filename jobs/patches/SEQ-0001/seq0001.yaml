@@ -1,7 +1,7 @@
 name: "SEQ-0001"
 version: "1"
 description: "Patch sequence vulnerability SEQ-0001"
-depends_on: ["sequence-v1", "guards-v1", "sequence-v2", "guards-v2"]
+depends_on: ["era-evm-predeploy-erc2470", "era-evm-predeploy-universal", "sequence-v1", "guards-v1", "sequence-v2", "guards-v2"]
 
 actions:
   - name: "sequence-main-module-upgradable-duo-v1"
@@ -40,9 +40,11 @@ actions:
       headers:
         Content-Type: "application/json"
       body:
-        signer: "0x596aF90CecdBF9A768886E771178fd5561dD27Ab"
-        chainId: 31337
-        secret: "werunalittlepatch"
+        type: "resolve-json"
+        arguments:
+          signer: "0x596aF90CecdBF9A768886E771178fd5561dD27Ab"
+          chainId: "{{Network().chainId}}"
+          secret: "werunalittlepatch"
 
   - name: "patch-guard-v1" # Sends a pre-signed transaction performing the migration
     template: "send-transaction"

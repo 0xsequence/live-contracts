@@ -1,7 +1,7 @@
 name: "sequence-v2"
 version: "1"
 description: "Deploy Sequence v2 wallet contracts"
-depends_on: []
+depends_on: ["era-evm-predeploy-erc2470"]
 
 actions:
   - name: "factory"
