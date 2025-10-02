@@ -101,6 +101,10 @@
     - etherscan_v2
     - sourcify
 
+- name: Monad
+  chainId: 143
+  rpcUrl: "https://nodes.sequence.app/monad/{{RPC_BUILDER_KEY}}"
+
 - name: Monad Testnet
   chainId: 10143
   rpcUrl: "https://nodes.sequence.app/monad-testnet/{{RPC_BUILDER_KEY}}"
