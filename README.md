@@ -173,7 +173,7 @@ The following is a list of contracts that are deployed by this script.
 │ factories            │ Erc1155PackFactory                │ 0x5B2f47ee798eee52cE184C9eC4d60873185836d8 │
 │ factories            │ Erc1155SaleFactory                │ 0xFb89C8A7DF9A1e0299088C3fC46fd87D3FcbcDBd │
 │ factories            │ Erc1155SoulboundFactory           │ 0xCCbB517AaCAb6680A2ad08ef5A593677dDE17284 │
-│ factories            │ Erc20Factory                      │ 0x1063cBEe6b3Cd69B49f1B922A0D402f484b39855 │
+│ factories            │ Erc20Factory                      │ 0x434c9C50b0Ca6b67AbB71F667C822d5451265062 │
 │ factories            │ Erc721Factory                     │ 0xC6064FfBaDB0687Da29721C8EC02ACa71e735a3e │
 │ factories            │ Erc721SaleFactory                 │ 0x2Ce46243FAb9d688CcC2B1F1B8D2c464e87A2076 │
 │ factories            │ Erc721SoulboundFactory            │ 0x718476DcFf820113B30fE4196905c7720F3c8a4e │
