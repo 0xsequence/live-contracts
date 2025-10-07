@@ -72,4 +72,18 @@ actions:
           types: ["address"]
           values: ["{{trails-multicall3-router.address}}"]
     output: false
-  
+
+  - name: "trails-intent-entrypoint"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsIntentEntrypoint).creationCode}}"
+    output: true
+
+  - name: "verify-trails-intent-entrypoint"
+    type: "verify-contract"
+    depends_on: ["trails-intent-entrypoint"]
+    arguments:
+      address: "{{trails-intent-entrypoint.address}}"
+      contract: "{{Contract(./build-info/beta-3/all-contracts.json:TrailsIntentEntrypoint)}}"
+    output: false
