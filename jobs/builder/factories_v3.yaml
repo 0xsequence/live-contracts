@@ -1,0 +1,421 @@
+name: "factories"
+version: "3"
+description: "Factory contracts for the builder"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+actions:
+  - name: "erc20-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/v1/ERC20-factory.json:ERC20ItemsFactory).creationCode}}"
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: true
+
+  - name: "erc721-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/v1/ERC721-factory.json:ERC721ItemsFactory).creationCode}}"
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: true
+
+  - name: "erc1155-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/v1/ERC1155-factory.json:ERC1155ItemsFactory).creationCode}}"
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: true
+
+  - name: "erc721-sale-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/v1/ERC721-Sale-factory.json:ERC721SaleFactory).creationCode}}"
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: true
+
+  - name: "erc1155-sale-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/v1/ERC1155-Sale-factory.json:ERC1155SaleFactory).creationCode}}"
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: true
+
+  - name: "erc721-soulbound-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/v1/ERC721-Soulbound-factory.json:ERC721SoulboundFactory).creationCode}}"
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: true
+
+  - name: "erc1155-soulbound-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/v1/ERC1155-Soulbound-factory.json:ERC1155SoulboundFactory).creationCode}}"
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: true
+
+  - name: "erc1155-holder"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/v2/ERC1155-Holder.json:ERC1155Holder).creationCode}}"
+    output: true
+
+  - name: "erc1155-pack-factory"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/v2/ERC1155-Pack-factory.json:ERC1155PackFactory).creationCode}}"
+          types: ["address", "address"]
+          values: ["{{developer-multisig-01}}", "{{erc1155-holder.address}}"]
+    output: true
+
+  - name: "verify-erc20-factory"
+    depends_on: ["erc20-factory"]
+    template: "verify-contract"
+    arguments:
+      address: "{{erc20-factory.address}}"
+      contract: "{{Contract(./build-info/v1/ERC20-factory.json:ERC20ItemsFactory)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: false
+
+  - name: "verify-erc20-implementation"
+    depends_on: ["verify-erc20-factory"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc20-factory.address}}"
+          nonce: "1"
+      contract: "{{Contract(./build-info/v1/ERC20-factory.json:ERC20Items)}}"
+    output: false
+
+  - name: "verify-erc20-implementation-proxy"
+    depends_on: ["verify-erc20-implementation"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc20-factory.address}}"
+          nonce: "2"
+      contract: "{{Contract(./build-info/v1/ERC20-factory.json:UpgradeableBeacon)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values:
+            - type: "compute-create"
+              arguments:
+                deployerAddress: "{{erc20-factory.address}}"
+                nonce: "1"
+    output: false
+
+  - name: "verify-erc721-factory"
+    depends_on: ["erc721-factory"]
+    template: "verify-contract"
+    arguments:
+      address: "{{erc721-factory.address}}"
+      contract: "{{Contract(./build-info/v1/ERC721-factory.json:ERC721ItemsFactory)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: false
+
+  - name: "verify-erc721-implementation"
+    depends_on: ["verify-erc721-factory"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc721-factory.address}}"
+          nonce: "1"
+      contract: "{{Contract(./build-info/v1/ERC721-factory.json:ERC721Items)}}"
+    output: false
+
+  - name: "verify-erc721-implementation-proxy"
+    depends_on: ["verify-erc721-implementation"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc721-factory.address}}"
+          nonce: "2"
+      contract: "{{Contract(./build-info/v1/ERC721-factory.json:UpgradeableBeacon)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values:
+            - type: "compute-create"
+              arguments:
+                deployerAddress: "{{erc721-factory.address}}"
+                nonce: "1"
+    output: false
+  - name: "verify-erc1155-factory"
+    depends_on: ["erc1155-factory"]
+    template: "verify-contract"
+    arguments:
+      address: "{{erc1155-factory.address}}"
+      contract: "{{Contract(./build-info/v1/ERC1155-factory.json:ERC1155ItemsFactory)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: false
+
+  - name: "verify-erc1155-implementation"
+    depends_on: ["verify-erc1155-factory"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc1155-factory.address}}"
+          nonce: "1"
+      contract: "{{Contract(./build-info/v1/ERC1155-factory.json:ERC1155Items)}}"
+    output: false
+
+  - name: "verify-erc1155-implementation-proxy"
+    depends_on: ["verify-erc1155-implementation"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc1155-factory.address}}"
+          nonce: "2"
+      contract: "{{Contract(./build-info/v1/ERC1155-factory.json:UpgradeableBeacon)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values:
+            - type: "compute-create"
+              arguments:
+                deployerAddress: "{{erc1155-factory.address}}"
+                nonce: "1"
+    output: false
+
+  - name: "verify-erc721-sale-factory"
+    depends_on: ["erc721-sale-factory"]
+    template: "verify-contract"
+    arguments:
+      address: "{{erc721-sale-factory.address}}"
+      contract: "{{Contract(./build-info/v1/ERC721-Sale-factory.json:ERC721SaleFactory)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: false
+
+  - name: "verify-erc721-sale-implementation"
+    depends_on: ["verify-erc721-sale-factory"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc721-sale-factory.address}}"
+          nonce: "1"
+      contract: "{{Contract(./build-info/v1/ERC721-Sale-factory.json:ERC721Sale)}}"
+    output: false
+
+  - name: "verify-erc721-sale-implementation-proxy"
+    depends_on: ["verify-erc721-sale-implementation"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc721-sale-factory.address}}"
+          nonce: "2"
+      contract: "{{Contract(./build-info/v1/ERC721-Sale-factory.json:UpgradeableBeacon)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values:
+            - type: "compute-create"
+              arguments:
+                deployerAddress: "{{erc721-sale-factory.address}}"
+                nonce: "1"
+    output: false
+
+  - name: "verify-erc1155-sale-factory"
+    depends_on: ["erc1155-sale-factory"]
+    template: "verify-contract"
+    arguments:
+      address: "{{erc1155-sale-factory.address}}"
+      contract: "{{Contract(./build-info/v1/ERC1155-Sale-factory.json:ERC1155SaleFactory)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: false
+
+  - name: "verify-erc1155-sale-implementation"
+    depends_on: ["verify-erc1155-sale-factory"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc1155-sale-factory.address}}"
+          nonce: "1"
+      contract: "{{Contract(./build-info/v1/ERC1155-Sale-factory.json:ERC1155Sale)}}"
+    output: false
+
+  - name: "verify-erc1155-sale-implementation-proxy"
+    depends_on: ["verify-erc1155-sale-implementation"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc1155-sale-factory.address}}"
+          nonce: "2"
+      contract: "{{Contract(./build-info/v1/ERC1155-Sale-factory.json:UpgradeableBeacon)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values:
+            - type: "compute-create"
+              arguments:
+                deployerAddress: "{{erc1155-sale-factory.address}}"
+                nonce: "1"
+    output: false
+
+  - name: "verify-erc721-soulbound-factory"
+    depends_on: ["erc721-soulbound-factory"]
+    template: "verify-contract"
+    arguments:
+      address: "{{erc721-soulbound-factory.address}}"
+      contract: "{{Contract(./build-info/v1/ERC721-Soulbound-factory.json:ERC721SoulboundFactory)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: false
+
+  - name: "verify-erc721-soulbound-implementation"
+    depends_on: ["verify-erc721-soulbound-factory"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc721-soulbound-factory.address}}"
+          nonce: "1"
+      contract: "{{Contract(./build-info/v1/ERC721-Soulbound-factory.json:ERC721Soulbound)}}"
+    output: false
+
+  - name: "verify-erc721-soulbound-implementation-proxy"
+    depends_on: ["verify-erc721-soulbound-implementation"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc721-soulbound-factory.address}}"
+          nonce: "2"
+      contract: "{{Contract(./build-info/v1/ERC721-Soulbound-factory.json:UpgradeableBeacon)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values:
+            - type: "compute-create"
+              arguments:
+                deployerAddress: "{{erc721-soulbound-factory.address}}"
+                nonce: "1"
+    output: false
+
+  - name: "verify-erc1155-soulbound-factory"
+    depends_on: ["erc1155-soulbound-factory"]
+    template: "verify-contract"
+    arguments:
+      address: "{{erc1155-soulbound-factory.address}}"
+      contract: "{{Contract(./build-info/v1/ERC1155-Soulbound-factory.json:ERC1155SoulboundFactory)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{developer-multisig-01}}"]
+    output: false
+
+  - name: "verify-erc1155-holder"
+    depends_on: ["erc1155-holder"]
+    template: "verify-contract"
+    arguments:
+      address: "{{erc1155-holder.address}}"
+      contract: "{{Contract(./build-info/v2/ERC1155-Holder.json:ERC1155Holder)}}"
+    output: false
+
+
+  - name: "verify-erc1155-pack-factory"
+    depends_on: ["erc1155-pack-factory"]
+    template: "verify-contract"
+    arguments:
+      address: "{{erc1155-pack-factory.address}}"
+      contract: "{{Contract(./build-info/v2/ERC1155-Pack-factory.json:ERC1155PackFactory)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address"]
+          values: ["{{developer-multisig-01}}", "{{erc1155-holder.address}}"]
+    output: false

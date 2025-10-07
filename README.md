@@ -170,7 +170,8 @@ The following is a list of contracts that are deployed by this script.
 │ clawback             │ ClawbackMetadata                  │ 0x335411eAA9D63251f8c0867600Be4d0C190a3b1f │
 │ developer-multisig   │ DeveloperMultisig                 │ 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 │
 │ factories            │ Erc1155Factory                    │ 0x024b9949FeD1c8dd7154DE653456d64Aa1093384 │
-│ factories            │ Erc1155PackFactory                │ 0x5B2f47ee798eee52cE184C9eC4d60873185836d8 │
+│ factories            │ Erc1155Holder                     │ 0x3883491F1433dafafd20FB8FD9ec1fE032Ca5e3B │
+│ factories            │ Erc1155PackFactory                │ 0xC4F1ABB23d8CC6E2786fBe7374A1162C499E1701 │
 │ factories            │ Erc1155SaleFactory                │ 0xFb89C8A7DF9A1e0299088C3fC46fd87D3FcbcDBd │
 │ factories            │ Erc1155SoulboundFactory           │ 0xCCbB517AaCAb6680A2ad08ef5A593677dDE17284 │
 │ factories            │ Erc20Factory                      │ 0x434c9C50b0Ca6b67AbB71F667C822d5451265062 │
