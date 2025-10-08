@@ -181,6 +181,10 @@
   rpcUrl: "https://nodes.sequence.app/somnia-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
+- name: Somnia
+  chainId: 5031
+  rpcUrl: "https://nodes.sequence.app/somnia/{{RPC_BUILDER_KEY}}"
+
 - name: LAOS Sigma Testnet
   chainId: 62850
   rpcUrl: "https://nodes.sequence.app/laos-sigma-testnet/{{RPC_BUILDER_KEY}}"
