@@ -11,7 +11,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/v0/ERC20-factory.json:ERC20ItemsFactory).creationCode}}"
+          creationCode: "{{Contract(./build-info/v1/ERC20-factory.json:ERC20ItemsFactory).creationCode}}"
           types: ["address"]
           values: ["{{developer-multisig-01}}"]
     output: true
@@ -105,7 +105,7 @@ actions:
     template: "verify-contract"
     arguments:
       address: "{{erc20-factory.address}}"
-      contract: "{{Contract(./build-info/v0/ERC20-factory.json:ERC20ItemsFactory)}}"
+      contract: "{{Contract(./build-info/v1/ERC20-factory.json:ERC20ItemsFactory)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -122,7 +122,7 @@ actions:
         arguments:
           deployerAddress: "{{erc20-factory.address}}"
           nonce: "1"
-      contract: "{{Contract(./build-info/v0/ERC20-factory.json:ERC20Items)}}"
+      contract: "{{Contract(./build-info/v1/ERC20-factory.json:ERC20Items)}}"
     output: false
 
   - name: "verify-erc20-implementation-proxy"
@@ -134,7 +134,7 @@ actions:
         arguments:
           deployerAddress: "{{erc20-factory.address}}"
           nonce: "2"
-      contract: "{{Contract(./build-info/v0/ERC20-factory.json:UpgradeableBeacon)}}"
+      contract: "{{Contract(./build-info/v1/ERC20-factory.json:UpgradeableBeacon)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
