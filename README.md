@@ -231,7 +231,7 @@ The following is a list of contracts that are deployed by this script.
 │ trails-rc-1          │ TrailsIntentEntrypoint            │ 0xf9dF60584Da03f8D83fF1Bed663465734B2221a7 │
 │ trails-rc-1          │ TrailsRouter                      │ 0x07abd6f71aE3EAD08b2B6D5d091eE24d32dc1Dfa │
 │ trails-rc-1          │ TrailsRouterShim                  │ 0xFc9ffCfaaD457d202CD9622C6D9788363BFA5f2f │
-│ trails-rc-2          │ TrailsIntentEntrypoint            │ 0x9EB7D66F8FACF3B0ec8Eb69B546e4b532Bb32b21 │
+│ trails-rc-2          │ TrailsIntentEntrypoint            │ 0x9470D883bac170116d397Db3dA71B2e57d567583 │
 │ trails-rc-2          │ TrailsRouter                      │ 0xB676Ad908a81722000C23a1E953691d01Ed90791 │
 │ trails-rc-2          │ TrailsRouterShim                  │ 0xCd1a39cd80d12AB38F61A9f252d160024b2144E4 │
 │ trails-token-sweeper │ TrailsMulticall3Router            │ 0xFF8f46538c39dCA637fCE9a804b2B59B517A9698 │
