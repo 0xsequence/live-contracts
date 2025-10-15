@@ -1,0 +1,60 @@
+name: "trails-rc-2"
+version: "rc-2"
+description: "Deploy Trails contracts (rc 2)"
+skip_networks: [19011, 40875]
+
+actions:
+  - name: "trails-router"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/rc-2/all-contracts.json:TrailsRouter).creationCode}}"
+    output: true
+
+  - name: "verify-trails-router"
+    type: "verify-contract"
+    depends_on: ["trails-router"]
+    arguments:
+      address: "{{trails-router.address}}"
+      contract: "{{Contract(./build-info/rc-2/all-contracts.json:TrailsRouter)}}"
+    output: false
+
+  - name: "trails-router-shim"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/rc-2/all-contracts.json:TrailsRouterShim).creationCode}}"
+          types: ["address"]
+          values: ["{{trails-router.address}}"]
+    output: true
+
+  - name: "verify-trails-router-shim"
+    type: "verify-contract"
+    depends_on: ["trails-router-shim"]
+    arguments:
+      address: "{{trails-router-shim.address}}"
+      contract: "{{Contract(./build-info/rc-2/all-contracts.json:TrailsRouterShim)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{trails-router.address}}"]
+    output: false
+
+  - name: "trails-intent-entrypoint"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/rc-2/all-contracts.json:TrailsIntentEntrypoint).creationCode}}"
+    output: true
+
+  - name: "verify-trails-intent-entrypoint"
+    type: "verify-contract"
+    depends_on: ["trails-intent-entrypoint"]
+    arguments:
+      address: "{{trails-intent-entrypoint.address}}"
+      contract: "{{Contract(./build-info/rc-2/all-contracts.json:TrailsIntentEntrypoint)}}"
+    output: false
