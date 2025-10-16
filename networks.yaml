@@ -86,10 +86,6 @@
   rpcUrl: "https://nodes.sequence.app/b3-sepolia/{{RPC_BUILDER_KEY}}"
   testnet: true
 
-- name: LAOS
-  chainId: 6283
-  rpcUrl: "https://nodes.sequence.app/laos/{{RPC_BUILDER_KEY}}"
-
 - name: B3
   chainId: 8333
   rpcUrl: "https://nodes.sequence.app/b3/{{RPC_BUILDER_KEY}}"
@@ -184,11 +180,6 @@
 - name: Somnia
   chainId: 5031
   rpcUrl: "https://nodes.sequence.app/somnia/{{RPC_BUILDER_KEY}}"
-
-- name: LAOS Sigma Testnet
-  chainId: 62850
-  rpcUrl: "https://nodes.sequence.app/laos-sigma-testnet/{{RPC_BUILDER_KEY}}"
-  testnet: true
 
 - name: Polygon Amoy
   chainId: 80002
