@@ -287,3 +287,8 @@
 - name: Katana
   chainId: 747474
   rpcUrl: "https://nodes.sequence.app/katana/{{RPC_BUILDER_KEY}}"
+
+- name: Arc Testnet
+  chainId: 5042002
+  rpcUrl: "https://nodes.sequence.app/arc-testnet/{{RPC_BUILDER_KEY}}"
+  testnet: true
