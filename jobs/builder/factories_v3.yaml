@@ -419,3 +419,36 @@ actions:
           types: ["address", "address"]
           values: ["{{developer-multisig-01}}", "{{erc1155-holder.address}}"]
     output: false
+
+  - name: "verify-erc1155-pack-implementation"
+    depends_on: ["verify-erc1155-pack-factory"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc1155-pack-factory.address}}"
+          nonce: "1"
+      contract: "{{Contract(./build-info/v2/ERC1155-Pack-factory.json:ERC1155Pack)}}"
+    output: false
+
+  - name: "verify-erc1155-pack-implementation-proxy"
+    depends_on: ["verify-erc1155-pack-implementation"]
+    template: "verify-contract"
+    arguments:
+      address:
+        type: "compute-create"
+        arguments:
+          deployerAddress: "{{erc1155-pack-factory.address}}"
+          nonce: "2"
+      contract: "{{Contract(./build-info/v2/ERC1155-Pack-factory.json:UpgradeableBeacon)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values:
+            - type: "compute-create"
+              arguments:
+                deployerAddress: "{{erc1155-pack-factory.address}}"
+                nonce: "1"
+    output: false
