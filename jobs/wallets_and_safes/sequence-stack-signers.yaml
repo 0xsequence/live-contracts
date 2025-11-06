@@ -1,0 +1,26 @@
+name: "stack-signers"
+version: "1"
+description: "Deploys the signers used by the Sequence stack"
+depends_on: ["sequence-v2"]
+
+actions:
+  - name: "payment-signer-dev"
+    template: "deploy-wallet-v2"
+    arguments:
+      implementation: "{{sequence-v2.main-module.address}}"
+      salt: "0x5a3d23cc68c09f9b4e48a805f031becde6a3b9ee32a2b2b9ed742a1078e2f7b8"
+    output: true
+
+  - name: "payment-signer-next"
+    template: "deploy-wallet-v2"
+    arguments:
+      implementation: "{{sequence-v2.main-module.address}}"
+      salt: "0x83f3b8cedaa13051ca1c926997c7c835797cc4fe3913271b0039fcac1c8fcc95"
+    output: true
+
+  - name: "payment-signer-prod"
+    template: "deploy-wallet-v2"
+    arguments:
+      implementation: "{{sequence-v2.main-module.address}}"
+      salt: "0x63ca5e66c37aef85b8a9691efc1b3cc98e8f013f98922e95ffba6fe6fa087200"
+    output: true
