@@ -62,10 +62,31 @@ actions:
     arguments:
       to: "{{guards-v1.prod-guard.address}}"
       data:
-        type: read-json
+        # The Sequence API appends an extra 0x03 at the end of the signature
+        # we have to trim it, otherwise the contract fails with "LibBytes#readUint8Uint8: OUT_OF_BOUNDS"
+        # when it attempts to parse the signature. We only reduce the size of the array by 1 byte, there is no need
+        # to remove the 03, as it will be ignored if it's out of bounds.
+        type: "abi-pack"
         arguments:
-          json: "{{get-guard-v1-signature.response}}"
-          path: "txs.data"
+          types: ["bytes", "bytes1", "bytes"]
+          values:
+            - type: "slice-bytes"
+              arguments:
+                value:
+                  type: "read-json"
+                  arguments:
+                    json: "{{get-guard-v1-signature.response}}"
+                    path: "txs.data"
+                range: "0:3267"
+            - "0x5c"
+            - type: "slice-bytes"
+              arguments:
+                value:
+                  type: "read-json"
+                  arguments:
+                    json: "{{get-guard-v1-signature.response}}"
+                    path: "txs.data"
+                range: "3268:"
 
   - name: "patch-guard-v2" # Sends a pre-signed transaction performing the migration
     template: "send-transaction"
