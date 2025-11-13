@@ -21,9 +21,6 @@ cleanup() {
         wait $ANVIL_PID 2>/dev/null || true
     fi
     
-    # Also kill any remaining anvil processes
-    pkill -f "anvil" 2>/dev/null || true
-    
     # Clean up temporary files
     rm -f gen-table.txt readme-table.txt README.md.backup README.md.new 2>/dev/null || true
 }
