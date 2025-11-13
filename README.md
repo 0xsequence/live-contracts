@@ -193,6 +193,7 @@ The following is a list of contracts that are deployed by this script.
 │ marketplace-v2       │ MarketV2                          │ 0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712 │
 │ niftyswap            │ Exchange20Wrapper                 │ 0x2c944F28965F9A2cd5E69bA7e7520CbbD928258a │
 │ niftyswap            │ Factory20                         │ 0x9196b852437D9Ed92d95715dCbdA4533ffC479E0 │
+│ p256-verifier        │ SoladyP256Verifier                │ 0x000000000000D01eA45F9eFD5c54f037Fa57Ea1a │
 │ payments             │ PaymentCombiner                   │ 0xfe0a269E288051B0815E05Fe192FC888118CB8a2 │
 │ payments             │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
 │ payments             │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
@@ -220,6 +221,9 @@ The following is a list of contracts that are deployed by this script.
 │ sequence-v2          │ MainModuleV2                      │ 0xfBf8f1A5E00034762D928f46d438B947f5d4065d │
 │ sequence-v2          │ SequenceFactoryV2                 │ 0xFaA5c0b14d1bED5C888Ca655B9a8A5911F78eF4A │
 │ sequence-v2          │ SequenceUtilsV2                   │ 0xdbbFa3cB3B087B64F4ef5E3D20Dda2488AA244e6 │
+│ stack-signers        │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
+│ stack-signers        │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
+│ stack-signers        │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
 │ trails-beta-2        │ TrailsBalanceInjector             │ 0x9eCA6CEf73799402a1afe4779f588f03034c5D0f │
 │ trails-beta-2        │ TrailsMulticall3Router            │ 0x748dD4d9da3fd46797FE55C0b54c329dDc06558D │
 │ trails-beta-2        │ TrailsTokenSweeper                │ 0x5CdC654bc149F72509442fa9c12762b269f34c23 │
