@@ -1,0 +1,19 @@
+name: "p256-verifier"
+version: "1"
+description: "Deploy the Solady P256 verifier to the canonical RIP-7212 fallback address via Arachnid's deterministic deployment proxy"
+
+actions:
+  - name: "solady-p256-verifier"
+    template: "arachnid-deterministic-deployment-proxy"
+    arguments:
+      salt: "0x0000000000000000000000000000000000000000135c0bd4331643038756500f"
+      creationCode: "{{Contract(./build-info/p256-verifier.json:P256Verifier).creationCode}}"
+    output: true
+
+  - name: "verify-solady-p256-verifier"
+    type: "verify-contract"
+    depends_on: ["solady-p256-verifier"]
+    arguments:
+      address: "{{solady-p256-verifier.address}}"
+      contract: "{{Contract(./build-info/p256-verifier.json:P256Verifier)}}"
+    output: false

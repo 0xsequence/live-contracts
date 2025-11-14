@@ -62,7 +62,7 @@ actions:
     arguments:
       to: "{{guards-v1.prod-guard.address}}"
       data:
-        type: read-json
+        type: "read-json"
         arguments:
           json: "{{get-guard-v1-signature.response}}"
           path: "txs.data"

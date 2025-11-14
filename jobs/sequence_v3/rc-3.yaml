@@ -1,6 +1,7 @@
 name: "sequence_v3/rc_3"
 version: "1"
 description: "Sequence v3 contracts (release candidate 3) (commit 49559600a79258293a41e956f9b239e64bf135a6) (evm paris)"
+depends_on: ["p256-verifier"]
 
 actions:
   - name: "factory"
