@@ -207,6 +207,13 @@
     - sourcify
   testnet: true
 
+- name: Etherlink Shadownet Testnet
+  chainId: 127823
+  rpcUrl: "https://nodes.sequence.app/etherlink-shadownet-testnet/{{RPC_BUILDER_KEY}}"
+  supports:
+    - sourcify
+  testnet: true
+
 - name: Arbitrum Sepolia
   chainId: 421614
   rpcUrl: "https://nodes.sequence.app/arbitrum-sepolia/{{RPC_BUILDER_KEY}}"
