@@ -1,6 +1,6 @@
 name: "sequence_v3/rc_4"
-version: "1"
-description: "Sequence v3 contracts (release candidate 3) (commit fa0fae3de26e189cf4f8a554b2d72f0a35297bc0) (evm paris)"
+version: "2"
+description: "Sequence v3 contracts (release candidate 3) (commit e7817ac8f49ba4f8934d1e15bd6c222a40e02540) (evm paris)"
 depends_on: ["p256-verifier"]
 
 
@@ -11,7 +11,7 @@ depends_on: ["p256-verifier"]
 #     - deploy() gated by a fixed senderCreator address.
 #     - Precomputes the CREATE2 wallet address and returns it if already deployed,
 #       otherwise forwards to Factory.deploy().
-
+#
 # - ERC4337v07
 #   - validateUserOp() now calls isValidSignature(userOpHash, userOp.signature)
 #     directly instead of this.isValidSignature(...).
@@ -37,6 +37,18 @@ depends_on: ["p256-verifier"]
 #   - Exposed new helper hashPayloadCallIdx(wallet, payload, callIdx) and private
 #     _hashPayloadHashCallIdx(...); removed hashCallWithReplayProtection(...).
 #   - SessionManager now passes wallet = msg.sender into SessionSig.recoverSignature(...).
+#   - Added SessionErrors.InvalidSignatureLength and a final check that the entire
+#     encoded session signature is consumed; extra trailing bytes now revert.
+#
+# - Payload
+#   - Added InvalidPackedLength error.
+#   - Payload.fromPackedCalls(...) now enforces that the entire packed buffer
+#     is consumed; any trailing bytes cause InvalidPackedLength().
+#
+# - Passkeys
+#   - Added InvalidSignatureLength error.
+#   - Compact passkey signatures now must be fully consumed by the decoder; if
+#     there are trailing bytes after parsing, decoding reverts with InvalidSignatureLength().
 #
 # - P256
 #   - Removed: P256VerificationFailed error declaration, N constant,
@@ -47,7 +59,7 @@ depends_on: ["p256-verifier"]
 #
 # - Misc cleanups
 #   - Removed unused imports:
-#     - LibBytes from Guest, SessionManager, ExplicitSessionManager.
+#     - LibBytes from SessionManager and ExplicitSessionManager.
 #     - Wallet from Stage2Auth.
 #     - Payload from ICheckpointer.
 #   - Removed unused InvalidSignatureType error from Stage1Auth.
@@ -77,7 +89,7 @@ actions:
   - name: "stage-1-module"
     template: "erc-2470"
     arguments:
-      salt: "0xb52f06e3d7f1e22467d8eaa6fe9f9ac69b1cd7029afa654a7c0cf06c7f468bd8"
+      salt: "0xada7d73b35b5c281661e3ab32d446d50d9d3345d29cbaa793fa89eebe1eac700"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -89,7 +101,7 @@ actions:
   - name: "stage-1-module-4337-07"
     template: "erc-2470"
     arguments:
-      salt: "0x5a071f323c89c67cca81a9d660abd0f3bfd40fd86bd56b22232d80d722698bb3"
+      salt: "0xb23845cabe43e4e700f40b64c16d0ca3c3b73909f80c53bd8334279c9e96b3a7"
       creationCode:
         type: "constructor-encode"
         arguments:
@@ -130,26 +142,24 @@ actions:
       creationCode: "{{Contract(./build-info/rc-3/guest.json:Guest).creationCode}}"
     output: true
 
-  # Remains the same as rc_3
   - name: "passkeys"
     template: "erc-2470"
     arguments:
-      salt: "0xa7a24f9823fbc7cd2679235e68fb31422123290d6fb5e2dd8bd697f8d059e179"
-      creationCode: "{{Contract(./build-info/rc-3/passkeys.json:Passkeys).creationCode}}"
+      salt: "0x3893f60d58ce8c5e5d885ee94c4f450814d0bb06917820a1c8059f437ecbd7c4"
+      creationCode: "{{Contract(./build-info/rc-4/passkeys.json:Passkeys).creationCode}}"
     output: true
 
-  # Remains the same as rc_3
   - name: "recovery"
     template: "erc-2470"
     arguments:
-      salt: "0xbf540d938665f3478571647ba4c25eacce75512e9d27fee5d9871a25ba6c43c0"
-      creationCode: "{{Contract(./build-info/rc-3/recovery.json:Recovery).creationCode}}"
+      salt: "0x92a23f4939e20cdb43d4bdefe65fa79d1324a4a70070b7d05e228ead3cae2a48"
+      creationCode: "{{Contract(./build-info/rc-4/recovery.json:Recovery).creationCode}}"
     output: true
 
   - name: "sessions"
     template: "erc-2470"
     arguments:
-      salt: "0xa30c855ee4f1c7a731235837f23bf85ae0940d396f60ef810cfbfbfdd87389f1"
+      salt: "0x8ab75435a905ce3b50cd8bb75fe32db9f0b370f20611589849dd10434e1eb41e"
       creationCode: "{{Contract(./build-info/rc-4/sessions.json:SessionManager).creationCode}}"
     output: true
 
@@ -236,7 +246,7 @@ actions:
     depends_on: ["passkeys"]
     arguments:
       address: "{{passkeys.address}}"
-      contract: "{{Contract(./build-info/rc-3/passkeys.json:Passkeys)}}"
+      contract: "{{Contract(./build-info/rc-4/passkeys.json:Passkeys)}}"
     output: false
 
   - name: "verify-recovery"
@@ -244,7 +254,7 @@ actions:
     depends_on: ["recovery"]
     arguments:
       address: "{{recovery.address}}"
-      contract: "{{Contract(./build-info/rc-3/recovery.json:Recovery)}}"
+      contract: "{{Contract(./build-info/rc-4/recovery.json:Recovery)}}"
     output: false
 
   - name: "verify-sessions"
