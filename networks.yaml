@@ -186,6 +186,7 @@
   rpcUrl: "https://nodes.sequence.app/amoy/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
+    - etherscan_v2
   testnet: true
 
 - name: Blast
