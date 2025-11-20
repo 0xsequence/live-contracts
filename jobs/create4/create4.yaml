@@ -1,0 +1,20 @@
+name: "create4"
+version: "1"
+description: "Deploy CREATE4 plan executor contract via the canonical ERC-2470 deployer"
+depends_on: []
+
+actions:
+  - name: "create4"
+    template: "erc-2470"
+    arguments:
+      salt: "0x416775737831323131206d616465204352454154453326342678030003000000"
+      creationCode: "{{Contract(./build-info/create4.json:CREATE4).creationCode}}"
+    output: true
+
+  - name: "verify-create4"
+    type: "verify-contract"
+    depends_on: ["create4"]
+    arguments:
+      address: "{{create4.address}}"
+      contract: "{{Contract(./build-info/create4.json:CREATE4)}}"
+    output: false
