@@ -283,6 +283,10 @@
   rpcUrl: "https://nodes.sequence.app/incentiv-testnet-v2/{{RPC_BUILDER_KEY}}"
   testnet: true
 
+- name: Incentiv
+  chainId: 24101
+  rpcUrl: "https://nodes.sequence.app/incentiv/{{RPC_BUILDER_KEY}}"
+
 - name: SEI Testnet
   chainId: 1328
   rpcUrl: "https://nodes.sequence.app/sei-testnet/{{RPC_BUILDER_KEY}}"
