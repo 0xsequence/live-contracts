@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@0xsequence/catapult':
-        specifier: ^1.3.10
-        version: 1.3.10
+        specifier: ^1.3.11
+        version: 1.3.11
     devDependencies:
       lefthook:
         specifier: ^1.12.2
@@ -18,8 +18,8 @@ importers:
 
 packages:
 
-  '@0xsequence/catapult@1.3.10':
-    resolution: {integrity: sha512-ZxycYWEJdRblmWWruJn6FS+lPTXRxVhlg5QcCnnULZ8/bEznjoD7yPZuywzfH25dBguY8241zlTSFR2Ay6J8mA==}
+  '@0xsequence/catapult@1.3.11':
+    resolution: {integrity: sha512-wxwK+wDSicE+PIDbFDZaqO3h2NkPDQpt5OG1t6tzf/ZT6urKoptwYImOA4haVHzCLR8F18gZ7oFkGRsBl6lsGw==}
     engines: {node: '>=16.0.0'}
     hasBin: true
 
@@ -239,7 +239,7 @@ packages:
 
 snapshots:
 
-  '@0xsequence/catapult@1.3.10':
+  '@0xsequence/catapult@1.3.11':
     dependencies:
       chalk: 4.1.2
       commander: 11.1.0

@@ -12,7 +12,7 @@
     "update-readme": "./scripts/update-table.sh"
   },
   "dependencies": {
-    "@0xsequence/catapult": "^1.3.10"
+    "@0xsequence/catapult": "^1.3.11"
   },
   "devDependencies": {
     "lefthook": "^1.12.2"
