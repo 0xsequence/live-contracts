@@ -14,7 +14,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/rc-3/all-contracts.json:TrailsRouter).creationCode}}"
           types: ["address"]
-          values: ["{{multicall3.address}}"]
+          values: ["{{multicall3.multicall3.address}}"]
     output: true
 
   - name: "verify-trails-router"
@@ -27,7 +27,7 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["{{multicall3.address}}"]
+          values: ["{{multicall3.multicall3.address}}"]
     output: false
 
   - name: "trails-router-shim"
