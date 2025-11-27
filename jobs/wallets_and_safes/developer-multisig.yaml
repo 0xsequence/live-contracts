@@ -10,3 +10,81 @@ actions:
       implementation: "{{sequence-v2.main-module.address}}"
       salt: "0x6562ac5c1205604d224a28401931308d58d852d725ebc6dcf4e3c20c2037fd12"
     output: true
+
+  - name: "developer-multisig-update-to-0x64fdbb4278c51725d7f0307121585d111ab6e5f245032ead9ae1f3404dfd6be4"
+    depends_on: ["developer-multisig"]
+    skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "neq"
+          values:
+            - "{{developer-multisig.address}}"
+            - "0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "gt"
+          values:
+            - type: "call"
+              arguments:
+                to: "{{developer-multisig.address}}"
+                signature: "readNonce(uint256) returns (uint256)"
+                values: ["0x19562960be2"]
+            - "0"
+    template: "send-transaction"
+    arguments:
+      to: "{{developer-multisig.address}}"
+      value: "0"
+      data:
+        type: "abi-encode"
+        arguments:
+          signature: "execute((bool,bool,uint256,address,uint256,bytes)[],uint256,bytes)"
+          values:
+            - # _txs: array of transaction tuples
+              - # transaction tuple
+                - false  # delegateCall
+                - true   # revertOnError
+                - "0"    # gasLimit
+                - "{{developer-multisig.address}}"  # target (self-call)
+                - "0"    # value
+                - "0x2956142664fdbb4278c51725d7f0307121585d111ab6e5f245032ead9ae1f3404dfd6be4"  # data (updateImageHash call)
+            - "0x019562960be2000000000000000000000000"  # _nonce
+            - "0x020002000000000101f278b8e1515fbaf4f6db5361ac1feae955160996040000440001532f9f3ec8ea00bb50f796a1dfc6527cee327da81b1c83604eee9df0e63324135b0557560e3865ec30bd45d6d65ab15739a19ae9b25fdce775e0a6a079679db21b02040000440001ab1aa550998c44021cc2aae569425cf5d41dc35c641db0802f658a5752c073bf01bba1a4d6b1dfb97c0f2fceb50ad607a889b38a18851fa27097d2f938749ff11b0204000016010131eabd463f98d2da85710ab0d5affdc47280320c"  # _signature
+
+  - name: "developer-multisig-update-to-0x48438e40f484123143eb80a191719925a837b3a5ef403ddbb71c7d2325809eb8"
+    depends_on: ["developer-multisig"]
+    skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "neq"
+          values:
+            - "{{developer-multisig.address}}"
+            - "0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4"
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "gt"
+          values:
+            - type: "call"
+              arguments:
+                to: "{{developer-multisig.address}}"
+                signature: "readNonce(uint256) returns (uint256)"
+                values: ["0x19562960be2"]
+            - "1"
+    template: "send-transaction"
+    arguments:
+      to: "{{developer-multisig.address}}"
+      value: "0"
+      data:
+        type: "abi-encode"
+        arguments:
+          signature: "execute((bool,bool,uint256,address,uint256,bytes)[],uint256,bytes)"
+          values:
+            - # _txs: array of transaction tuples
+              - # transaction tuple
+                - false  # delegateCall
+                - true   # revertOnError
+                - "0"    # gasLimit
+                - "{{developer-multisig.address}}"  # target (self-call)
+                - "0"    # value
+                - "0x2956142648438e40f484123143eb80a191719925a837b3a5ef403ddbb71c7d2325809eb8"  # data (updateImageHash call)
+            - "0x019562960be2000000000000000000000001"  # _nonce
+            - "0x0200020000000100011e21820232c87e5398d3fabecae5d5462c68c33b6737b365a9367c5c5316e0aa3cada93a14326268c5fc66808b6cb5a9fe9bcceb7ba32990c4c593eb7fc7e6471c02040000440001a2834a915327f935930a0c8db6dc6a991c1fe7f6cf5586070d3b751cd6eeaeb852d4a980c6310c207ab8332eec9f7d22b853186a5e8a9db2af02303b7a0b38111c02040000160101e5f90df2b653b37b97f6525fb08a3d88ab7b8480040000160101eb5eee1f1650b821e0d3a87c1341d85b3a16ea72"  # _signature
