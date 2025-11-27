@@ -1,0 +1,20 @@
+name: "multicall3"
+version: "1"
+description: "Deploy Multicall3 via Singleton Factory (ERC-2470)"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+actions:
+  - name: "multicall3"
+    template: "erc-2470"
+    arguments:
+      salt: "0x416775737831323131206d616465204352454154453326342678030003000000"
+      creationCode: "{{Contract(./build-info/multicall3.json:Multicall3).creationCode}}"
+    output: true
+
+  - name: "verify-multicall3"
+    type: "verify-contract"
+    depends_on: ["multicall3"]
+    arguments:
+      address: "{{multicall3.address}}"
+      contract: "{{Contract(./build-info/multicall3.json:Multicall3)}}"
+    output: false
