@@ -1,6 +1,7 @@
 name: "trails-rc-4"
 version: "rc-4"
 description: "Deploy Trails contracts (rc 4)"
+depends_on: ["sequence_v3/rc_4"]
 skip_networks: [19011, 40875]
 
 actions:
@@ -8,7 +9,12 @@ actions:
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
-      creationCode: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsRouter).creationCode}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsRouter).creationCode}}"
+          types: ["address"]
+          values: ["{{sequence_v3/rc_4.guest.address}}"]
     output: true
 
   - name: "verify-trails-router"
@@ -17,6 +23,11 @@ actions:
     arguments:
       address: "{{trails-router.address}}"
       contract: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsRouter)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{sequence_v3/rc_4.guest.address}}"]
     output: false
 
   - name: "trails-router-shim"
