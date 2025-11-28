@@ -1,7 +1,7 @@
 name: "trails-rc-3"
 version: "rc-3"
 description: "Deploy Trails contracts (rc 3)"
-depends_on: ["multicall3"]
+depends_on: ["era-evm-predeploy-erc2470", "multicall3"]
 skip_networks: [19011, 40875]
 
 actions:

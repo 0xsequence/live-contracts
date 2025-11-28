@@ -1,6 +1,7 @@
 name: "trails-beta-2"
 version: "beta-2"
 description: "Deploy TrailsTokenSweeper via SingletonFactory (EIP-2470)"
+depends_on: ["era-evm-predeploy-erc2470"]
 
 actions:
   - name: "trails-token-sweeper"
