@@ -1,6 +1,7 @@
 name: "trails-beta-3"
 version: "beta-3"
 description: "Deploy Trails contracts (beta 3)"
+depends_on: ["era-evm-predeploy-erc2470"]
 skip_networks: [19011, 40875]
 
 actions:
