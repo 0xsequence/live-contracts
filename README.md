@@ -192,6 +192,7 @@ The following is a list of contracts that are deployed by this script.
 │ marketplace-v2       │ BatchPayableHelperV2              │ 0x6166c1952c54dEd6b070B4616797E61b6c48A117 │
 │ marketplace-v2       │ MarketFactoryV2                   │ 0xBDC76d15eA28beB6AF2Cc69b4EFBb4Aa4FB77689 │
 │ marketplace-v2       │ MarketV2                          │ 0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712 │
+│ multicall3           │ Multicall3                        │ 0xae96419a81516f063744206d4b5E36f3168280f8 │
 │ niftyswap            │ Exchange20Wrapper                 │ 0x2c944F28965F9A2cd5E69bA7e7520CbbD928258a │
 │ niftyswap            │ Factory20                         │ 0x9196b852437D9Ed92d95715dCbdA4533ffC479E0 │
 │ p256-verifier        │ SoladyP256Verifier                │ 0x000000000000D01eA45F9eFD5c54f037Fa57Ea1a │
@@ -240,6 +241,9 @@ The following is a list of contracts that are deployed by this script.
 │ trails-rc-2          │ TrailsIntentEntrypoint            │ 0x9470D883bac170116d397Db3dA71B2e57d567583 │
 │ trails-rc-2          │ TrailsRouter                      │ 0xc4415c5CabD726bA06042af752a528B3dbc263F7 │
 │ trails-rc-2          │ TrailsRouterShim                  │ 0x859E606022aE8894342c00D297A4c4332aE53AbB │
+│ trails-rc-3          │ TrailsIntentEntrypoint            │ 0x8f64eEB1f4680B9ed1F9d6A6Eee7CCf36258C93D │
+│ trails-rc-3          │ TrailsRouter                      │ 0xF8A739B9F24E297a98b7aba7A9cdFDBD457F6fF8 │
+│ trails-rc-3          │ TrailsRouterShim                  │ 0x1306aF05bA556839885B9B8c758f1d2F33d3571E │
 │ trails-token-sweeper │ TrailsMulticall3Router            │ 0xFF8f46538c39dCA637fCE9a804b2B59B517A9698 │
 │ trails-token-sweeper │ TrailsTokenSweeper                │ 0xEbDd59B8cE1993d38e4E081E0d80662BB169d3db │
 │ value-forwarder      │ ValueForwarder                    │ 0xABAAd93EeE2a569cF0632f39B10A9f5D734777ca │
