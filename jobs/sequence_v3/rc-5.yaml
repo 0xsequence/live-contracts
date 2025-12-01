@@ -1,73 +1,17 @@
-name: "sequence_v3/rc_4"
-version: "2"
-description: "Sequence v3 contracts (release candidate 3) (commit e7817ac8f49ba4f8934d1e15bd6c222a40e02540) (evm paris)"
+name: "sequence_v3/rc_5"
+version: "1"
+description: "Sequence v3 contracts (release candidate 5) (commit 0d9061f229da73edae890e6fdd1fbf753028df6d) (evm paris)"
 depends_on: ["p256-verifier"]
 
-deprecated: true
 
-# Changelog since rc-3
+# Changelog since rc-4
 #
-# - ERC4337FactoryWrapper
-#   - Added new ERC4337FactoryWrapper contract wrapping Factory:
-#     - deploy() gated by a fixed senderCreator address.
-#     - Precomputes the CREATE2 wallet address and returns it if already deployed,
-#       otherwise forwards to Factory.deploy().
-#
-# - ERC4337v07
-#   - validateUserOp() now calls isValidSignature(userOpHash, userOp.signature)
-#     directly instead of this.isValidSignature(...).
-#
-# - BaseAuth
-#   - Static-signature branch now sets _payload.noChainId from signatureFlag
-#     before computing opHash.
-#   - Updated BaseSig.recover(...) calls to use BaseSig.RecoverMode.Initial.
-#   - isValidSignature(bytes32,bytes) visibility changed from external to public.
-#
-# - BaseSig
-#   - Introduced RecoverMode enum (Initial / UseProvidedCheckpointer / SkipSnapshotRead).
-#   - recover(...) now takes RecoverMode instead of a boolean ignoreCheckpointer.
-#   - recoverChained(...) updated to pass the appropriate RecoverMode to nested recover() calls.
-#   - Added ChainedSignatureNestedInChainedSignature error and revert if a chained
-#     signature is nested inside another chained signature.
-#
-# - Sessions (SessionManager / SessionSig)
-#   - SessionSig.recoverSignature(...) now takes the wallet address as first parameter.
-#   - Per-call signature hash now uses:
-#     - payloadHash = Payload.hashFor(payload, wallet)
-#     - callHash = keccak256(abi.encodePacked(payloadHash, callIdx))
-#   - Exposed new helper hashPayloadCallIdx(wallet, payload, callIdx) and private
-#     _hashPayloadHashCallIdx(...); removed hashCallWithReplayProtection(...).
-#   - SessionManager now passes wallet = msg.sender into SessionSig.recoverSignature(...).
-#   - Added SessionErrors.InvalidSignatureLength and a final check that the entire
-#     encoded session signature is consumed; extra trailing bytes now revert.
-#
-# - Payload
-#   - Added InvalidPackedLength error.
-#   - Payload.fromPackedCalls(...) now enforces that the entire packed buffer
-#     is consumed; any trailing bytes cause InvalidPackedLength().
-#
-# - Passkeys
-#   - Added InvalidSignatureLength error.
-#   - Compact passkey signatures now must be fully consumed by the decoder; if
-#     there are trailing bytes after parsing, decoding reverts with InvalidSignatureLength().
-#
-# - P256
-#   - Removed: P256VerificationFailed error declaration, N constant,
-#     verifySignatureAllowMalleability(...), normalized(...),
-#     tryDecodePoint(...), tryDecodePointCalldata(...).
-#   - Library API now consists of verifySignature(...) plus VERIFIER,
-#     RIP_PRECOMPILE and _HALF_N constants.
-#
-# - Misc cleanups
-#   - Removed unused imports:
-#     - LibBytes from SessionManager and ExplicitSessionManager.
-#     - Wallet from Stage2Auth.
-#     - Payload from ICheckpointer.
-#   - Removed unused InvalidSignatureType error from Stage1Auth.
-
+# - Events
+#   - Added `indexed` for call events.
+#   - Added `indexed` for recovery events.
 
 actions:
-  # Remains the same as rc_3
+  # Remains the same as rc_4
   - name: "factory"
     template: "erc-2470"
     arguments:
@@ -75,6 +19,7 @@ actions:
       creationCode: "{{Contract(./build-info/rc-3/factory.json:Factory).creationCode}}"
     output: true
 
+  # Remains the same as rc_4
   - name: "erc4337-factory-wrapper"
     template: "erc-2470"
     arguments:
@@ -90,11 +35,11 @@ actions:
   - name: "stage-1-module"
     template: "erc-2470"
     arguments:
-      salt: "0xada7d73b35b5c281661e3ab32d446d50d9d3345d29cbaa793fa89eebe1eac700"
+      salt: "0x0aee8e5fdccaf70bbd1ceaa5321de853b9142f5714dcc163592f3842b2819396"
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/rc-4/stage1.json:Stage1Module).creationCode}}"
+          creationCode: "{{Contract(./build-info/rc-5/stage1.json:Stage1Module).creationCode}}"
           types: ["address", "address"]
           values: ["{{factory.address}}", "{{address-zero}}"]
     output: true
@@ -102,11 +47,11 @@ actions:
   - name: "stage-1-module-4337-07"
     template: "erc-2470"
     arguments:
-      salt: "0xb23845cabe43e4e700f40b64c16d0ca3c3b73909f80c53bd8334279c9e96b3a7"
+      salt: "0xd664aeec7b79eb9b3b33f5de6fd385b117da82ab787734d346090f33c46b780f"
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/rc-4/stage1.json:Stage1Module).creationCode}}"
+          creationCode: "{{Contract(./build-info/rc-5/stage1.json:Stage1Module).creationCode}}"
           types: ["address", "address"]
           values: ["{{factory.address}}", "{{entrypoint-4337-07}}"]
     output: true
@@ -135,14 +80,14 @@ actions:
           values: []
     output: true
 
-  # Remains the same as rc_3
   - name: "guest"
     template: "erc-2470"
     arguments:
-      salt: "0x5c11a7895a309fa08b06f53784721316f1c7615a976337cd3b9b6251cd25ab9f"
-      creationCode: "{{Contract(./build-info/rc-3/guest.json:Guest).creationCode}}"
+      salt: "0xcb4dae7b9b2a241b19adb078f35433bb1b02cb63a82ecb49a6fe2a290c4585b4"
+      creationCode: "{{Contract(./build-info/rc-5/guest.json:Guest).creationCode}}"
     output: true
 
+  # Remains the same as rc_4
   - name: "passkeys"
     template: "erc-2470"
     arguments:
@@ -153,10 +98,11 @@ actions:
   - name: "recovery"
     template: "erc-2470"
     arguments:
-      salt: "0x92a23f4939e20cdb43d4bdefe65fa79d1324a4a70070b7d05e228ead3cae2a48"
-      creationCode: "{{Contract(./build-info/rc-4/recovery.json:Recovery).creationCode}}"
+      salt: "0x2367235aa5766b14e874331a8bad01ed8a24ae17b62bc72de819bf81d1a2aa5b"
+      creationCode: "{{Contract(./build-info/rc-5/recovery.json:Recovery).creationCode}}"
     output: true
 
+  # Remains the same as rc_4
   - name: "sessions"
     template: "erc-2470"
     arguments:
@@ -177,7 +123,7 @@ actions:
     depends_on: ["stage-1-module"]
     arguments:
       address: "{{stage-1-module.address}}"
-      contract: "{{Contract(./build-info/rc-4/stage1.json:Stage1Module)}}"
+      contract: "{{Contract(./build-info/rc-5/stage1.json:Stage1Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -195,7 +141,7 @@ actions:
           to: "{{stage-1-module.address}}"
           signature: "STAGE_2_IMPLEMENTATION() returns (address)"
           values: []
-      contract: "{{Contract(./build-info/rc-4/stage1.json:Stage2Module)}}"
+      contract: "{{Contract(./build-info/rc-5/stage1.json:Stage2Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -208,7 +154,7 @@ actions:
     depends_on: ["stage-1-module-4337-07"]
     arguments:
       address: "{{stage-1-module-4337-07.address}}"
-      contract: "{{Contract(./build-info/rc-4/stage1.json:Stage1Module)}}"
+      contract: "{{Contract(./build-info/rc-5/stage1.json:Stage1Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -226,7 +172,7 @@ actions:
           to: "{{stage-1-module-4337-07.address}}"
           signature: "STAGE_2_IMPLEMENTATION() returns (address)"
           values: []
-      contract: "{{Contract(./build-info/rc-4/stage1.json:Stage2Module)}}"
+      contract: "{{Contract(./build-info/rc-5/stage1.json:Stage2Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
@@ -239,7 +185,7 @@ actions:
     depends_on: ["guest"]
     arguments:
       address: "{{guest.address}}"
-      contract: "{{Contract(./build-info/rc-3/guest.json:Guest)}}"
+      contract: "{{Contract(./build-info/rc-5/guest.json:Guest)}}"
     output: false
 
   - name: "verify-passkeys"
@@ -255,7 +201,7 @@ actions:
     depends_on: ["recovery"]
     arguments:
       address: "{{recovery.address}}"
-      contract: "{{Contract(./build-info/rc-4/recovery.json:Recovery)}}"
+      contract: "{{Contract(./build-info/rc-5/recovery.json:Recovery)}}"
     output: false
 
   - name: "verify-sessions"
