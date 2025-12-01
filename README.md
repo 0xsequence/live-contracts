@@ -213,6 +213,16 @@ The following is a list of contracts that are deployed by this script.
 │ sequence_v3/rc_4     │ Stage1ModuleV3                    │ 0x0000000000003DF093bc4257E6dCE45D937EF161 │
 │ sequence_v3/rc_4     │ Stage2Module.valueV3              │ 0x10bE1Abf3cD0918bb1079ECc6b8220c177F34088 │
 │ sequence_v3/rc_4     │ Stage2Module433707.valueV3        │ 0x4B3E5735665057A0A15eE448A7293bC01e3b4De9 │
+│ sequence_v3/rc_5     │ Erc4337FactoryWrapperV3           │ 0x00000000000003c0C955C8AE06FB13cDd19a7ac6 │
+│ sequence_v3/rc_5     │ GuestV3                           │ 0x0000000000006Ac72ed1d192fa28f0058D3F8806 │
+│ sequence_v3/rc_5     │ PasskeysV3                        │ 0x0000000000005204F3711851EAD52CC9c241499a │
+│ sequence_v3/rc_5     │ RecoveryV3                        │ 0x000000000000AB36D17eB1150116371520565205 │
+│ sequence_v3/rc_5     │ SequenceV3/rc5FactoryV3           │ 0x00000000000018A77519fcCCa060c2537c9D6d3F │
+│ sequence_v3/rc_5     │ SessionsV3                        │ 0x00000000000030Bcc832F7d657f50D6Be35C92b3 │
+│ sequence_v3/rc_5     │ Stage1Module433707V3              │ 0x0000000000009caFdeDb6f64Bf5F31a22124B2a8 │
+│ sequence_v3/rc_5     │ Stage1ModuleV3                    │ 0x0000000000001f3C39d61698ab21131a12134454 │
+│ sequence_v3/rc_5     │ Stage2Module.valueV3              │ 0xD0ae8eF93b7DA4eabb32Ec4d81b7a501DCa04D4C │
+│ sequence_v3/rc_5     │ Stage2Module433707.valueV3        │ 0xcBca3328a731deffE6Ce4c2fb51b585c3c37FB92 │
 │ sequence-v1          │ GuestModuleV1                     │ 0x02390F3E6E5FD1C6786CB78FD3027C117a9955A7 │
 │ sequence-v1          │ MainModuleUpgradeableV1           │ 0x7EFE6cE415956c5f80C6530cC6cc81b4808F6118 │
 │ sequence-v1          │ MainModuleV1                      │ 0xd01F11855bCcb95f88D7A48492F66410d4637313 │
