@@ -203,16 +203,6 @@ The following is a list of contracts that are deployed by this script.
 │ proxy-hook           │ WalletProxyHook                   │ 0x1f56dbAD5e8319F0DE9a323E24A31b5077dEB1a4 │
 │ SEQ-0001             │ SequenceMainModuleUpgradableDuoV1 │ 0x94Fb1E5196B4eE5A1c9ad737a505CE12bAe7Ca85 │
 │ SEQ-0001             │ SequenceMainModuleUpgradableDuoV2 │ 0x4f8ce847174b32cBe21b3887Be894e0DEBC28952 │
-│ sequence_v3/rc_4     │ Erc4337FactoryWrapperV3           │ 0x00000000000003c0C955C8AE06FB13cDd19a7ac6 │
-│ sequence_v3/rc_4     │ GuestV3                           │ 0x0000000000601fcA38f0cCA649453F6739436d6C │
-│ sequence_v3/rc_4     │ PasskeysV3                        │ 0x0000000000005204F3711851EAD52CC9c241499a │
-│ sequence_v3/rc_4     │ RecoveryV3                        │ 0x000000000001FC499c3E177DD56Febb0A4bc15b7 │
-│ sequence_v3/rc_4     │ SequenceV3/rc4FactoryV3           │ 0x00000000000018A77519fcCCa060c2537c9D6d3F │
-│ sequence_v3/rc_4     │ SessionsV3                        │ 0x00000000000030Bcc832F7d657f50D6Be35C92b3 │
-│ sequence_v3/rc_4     │ Stage1Module433707V3              │ 0x0000000000003add039FF84b064B7347Fc23C444 │
-│ sequence_v3/rc_4     │ Stage1ModuleV3                    │ 0x0000000000003DF093bc4257E6dCE45D937EF161 │
-│ sequence_v3/rc_4     │ Stage2Module.valueV3              │ 0x10bE1Abf3cD0918bb1079ECc6b8220c177F34088 │
-│ sequence_v3/rc_4     │ Stage2Module433707.valueV3        │ 0x4B3E5735665057A0A15eE448A7293bC01e3b4De9 │
 │ sequence_v3/rc_5     │ Erc4337FactoryWrapperV3           │ 0x00000000000003c0C955C8AE06FB13cDd19a7ac6 │
 │ sequence_v3/rc_5     │ GuestV3                           │ 0x0000000000006Ac72ed1d192fa28f0058D3F8806 │
 │ sequence_v3/rc_5     │ PasskeysV3                        │ 0x0000000000005204F3711851EAD52CC9c241499a │
