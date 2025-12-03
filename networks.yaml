@@ -54,6 +54,8 @@
 - name: "HyperEVM"
   chainId: 999
   rpcUrl: "https://nodes.sequence.app/hyperevm/{{RPC_BUILDER_KEY}}"
+  supports:
+    - etherscan_v2
 
 - name: Polygon zkEVM
   chainId: 1101
