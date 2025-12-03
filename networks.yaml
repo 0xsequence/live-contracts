@@ -51,6 +51,10 @@
     - etherscan_v2
     - sourcify
 
+- name: "HyperEVM"
+  chainId: 999
+  rpcUrl: "https://nodes.sequence.app/hyperevm/{{RPC_BUILDER_KEY}}"
+
 - name: Polygon zkEVM
   chainId: 1101
   rpcUrl: "https://nodes.sequence.app/polygon-zkevm/{{RPC_BUILDER_KEY}}"
