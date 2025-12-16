@@ -69,3 +69,18 @@ actions:
       address: "{{trails-intent-entrypoint.address}}"
       contract: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsIntentEntrypoint)}}"
     output: false
+
+  - name: "trails-validator"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsValidator).creationCode}}"
+    output: true
+
+  - name: "verify-trails-validator"
+    type: "verify-contract"
+    depends_on: ["trails-validator"]
+    arguments:
+      address: "{{trails-validator.address}}"
+      contract: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsValidator)}}"
+    output: false
