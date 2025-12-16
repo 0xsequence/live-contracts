@@ -1,5 +1,5 @@
 name: "trails-rc-4"
-version: "rc-4"
+version: "rc-4.2"
 description: "Deploy Trails contracts (rc 4)"
 depends_on: ["era-evm-predeploy-erc2470", "multicall3"]
 skip_networks: [19011, 40875]
@@ -68,4 +68,19 @@ actions:
     arguments:
       address: "{{trails-intent-entrypoint.address}}"
       contract: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsIntentEntrypoint)}}"
+    output: false
+
+  - name: "trails-validator"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsValidator).creationCode}}"
+    output: true
+
+  - name: "verify-trails-validator"
+    type: "verify-contract"
+    depends_on: ["trails-validator"]
+    arguments:
+      address: "{{trails-validator.address}}"
+      contract: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsValidator)}}"
     output: false
