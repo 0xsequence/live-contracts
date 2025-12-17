@@ -169,6 +169,7 @@ The following is a list of contracts that are deployed by this script.
 │ clawback             │ Clawback                          │ 0x6F9a2c3E11011b894fae691d5338748f8048467d │
 │ clawback             │ ClawbackMetadata                  │ 0x335411eAA9D63251f8c0867600Be4d0C190a3b1f │
 │ create4              │ Create4                           │ 0xC4C4C4Ae7EA494fdb246991b70c8E40f471c9166 │
+│ czip-decompressor    │ Decompressor                      │ 0x8C5CF0a201C1F0C1517a23699BE48070724e7a70 │
 │ developer-multisig   │ DeveloperMultisig                 │ 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 │
 │ factories            │ Erc1155Factory                    │ 0x024b9949FeD1c8dd7154DE653456d64Aa1093384 │
 │ factories            │ Erc1155Holder                     │ 0x3883491F1433dafafd20FB8FD9ec1fE032Ca5e3B │

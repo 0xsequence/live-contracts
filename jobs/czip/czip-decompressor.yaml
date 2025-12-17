@@ -1,0 +1,12 @@
+name: "czip-decompressor"
+version: "1"
+description: "Deploy CZIP decompressor via Singleton Factory (ERC-2470)"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+actions:
+  - name: "decompressor"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode: "{{Contract(./artifacts/decompressor.json).creationCode}}"
+    output: true
