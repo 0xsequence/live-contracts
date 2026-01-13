@@ -1,14 +1,13 @@
 name: "trails-utils-1"
-version: "1"
+version: "2"
 description: "Deploy TrailsUtils contract (v1)"
 depends_on: ["era-evm-predeploy-erc2470"]
-deprecated: true
 
 actions:
   - name: "trails-utils"
     template: "erc-2470"
     arguments:
-      salt: "{{salt-zero}}"
+      salt: "0xf35d01ef5765efae3b56d469ed412ec0b207c17103a8b64488f7df01b2cd0bb5"
       creationCode:
         type: "constructor-encode"
         arguments:
