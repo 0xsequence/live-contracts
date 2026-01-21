@@ -250,7 +250,7 @@ The following is a list of contracts that are deployed by this script.
 │ trails-rc-4          │ TrailsValidator                   │ 0x4B3eC67c5812543924C12a07140369C29077071e │
 │ trails-token-sweeper │ TrailsMulticall3Router            │ 0xFF8f46538c39dCA637fCE9a804b2B59B517A9698 │
 │ trails-token-sweeper │ TrailsTokenSweeper                │ 0xEbDd59B8cE1993d38e4E081E0d80662BB169d3db │
-│ trails-utils-1       │ TrailsUtils                       │ 0x000004D72E02C7B4F68c38E67A978A528eE95248 │
+│ trails-utils-1       │ TrailsUtils                       │ 0x0000000066c426Fe13962e276f894F11Aa6ebbF2 │
 │ value-forwarder      │ ValueForwarder                    │ 0xABAAd93EeE2a569cF0632f39B10A9f5D734777ca │
 │ waas-trust-factory   │ TrustFactory                      │ 0x4483FaA9dEEDd6D6FaCFee9c686f1E394A1280f9 │
 └──────────────────────┴───────────────────────────────────┴────────────────────────────────────────────┘
