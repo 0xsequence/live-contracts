@@ -207,13 +207,6 @@
     - sourcify
   testnet: true
 
-- name: Etherlink Testnet
-  chainId: 128123
-  rpcUrl: "https://nodes.sequence.app/etherlink-testnet/{{RPC_BUILDER_KEY}}"
-  supports:
-    - sourcify
-  testnet: true
-
 - name: Etherlink Shadownet Testnet
   chainId: 127823
   rpcUrl: "https://nodes.sequence.app/etherlink-shadownet-testnet/{{RPC_BUILDER_KEY}}"
