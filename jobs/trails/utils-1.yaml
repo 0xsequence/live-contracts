@@ -1,0 +1,23 @@
+name: "trails-utils-1"
+version: "4"
+description: "Deploy TrailsUtils contract (v1)"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+actions:
+  - name: "trails-utils"
+    template: "erc-2470"
+    arguments:
+      salt: "0x333fe2cd748e5a5b9e37c86322b7ca4e11899807eba23b868c3353b9154ab5e9"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/utils-1/all-contracts.json:TrailsUtils).creationCode}}"
+    output: true
+
+  - name: "verify-trails-utils"
+    type: "verify-contract"
+    depends_on: ["trails-utils"]
+    arguments:
+      address: "{{trails-utils.address}}"
+      contract: "{{Contract(./build-info/utils-1/all-contracts.json:TrailsUtils)}}"
+    output: false
