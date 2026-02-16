@@ -294,3 +294,11 @@
   chainId: 5042002
   rpcUrl: "https://nodes.sequence.app/arc-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
+
+- name: Sonic
+  chainId: 146
+  rpcUrl: "https://nodes.sequence.app/sonic/{{RPC_BUILDER_KEY}}"
+
+- name: Berachain
+  chainId: 80094
+  rpcUrl: "https://nodes.sequence.app/berachain/{{RPC_BUILDER_KEY}}"
