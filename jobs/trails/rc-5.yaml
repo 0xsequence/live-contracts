@@ -1,0 +1,89 @@
+name: "trails-rc-5"
+version: "rc-5"
+description: "Deploy Trails contracts (rc 5)"
+depends_on: ["era-evm-predeploy-erc2470", "multicall3"]
+skip_networks: [19011, 40875]
+
+actions:
+  - name: "trails-router"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/rc-5/all-contracts.json:TrailsRouter).creationCode}}"
+          types: ["address"]
+          values: ["{{multicall3.multicall3.address}}"]
+    output: true
+
+  - name: "verify-trails-router"
+    type: "verify-contract"
+    depends_on: ["trails-router"]
+    arguments:
+      address: "{{trails-router.address}}"
+      contract: "{{Contract(./build-info/rc-5/all-contracts.json:TrailsRouter)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{multicall3.multicall3.address}}"]
+    output: false
+
+  - name: "trails-router-shim"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          # Intentionally using rc-4 to prevent new deployment
+          creationCode: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsRouterShim).creationCode}}"
+          types: ["address"]
+          values: ["{{trails-router.address}}"]
+    output: true
+
+  - name: "verify-trails-router-shim"
+    type: "verify-contract"
+    depends_on: ["trails-router-shim"]
+    arguments:
+      address: "{{trails-router-shim.address}}"
+      contract: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsRouterShim)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{trails-router.address}}"]
+    output: false
+
+  - name: "trails-intent-entrypoint"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      # Intentionally using rc-4 to prevent new deployment
+      creationCode: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsIntentEntrypoint).creationCode}}"
+    output: true
+
+  - name: "verify-trails-intent-entrypoint"
+    type: "verify-contract"
+    depends_on: ["trails-intent-entrypoint"]
+    arguments:
+      address: "{{trails-intent-entrypoint.address}}"
+      contract: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsIntentEntrypoint)}}"
+    output: false
+
+  - name: "trails-validator"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      # Intentionally using rc-4 to prevent new deployment
+      creationCode: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsValidator).creationCode}}"
+    output: true
+
+  - name: "verify-trails-validator"
+    type: "verify-contract"
+    depends_on: ["trails-validator"]
+    arguments:
+      address: "{{trails-validator.address}}"
+      contract: "{{Contract(./build-info/rc-4/all-contracts.json:TrailsValidator)}}"
+    output: false
