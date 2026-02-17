@@ -1,0 +1,20 @@
+name: "eip-6492"
+version: "1"
+description: "Deploy UniversalSigValidator contract via the canonical ERC-2470 deployer"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+actions:
+  - name: "eip-6492"
+    template: "erc-2470"
+    arguments:
+      salt: "0x1b9b4d98f77b22f8d4c8cd4d2dc03de212aabe13bdbfddee58e499e7b278c172"
+      creationCode: "{{Contract(./build-info/eip-6492.json:UniversalSigValidator).creationCode}}"
+    output: true
+
+  - name: "verify-eip-6492"
+    type: "verify-contract"
+    depends_on: ["eip-6492"]
+    arguments:
+      address: "{{eip-6492.address}}"
+      contract: "{{Contract(./build-info/eip-6492.json:UniversalSigValidator)}}"
+    output: false
