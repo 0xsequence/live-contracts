@@ -44,7 +44,8 @@ echo "🧹 Cleaning output directory..."
 rm -rf output
 
 echo "🚀 Deploying contracts to Anvil..."
-pnpm run deploy --rpc-url http://localhost:8545 -vvv
+# Use default Anvil account #0 key
+pnpm run deploy --rpc-url http://localhost:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 -vvv
 
 echo "📊 Generating deployment table..."
 pnpm -s run gen-table > gen-table.txt
