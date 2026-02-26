@@ -3,6 +3,8 @@ version: "1"
 description: "Deploy Sequence.app v1 guard contracts, prod & dev"
 depends_on: ["sequence-v1"]
 
+skip_networks: [146]
+
 actions:
   - name: "prod-guard"
     template: "deploy-wallet-v1"

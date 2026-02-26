@@ -3,6 +3,8 @@ version: "1"
 description: "Deploy Sequence v1 wallet contracts"
 depends_on: ["era-evm-predeploy-universal"]
 
+skip_networks: [146]
+
 actions:
   - name: "factory"
     template: "sequence-universal-deployer-2"
