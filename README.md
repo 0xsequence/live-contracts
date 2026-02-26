@@ -255,3 +255,8 @@ The following is a list of contracts that are deployed by this script.
 ## Chains
 
 For a full list of supported chains, see the [Sequence Status Dashboard](https://status.sequence.info/).
+
+
+## Known Issues
+
+A list of known deployment issues can be found in [KNOWN_ISSUES.md](KNOWN_ISSUES.md).
