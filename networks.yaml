@@ -150,7 +150,6 @@
   rpcUrl: "https://nodes.sequence.app/arbitrum/{{RPC_BUILDER_KEY}}"
   supports:
     - etherscan_v2
-    - sourcify
 
 - name: Arbitrum Nova
   chainId: 42170
