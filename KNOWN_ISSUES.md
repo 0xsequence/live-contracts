@@ -81,6 +81,10 @@ If the network is unable or unwilling to assist, the related job should be skipp
 
 When the network nodes are unhealthy, you may see an "all nodes unhealthy" error. This is typically a temporary issue and the job should be rerun later.
 
+For the following networks we have updated this repo to use public RPC nodes instead:
+
+* Apechain Testnet
+
 ### Insufficient Funds
 
 The CI in this repository the deployer address `0x000000cCD1D384484d4f4AeE9CC47527Dc03e265`. It can run out of funds.

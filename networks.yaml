@@ -132,9 +132,7 @@
 
 - name: ApeChain Testnet
   chainId: 33111
-  rpcUrl: "https://nodes.sequence.app/apechain-testnet/{{RPC_BUILDER_KEY}}"
-  supports:
-    - sourcify
+  rpcUrl: "https://curtis.rpc.caldera.xyz/http"
   testnet: true
 
 - name: ApeChain
