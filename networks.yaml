@@ -196,10 +196,6 @@
     - etherscan_v2
   testnet: true
 
-- name: Blast
-  chainId: 81457
-  rpcUrl: "https://nodes.sequence.app/blast/{{RPC_BUILDER_KEY}}"
-
 - name: Base Sepolia
   chainId: 84532
   rpcUrl: "https://nodes.sequence.app/base-sepolia/{{RPC_BUILDER_KEY}}"
@@ -222,12 +218,6 @@
     - etherscan_v2
     - sourcify
   testnet: true
-
-- name: Xai
-  chainId: 660279
-  rpcUrl: "https://nodes.sequence.app/xai/{{RPC_BUILDER_KEY}}"
-  supports:
-    - sourcify
 
 - name: Sepolia
   chainId: 11155111
@@ -262,21 +252,9 @@
   rpcUrl: "https://nodes.sequence.app/skale-nebula-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
-- name: Blast Sepolia
-  chainId: 168587773
-  rpcUrl: "https://nodes.sequence.app/blast-sepolia/{{RPC_BUILDER_KEY}}"
-  testnet: true
-
 - name: SKALE Nebula
   chainId: 1482601649
   rpcUrl: "https://nodes.sequence.app/skale-nebula/{{RPC_BUILDER_KEY}}"
-
-- name: Xai Sepolia
-  chainId: 37714555429
-  rpcUrl: "https://nodes.sequence.app/xai-sepolia/{{RPC_BUILDER_KEY}}"
-  supports:
-    - sourcify
-  testnet: true
 
 - name: Incentiv Testnet v2
   chainId: 28802
