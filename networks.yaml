@@ -128,12 +128,11 @@
   rpcUrl: "https://nodes.sequence.app/homeverse/{{RPC_BUILDER_KEY}}"
   supports:
     - sourcify
+  evmVersion: shanghai
 
 - name: ApeChain Testnet
   chainId: 33111
-  rpcUrl: "https://nodes.sequence.app/apechain-testnet/{{RPC_BUILDER_KEY}}"
-  supports:
-    - sourcify
+  rpcUrl: "https://curtis.rpc.caldera.xyz/http"
   testnet: true
 
 - name: ApeChain
@@ -144,6 +143,7 @@
   chainId: 40875
   rpcUrl: "https://nodes.sequence.app/homeverse-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
+  evmVersion: shanghai
 
 - name: Arbitrum One
   chainId: 42161
@@ -261,6 +261,7 @@
   chainId: 37084624
   rpcUrl: "https://nodes.sequence.app/skale-nebula-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
+  evmVersion: shanghai
 
 - name: Blast Sepolia
   chainId: 168587773
@@ -270,6 +271,7 @@
 - name: SKALE Nebula
   chainId: 1482601649
   rpcUrl: "https://nodes.sequence.app/skale-nebula/{{RPC_BUILDER_KEY}}"
+  evmVersion: shanghai
 
 - name: Xai Sepolia
   chainId: 37714555429
