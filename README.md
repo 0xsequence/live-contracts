@@ -239,6 +239,8 @@ The following is a list of contracts that are deployed by this script.
 │ trails-rc-5          │ TrailsRouter                      │ 0xBaE357CBAA04a68cbfD5a560Ab06C4E9A3328A90 │
 │ trails-rc-5          │ TrailsRouterShim                  │ 0xde04013becF982866A04d928A6df25e0D1FAaA71 │
 │ trails-rc-5          │ TrailsValidator                   │ 0x4B3eC67c5812543924C12a07140369C29077071e │
+│ trails-timed-refund-1 │ TrailsTimedRefundAllowlist       │ 0x553c782C632e318b22C00706DAeD6c71c87e362A │
+│ trails-timed-refund-1 │ TrailsTimedRefundSapient         │ 0xF2b72eCb5348D0cf0b5387C4649b17C8aa5f43A5 │
 │ trails-token-sweeper │ TrailsMulticall3Router            │ 0xFF8f46538c39dCA637fCE9a804b2B59B517A9698 │
 │ trails-token-sweeper │ TrailsTokenSweeper                │ 0xEbDd59B8cE1993d38e4E081E0d80662BB169d3db │
 │ trails-utils-1       │ TrailsUtils                       │ 0x000000004f702C8398e158108937814d074cD74b │
