@@ -1,0 +1,63 @@
+name: "trails-timed-refund-1"
+version: "1"
+description: "Deploy timed refund auto-recovery contracts"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+constants:
+  timed-refund-allowlist:
+    - "0xA73793B25699B21986af43B0b6A1D4F4bebf54b2"
+    - "0xE0b2E56fc8720382502faDd248Bc38F94B3ba188"
+
+min_evm_version: "shanghai"
+
+actions:
+  - name: "trails-timed-refund-allowlist"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/timed-refund-1/all-contracts.json:Allowlist).creationCode}}"
+          types: ["address", "address[]"]
+          values: ["{{developer-multisig-01}}", "{{timed-refund-allowlist}}"]
+    output: true
+
+  - name: "verify-trails-timed-refund-allowlist"
+    type: "verify-contract"
+    depends_on: ["trails-timed-refund-allowlist"]
+    arguments:
+      address: "{{trails-timed-refund-allowlist.address}}"
+      contract: "{{Contract(./build-info/timed-refund-1/all-contracts.json:Allowlist)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address[]"]
+          values: ["{{developer-multisig-01}}", "{{timed-refund-allowlist}}"]
+    output: false
+
+  - name: "trails-timed-refund-sapient"
+    template: "erc-2470"
+    depends_on: ["trails-timed-refund-allowlist"]
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/timed-refund-1/all-contracts.json:TimedRefundSapient).creationCode}}"
+          types: ["address"]
+          values: ["{{trails-timed-refund-allowlist.address}}"]
+    output: true
+
+  - name: "verify-trails-timed-refund-sapient"
+    type: "verify-contract"
+    depends_on: ["trails-timed-refund-sapient"]
+    arguments:
+      address: "{{trails-timed-refund-sapient.address}}"
+      contract: "{{Contract(./build-info/timed-refund-1/all-contracts.json:TimedRefundSapient)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{trails-timed-refund-allowlist.address}}"]
+    output: false
