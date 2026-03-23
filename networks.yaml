@@ -59,13 +59,6 @@
   supports:
     - etherscan_v2
 
-- name: Polygon zkEVM
-  chainId: 1101
-  rpcUrl: "https://nodes.sequence.app/polygon-zkevm/{{RPC_BUILDER_KEY}}"
-  supports:
-    - etherscan_v2
-    - sourcify
-
 - name: Moonbeam
   chainId: 1284
   rpcUrl: "https://nodes.sequence.app/moonbeam/{{RPC_BUILDER_KEY}}"
@@ -235,18 +228,6 @@
     - sourcify
   testnet: true
 
-- name: Toy Testnet
-  chainId: 21000000
-  rpcUrl: "https://nodes.sequence.app/toy-testnet/{{RPC_BUILDER_KEY}}"
-  supports:
-    - sourcify
-  testnet: true
-
-- name: Sandbox Testnet
-  chainId: 6252
-  rpcUrl: "https://nodes.sequence.app/sandbox-testnet/{{RPC_BUILDER_KEY}}"
-  testnet: true
-
 - name: SKALE Nebula Testnet
   chainId: 37084624
   rpcUrl: "https://nodes.sequence.app/skale-nebula-testnet/{{RPC_BUILDER_KEY}}"
@@ -257,15 +238,6 @@
   chainId: 1482601649
   rpcUrl: "https://nodes.sequence.app/skale-nebula/{{RPC_BUILDER_KEY}}"
   evmVersion: shanghai
-
-- name: Incentiv Testnet v2
-  chainId: 28802
-  rpcUrl: "https://nodes.sequence.app/incentiv-testnet-v2/{{RPC_BUILDER_KEY}}"
-  testnet: true
-
-- name: Incentiv
-  chainId: 24101
-  rpcUrl: "https://nodes.sequence.app/incentiv/{{RPC_BUILDER_KEY}}"
 
 - name: Katana
   chainId: 747474
