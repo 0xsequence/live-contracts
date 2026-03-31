@@ -1,0 +1,45 @@
+name: "skyweaver-signer-wallet-migration"
+version: "3"
+description: "Deploy and migrate the Skyweaver signer wallet 0x29E0F3385f981189a1Eb343537681464B7D94D86 from Sequence v1 to Sequence v3 rc5 Stage2"
+depends_on: ["sequence-v1", "sequence_v3/rc_5"]
+
+# Networks without a presigned migration payload are skipped automatically.
+# Networks where the wallet is already on the target image hash are also skipped automatically.
+actions:
+  - name: "skyweaver-signer-wallet"
+    template: "deploy-wallet-v1"
+    arguments:
+      implementation: "{{sequence-v1.main-module.address}}"
+      salt: "0xc5211e7a5ae2aed0c02625cdf6ebb2ed09e5aea67525c69290a279e575973854"
+    output: false
+
+  - name: "skyweaver-signer-wallet-migrate"
+    depends_on: ["skyweaver-signer-wallet"]
+    output: true
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{skyweaver-signer-wallet-migration-execute-calldata}}"
+              path: "{{Network().chainId}}"
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "call"
+              arguments:
+                to: "{{skyweaver-signer-wallet.address}}"
+                signature: "imageHash() returns (bytes32)"
+                values: []
+            - "0xfd72d46fd0d0a98780315f81790f051356f2f3101af4b5c3fb1c6da3237fb765"
+    template: "send-transaction"
+    arguments:
+      to: "{{skyweaver-signer-wallet.address}}"
+      value: "0"
+      data:
+        type: "read-json"
+        arguments:
+          json: "{{skyweaver-signer-wallet-migration-execute-calldata}}"
+          path: "{{Network().chainId}}"
