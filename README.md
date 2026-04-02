@@ -204,6 +204,7 @@ The following is a list of contracts that are deployed by this script.
 │ proxy-hook            │ WalletProxyHook                   │ 0x1f56dbAD5e8319F0DE9a323E24A31b5077dEB1a4 │
 │ SEQ-0001              │ SequenceMainModuleUpgradableDuoV1 │ 0x94Fb1E5196B4eE5A1c9ad737a505CE12bAe7Ca85 │
 │ SEQ-0001              │ SequenceMainModuleUpgradableDuoV2 │ 0x4f8ce847174b32cBe21b3887Be894e0DEBC28952 │
+│ sequence_v3/eip_7702  │ Stage7702ModuleV3                 │ 0x000000732C68Dc7D14AE652cCcbEAAC791832E58 │
 │ sequence_v3/rc_5      │ Erc4337FactoryWrapperV3           │ 0x00000000000003c0C955C8AE06FB13cDd19a7ac6 │
 │ sequence_v3/rc_5      │ GuestV3                           │ 0x0000000000006Ac72ed1d192fa28f0058D3F8806 │
 │ sequence_v3/rc_5      │ PasskeysV3                        │ 0x0000000000005204F3711851EAD52CC9c241499a │
