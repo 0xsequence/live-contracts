@@ -1,6 +1,6 @@
-name: "sequence_v3/eip_7702"
+name: "sequence_v3/eip_7702_rc_1"
 version: "1"
-description: "Sequence v3 EIP-7702 contract (commit e1ae1fb6b51787423d29c3facbc17f8bb0cda8f8) (evm paris)"
+description: "Sequence v3 EIP-7702 contract (release candidate 1) (commit e1ae1fb6b51787423d29c3facbc17f8bb0cda8f8) (evm paris)"
 
 actions:
   - name: "stage-7702-module"
@@ -10,7 +10,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/eip-7702/stage7702.json:Stage7702Module).creationCode}}"
+          creationCode: "{{Contract(./build-info/eip-7702-rc-1/stage7702.json:Stage7702Module).creationCode}}"
           types: ["address", "address"]
           values: ["{{entrypoint-4337-07}}", "{{address-zero}}"]
     output: true
@@ -20,7 +20,7 @@ actions:
     depends_on: ["stage-7702-module"]
     arguments:
       address: "{{stage-7702-module.address}}"
-      contract: "{{Contract(./build-info/eip-7702/stage7702.json:Stage7702Module)}}"
+      contract: "{{Contract(./build-info/eip-7702-rc-1/stage7702.json:Stage7702Module)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
