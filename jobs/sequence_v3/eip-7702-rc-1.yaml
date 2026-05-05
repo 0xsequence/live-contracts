@@ -1,0 +1,29 @@
+name: "sequence_v3/eip_7702_rc_1"
+version: "1"
+description: "Sequence v3 EIP-7702 contract (release candidate 1) (commit e1ae1fb6b51787423d29c3facbc17f8bb0cda8f8) (evm paris)"
+
+actions:
+  - name: "stage-7702-module"
+    template: "erc-2470"
+    arguments:
+      salt: "0x6a3a045b0d6254e4a87c74e41e452fc65c6bcdf75b355d1216f8d658f7af0373"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/eip-7702-rc-1/stage7702.json:Stage7702Module).creationCode}}"
+          types: ["address", "address"]
+          values: ["{{entrypoint-4337-07}}", "{{address-zero}}"]
+    output: true
+
+  - name: "verify-stage-7702-module"
+    type: "verify-contract"
+    depends_on: ["stage-7702-module"]
+    arguments:
+      address: "{{stage-7702-module.address}}"
+      contract: "{{Contract(./build-info/eip-7702-rc-1/stage7702.json:Stage7702Module)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address"]
+          values: ["{{entrypoint-4337-07}}", "{{address-zero}}"]
+    output: false
