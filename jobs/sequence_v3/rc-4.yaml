@@ -2,6 +2,7 @@ name: "sequence_v3/rc_4"
 version: "2"
 description: "Sequence v3 contracts (release candidate 3) (commit e7817ac8f49ba4f8934d1e15bd6c222a40e02540) (evm paris)"
 depends_on: ["p256-verifier"]
+skip_networks: [143, 4217, 10143]
 
 deprecated: true
 
@@ -64,7 +65,6 @@ deprecated: true
 #     - Wallet from Stage2Auth.
 #     - Payload from ICheckpointer.
 #   - Removed unused InvalidSignatureType error from Stage1Auth.
-
 
 actions:
   # Remains the same as rc_3

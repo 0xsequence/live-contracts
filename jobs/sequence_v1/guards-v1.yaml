@@ -2,8 +2,7 @@ name: "guards-v1"
 version: "1"
 description: "Deploy Sequence.app v1 guard contracts, prod & dev"
 depends_on: ["sequence-v1"]
-
-skip_networks: [146]
+skip_networks: [143, 146, 4217, 10143]
 
 actions:
   - name: "prod-guard"

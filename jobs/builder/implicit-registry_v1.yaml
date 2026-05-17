@@ -2,6 +2,8 @@ name: "implicit-registry"
 version: "1"
 description: "Implicit registry"
 depends_on: ["era-evm-predeploy-erc2470"]
+skip_networks: [143, 4217, 10143]
+
 deprecated: true
 
 actions:

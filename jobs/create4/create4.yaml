@@ -2,6 +2,7 @@ name: "create4"
 version: "1"
 description: "Deploy CREATE4 plan executor contract via the canonical ERC-2470 deployer"
 depends_on: []
+skip_networks: [143, 4217, 10143]
 
 actions:
   - name: "create4"
