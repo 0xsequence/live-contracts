@@ -2,6 +2,7 @@ name: "eip-6492"
 version: "1"
 description: "Deploy UniversalSigValidator contract via the canonical ERC-2470 deployer"
 depends_on: ["era-evm-predeploy-erc2470"]
+skip_networks: [143, 4217, 10143]
 
 min_evm_version: "prague"
 

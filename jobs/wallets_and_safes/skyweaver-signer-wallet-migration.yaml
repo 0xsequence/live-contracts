@@ -2,9 +2,11 @@ name: "skyweaver-signer-wallet-migration"
 version: "3"
 description: "Deploy and migrate the Skyweaver signer wallet 0x29E0F3385f981189a1Eb343537681464B7D94D86 from Sequence v1 to Sequence v3 rc5 Stage2"
 depends_on: ["sequence-v1", "sequence_v3/rc_5"]
+skip_networks: [143, 4217, 10143]
 
 # Networks without a presigned migration payload are skipped automatically.
 # Networks where the wallet is already on the target image hash are also skipped automatically.
+
 actions:
   - name: "skyweaver-signer-wallet"
     template: "deploy-wallet-v1"

@@ -8,6 +8,7 @@ only_networks:
   - 15003   # Immutable zkEVM Devnet
   - 31337   # Anvil
 
+
 actions:
   - name: "erc712-operator-enforced-factory"
     template: "erc-2470"

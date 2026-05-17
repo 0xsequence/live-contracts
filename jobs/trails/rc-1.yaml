@@ -2,7 +2,7 @@ name: "trails-rc-1"
 version: "rc-1"
 description: "Deploy Trails contracts (rc 1)"
 depends_on: ["era-evm-predeploy-erc2470"]
-skip_networks: [19011, 40875]
+skip_networks: [143, 4217, 10143, 19011, 40875]
 deprecated: true
 
 actions:

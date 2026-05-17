@@ -2,8 +2,7 @@ name: "factories"
 version: "3"
 description: "Factory contracts for the builder"
 depends_on: ["era-evm-predeploy-erc2470"]
-
-skip_networks: [40, 41]
+skip_networks: [40, 41, 143, 4217, 10143]
 
 actions:
   - name: "erc20-factory"

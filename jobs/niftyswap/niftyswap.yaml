@@ -2,8 +2,7 @@ name: "niftyswap"
 version: "1"
 description: ""
 depends_on: ["era-evm-predeploy-erc2470", "era-evm-predeploy-universal"]
-
-skip_networks: [146]
+skip_networks: [143, 146, 4217, 10143]
 
 actions:
   - name: "factory-20"

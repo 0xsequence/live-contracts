@@ -1,6 +1,8 @@
 name: "factories"
 version: "1"
 description: "Factory contracts for the builder"
+skip_networks: [143, 4217, 10143]
+
 deprecated: true
 
 actions:
