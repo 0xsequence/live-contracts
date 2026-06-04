@@ -1,8 +1,6 @@
-name: "sequence_v3/eip_7702_rc_1"
+name: "sequence_v3/eip_7702"
 version: "1"
-description: "Sequence v3 EIP-7702 contract (release candidate 1) (commit e1ae1fb6b51787423d29c3facbc17f8bb0cda8f8) (evm paris)"
-
-deprecated: true
+description: "Sequence v3 EIP-7702 contract (commit e1ae1fb6b51787423d29c3facbc17f8bb0cda8f8) (evm paris)"
 
 actions:
   - name: "stage-7702-module"
