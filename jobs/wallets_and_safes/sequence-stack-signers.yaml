@@ -2,6 +2,7 @@ name: "stack-signers"
 version: "1"
 description: "Deploys the signers used by the Sequence stack"
 depends_on: ["sequence-v2"]
+skip_networks: [143, 4217, 10143]
 
 actions:
   - name: "payment-signer-dev"

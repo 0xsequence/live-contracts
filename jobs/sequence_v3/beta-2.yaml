@@ -1,6 +1,7 @@
 name: "sequence_v3/beta_2"
 version: "1"
 description: "Sequence v2 contracts (beta 2) (dev2 on sequence.js)"
+skip_networks: [143, 4217, 10143]
 
 min_evm_version: "shanghai"
 deprecated: true

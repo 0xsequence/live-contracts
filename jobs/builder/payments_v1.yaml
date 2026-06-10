@@ -1,9 +1,11 @@
 name: "payments"
 version: "1"
 description: "Sequence payments"
+
 deprecated: true
 
 depends_on: ["era-evm-predeploy-erc2470", "era-evm-predeploy-universal", "sequence-v2"]
+skip_networks: [143, 4217, 10143]
 
 actions:
   - name: "payments-factory"

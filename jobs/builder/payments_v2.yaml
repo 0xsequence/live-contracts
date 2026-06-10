@@ -3,6 +3,7 @@ version: "2"
 description: "Sequence payments"
 
 depends_on: ["sequence-v2"]
+skip_networks: [143, 4217, 10143]
 
 actions:
   - name: "payment-combiner"

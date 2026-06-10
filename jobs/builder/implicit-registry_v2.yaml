@@ -1,6 +1,7 @@
 name: "implicit-registry"
 version: "2"
 description: "Implicit registry"
+skip_networks: [143, 4217, 10143]
 
 actions:
   - name: "implicit-registry-dev"
