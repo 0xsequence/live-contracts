@@ -4,7 +4,7 @@ description: "Deploy TrailsUtils contract (v1)"
 depends_on: ["era-evm-predeploy-erc2470"]
 
 skip_networks: [40, 41]
-min_evm_version: "shanghai"
+min_evm_version: "prague"
 
 actions:
   - name: "trails-utils"
