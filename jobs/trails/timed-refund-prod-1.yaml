@@ -1,0 +1,69 @@
+name: "trails-timed-refund-prod-1"
+version: "1"
+description: "Deploy timed refund auto-recovery contracts (prod) (commit 3611e8a313793d148eb2b2dbfe4727130c48aa23)"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+constants:
+  timed-refund-prod-allowlist:
+    # watchtower EOA
+    - "0x86A697908fFB0F34795E4cD6f7C3E78a59b6226d"
+    # watchtower Sequence v3 RC-5 1/1 wallet: threshold 1, checkpoint 0, checkpointer address(0)
+    - "0x64D8a1f6DCe5a702c715FaB25BafD69E262F642d"
+    # API EOA
+    - "0x61fDd6eEA8C837303d84899AD0852CcCaAE35964"
+    # API Sequence v3 RC-5 1/1 wallet: threshold 1, checkpoint 0, checkpointer address(0)
+    - "0x5c79c1416a6DE9F0649b2AeBcf2311ecFdD8eca2"
+
+min_evm_version: "prague"
+
+actions:
+  - name: "trails-timed-refund-prod-allowlist"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/timed-refund-2/timed-refund.json:Allowlist).creationCode}}"
+          types: ["address", "address[]"]
+          values: ["{{developer-multisig-01}}", "{{timed-refund-prod-allowlist}}"]
+    output: true
+
+  - name: "verify-trails-timed-refund-prod-allowlist"
+    type: "verify-contract"
+    depends_on: ["trails-timed-refund-prod-allowlist"]
+    arguments:
+      address: "{{trails-timed-refund-prod-allowlist.address}}"
+      contract: "{{Contract(./build-info/timed-refund-2/timed-refund.json:Allowlist)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address[]"]
+          values: ["{{developer-multisig-01}}", "{{timed-refund-prod-allowlist}}"]
+    output: false
+
+  - name: "trails-timed-refund-prod-sapient"
+    template: "erc-2470"
+    depends_on: ["trails-timed-refund-prod-allowlist"]
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/timed-refund-2/timed-refund.json:TimedRefundSapient).creationCode}}"
+          types: ["address"]
+          values: ["{{trails-timed-refund-prod-allowlist.address}}"]
+    output: true
+
+  - name: "verify-trails-timed-refund-prod-sapient"
+    type: "verify-contract"
+    depends_on: ["trails-timed-refund-prod-sapient"]
+    arguments:
+      address: "{{trails-timed-refund-prod-sapient.address}}"
+      contract: "{{Contract(./build-info/timed-refund-2/timed-refund.json:TimedRefundSapient)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{trails-timed-refund-prod-allowlist.address}}"]
+    output: false
