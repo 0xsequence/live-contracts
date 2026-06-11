@@ -1,17 +1,17 @@
 name: "trails-timed-refund-prod-1"
 version: "1"
-description: "Deploy timed refund auto-recovery contracts (prod) (commit 3611e8a313793d148eb2b2dbfe4727130c48aa23)"
-depends_on: ["era-evm-predeploy-erc2470"]
+description: "Deploy timed refund auto-recovery contracts (prod) (0xsequence/trails-contracts commit 3611e8a313793d148eb2b2dbfe4727130c48aa23)"
+depends_on: ["era-evm-predeploy-erc2470", "sequence_v3/rc_5"]
 
 constants:
   timed-refund-prod-allowlist:
     # watchtower EOA
     - "0x86A697908fFB0F34795E4cD6f7C3E78a59b6226d"
-    # watchtower Sequence v3 RC-5 1/1 wallet: threshold 1, checkpoint 0, checkpointer address(0)
+    # watchtower Sequence v3 RC-5 1/1 wallet: threshold 1, checkpoint 0, checkpointer address(0), signer above with weight 1
     - "0x64D8a1f6DCe5a702c715FaB25BafD69E262F642d"
     # API EOA
     - "0x61fDd6eEA8C837303d84899AD0852CcCaAE35964"
-    # API Sequence v3 RC-5 1/1 wallet: threshold 1, checkpoint 0, checkpointer address(0)
+    # API Sequence v3 RC-5 1/1 wallet: threshold 1, checkpoint 0, checkpointer address(0), signer above with weight 1
     - "0x5c79c1416a6DE9F0649b2AeBcf2311ecFdD8eca2"
 
 min_evm_version: "prague"
@@ -66,4 +66,23 @@ actions:
         arguments:
           types: ["address"]
           values: ["{{trails-timed-refund-prod-allowlist.address}}"]
+    output: false
+
+  # Deploys the Sequence v3 wallets used in the allowlist.
+  # Salt is the imageHash of the wallet's initial configuration.
+
+  - name: "trails-timed-refund-prod-watchtower-wallet"
+    template: "deploy-wallet-v3"
+    arguments:
+      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      # threshold 1, checkpoint 0, checkpointer address(0), signer 0x86A697908fFB0F34795E4cD6f7C3E78a59b6226d with weight 1
+      salt: "0xa1a2a6d47685f320f9eec88d6e81e783e96ccdb7f59772bb6830905e252697fe"
+    output: false
+
+  - name: "trails-timed-refund-prod-api-wallet"
+    template: "deploy-wallet-v3"
+    arguments:
+      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      # threshold 1, checkpoint 0, checkpointer address(0), signer 0x61fDd6eEA8C837303d84899AD0852CcCaAE35964 with weight 1
+      salt: "0xbf04de474ab5863ce898c67bb2352420e2bf17cec6d42088c088e3f4a58a628b"
     output: false
