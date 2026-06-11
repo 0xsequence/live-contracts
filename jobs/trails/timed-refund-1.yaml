@@ -8,7 +8,8 @@ constants:
     - "0xA73793B25699B21986af43B0b6A1D4F4bebf54b2"
     - "0xE0b2E56fc8720382502faDd248Bc38F94B3ba188"
 
-min_evm_version: "shanghai"
+min_evm_version: "prague"
+deprecated: true
 
 actions:
   - name: "trails-timed-refund-allowlist"

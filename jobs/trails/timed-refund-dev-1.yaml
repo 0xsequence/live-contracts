@@ -1,0 +1,88 @@
+name: "trails-timed-refund-dev-1"
+version: "1"
+description: "Deploy timed refund auto-recovery contracts (dev) (0xsequence/trails-contracts commit 3611e8a313793d148eb2b2dbfe4727130c48aa23)"
+depends_on: ["era-evm-predeploy-erc2470", "sequence_v3/rc_5"]
+
+constants:
+  timed-refund-dev-allowlist:
+    # watchtower EOA
+    - "0x07F9D6566336C42E70cE6B6faa6cDf78b1f101a7"
+    # watchtower Sequence v3 RC-5 1/1 wallet: threshold 1, checkpoint 0, checkpointer address(0), signer above with weight 1
+    - "0xD81cdeBAe019724fa10C2B7e5d204DB95ae08652"
+    # API EOA
+    - "0x54fAE124fE06D157ad9cc898b0D10A027C70d25c"
+    # API Sequence v3 RC-5 1/1 wallet: threshold 1, checkpoint 0, checkpointer address(0), signer above with weight 1
+    - "0xf16BA650fbBcb6ACCB2b475BFE3B143255017868"
+
+min_evm_version: "prague"
+
+actions:
+  - name: "trails-timed-refund-dev-allowlist"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/timed-refund-2/timed-refund.json:Allowlist).creationCode}}"
+          types: ["address", "address[]"]
+          values: ["{{developer-multisig-01}}", "{{timed-refund-dev-allowlist}}"]
+    output: true
+
+  - name: "verify-trails-timed-refund-dev-allowlist"
+    type: "verify-contract"
+    depends_on: ["trails-timed-refund-dev-allowlist"]
+    arguments:
+      address: "{{trails-timed-refund-dev-allowlist.address}}"
+      contract: "{{Contract(./build-info/timed-refund-2/timed-refund.json:Allowlist)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address[]"]
+          values: ["{{developer-multisig-01}}", "{{timed-refund-dev-allowlist}}"]
+    output: false
+
+  - name: "trails-timed-refund-dev-sapient"
+    template: "erc-2470"
+    depends_on: ["trails-timed-refund-dev-allowlist"]
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/timed-refund-2/timed-refund.json:TimedRefundSapient).creationCode}}"
+          types: ["address"]
+          values: ["{{trails-timed-refund-dev-allowlist.address}}"]
+    output: true
+
+  - name: "verify-trails-timed-refund-dev-sapient"
+    type: "verify-contract"
+    depends_on: ["trails-timed-refund-dev-sapient"]
+    arguments:
+      address: "{{trails-timed-refund-dev-sapient.address}}"
+      contract: "{{Contract(./build-info/timed-refund-2/timed-refund.json:TimedRefundSapient)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{trails-timed-refund-dev-allowlist.address}}"]
+    output: false
+
+  # Deploys the Sequence v3 wallets used in the allowlist.
+  # Salt is the imageHash of the wallet's initial configuration.
+
+  - name: "trails-timed-refund-dev-watchtower-wallet"
+    template: "deploy-wallet-v3"
+    arguments:
+      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      # threshold 1, checkpoint 0, checkpointer address(0), signer 0x07F9D6566336C42E70cE6B6faa6cDf78b1f101a7 with weight 1
+      salt: "0x7c400dc22a44bb9f0b97fd859271f40ee7593963ff41ec1332cf491088df9541"
+    output: false
+
+  - name: "trails-timed-refund-dev-api-wallet"
+    template: "deploy-wallet-v3"
+    arguments:
+      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      # threshold 1, checkpoint 0, checkpointer address(0), signer 0x54fAE124fE06D157ad9cc898b0D10A027C70d25c with weight 1
+      salt: "0x678c0ca0528005c2b2ff487e8d09df4ec6bfff54e08a03a55876af4e512dae9f"
+    output: false

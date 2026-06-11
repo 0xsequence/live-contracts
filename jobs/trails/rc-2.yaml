@@ -3,6 +3,7 @@ version: "rc-2"
 description: "Deploy Trails contracts (rc 2)"
 depends_on: ["era-evm-predeploy-erc2470"]
 skip_networks: [19011, 40875]
+min_evm_version: "prague"
 deprecated: true
 
 actions:

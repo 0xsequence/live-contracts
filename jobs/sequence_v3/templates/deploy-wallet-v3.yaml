@@ -1,0 +1,60 @@
+name: "deploy-wallet-v3"
+version: "1"
+type: "template"
+
+arguments:
+  mainModule:
+    type: "address"
+  salt:
+    type: "bytes32"
+
+returns:
+  address:
+    type: "address"
+
+setup:
+  - type: "job-completed"
+    arguments:
+      job: "sequence_v3/rc_5"
+
+actions:
+  - name: "deploy"
+    type: "send-transaction"
+    arguments:
+      to: "{{sequence_v3/rc_5.factory.address}}"
+      value: "0"
+      data:
+        type: "abi-encode"
+        arguments:
+          signature: "deploy(address,bytes32)"
+          values:
+            - "{{mainModule}}"
+            - "{{salt}}"
+
+skip_condition:
+  - type: "contract-exists"
+    arguments:
+      address:
+        type: "compute-create2"
+        arguments:
+          deployerAddress: "{{sequence_v3/rc_5.factory.address}}"
+          salt: "{{salt}}"
+          initCode:
+            type: "constructor-encode"
+            arguments:
+              creationCode: "0x6041600e3d396021805130553df33d3d36153402601f57363d3d373d363d30545af43d82803e903d91601f57fd5bf3"
+              types: ["address"]
+              values: ["{{mainModule}}"]
+
+outputs:
+  address:
+    type: "compute-create2"
+    arguments:
+      deployerAddress: "{{sequence_v3/rc_5.factory.address}}"
+      salt: "{{salt}}"
+      initCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "0x6041600e3d396021805130553df33d3d36153402601f57363d3d373d363d30545af43d82803e903d91601f57fd5bf3"
+          types: ["address"]
+          values: ["{{mainModule}}"]
