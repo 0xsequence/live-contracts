@@ -248,6 +248,10 @@
   rpcUrl: "https://nodes.sequence.app/arc-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
+- name: Arc
+  chainId: 5042
+  rpcUrl: "{{RPC_ARC_MAINNET}}"
+
 - name: Sonic
   chainId: 146
   rpcUrl: "https://nodes.sequence.app/sonic/{{RPC_BUILDER_KEY}}"
