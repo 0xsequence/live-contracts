@@ -1,0 +1,36 @@
+name: "trails-pausable-sapient-1"
+version: "1"
+description: "Deploy the Trails PausableSapient contract"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+constants:
+  # Pause-only operators can be added later by the developer multisig owner.
+  trails-pausable-sapient-initial-operators: []
+
+min_evm_version: "prague"
+
+actions:
+  - name: "trails-pausable-sapient"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/pausable-sapient-1/pausable-sapient.json:PausableSapient).creationCode}}"
+          types: ["address", "address[]"]
+          values: ["{{developer-multisig-01}}", "{{trails-pausable-sapient-initial-operators}}"]
+    output: true
+
+  - name: "verify-trails-pausable-sapient"
+    type: "verify-contract"
+    depends_on: ["trails-pausable-sapient"]
+    arguments:
+      address: "{{trails-pausable-sapient.address}}"
+      contract: "{{Contract(./build-info/pausable-sapient-1/pausable-sapient.json:PausableSapient)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address[]"]
+          values: ["{{developer-multisig-01}}", "{{trails-pausable-sapient-initial-operators}}"]
+    output: false

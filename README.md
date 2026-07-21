@@ -229,6 +229,7 @@ The following is a list of contracts that are deployed by this script.
 │ stack-signers              │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
 │ stack-signers              │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
 │ stack-signers              │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
+│ trails-pausable-sapient-1  │ TrailsPausableSapient             │ 0xAC4ADe71426E584E21E0A91dF0867e4d498ad6A6 │
 │ trails-rc-3                │ TrailsIntentEntrypoint            │ 0x8f64eEB1f4680B9ed1F9d6A6Eee7CCf36258C93D │
 │ trails-rc-3                │ TrailsRouter                      │ 0xF8A739B9F24E297a98b7aba7A9cdFDBD457F6fF8 │
 │ trails-rc-3                │ TrailsRouterShim                  │ 0x1306aF05bA556839885B9B8c758f1d2F33d3571E │

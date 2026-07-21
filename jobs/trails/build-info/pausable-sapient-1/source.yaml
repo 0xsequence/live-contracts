@@ -1,0 +1,8 @@
+type: source
+
+build_info:
+  "./pausable-sapient.json":
+    repo: "https://github.com/0xsequence/trails-contracts"
+    commit: "21751c2e6200079fa2d4fb27d0a0aaf7be61dc4d"
+    image: "ghcr.io/foundry-rs/foundry:v1.5.1"
+    build: "git submodule update --init --recursive && forge build src/pausable/PausableSapient.sol --build-info --evm-version prague"
