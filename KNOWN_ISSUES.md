@@ -52,6 +52,21 @@ Similar to the previous known issue, the Arachnid Deterministic Proxy relies on 
 
 Catapult has a `Nick's test` job that automatically runs before these pre-signed transactions to prevent this issue happening in future.
 
+### Safe Singleton Factory
+
+Affected deployments:
+
+* [Polygon pause Safe](jobs/wallets_and_safes/polygon-pause-safe.yaml)
+* [Trails PausableSapient](jobs/trails/pausable-sapient-1.yaml)
+
+Affected networks:
+
+* SKALE Nebula testnet (37084624)
+* SKALE Base testnet (324705682)
+* SKALE Nebula (1482601649)
+
+The Polygon pause Safe is deployed at its canonical cross-chain address through Safe's singleton factory at `0x914d7Fec6aaC8cd542e72Bca78B30650d45643d7`. Safe does not publish chain-specific signed factory deployment transactions for these networks, so the Safe and the PausableSapient contract that depends on it are skipped.
+
 ### EIP-6492
 
 Affected deployments:

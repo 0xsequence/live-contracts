@@ -201,6 +201,12 @@ The following is a list of contracts that are deployed by this script.
 │ payments                   │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
 │ payments                   │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
 │ payments                   │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
+│ polygon-pause-safe         │ PolygonPauseSafe                  │ 0x9d851f8b8751c5FbC09b9E74E6e68E9950949052 │
+│ polygon-pause-safe         │ SafeFallbackHandler141            │ 0xfd0732Dc9E303f09fCEf3a7388Ad10A83459Ec99 │
+│ polygon-pause-safe         │ SafeL2Singleton141                │ 0x29fcB43b46531BcA003ddC8FCB67FFE91900C762 │
+│ polygon-pause-safe         │ SafeProxyFactory141               │ 0x4e1DCf7AD4e460CfD30791CCC4F9c8a4f820ec67 │
+│ polygon-pause-safe         │ SafeSingleton141                  │ 0x41675C099F32341bf84BFc5382aF534df5C7461a │
+│ polygon-pause-safe         │ SafeToL2Setup141                  │ 0xBD89A1CE4DDe368FFAB0eC35506eEcE0b1fFdc54 │
 │ proxy-hook                 │ WalletProxyHook                   │ 0x1f56dbAD5e8319F0DE9a323E24A31b5077dEB1a4 │
 │ SEQ-0001                   │ SequenceMainModuleUpgradableDuoV1 │ 0x94Fb1E5196B4eE5A1c9ad737a505CE12bAe7Ca85 │
 │ SEQ-0001                   │ SequenceMainModuleUpgradableDuoV2 │ 0x4f8ce847174b32cBe21b3887Be894e0DEBC28952 │
@@ -229,7 +235,7 @@ The following is a list of contracts that are deployed by this script.
 │ stack-signers              │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
 │ stack-signers              │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
 │ stack-signers              │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
-│ trails-pausable-sapient-1  │ TrailsPausableSapient             │ 0xAC4ADe71426E584E21E0A91dF0867e4d498ad6A6 │
+│ trails-pausable-sapient-1  │ TrailsPausableSapient             │ 0xCF792EA711EF777D8429F3Cc5c9e79964A73eDB2 │
 │ trails-rc-3                │ TrailsIntentEntrypoint            │ 0x8f64eEB1f4680B9ed1F9d6A6Eee7CCf36258C93D │
 │ trails-rc-3                │ TrailsRouter                      │ 0xF8A739B9F24E297a98b7aba7A9cdFDBD457F6fF8 │
 │ trails-rc-3                │ TrailsRouterShim                  │ 0x1306aF05bA556839885B9B8c758f1d2F33d3571E │

@@ -1,0 +1,13 @@
+type: source
+
+build_info:
+  "./safe-1.4.1.json":
+    repo: "https://github.com/safe-global/safe-smart-account"
+    commit: "aa14911666deb13cdbbe37c37253a55918525437"
+    image: "node:16.20.2"
+    # The published @safe-global/safe-contracts@1.4.1-2 build-info contains the
+    # later payable-cast fix in this otherwise unrelated migration library.
+    build: >-
+      yarn install --frozen-lockfile --ignore-scripts &&
+      sed -i 's/ISafe(address(this))/ISafe(payable(address(this)))/g' contracts/libraries/SafeMigration.sol &&
+      yarn build
