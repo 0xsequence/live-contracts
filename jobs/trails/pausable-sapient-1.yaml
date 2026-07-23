@@ -5,7 +5,7 @@ depends_on: ["era-evm-predeploy-erc2470"]
 
 constants:
   trails-pausable-sapient-initial-operators:
-    - "0x9d25A8e7F291d72f67DAb74E656d28F62036fd46"
+    - "0x20bfB5e67f4C75BDd234Aa6F7BcfbC3A3d2c2395"
 
 min_evm_version: "prague"
 
