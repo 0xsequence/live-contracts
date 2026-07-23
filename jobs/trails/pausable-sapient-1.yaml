@@ -1,11 +1,11 @@
 name: "trails-pausable-sapient-1"
 version: "1"
 description: "Deploy the Trails PausableSapient contract"
-depends_on: ["era-evm-predeploy-erc2470", "polygon-pause-safe"]
+depends_on: ["era-evm-predeploy-erc2470"]
 
-# Keep this aligned with polygon-pause-safe.yaml: PausableSapient must never be
-# deployed with an operator address that has no contract behind it.
-skip_networks: [37084624, 324705682, 1482601649]
+constants:
+  trails-pausable-sapient-initial-operators:
+    - "0x9d25A8e7F291d72f67DAb74E656d28F62036fd46"
 
 min_evm_version: "prague"
 
@@ -19,9 +19,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/pausable-sapient-1/pausable-sapient.json:PausableSapient).creationCode}}"
           types: ["address", "address[]"]
-          values:
-            - "{{developer-multisig-01}}"
-            - ["{{polygon-pause-safe.polygon-pause-safe.address}}"]
+          values: ["{{developer-multisig-01}}", "{{trails-pausable-sapient-initial-operators}}"]
     output: true
 
   - name: "verify-trails-pausable-sapient"
@@ -34,7 +32,5 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address", "address[]"]
-          values:
-            - "{{developer-multisig-01}}"
-            - ["{{polygon-pause-safe.polygon-pause-safe.address}}"]
+          values: ["{{developer-multisig-01}}", "{{trails-pausable-sapient-initial-operators}}"]
     output: false
