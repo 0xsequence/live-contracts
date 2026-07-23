@@ -3,10 +3,6 @@ version: "1"
 description: "Deploy the Trails PausableSapient contract"
 depends_on: ["era-evm-predeploy-erc2470"]
 
-constants:
-  trails-pausable-sapient-initial-operators:
-    - "0x20bfB5e67f4C75BDd234Aa6F7BcfbC3A3d2c2395"
-
 min_evm_version: "prague"
 
 actions:
@@ -19,7 +15,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/pausable-sapient-1/pausable-sapient.json:PausableSapient).creationCode}}"
           types: ["address", "address[]"]
-          values: ["{{developer-multisig-01}}", "{{trails-pausable-sapient-initial-operators}}"]
+          values: ["{{developer-multisig-01}}", ["{{PAUSABLE_ENCHANTER_MULTISIG}}"]]
     output: true
 
   - name: "verify-trails-pausable-sapient"
@@ -32,5 +28,5 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address", "address[]"]
-          values: ["{{developer-multisig-01}}", "{{trails-pausable-sapient-initial-operators}}"]
+          values: ["{{developer-multisig-01}}", ["{{PAUSABLE_ENCHANTER_MULTISIG}}"]]
     output: false
