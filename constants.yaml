@@ -9,5 +9,4 @@ constants:
   entrypoint-4337-07: "0x0000000071727de22e5e9d8baf0edac6f37da032"
   entrypoint-4337-07-sender-creator: "0xEFC2c1444eBCC4Db75e7613d20C6a62fF67A167C"
   era-evm-predeploy-manager: "0x0000000000000000000000000000000000008014"
-  # Multisig initialized as the pause operator for Trails PausableSapient.
-  PAUSABLE_ENCHANTER_MULTISIG: "0x20bfB5e67f4C75BDd234Aa6F7BcfbC3A3d2c2395"
+  pausable-enchanter-multisig: "0x20bfB5e67f4C75BDd234Aa6F7BcfbC3A3d2c2395"

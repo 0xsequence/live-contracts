@@ -15,7 +15,7 @@ actions:
         arguments:
           creationCode: "{{Contract(./build-info/pausable-sapient-1/pausable-sapient.json:PausableSapient).creationCode}}"
           types: ["address", "address[]"]
-          values: ["{{developer-multisig-01}}", ["{{PAUSABLE_ENCHANTER_MULTISIG}}"]]
+          values: ["{{developer-multisig-01}}", ["{{pausable-enchanter-multisig}}"]]
     output: true
 
   - name: "verify-trails-pausable-sapient"
@@ -28,5 +28,5 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address", "address[]"]
-          values: ["{{developer-multisig-01}}", ["{{PAUSABLE_ENCHANTER_MULTISIG}}"]]
+          values: ["{{developer-multisig-01}}", ["{{pausable-enchanter-multisig}}"]]
     output: false
