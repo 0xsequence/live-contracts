@@ -1,0 +1,33 @@
+name: "x402-sapient-signer"
+version: "1"
+description: "Deploy the X402SessionSapientSigner from 0xsequence/wallet-contracts-v3 (x402 smart sessions sapient signer)"
+
+actions:
+  - name: "x402-sapient-signer"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/x402-sapient-signer/x402-sapient-signer.json:X402SessionSapientSigner).creationCode}}"
+          types: ["address", "address"]
+          values:
+            - "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+            - "0x402085c248EeA27D92E8b30b2C58ed07f9E20001"
+    output: true
+
+  - name: "verify"
+    type: "verify-contract"
+    depends_on: ["x402-sapient-signer"]
+    arguments:
+      address: "{{x402-sapient-signer.address}}"
+      contract: "{{Contract(./build-info/x402-sapient-signer/x402-sapient-signer.json:X402SessionSapientSigner)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address"]
+          values:
+            - "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+            - "0x402085c248EeA27D92E8b30b2C58ed07f9E20001"
+    output: false
