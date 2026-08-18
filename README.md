@@ -250,6 +250,7 @@ The following is a list of contracts that are deployed by this script.
 │ trails-utils-1             │ TrailsUtils                       │ 0x000000004f702C8398e158108937814d074cD74b │
 │ value-forwarder            │ ValueForwarder                    │ 0xABAAd93EeE2a569cF0632f39B10A9f5D734777ca │
 │ waas-trust-factory         │ TrustFactory                      │ 0x4483FaA9dEEDd6D6FaCFee9c686f1E394A1280f9 │
+│ x402-sapient-signer        │ X402SapientSigner                 │ 0x2077a1be1910f68bb354B428120f343017df11aC │
 └────────────────────────────┴───────────────────────────────────┴────────────────────────────────────────────┘
 ```
 
