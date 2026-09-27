@@ -1,6 +1,7 @@
 name: "implicit-registry"
 version: "2"
 description: "Implicit registry"
+deprecated: true
 
 actions:
   - name: "implicit-registry-dev"

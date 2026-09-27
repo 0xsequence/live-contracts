@@ -1,6 +1,7 @@
 name: "payments"
 version: "2"
 description: "Sequence payments"
+deprecated: true
 
 depends_on: ["sequence-v2"]
 
