@@ -76,7 +76,7 @@ Common templates and action types in this repo:
 
 Use `output: true` only for values that should appear in generated outputs and the README table. Verification actions should use `output: false`. If an address is known from a factory call, use explicit output like `output: { address: "0x..." }` and pair it with a `contract-exists` skip condition.
 
-Use `deprecated: true` for retained historical jobs that should not run unless explicitly targeted with `--run-deprecated`. Use `skip_networks` only for real chain incompatibilities, and document durable skips in `KNOWN_ISSUES.md`.
+Use `deprecated: true` for retained historical jobs that should not run unless explicitly targeted with `--run-deprecated`. Use `skip_networks` only for real chain incompatibilities, and document durable skips in `KNOWN_ISSUES.md`. To limit which jobs run on a chain, set `onlyJobs` or `skipJobs` (job name patterns) on its `networks.yaml` entry instead of editing every job; `onlyJobs` keeps the matched jobs' dependencies.
 
 ## Build Artifacts
 
