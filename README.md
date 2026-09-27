@@ -206,9 +206,6 @@ The following is a list of contracts that are deployed by this script.
 │ sequence-v2                │ MainModuleV2                      │ 0xfBf8f1A5E00034762D928f46d438B947f5d4065d │
 │ sequence-v2                │ SequenceFactoryV2                 │ 0xFaA5c0b14d1bED5C888Ca655B9a8A5911F78eF4A │
 │ sequence-v2                │ SequenceUtilsV2                   │ 0xdbbFa3cB3B087B64F4ef5E3D20Dda2488AA244e6 │
-│ stack-signers              │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
-│ stack-signers              │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
-│ stack-signers              │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
 │ trails-pausable-sapient-1  │ TrailsPausableSapient             │ 0x72030E1dbf0a847196ae62EA3ee84BD7ce99D6c1 │
 │ trails-rc-3                │ TrailsIntentEntrypoint            │ 0x8f64eEB1f4680B9ed1F9d6A6Eee7CCf36258C93D │
 │ trails-rc-3                │ TrailsRouter                      │ 0xF8A739B9F24E297a98b7aba7A9cdFDBD457F6fF8 │
