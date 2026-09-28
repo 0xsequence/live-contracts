@@ -12,6 +12,6 @@ actions:
       salt: "{{salt-zero}}"
       # BalanceReader.CREATION_CODE in evm/src/BalanceReader.sol
       #   repo: "https://github.com/0xsequence/trails-pda-contracts"
-      #   commit: "b2225f0f030d1f9c78b21855acd43841b0daeab3"
+      #   commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
       creationCode: "0x60218060095f395ff35f5f36600757005b803560601c3182526014019060200190803611600757505ff3"
     output: true
