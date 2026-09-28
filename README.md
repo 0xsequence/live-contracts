@@ -166,29 +166,13 @@ The following is a list of contracts that are deployed by this script.
 ┌────────────────────────────┬───────────────────────────────────┬────────────────────────────────────────────┐
 │ Job                        │ Name                              │ Address                                    │
 ├────────────────────────────┼───────────────────────────────────┼────────────────────────────────────────────┤
-│ clawback                   │ Clawback                          │ 0x6F9a2c3E11011b894fae691d5338748f8048467d │
-│ clawback                   │ ClawbackMetadata                  │ 0x335411eAA9D63251f8c0867600Be4d0C190a3b1f │
 │ create4                    │ Create4                           │ 0xC4C4C4Ae7EA494fdb246991b70c8E40f471c9166 │
 │ developer-multisig         │ DeveloperMultisig                 │ 0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4 │
 │ eip-6492                   │ Eip6492                           │ 0x0000000044dE9306b161ddE8D58682054e70c766 │
-│ factories                  │ Erc1155Factory                    │ 0x024b9949FeD1c8dd7154DE653456d64Aa1093384 │
-│ factories                  │ Erc1155Holder                     │ 0x3883491F1433dafafd20FB8FD9ec1fE032Ca5e3B │
-│ factories                  │ Erc1155PackFactory                │ 0xC4F1ABB23d8CC6E2786fBe7374A1162C499E1701 │
-│ factories                  │ Erc1155SaleFactory                │ 0xFb89C8A7DF9A1e0299088C3fC46fd87D3FcbcDBd │
-│ factories                  │ Erc1155SoulboundFactory           │ 0xCCbB517AaCAb6680A2ad08ef5A593677dDE17284 │
-│ factories                  │ Erc20Factory                      │ 0x434c9C50b0Ca6b67AbB71F667C822d5451265062 │
-│ factories                  │ Erc721Factory                     │ 0xC6064FfBaDB0687Da29721C8EC02ACa71e735a3e │
-│ factories                  │ Erc721SaleFactory                 │ 0x2Ce46243FAb9d688CcC2B1F1B8D2c464e87A2076 │
-│ factories                  │ Erc721SoulboundFactory            │ 0x718476DcFf820113B30fE4196905c7720F3c8a4e │
 │ guards-v1                  │ DevGuardV1                        │ 0x2ca2380dA88528C6061ACb70aD5222fe455F25DF │
 │ guards-v1                  │ ProdGuardV1                       │ 0x596aF90CecdBF9A768886E771178fd5561dD27Ab │
 │ guards-v2                  │ DevGuardV2                        │ 0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0 │
 │ guards-v2                  │ ProdGuardV2                       │ 0x761f5e29944D79d76656323F106CF2efBF5F09e9 │
-│ immutable-factories        │ Erc1155OperatorEnforcedFactory    │ 0xc89f63389ef3B53D07649D52D47F9E4afcAbb1fB │
-│ immutable-factories        │ Erc712OperatorEnforcedFactory     │ 0x5fD880b092bD285873b16335a454D11c062a4689 │
-│ implicit-registry          │ ImplicitRegistryDev               │ 0x0000002DBE996066c3F322753B4AB7F245C13981 │
-│ implicit-registry          │ ImplicitRegistryNext              │ 0x0000001d15BEA64A9584078917f8DB51Fb44C678 │
-│ implicit-registry          │ ImplicitRegistryProd              │ 0x00000000809DcDFe2Ee78a9F43eAB5f678A46002 │
 │ marketplace-v1             │ MarketV1                          │ 0xB537a160472183f2150d42EB1c3DD6684A55f74c │
 │ marketplace-v2             │ BatchPayableHelperV2              │ 0x6166c1952c54dEd6b070B4616797E61b6c48A117 │
 │ marketplace-v2             │ MarketFactoryV2                   │ 0xBDC76d15eA28beB6AF2Cc69b4EFBb4Aa4FB77689 │
@@ -197,10 +181,6 @@ The following is a list of contracts that are deployed by this script.
 │ niftyswap                  │ Exchange20Wrapper                 │ 0x2c944F28965F9A2cd5E69bA7e7520CbbD928258a │
 │ niftyswap                  │ Factory20                         │ 0x9196b852437D9Ed92d95715dCbdA4533ffC479E0 │
 │ p256-verifier              │ SoladyP256Verifier                │ 0x000000000000D01eA45F9eFD5c54f037Fa57Ea1a │
-│ payments                   │ PaymentCombiner                   │ 0xfe0a269E288051B0815E05Fe192FC888118CB8a2 │
-│ payments                   │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
-│ payments                   │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
-│ payments                   │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
 │ proxy-hook                 │ WalletProxyHook                   │ 0x1f56dbAD5e8319F0DE9a323E24A31b5077dEB1a4 │
 │ SEQ-0001                   │ SequenceMainModuleUpgradableDuoV1 │ 0x94Fb1E5196B4eE5A1c9ad737a505CE12bAe7Ca85 │
 │ SEQ-0001                   │ SequenceMainModuleUpgradableDuoV2 │ 0x4f8ce847174b32cBe21b3887Be894e0DEBC28952 │
@@ -226,9 +206,6 @@ The following is a list of contracts that are deployed by this script.
 │ sequence-v2                │ MainModuleV2                      │ 0xfBf8f1A5E00034762D928f46d438B947f5d4065d │
 │ sequence-v2                │ SequenceFactoryV2                 │ 0xFaA5c0b14d1bED5C888Ca655B9a8A5911F78eF4A │
 │ sequence-v2                │ SequenceUtilsV2                   │ 0xdbbFa3cB3B087B64F4ef5E3D20Dda2488AA244e6 │
-│ stack-signers              │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
-│ stack-signers              │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
-│ stack-signers              │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
 │ trails-pausable-sapient-1  │ TrailsPausableSapient             │ 0x72030E1dbf0a847196ae62EA3ee84BD7ce99D6c1 │
 │ trails-rc-3                │ TrailsIntentEntrypoint            │ 0x8f64eEB1f4680B9ed1F9d6A6Eee7CCf36258C93D │
 │ trails-rc-3                │ TrailsRouter                      │ 0xF8A739B9F24E297a98b7aba7A9cdFDBD457F6fF8 │
