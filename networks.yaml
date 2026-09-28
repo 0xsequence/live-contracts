@@ -265,3 +265,12 @@
 - name: Berachain
   chainId: 80094
   rpcUrl: "https://nodes.sequence.app/berachain/{{RPC_BUILDER_KEY}}"
+
+- name: Robinhood Chain
+  chainId: 4663
+  rpcUrl: "https://nodes.sequence.app/robinhood/{{RPC_BUILDER_KEY}}"
+
+- name: Robinhood Chain Testnet
+  chainId: 46630
+  rpcUrl: "https://nodes.sequence.app/robinhood-testnet/{{RPC_BUILDER_KEY}}"
+  testnet: true
