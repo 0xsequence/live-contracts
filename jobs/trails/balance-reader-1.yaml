@@ -1,0 +1,17 @@
+name: "trails-balance-reader"
+version: "1"
+description: "Deploy BalanceReader contract"
+depends_on: ["era-evm-predeploy-erc2470"]
+
+min_evm_version: "shanghai"
+
+actions:
+  - name: "trails-balance-reader"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      # BalanceReader.CREATION_CODE in evm/src/BalanceReader.sol
+      #   repo: "https://github.com/0xsequence/trails-pda-contracts"
+      #   commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+      creationCode: "0x60218060095f395ff35f5f36600757005b803560601c3182526014019060200190803611600757505ff3"
+    output: true
