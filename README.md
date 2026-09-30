@@ -166,6 +166,7 @@ The following is a list of contracts that are deployed by this script.
 ┌────────────────────────────┬───────────────────────────────────┬────────────────────────────────────────────┐
 │ Job                        │ Name                              │ Address                                    │
 ├────────────────────────────┼───────────────────────────────────┼────────────────────────────────────────────┤
+│ balance-reader-1           │ BalanceReader1                    │ 0x72A2292A565734f3FC19B06c451dDE2813DF4eE0 │
 │ clawback                   │ Clawback                          │ 0x6F9a2c3E11011b894fae691d5338748f8048467d │
 │ clawback                   │ ClawbackMetadata                  │ 0x335411eAA9D63251f8c0867600Be4d0C190a3b1f │
 │ create4                    │ Create4                           │ 0xC4C4C4Ae7EA494fdb246991b70c8E40f471c9166 │
@@ -229,7 +230,6 @@ The following is a list of contracts that are deployed by this script.
 │ stack-signers              │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
 │ stack-signers              │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
 │ stack-signers              │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
-│ trails-balance-reader      │ TrailsBalanceReader               │ 0x72A2292A565734f3FC19B06c451dDE2813DF4eE0 │
 │ trails-pausable-sapient-1  │ TrailsPausableSapient             │ 0x72030E1dbf0a847196ae62EA3ee84BD7ce99D6c1 │
 │ trails-rc-3                │ TrailsIntentEntrypoint            │ 0x8f64eEB1f4680B9ed1F9d6A6Eee7CCf36258C93D │
 │ trails-rc-3                │ TrailsRouter                      │ 0xF8A739B9F24E297a98b7aba7A9cdFDBD457F6fF8 │
