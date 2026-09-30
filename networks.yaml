@@ -68,15 +68,6 @@
   rpcUrl: "https://nodes.sequence.app/soneium-minato/{{RPC_BUILDER_KEY}}"
   testnet: true
 
-- name: B3 Sepolia
-  chainId: 1993
-  rpcUrl: "https://nodes.sequence.app/b3-sepolia/{{RPC_BUILDER_KEY}}"
-  testnet: true
-
-- name: B3
-  chainId: 8333
-  rpcUrl: "https://nodes.sequence.app/b3/{{RPC_BUILDER_KEY}}"
-
 - name: Base
   chainId: 8453
   rpcUrl: "https://nodes.sequence.app/base/{{RPC_BUILDER_KEY}}"
