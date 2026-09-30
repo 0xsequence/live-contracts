@@ -39,7 +39,7 @@ name: "job-name"
 version: "1"
 description: "What this deploys"
 depends_on: ["other-job"]
-skip_networks: [19011]
+skip_networks: [1]
 min_evm_version: "shanghai"
 deprecated: true
 
