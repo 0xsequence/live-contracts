@@ -59,20 +59,6 @@
   supports:
     - etherscan_v2
 
-- name: Moonbeam
-  chainId: 1284
-  rpcUrl: "https://nodes.sequence.app/moonbeam/{{RPC_BUILDER_KEY}}"
-  supports:
-    - etherscan_v2
-    - sourcify
-
-- name: Moonbase Alpha
-  chainId: 1287
-  rpcUrl: "https://nodes.sequence.app/moonbase-alpha/{{RPC_BUILDER_KEY}}"
-  supports:
-    - etherscan_v2
-    - sourcify
-
 - name: Soneium
   chainId: 1868
   rpcUrl: "https://nodes.sequence.app/soneium/{{RPC_BUILDER_KEY}}"
@@ -112,13 +98,6 @@
   rpcUrl: "https://nodes.sequence.app/immutable-zkevm-testnet/{{RPC_BUILDER_KEY}}"
   testnet: true
 
-- name: HOMEVERSE
-  chainId: 19011
-  rpcUrl: "https://nodes.sequence.app/homeverse/{{RPC_BUILDER_KEY}}"
-  supports:
-    - sourcify
-  evmVersion: shanghai
-
 - name: ApeChain Testnet
   chainId: 33111
   rpcUrl: "https://curtis.rpc.caldera.xyz/http"
@@ -127,12 +106,6 @@
 - name: ApeChain
   chainId: 33139
   rpcUrl: "https://nodes.sequence.app/apechain/{{RPC_BUILDER_KEY}}"
-
-- name: HOMEVERSE Testnet
-  chainId: 40875
-  rpcUrl: "https://nodes.sequence.app/homeverse-testnet/{{RPC_BUILDER_KEY}}"
-  testnet: true
-  evmVersion: shanghai
 
 - name: Arbitrum One
   chainId: 42161
