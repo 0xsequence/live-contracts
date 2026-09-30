@@ -225,7 +225,7 @@
 
 - name: Arc
   chainId: 5042
-  rpcUrl: "{{RPC_ARC_MAINNET}}"
+  rpcUrl: "https://nodes.sequence.app/arc/{{RPC_BUILDER_KEY}}"
 
 - name: Sonic
   chainId: 146
