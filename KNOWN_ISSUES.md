@@ -52,21 +52,6 @@ Similar to the previous known issue, the Arachnid Deterministic Proxy relies on 
 
 Catapult has a `Nick's test` job that automatically runs before these pre-signed transactions to prevent this issue happening in future.
 
-### EIP-6492
-
-Affected deployments:
-
-* [eip-6492](jobs/eip_6492/eip-6492.yaml)
-
-Affected networks:
-
-* Homeverse (19011)
-* Homeverse testnet (40875)
-
-The EIP-6492 deployment uses evm version `prague`. Some networks do not yet support the required op codes for this deployment.
-
-For most networks EIP-6492 deployment is not neccessary, as [EIP-6492](https://eips.ethereum.org/EIPS/eip-6492) can be used via `eth_call` without the contract being present on chain. This EIP-6492 deployment is specifically to cater for ZkEVM networks that have trouble with the deployment bundled in the EIP-6492 `eth_call`.
-
 ## Debugging Required
 
 ### Nick's Test Failed
