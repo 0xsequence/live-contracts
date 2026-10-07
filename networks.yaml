@@ -188,12 +188,6 @@
     - sourcify
   testnet: true
 
-- name: SKALE Nebula Testnet
-  chainId: 37084624
-  rpcUrl: "https://nodes.sequence.app/skale-nebula-testnet/{{RPC_BUILDER_KEY}}"
-  testnet: true
-  evmVersion: shanghai
-
 - name: SKALE Base Testnet
   chainId: 324705682
   rpcUrl: "https://nodes.sequence.app/skale-base-testnet/{{RPC_BUILDER_KEY}}"
