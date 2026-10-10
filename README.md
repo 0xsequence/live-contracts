@@ -190,13 +190,7 @@ The following is a list of contracts that are deployed by this script.
 │ implicit-registry          │ ImplicitRegistryDev               │ 0x0000002DBE996066c3F322753B4AB7F245C13981 │
 │ implicit-registry          │ ImplicitRegistryNext              │ 0x0000001d15BEA64A9584078917f8DB51Fb44C678 │
 │ implicit-registry          │ ImplicitRegistryProd              │ 0x00000000809DcDFe2Ee78a9F43eAB5f678A46002 │
-│ marketplace-v1             │ MarketV1                          │ 0xB537a160472183f2150d42EB1c3DD6684A55f74c │
-│ marketplace-v2             │ BatchPayableHelperV2              │ 0x6166c1952c54dEd6b070B4616797E61b6c48A117 │
-│ marketplace-v2             │ MarketFactoryV2                   │ 0xBDC76d15eA28beB6AF2Cc69b4EFBb4Aa4FB77689 │
-│ marketplace-v2             │ MarketV2                          │ 0xfdb42A198a932C8D3B506Ffa5e855bC4b348a712 │
 │ multicall3                 │ Multicall3                        │ 0xae96419a81516f063744206d4b5E36f3168280f8 │
-│ niftyswap                  │ Exchange20Wrapper                 │ 0x2c944F28965F9A2cd5E69bA7e7520CbbD928258a │
-│ niftyswap                  │ Factory20                         │ 0x9196b852437D9Ed92d95715dCbdA4533ffC479E0 │
 │ p256-verifier              │ SoladyP256Verifier                │ 0x000000000000D01eA45F9eFD5c54f037Fa57Ea1a │
 │ payments                   │ PaymentCombiner                   │ 0xfe0a269E288051B0815E05Fe192FC888118CB8a2 │
 │ payments                   │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
