@@ -1,0 +1,41 @@
+name: "trails-pdas-dev/signed-swap-oracle"
+version: "1"
+description: "Deploy the Trails PDAs signed swap oracle"
+depends_on: ["era-evm-predeploy-erc2470", "trails-pdas-dev/configurator"]
+min_evm_version: "cancun"
+
+constants:
+  trails-pdas-dev-oracle-signer: "0xFaab046d2f6B0d155e28E8e45AE38C488F2dFcfB"
+
+actions:
+  # Signed oracle used by the router to value route balance deltas. Admin is the Configurator and
+  # the initial signer set holds SIGNER_ROLE. Both constructor arguments are chain-invariant, so
+  # the address is the same on every chain.
+  - name: "trails-pdas-signed-swap-oracle"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/pdas-1/SignedSwapOracle.json:SignedSwapOracle).creationCode}}"
+          types: ["address", "address[]"]
+          values:
+            - "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+            - ["{{trails-pdas-dev-oracle-signer}}"]
+    output: true
+
+  - name: "verify-trails-pdas-signed-swap-oracle"
+    type: "verify-contract"
+    depends_on: ["trails-pdas-signed-swap-oracle"]
+    arguments:
+      address: "{{trails-pdas-signed-swap-oracle.address}}"
+      contract: "{{Contract(./build-info/pdas-1/SignedSwapOracle.json:SignedSwapOracle)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address[]"]
+          values:
+            - "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+            - ["{{trails-pdas-dev-oracle-signer}}"]
+    output: false

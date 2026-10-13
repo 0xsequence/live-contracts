@@ -1,0 +1,61 @@
+name: "trails-pdas-dev/evm"
+version: "1"
+description: "Deploy the Trails PDAs router (Cancun transient-storage variant) and configure it"
+depends_on:
+  - "era-evm-predeploy-erc2470"
+  - "trails-pdas-dev-owner"
+  - "trails-pdas-dev/configurator"
+  - "trails-pdas-dev/fee-adapter"
+  - "trails-pdas-dev/hyperlane-adapter"
+  - "trails-pdas-dev/layerzero-adapter"
+  - "trails-pdas-dev/stargate-adapter"
+  - "trails-pdas-dev/ovault-composer-adapter"
+  - "trails-pdas-dev/ovault-stargate-adapter"
+  - "trails-pdas-dev/signed-swap-oracle"
+min_evm_version: "cancun"
+
+constants:
+  # Recipient of ERC-20 deposit pull fees. Set at construction and only changeable by the admin.
+  trails-pdas-dev-fee-collector: "0xe8db071f698aBA1d60babaE8e08F5cBc28782108"
+
+actions:
+  - name: "trails-pdas-evm"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/pdas-1/trails-pdas-evm.json:TrailsPdasEvm).creationCode}}"
+          types: ["address", "address", "address[]", "address[]"]
+          values:
+            - "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+            - "{{trails-pdas-dev-fee-collector}}"
+            - ["{{trails-pdas-dev/fee-adapter.trails-pdas-fee-adapter.address}}"]
+            - - "{{trails-pdas-dev/hyperlane-adapter.trails-pdas-hyperlane-adapter.address}}"
+              - "{{trails-pdas-dev/layerzero-adapter.trails-pdas-layerzero-adapter.address}}"
+              - "{{trails-pdas-dev/stargate-adapter.trails-pdas-stargate-adapter.address}}"
+              - "{{trails-pdas-dev/ovault-composer-adapter.trails-pdas-ovault-composer-adapter.address}}"
+              - "{{trails-pdas-dev/ovault-stargate-adapter.trails-pdas-ovault-stargate-adapter.address}}"
+    output: true
+
+  - name: "verify-trails-pdas-evm"
+    type: "verify-contract"
+    depends_on: ["trails-pdas-evm"]
+    arguments:
+      address: "{{trails-pdas-evm.address}}"
+      contract: "{{Contract(./build-info/pdas-1/trails-pdas-evm.json:TrailsPdasEvm)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address", "address[]", "address[]"]
+          values:
+            - "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+            - "{{trails-pdas-dev-fee-collector}}"
+            - ["{{trails-pdas-dev/fee-adapter.trails-pdas-fee-adapter.address}}"]
+            - - "{{trails-pdas-dev/hyperlane-adapter.trails-pdas-hyperlane-adapter.address}}"
+              - "{{trails-pdas-dev/layerzero-adapter.trails-pdas-layerzero-adapter.address}}"
+              - "{{trails-pdas-dev/stargate-adapter.trails-pdas-stargate-adapter.address}}"
+              - "{{trails-pdas-dev/ovault-composer-adapter.trails-pdas-ovault-composer-adapter.address}}"
+              - "{{trails-pdas-dev/ovault-stargate-adapter.trails-pdas-ovault-stargate-adapter.address}}"
+    output: false

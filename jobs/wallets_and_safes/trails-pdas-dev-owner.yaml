@@ -1,0 +1,17 @@
+name: "trails-pdas-dev-owner"
+version: "1"
+description: "Deploys the 1/2 Sequence wallet that owns the Trails PDAs contracts"
+depends_on: ["sequence_v3/rc_5"]
+
+actions:
+  # Sequence v3 1/2 wallet: threshold 1, checkpoint 0, checkpointer address(0), signers
+  # 0xe8db071f698aBA1d60babaE8e08F5cBc28782108 and 0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf,
+  # each with weight 1, folded in that order.
+  # Salt is the imageHash of that configuration, so the address is the same on every chain.
+  # See ./jobs/trails-pdas-dev/README.md to reproduce the imageHash and the pre-signed payloads.
+  - name: "trails-pdas-dev-owner"
+    template: "deploy-wallet-v3"
+    arguments:
+      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      salt: "0x2020ea78d2c0eed21b2b8d4e5eab6d1043c7b8ebbb7c1a1547367dc6c9f6807a"
+    output: true
