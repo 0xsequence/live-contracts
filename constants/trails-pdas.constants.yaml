@@ -1,0 +1,144 @@
+type: "constants"
+
+# Wrapped native token per chain, mirrored from
+# 0xsequence/trails-api lib/routes/weth/chains.go. Chains absent from this map have no
+# WethAdapter deployment; the deploy action skips them.
+constants:
+  trails-pdas-wrapped-native:
+    # Mainnets
+    "1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" # Ethereum WETH
+    "10": "0x4200000000000000000000000000000000000006" # Optimism WETH
+    "56": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" # BSC WBNB
+    "100": "0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d" # Gnosis WXDAI
+    "137": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270" # Polygon WMATIC
+    "146": "0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38" # Sonic WS
+    "999": "0x5555555555555555555555555555555555555555" # HyperEVM WHYPE
+    "1868": "0x4200000000000000000000000000000000000006" # Soneium WETH
+    "5031": "0x046EDe9564A72571df6F5e44d0405360c0f4dCab" # Somnia WSOMI
+    "8453": "0x4200000000000000000000000000000000000006" # Base WETH
+    "42161": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1" # Arbitrum WETH
+    "43114": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7" # Avalanche WAVAX
+    "80094": "0x6969696969696969696969696969696969696969" # Berachain WBERA
+    "747474": "0xee7d8bcfb72bc1880d0cf19822eb0a2e6577ab62" # Katana WETH
+
+    # Testnets
+    "80002": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889" # Polygon Amoy WMATIC
+    "84532": "0x4200000000000000000000000000000000000006" # Base Sepolia WETH
+    "421614": "0x980B62Da83eFf3D4576C647993b0c1D7faf17c73" # Arbitrum Sepolia WETH
+    "11155111": "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9" # Ethereum Sepolia WETH
+    "11155420": "0x4200000000000000000000000000000000000006" # OP Sepolia WETH
+
+  # Uniswap v4 PoolManager per chain, from Uniswap/docs content/protocols/v4/deployments.mdx.
+  # Only chains present in networks.yaml are listed; chains absent from this map have no
+  # UniswapV4Adapter deployment and the deploy action skips them.
+  trails-pdas-uniswap-v4-pool-manager:
+    # Mainnets
+    "1": "0x000000000004444c5dc75cB358380D2e3dE08A90" # Ethereum
+    "10": "0x9a13f98cb987694c9f086b1f5eb990eea8264ec3" # Optimism
+    "56": "0x28e2ea090877bf75740558f6bfb36a5ffee9e9df" # BNB Smart Chain
+    "137": "0x67366782805870060151383f4bbff9dab53e5cd6" # Polygon
+    "143": "0x188d586ddcf52439676ca21a244753fa19f9ea8e" # Monad
+    "1868": "0x360e68faccca8ca495c1b759fd9eee466db9fb32" # Soneium
+    "8453": "0x498581ff718922c3f8e6a244956af099b2652b2b" # Base
+    "42161": "0x360e68faccca8ca495c1b759fd9eee466db9fb32" # Arbitrum One
+    "43114": "0x06380c0e0912312b5150364b9dc4542ba0dbbc85" # Avalanche
+
+    # Testnets
+    "84532": "0x05E73354cFDd6745C338b50BcFDfA3Aa6fA03408" # Base Sepolia
+    "421614": "0xFB3e0C6F74eB1a21CC1Da29aeC80D2Dfe6C9a317" # Arbitrum Sepolia
+    "11155111": "0xE03A1074c86CFeDd5C142C4F04F1a1536e203543" # Ethereum Sepolia
+
+  # Uniswap v3 factory per chain, from Uniswap docs docs.uniswap.org docs/protocols/v3/deployments.
+  # Testnet factories come from the per-chain pages' Sepolia sections (Ethereum, Arbitrum, OP
+  # Sepolia) and were code-verified on the live testnets. Monad has a factory but no wrapped
+  # native in trails-api's map, so it is absent until that lands. Chains absent from this map
+  # have no UniswapV3Adapter deployment and the deploy action skips them.
+  trails-pdas-uniswap-v3-factory:
+    # Mainnets
+    "1": "0x1F98431c8aD98523631AE4a59f267346ea31F984" # Ethereum
+    "10": "0x1F98431c8aD98523631AE4a59f267346ea31F984" # Optimism
+    "56": "0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7" # BNB Smart Chain
+    "137": "0x1F98431c8aD98523631AE4a59f267346ea31F984" # Polygon
+    "8453": "0x33128a8fC17869897dcE68Ed026d694621f6FDfD" # Base
+    "999": "0xf0db7b58379503491d857dB50AC9ece64c653918" # HyperEVM
+    "42161": "0x1F98431c8aD98523631AE4a59f267346ea31F984" # Arbitrum One
+    "43114": "0x740b1c1de25031C31FF4fC9A62f554A55cdC1baD" # Avalanche
+
+    # Testnets
+    "11155111": "0x0227628f3F023bb0B980b67D528571c95c6DaC1c" # Ethereum Sepolia
+    "421614": "0x248AB79Bbb9bC29bB72f7Cd42F17e054Fc40188e" # Arbitrum Sepolia
+    "11155420": "0x4752ba5DBc23f44D87826276BF6Fd6b1C372aD24" # OP Sepolia
+
+  # CCTP v2 TokenMessenger per chain, from Circle's developers.circle.com/cctp/references/contract-addresses.
+  # Only chains present in networks.yaml are listed; chains absent from this map have no
+  # CctpAdapter deployment and the deploy action skips them.
+  trails-pdas-cctp-token-messenger:
+    # Mainnets
+    "1": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # Ethereum
+    "10": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # OP Mainnet
+    "137": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # Polygon PoS
+    "143": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # Monad
+    "146": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # Sonic
+    "999": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # HyperEVM
+    "5042": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # Arc
+    "8453": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # Base
+    "42161": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # Arbitrum One
+    "43114": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d" # Avalanche
+
+    # Testnets
+    "10143": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA" # Monad Testnet
+    "43113": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA" # Avalanche Fuji
+    "80002": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA" # Polygon Amoy
+    "84532": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA" # Base Sepolia
+    "421614": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA" # Arbitrum Sepolia
+    "5042002": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA" # Arc Testnet
+    "11155111": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA" # Sepolia
+    "11155420": "0x8FE6B999Dc680CcFDD5Bf7EB0974218be2542DAA" # OP Sepolia
+
+  # Relay Protocol v2 Depository per chain, mirrored from docs.relay.link/references/protocol/addresses
+  # (fetched live from api.relay.link/chains). Only mainnet chains present in networks.yaml are
+  # listed; chains absent from this map have no RelayAdapter deployment and the deploy action
+  # skips them. Relay deploys the depository at the same address on most chains; Arc differs only
+  # in checksum casing.
+  trails-pdas-relay-depository:
+    # Mainnets
+    "1": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Ethereum
+    "10": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Optimism
+    "56": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # BNB
+    "100": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Gnosis
+    "137": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Polygon
+    "143": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Monad
+    "146": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Sonic
+    "999": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # HyperEVM
+    "1868": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Soneium
+    "5031": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Somnia
+    "5042": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Arc
+    "8453": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Base
+    "33139": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # ApeChain
+    "42161": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Arbitrum
+    "43114": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Avalanche
+    "80094": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Berachain
+    "747474": "0x4cd00e387622c35bddb9b4c962c136462338bc31" # Katana
+
+  # Relay chain-id string per chain, from the same Chains API (the chain's `name`). The adapter
+  # binds it into every order as the origin refund chain, so it differs per chain and is why
+  # RelayAdapter lands at one address per chain despite the shared depository address.
+  trails-pdas-relay-chain-id:
+    # Mainnets
+    "1": "ethereum" # Ethereum
+    "10": "optimism" # Optimism
+    "56": "bsc" # BNB
+    "100": "gnosis" # Gnosis
+    "137": "polygon" # Polygon
+    "143": "monad" # Monad
+    "146": "sonic" # Sonic
+    "999": "hyperevm" # HyperEVM
+    "1868": "soneium" # Soneium
+    "5031": "somnia" # Somnia
+    "5042": "arc" # Arc
+    "8453": "base" # Base
+    "33139": "apechain" # ApeChain
+    "42161": "arbitrum" # Arbitrum
+    "43114": "avalanche" # Avalanche
+    "80094": "berachain" # Berachain
+    "747474": "katana" # Katana

@@ -1,0 +1,39 @@
+name: "trails-pdas-dev/configurator"
+version: "1"
+description: "Deploy the Trails PDAs Configurator, owner-of-record for adapter administration"
+depends_on: ["era-evm-predeploy-erc2470"]
+min_evm_version: "cancun"
+
+actions:
+  # Owner-of-record for the bridge adapters. It redeems one owner-signed merkle root covering every
+  # chain's configuration batch, so an administrative rollout costs one signing round rather than
+  # one per chain. Its own owner is the Trails PDAs owner wallet, and the constructor argument is
+  # chain-invariant, so the address is the same on every chain.
+  #
+  # The signed digest omits chainId and verifyingContract, so a root is accepted by every
+  # Configurator sharing this owner. Rotating this contract's owner invalidates every root the
+  # previous owner signed.
+  - name: "trails-pdas-configurator"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/pdas-1/Configurator.json:Configurator).creationCode}}"
+          types: ["address"]
+          values: ["{{trails-pdas-dev-owner-address}}"]
+    output: true
+
+  - name: "verify-trails-pdas-configurator"
+    type: "verify-contract"
+    depends_on: ["trails-pdas-configurator"]
+    arguments:
+      address: "{{trails-pdas-configurator.address}}"
+      contract: "{{Contract(./build-info/pdas-1/Configurator.json:Configurator)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{trails-pdas-dev-owner-address}}"]
+    output: false

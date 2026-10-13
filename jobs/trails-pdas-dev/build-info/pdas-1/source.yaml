@@ -1,0 +1,107 @@
+type: source
+
+# Every build-info here is built from trails-pda-contracts at the same commit, one contract per
+# build so the embedded sources stay limited to what the deployed bytecode needs.
+# The commit pins solc and the EVM version in evm/foundry.toml, so the build commands carry no
+# --use or --evm-version flags; moving the pin off that commit would need them back.
+# Verify with: pnpm exec catapult provenance verify 'trails-pdas/*'
+
+build_info:
+  "./Configurator.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/Configurator.sol --build-info"
+
+  "./CctpAdapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/CctpAdapter.sol --build-info"
+
+  "./RelayAdapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/RelayAdapter.sol --build-info"
+
+  "./FeeAdapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/FeeAdapter.sol --build-info"
+
+  "./HyperlaneAdapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/HyperlaneAdapter.sol --build-info"
+
+  "./LayerZeroAdapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/LayerZeroAdapter.sol --build-info"
+
+  "./StargateAdapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/StargateAdapter.sol --build-info"
+
+  "./OVaultComposerAdapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/OVaultComposerAdapter.sol --build-info"
+
+  "./OVaultStargateAdapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/OVaultStargateAdapter.sol --build-info"
+
+  "./WethAdapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/WethAdapter.sol --build-info"
+
+  "./UniswapV4Adapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/UniswapV4Adapter.sol --build-info"
+
+  "./UniswapV3Adapter.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/adapters/UniswapV3Adapter.sol --build-info"
+
+  "./SignedSwapOracle.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build src/SignedSwapOracle.sol --build-info"
+
+  # The router lives outside src/ so TronBox and the Shanghai profile never see it.
+  "./trails-pdas-evm.json":
+    repo: "https://github.com/0xsequence/trails-pda-contracts"
+    ref: "main"
+    commit: "75dd5fe869a18591cf3584f2fd91f9431b04f482"
+    image: "ghcr.io/foundry-rs/foundry:v1.8.3"
+    build: "git submodule update --init --recursive && cd evm && forge build cancun/TrailsPdasEvm.sol --build-info"
