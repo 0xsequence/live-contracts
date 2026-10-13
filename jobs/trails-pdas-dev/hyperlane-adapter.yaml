@@ -1,0 +1,31 @@
+name: "trails-pdas-dev/hyperlane-adapter"
+version: "1"
+description: "Deploy the Trails PDAs Hyperlane adapter (Cancun transient-storage variant)"
+depends_on: ["era-evm-predeploy-erc2470", "trails-pdas-dev/configurator"]
+min_evm_version: "cancun"
+
+actions:
+  - name: "trails-pdas-hyperlane-adapter"
+    template: "erc-2470"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/pdas-1/HyperlaneAdapter.json:HyperlaneAdapter).creationCode}}"
+          types: ["address"]
+          values: ["{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"]
+    output: true
+
+  - name: "verify-trails-pdas-hyperlane-adapter"
+    type: "verify-contract"
+    depends_on: ["trails-pdas-hyperlane-adapter"]
+    arguments:
+      address: "{{trails-pdas-hyperlane-adapter.address}}"
+      contract: "{{Contract(./build-info/pdas-1/HyperlaneAdapter.json:HyperlaneAdapter)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values: ["{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"]
+    output: false

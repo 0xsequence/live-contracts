@@ -1,0 +1,71 @@
+name: "trails-pdas-dev/relay-adapter"
+version: "1"
+description: "Deploy the Trails PDAs Relay adapter on chains with a Relay Protocol v2 Depository"
+depends_on: ["era-evm-predeploy-erc2470", "trails-pdas-dev/configurator"]
+min_evm_version: "cancun"
+
+actions:
+  # Takes the chain's Relay v2 Depository and Relay chain-id string, which differ per chain (the
+  # depository is shared across most chains but the chain-id string binds the origin refund into
+  # every order), so the adapter lands at one address per chain. That is why it is not in the
+  # router's constructor adapter array; the bootstrap rollout registers it with addBridgeAdapters
+  # and approves Relay's solver. Routes nothing until a solver is approved; owned by the
+  # Configurator.
+  - name: "trails-pdas-relay-adapter"
+    template: "erc-2470"
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-relay-depository}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/pdas-1/RelayAdapter.json:RelayAdapter).creationCode}}"
+          types: ["address", "address", "string"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-relay-depository}}"
+                path: "{{Network().chainId}}"
+            - "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-relay-chain-id}}"
+                path: "{{Network().chainId}}"
+    output: true
+
+  - name: "verify-trails-pdas-relay-adapter"
+    type: "verify-contract"
+    depends_on: ["trails-pdas-relay-adapter"]
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-relay-depository}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      address: "{{trails-pdas-relay-adapter.address}}"
+      contract: "{{Contract(./build-info/pdas-1/RelayAdapter.json:RelayAdapter)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address", "string"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-relay-depository}}"
+                path: "{{Network().chainId}}"
+            - "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-relay-chain-id}}"
+                path: "{{Network().chainId}}"
+    output: false

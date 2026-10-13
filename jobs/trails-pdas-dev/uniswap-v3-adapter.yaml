@@ -1,0 +1,85 @@
+name: "trails-pdas-dev/uniswap-v3-adapter"
+version: "1"
+description: "Deploy the Trails PDAs Uniswap v3 adapter on chains with a known factory and wrapped native"
+depends_on: ["era-evm-predeploy-erc2470"]
+min_evm_version: "cancun"
+
+constants:
+  # UniswapV3Adapter is pinned to a single fee tier baked into the constructor, so this
+  # deployment only routes through 0.30% pools. Changing the value changes the adapter
+  # address on every chain.
+  trails-pdas-uniswap-v3-fee: "3000"
+
+actions:
+  - name: "trails-pdas-uniswap-v3-adapter"
+    template: "erc-2470"
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-uniswap-v3-factory}}"
+              path: "{{Network().chainId}}"
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-wrapped-native}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/pdas-1/UniswapV3Adapter.json:UniswapV3Adapter).creationCode}}"
+          types: ["address", "address", "uint24"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-uniswap-v3-factory}}"
+                path: "{{Network().chainId}}"
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-wrapped-native}}"
+                path: "{{Network().chainId}}"
+            - "{{trails-pdas-uniswap-v3-fee}}"
+    output: true
+
+  - name: "verify-trails-pdas-uniswap-v3-adapter"
+    type: "verify-contract"
+    depends_on: ["trails-pdas-uniswap-v3-adapter"]
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-uniswap-v3-factory}}"
+              path: "{{Network().chainId}}"
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-wrapped-native}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      address: "{{trails-pdas-uniswap-v3-adapter.address}}"
+      contract: "{{Contract(./build-info/pdas-1/UniswapV3Adapter.json:UniswapV3Adapter)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address", "uint24"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-uniswap-v3-factory}}"
+                path: "{{Network().chainId}}"
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-wrapped-native}}"
+                path: "{{Network().chainId}}"
+            - "{{trails-pdas-uniswap-v3-fee}}"
+    output: false

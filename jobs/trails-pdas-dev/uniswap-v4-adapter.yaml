@@ -1,0 +1,71 @@
+name: "trails-pdas-dev/uniswap-v4-adapter"
+version: "1"
+description: "Deploy the Trails PDAs Uniswap v4 adapter on chains with a known pool manager"
+depends_on: ["era-evm-predeploy-erc2470"]
+min_evm_version: "cancun"
+
+constants:
+  # Uniswap v4 pool selection. The adapter takes one fee tier and one tick spacing, so these
+  # pick the single pool shape it can route through. 3000 = 0.30%, whose canonical spacing is 60.
+  trails-pdas-uniswap-v4-fee: "3000"
+  trails-pdas-uniswap-v4-tick-spacing: "60"
+
+actions:
+  # UniswapV4Adapter is pinned to a single pool shape: one fee tier and one tick spacing are
+  # baked into the constructor, so this deployment only routes through 0.30% / 60 pools.
+  # Changing either value changes the adapter address on every chain. Hooks are address(0), so
+  # the adapter only trades hookless pools.
+  - name: "trails-pdas-uniswap-v4-adapter"
+    template: "erc-2470"
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-uniswap-v4-pool-manager}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(./build-info/pdas-1/UniswapV4Adapter.json:UniswapV4Adapter).creationCode}}"
+          types: ["address", "uint24", "int24", "address"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-uniswap-v4-pool-manager}}"
+                path: "{{Network().chainId}}"
+            - "{{trails-pdas-uniswap-v4-fee}}"
+            - "{{trails-pdas-uniswap-v4-tick-spacing}}"
+            - "{{address-zero}}"
+    output: true
+
+  - name: "verify-trails-pdas-uniswap-v4-adapter"
+    type: "verify-contract"
+    depends_on: ["trails-pdas-uniswap-v4-adapter"]
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-uniswap-v4-pool-manager}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      address: "{{trails-pdas-uniswap-v4-adapter.address}}"
+      contract: "{{Contract(./build-info/pdas-1/UniswapV4Adapter.json:UniswapV4Adapter)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "uint24", "int24", "address"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-uniswap-v4-pool-manager}}"
+                path: "{{Network().chainId}}"
+            - "{{trails-pdas-uniswap-v4-fee}}"
+            - "{{trails-pdas-uniswap-v4-tick-spacing}}"
+            - "{{address-zero}}"
+    output: false

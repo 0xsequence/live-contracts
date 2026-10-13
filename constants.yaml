@@ -10,3 +10,8 @@ constants:
   entrypoint-4337-07-sender-creator: "0xEFC2c1444eBCC4Db75e7613d20C6a62fF67A167C"
   era-evm-predeploy-manager: "0x0000000000000000000000000000000000008014"
   pausable-enchanter-multisig: "0x20bfB5e67f4C75BDd234Aa6F7BcfbC3A3d2c2395"
+  # 1/2 Sequence v3 wallet deployed by jobs/wallets_and_safes/trails-pdas-dev-owner.yaml: threshold 1,
+  # checkpoint 0, checkpointer address(0), signers 0xe8db071f698aBA1d60babaE8e08F5cBc28782108 and
+  # 0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf, each with weight 1. Counterfactual and identical
+  # on every chain, so the Trails PDAs contracts can take it as owner before it exists.
+  trails-pdas-dev-owner-address: "0xda93c44a5f1f7da9537f51c4f7260c6b4829571c"
