@@ -7,3 +7,4 @@ config.json
 
 output
 *.tmp
+__pycache__/
