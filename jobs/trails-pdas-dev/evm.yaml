@@ -12,6 +12,9 @@ depends_on:
   - "trails-pdas-dev/ovault-composer-adapter"
   - "trails-pdas-dev/ovault-stargate-adapter"
   - "trails-pdas-dev/signed-swap-oracle"
+# TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base;
+# 31337 keeps the local Anvil run that generates the README table.
+only_networks: [10, 137, 8453, 31337]
 min_evm_version: "cancun"
 
 constants:
