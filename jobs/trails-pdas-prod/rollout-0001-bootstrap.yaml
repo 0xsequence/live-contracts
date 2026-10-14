@@ -7,6 +7,9 @@ depends_on:
   - "trails-pdas-prod/cctp-adapter"
   - "trails-pdas-prod/evm"
   - "trails-pdas-prod/uniswap-v3-adapter"
+# TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base;
+# 31337 keeps the local Anvil run that generates the README table.
+only_networks: [10, 137, 8453, 31337]
 min_evm_version: "cancun"
 
 # TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
