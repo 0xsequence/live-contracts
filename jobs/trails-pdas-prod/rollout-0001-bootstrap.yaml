@@ -1,0 +1,98 @@
+name: "trails-pdas-prod/rollout-0001-bootstrap"
+version: "1"
+description: "Redeem the Trails PDAs prod bootstrap rollout on each chain's Configurator"
+depends_on:
+  - "trails-pdas-prod-owner"
+  - "trails-pdas-prod/configurator"
+  - "trails-pdas-prod/cctp-adapter"
+  - "trails-pdas-prod/evm"
+  - "trails-pdas-prod/uniswap-v3-adapter"
+min_evm_version: "cancun"
+
+actions:
+  # Grants the executor role, sets the swap oracle, registers the CCTP adapter with the router,
+  # sets the Stargate and CCTP corridors, registers the WETH and Uniswap v4 local adapters, and
+  # sets the EVM remote-inbox fallback. See ./rollouts/0001-bootstrap.spec.json.
+  #
+  # Redeems this chain's leaf from the signed root in ./rollouts/0001-bootstrap.constants.yaml.
+  # Skipped once the Configurator's nonce has moved past the leaf, which is also how a second run
+  # is a no-op. The owner wallet must be deployed on the chain for its signature to validate.
+  # Catapult expands a template only when it is the whole string, so each per-chain value is two
+  # nested lookups: the chain's entry under `leaves`, then the field within it.
+  - name: "rollout-0001-bootstrap"
+    template: "send-transaction"
+    skip_condition:
+      # Chains outside the rollout have no leaf, including the local chain the README table deploys to.
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json:
+                type: "read-json"
+                arguments:
+                  json: "{{trails-pdas-prod-rollout-0001-bootstrap}}"
+                  path: "leaves"
+              path: "{{Network().chainId}}"
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "gt"
+          values:
+            - type: "call"
+              arguments:
+                to: "{{trails-pdas-prod/configurator.trails-pdas-configurator.address}}"
+                signature: "nonce() returns (uint256)"
+                values: []
+            - type: "read-json"
+              arguments:
+                json:
+                  type: "read-json"
+                  arguments:
+                    json:
+                      type: "read-json"
+                      arguments:
+                        json: "{{trails-pdas-prod-rollout-0001-bootstrap}}"
+                        path: "leaves"
+                    path: "{{Network().chainId}}"
+                path: "leaf.2"
+    arguments:
+      to: "{{trails-pdas-prod/configurator.trails-pdas-configurator.address}}"
+      value: "0"
+      data:
+        type: "abi-encode"
+        arguments:
+          signature: "updateConfig(bytes32,(uint256,address,uint256,(address,bytes)[]),bytes32[],bytes)"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-rollout-0001-bootstrap}}"
+                path: "root"
+            - type: "read-json"
+              arguments:
+                json:
+                  type: "read-json"
+                  arguments:
+                    json:
+                      type: "read-json"
+                      arguments:
+                        json: "{{trails-pdas-prod-rollout-0001-bootstrap}}"
+                        path: "leaves"
+                    path: "{{Network().chainId}}"
+                path: "leaf"
+            - type: "read-json"
+              arguments:
+                json:
+                  type: "read-json"
+                  arguments:
+                    json:
+                      type: "read-json"
+                      arguments:
+                        json: "{{trails-pdas-prod-rollout-0001-bootstrap}}"
+                        path: "leaves"
+                    path: "{{Network().chainId}}"
+                path: "proof"
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-rollout-0001-bootstrap}}"
+                path: "signature"
+    output: false
