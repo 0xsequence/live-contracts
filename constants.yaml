@@ -14,6 +14,9 @@ constants:
   # checkpoint 0, checkpointer address(0), signers 0xe8db071f698aBA1d60babaE8e08F5cBc28782108 and
   # 0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf, each with weight 1. Counterfactual and identical
   # on every chain, so the Trails PDAs contracts can take it as owner before it exists.
+  # TODO: both signers are Michael Standen's testing wallets. Replace them with team-held signers;
+  # that changes the imageHash, so the wallet, the Configurator and every dev contract redeploy at
+  # new addresses.
   trails-pdas-dev-owner-address: "0xda93c44a5f1f7da9537f51c4f7260c6b4829571c"
   # Sequence v3 multisig deployed by jobs/wallets_and_safes/trails-pdas-prod-owner.yaml. Owner of
   # the production Configurator; every prod contract address derives from it.
