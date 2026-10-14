@@ -1,7 +1,10 @@
 name: "trails-pdas-prod-owner"
 version: "1"
 description: "Deploys the Sequence multisig wallet that owns the Trails PDAs production contracts"
-depends_on: ["sequence_v3/rc_5"]
+depends_on: ["sequence_v3/rc_6"]
+# TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base;
+# 31337 keeps the local Anvil run that generates the README table.
+only_networks: [10, 137, 8453, 31337]
 
 # TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
 # address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
@@ -24,6 +27,6 @@ actions:
   - name: "trails-pdas-prod-owner"
     template: "deploy-wallet-v3"
     arguments:
-      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      mainModule: "{{sequence_v3/rc_6.stage-1-module.address}}"
       salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
     output: true
