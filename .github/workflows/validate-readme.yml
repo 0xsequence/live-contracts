@@ -67,7 +67,10 @@ jobs:
         run: anvil &
 
       - name: Deploy to Anvil
-        run: pnpm run deploy --rpc-url http://localhost:8545 -vvv
+        # Anvil's default account 0 key, as scripts/update-table.sh uses. Without an explicit key
+        # Catapult resolves the signer via eth_accounts, and a job skipped at job level leaves that
+        # request pending until the provider is destroyed, which crashes the run.
+        run: pnpm run deploy --rpc-url http://localhost:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 -vvv
 
       - name: Generate deployment table
         run: pnpm -s run gen-table > gen-table.txt
