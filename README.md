@@ -232,6 +232,7 @@ The following is a list of contracts that are deployed by this script.
 │ stack-signers                           │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
 │ trails-pausable-sapient-1               │ TrailsPausableSapient             │ 0x72030E1dbf0a847196ae62EA3ee84BD7ce99D6c1 │
 │ trails-pdas-dev-owner                   │ TrailsPdasDevOwner                │ 0xdA93C44A5f1F7dA9537f51c4F7260c6b4829571c │
+│ trails-pdas-dev/cctp-adapter            │ TrailsPdasCctpAdapter             │ * per-chain address                        │
 │ trails-pdas-dev/configurator            │ TrailsPdasConfigurator            │ 0x7a518a9f83bba2E899e497F4BC3ecaE670583b0D │
 │ trails-pdas-dev/evm                     │ TrailsPdasEvm                     │ 0xB2AAAA5f233aC8000a6f301b5072C5acea919824 │
 │ trails-pdas-dev/fee-adapter             │ TrailsPdasFeeAdapter              │ 0xDbE6603F01Dc87fb5F5d442827Fb7a88a1abfb50 │
@@ -239,8 +240,17 @@ The following is a list of contracts that are deployed by this script.
 │ trails-pdas-dev/layerzero-adapter       │ TrailsPdasLayerzeroAdapter        │ 0x7b882A89548fe1855BE3Bfc020F3224b59993288 │
 │ trails-pdas-dev/ovault-composer-adapter │ TrailsPdasOvaultComposerAdapter   │ 0x42429E8B530aAF35a11196525A78363Dea15C9d8 │
 │ trails-pdas-dev/ovault-stargate-adapter │ TrailsPdasOvaultStargateAdapter   │ 0x1231f9155cB9a395bB0cD5006b2C3E4dADE49363 │
+│ trails-pdas-dev/relay-adapter           │ TrailsPdasRelayAdapter            │ * per-chain address                        │
 │ trails-pdas-dev/signed-swap-oracle      │ TrailsPdasSignedSwapOracle        │ 0x76a576E91B0c489401Dd56545178daF7F8FA08f3 │
 │ trails-pdas-dev/stargate-adapter        │ TrailsPdasStargateAdapter         │ 0x43E3C60B759260ee1F5305C3Cd590158eBC1667B │
+│ trails-pdas-dev/uniswap-v3-adapter      │ TrailsPdasUniswapV3AdapterV3      │ * per-chain address                        │
+│ trails-pdas-dev/uniswap-v4-adapter      │ TrailsPdasUniswapV4AdapterV4      │ * per-chain address                        │
+│ trails-pdas-dev/weth-adapter            │ TrailsPdasWethAdapter             │ * per-chain address                        │
+│ trails-pdas-prod/cctp-adapter           │ TrailsPdasCctpAdapter             │ * per-chain address                        │
+│ trails-pdas-prod/relay-adapter          │ TrailsPdasRelayAdapter            │ * per-chain address                        │
+│ trails-pdas-prod/uniswap-v3-adapter     │ TrailsPdasUniswapV3AdapterV3      │ * per-chain address                        │
+│ trails-pdas-prod/uniswap-v4-adapter     │ TrailsPdasUniswapV4AdapterV4      │ * per-chain address                        │
+│ trails-pdas-prod/weth-adapter           │ TrailsPdasWethAdapter             │ * per-chain address                        │
 │ trails-rc-3                             │ TrailsIntentEntrypoint            │ 0x8f64eEB1f4680B9ed1F9d6A6Eee7CCf36258C93D │
 │ trails-rc-3                             │ TrailsRouter                      │ 0xF8A739B9F24E297a98b7aba7A9cdFDBD457F6fF8 │
 │ trails-rc-3                             │ TrailsRouterShim                  │ 0x1306aF05bA556839885B9B8c758f1d2F33d3571E │
@@ -268,6 +278,7 @@ The following is a list of contracts that are deployed by this script.
 
 > To obtain this table for a specific deployment, run the deployment (without errors) and then run `pnpm -s run gen-table`.
 > To update this table, run `pnpm -s run update-readme`.
+> `* per-chain address` marks a contract whose constructor takes a chain-specific argument, so its address differs per chain; read it from the deployment output for that chain.
 
 ## Chains
 

@@ -3,6 +3,14 @@ version: "1"
 description: "Deploys the Sequence multisig wallet that owns the Trails PDAs production contracts"
 depends_on: ["sequence_v3/rc_5"]
 
+# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
+# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
+skip_condition:
+  - type: "basic-arithmetic"
+    arguments:
+      operation: "eq"
+      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
+
 actions:
   # Sequence v3 M-of-N wallet, checkpoint 0, checkpointer address(0). Salt is the imageHash of
   # that configuration, so the address is the same on every chain. The Configurator's digest

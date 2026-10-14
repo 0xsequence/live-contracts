@@ -9,13 +9,14 @@
     "download-build-info": "catapult etherscan source",
     "provenance": "catapult provenance verify",
     "clean": "rm -rf output",
-    "gen-table": "catapult utils gen-table ./output",
+    "gen-table": "node scripts/gen-table.mjs ./output",
     "update-readme": "./scripts/update-table.sh"
   },
   "dependencies": {
     "@0xsequence/catapult": "^2.1.0"
   },
   "devDependencies": {
-    "lefthook": "^1.12.2"
+    "lefthook": "^1.12.2",
+    "yaml": "2.9.1"
   }
 }
