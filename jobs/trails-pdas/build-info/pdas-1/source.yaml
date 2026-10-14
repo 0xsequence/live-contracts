@@ -4,7 +4,8 @@ type: source
 # build so the embedded sources stay limited to what the deployed bytecode needs.
 # The commit pins solc and the EVM version in evm/foundry.toml, so the build commands carry no
 # --use or --evm-version flags; moving the pin off that commit would need them back.
-# Verify with: pnpm exec catapult provenance verify 'trails-pdas/*'
+# Shared by jobs/trails-pdas-dev and jobs/trails-pdas-prod, which reference it as ../trails-pdas/build-info.
+# Verify with: pnpm exec catapult provenance verify 'trails-pdas-dev/*' (or 'trails-pdas-prod/*')
 
 build_info:
   "./Configurator.json":

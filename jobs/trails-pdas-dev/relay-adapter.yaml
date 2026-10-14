@@ -26,7 +26,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/pdas-1/RelayAdapter.json:RelayAdapter).creationCode}}"
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/RelayAdapter.json:RelayAdapter).creationCode}}"
           types: ["address", "address", "string"]
           values:
             - type: "read-json"
@@ -53,7 +53,7 @@ actions:
               path: "{{Network().chainId}}"
     arguments:
       address: "{{trails-pdas-relay-adapter.address}}"
-      contract: "{{Contract(./build-info/pdas-1/RelayAdapter.json:RelayAdapter)}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/RelayAdapter.json:RelayAdapter)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:

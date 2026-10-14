@@ -1,6 +1,11 @@
-# Trails PDAs deployment
+# Trails PDAs dev deployment
 
-Catapult jobs for the Trails PDAs router, its adapters, and its signed swap oracle.
+Catapult jobs for the Trails PDAs router, its adapters, and its signed swap oracle, in the
+**dev** environment: the Sequence/Polygon dev stack, deployed on production chains. The owner
+wallet and the oracle signer are throwaway keys. The production stack is `jobs/trails-pdas-prod/`
+(see its README for what differs); both share the build-info and the scripts in
+`jobs/trails-pdas/`, so the two stacks deploy identical bytecode and differ only by owner,
+fee collector, oracle signer and rollouts.
 
 Contracts are deployed deterministically through ERC-2470 with a zero salt, so every contract
 whose constructor arguments are chain-invariant lands on the same address on every chain. Two
@@ -75,27 +80,27 @@ for c in FeeAdapter HyperlaneAdapter LayerZeroAdapter StargateAdapter \
          OVaultComposerAdapter OVaultStargateAdapter WethAdapter UniswapV4Adapter; do
   forge clean
   rm -rf /tmp/bi && forge build --build-info --build-info-path /tmp/bi "src/adapters/$c.sol"
-  cp /tmp/bi/*.json "<live-contracts>/jobs/trails-pdas-dev/build-info/pdas-1/$c.json"
+  cp /tmp/bi/*.json "<live-contracts>/jobs/trails-pdas/build-info/pdas-1/$c.json"
 done
 
 # The Configurator and the oracle sit at the src/ root, not under src/adapters/.
 for c in Configurator SignedSwapOracle; do
   forge clean
   rm -rf /tmp/bi && forge build --build-info --build-info-path /tmp/bi "src/$c.sol"
-  cp /tmp/bi/*.json "<live-contracts>/jobs/trails-pdas-dev/build-info/pdas-1/$c.json"
+  cp /tmp/bi/*.json "<live-contracts>/jobs/trails-pdas/build-info/pdas-1/$c.json"
 done
 
 # The router lives outside src/ so that TronBox and the Shanghai profile never see it.
 forge clean
 rm -rf /tmp/bi && forge build --build-info --build-info-path /tmp/bi cancun/TrailsPdasEvm.sol
-cp /tmp/bi/*.json "<live-contracts>/jobs/trails-pdas-dev/build-info/pdas-1/trails-pdas-evm.json"
+cp /tmp/bi/*.json "<live-contracts>/jobs/trails-pdas/build-info/pdas-1/trails-pdas-evm.json"
 ```
 
 Each build must leave exactly one JSON in `/tmp/bi`; more than one means the glob copied the wrong
 build-info. The `lib/openzeppelin-contracts` submodule must be initialised, since its sources are
 embedded in the build-info and feed verification.
 
-`build-info/pdas-1/source.yaml` records the repo, commit, Docker image and build command behind
+`jobs/trails-pdas/build-info/pdas-1/source.yaml` records the repo, commit, Docker image and build command behind
 every JSON here. Update its `commit` whenever the build-info is rebuilt, then prove the committed
 files reproduce:
 
@@ -116,7 +121,7 @@ signers (each weight 1) and prints the imageHash — used as the wallet's deploy
 counterfactual address.
 
 ```sh
-./jobs/trails-pdas-dev/image-hash.sh \
+./jobs/trails-pdas/image-hash.sh \
   0xe8db071f698aBA1d60babaE8e08F5cBc28782108 \
   0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf
 # imageHash       0x2020ea78d2c0eed21b2b8d4e5eab6d1043c7b8ebbb7c1a1547367dc6c9f6807a
@@ -172,7 +177,7 @@ W=0xdA93C44A5f1F7dA9537f51c4F7260c6b4829571c   # owner wallet
 A=0xe8db071f698aBA1d60babaE8e08F5cBc28782108   # signer 1
 B=0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf   # signer 2 (the test key)
 
-python3 ./jobs/trails-pdas-dev/sign-root.py --root 0x<merkle root> --wallet $W --signers $A,$B
+python3 ./jobs/trails-pdas/sign-root.py --root 0x<merkle root> --wallet $W --signers $A,$B
 ```
 
 List **all** the wallet's signers, in imageHash order. The script emits the signing key as a

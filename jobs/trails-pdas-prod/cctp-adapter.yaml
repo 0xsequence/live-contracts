@@ -1,0 +1,65 @@
+name: "trails-pdas-prod/cctp-adapter"
+version: "1"
+description: "Deploy the Trails PDAs CCTP adapter on chains with a CCTP v2 TokenMessenger"
+depends_on: ["era-evm-predeploy-erc2470", "trails-pdas-prod/configurator"]
+min_evm_version: "cancun"
+
+actions:
+  # Takes the chain's CCTP v2 TokenMessenger, which Circle deploys at one address on every mainnet
+  # and another on every testnet, so the adapter lands at two addresses: one mainnet, one testnet.
+  # That is why it is not in the router's constructor adapter array; the bootstrap rollout
+  # registers it with addBridgeAdapters. Owned by the Configurator.
+  #
+  # EVM corridors are derived from Circle's TokenMinterV2 registry: once a destination chain is
+  # set with setDomain, every token Circle registers for that domain is routable, with no
+  # per-token configuration.
+  - name: "trails-pdas-cctp-adapter"
+    template: "erc-2470"
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-cctp-token-messenger}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/CctpAdapter.json:CctpAdapter).creationCode}}"
+          types: ["address", "address"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-cctp-token-messenger}}"
+                path: "{{Network().chainId}}"
+            - "{{trails-pdas-prod/configurator.trails-pdas-configurator.address}}"
+    output: true
+
+  - name: "verify-trails-pdas-cctp-adapter"
+    type: "verify-contract"
+    depends_on: ["trails-pdas-cctp-adapter"]
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-cctp-token-messenger}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      address: "{{trails-pdas-cctp-adapter.address}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/CctpAdapter.json:CctpAdapter)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address", "address"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-cctp-token-messenger}}"
+                path: "{{Network().chainId}}"
+            - "{{trails-pdas-prod/configurator.trails-pdas-configurator.address}}"
+    output: false

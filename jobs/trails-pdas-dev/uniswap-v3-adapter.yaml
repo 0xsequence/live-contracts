@@ -33,7 +33,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/pdas-1/UniswapV3Adapter.json:UniswapV3Adapter).creationCode}}"
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/UniswapV3Adapter.json:UniswapV3Adapter).creationCode}}"
           types: ["address", "address", "uint24"]
           values:
             - type: "read-json"
@@ -67,7 +67,7 @@ actions:
               path: "{{Network().chainId}}"
     arguments:
       address: "{{trails-pdas-uniswap-v3-adapter.address}}"
-      contract: "{{Contract(./build-info/pdas-1/UniswapV3Adapter.json:UniswapV3Adapter)}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/UniswapV3Adapter.json:UniswapV3Adapter)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:

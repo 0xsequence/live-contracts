@@ -1,0 +1,2023 @@
+{
+  "_todo": "Placeholder 0x0000...0000 addresses are the production deployment's own contracts (Configurator, router, governor, oracle, adapters, the executor relayer). Fill them from a local run of 'trails-pdas-prod/*' once the owner, fee collector and oracle signer are set; see ../README.md. Token, pool, domain and solver values are protocol data shared with dev and are already correct.",
+  "configurator": "0x0000000000000000000000000000000000000000",
+  "chains": {
+    "1": 0,
+    "10": 0,
+    "56": 0,
+    "97": 0,
+    "100": 0,
+    "137": 0,
+    "143": 0,
+    "146": 0,
+    "999": 0,
+    "1868": 0,
+    "1946": 0,
+    "5031": 0,
+    "5042": 0,
+    "8453": 0,
+    "13371": 0,
+    "13473": 0,
+    "33111": 0,
+    "33139": 0,
+    "42161": 0,
+    "42170": 0,
+    "42793": 0,
+    "43113": 0,
+    "43114": 0,
+    "50312": 0,
+    "80002": 0,
+    "80094": 0,
+    "84532": 0,
+    "127823": 0,
+    "421614": 0,
+    "747474": 0,
+    "5042002": 0,
+    "11155111": 0,
+    "11155420": 0
+  },
+  "calls": [
+    {
+      "target": "0x0000000000000000000000000000000000000000",
+      "signature": "grantRole(bytes32,address)",
+      "args": [
+        "0xd8aa0f3194971a2a116679f7c2090f6939c8d4e01a2a8d7e41d55e5351469e63",
+        "0x0000000000000000000000000000000000000000"
+      ]
+    },
+    {
+      "target": "0x0000000000000000000000000000000000000000",
+      "signature": "setSwapOracle(address)",
+      "args": [
+        "0x0000000000000000000000000000000000000000"
+      ]
+    },
+    {
+      "target": "0x0000000000000000000000000000000000000000",
+      "signature": "setRemoteInboxFallback(uint8,bytes)",
+      "args": [
+        "1",
+        "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      ]
+    }
+  ],
+  "chainCalls": {
+    "137": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+          "0x9aa02d4fae7f58b8e8f34c66e756cc734dac7fe4",
+          10,
+          "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+          30111,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+          "0x9aa02d4fae7f58b8e8f34c66e756cc734dac7fe4",
+          42161,
+          "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+          30110,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+          "0x9aa02d4fae7f58b8e8f34c66e756cc734dac7fe4",
+          8453,
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          30184,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          1,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          146,
+          13,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          999,
+          19,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          8453,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          42161,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43114,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "10": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+          "0xce8cca271ebc0533920c83d39f417ed6a0abb7d0",
+          137,
+          "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+          30109,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+          "0xce8cca271ebc0533920c83d39f417ed6a0abb7d0",
+          42161,
+          "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+          30110,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+          "0xce8cca271ebc0533920c83d39f417ed6a0abb7d0",
+          8453,
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          30184,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          1,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          137,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          146,
+          13,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          999,
+          19,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          8453,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          42161,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43114,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "42161": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+          "0xe8cdf27acd73a434d661c84887215f7598e7d0d3",
+          137,
+          "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+          30109,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+          "0xe8cdf27acd73a434d661c84887215f7598e7d0d3",
+          10,
+          "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+          30111,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+          "0xe8cdf27acd73a434d661c84887215f7598e7d0d3",
+          8453,
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          30184,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          1,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          137,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          146,
+          13,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          999,
+          19,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          8453,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43114,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "8453": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          "0x27a16dc786820b16e5c9028b75b99f6f604b5d26",
+          137,
+          "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+          30109,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          "0x27a16dc786820b16e5c9028b75b99f6f604b5d26",
+          10,
+          "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+          30111,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDestination(address,address,uint256,address,uint32,uint8)",
+        "args": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          "0x27a16dc786820b16e5c9028b75b99f6f604b5d26",
+          42161,
+          "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+          30110,
+          6
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          1,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          137,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          146,
+          13,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          999,
+          19,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          42161,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43114,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "1": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          137,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          146,
+          13,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          999,
+          19,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          8453,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          42161,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43114,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "143": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          1,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          137,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          146,
+          13,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          999,
+          19,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          8453,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          42161,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43114,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "146": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          1,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          137,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          999,
+          19,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          8453,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          42161,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43114,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "999": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          1,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          137,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          146,
+          13,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          8453,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          42161,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43114,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "5042": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          1,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          137,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          146,
+          13,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          999,
+          19,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          8453,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          42161,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43114,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "43114": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          1,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          137,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          146,
+          13,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          999,
+          19,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          8453,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          42161,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "43113": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          80002,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          84532,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          421614,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042002,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155111,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155420,
+          2,
+          1000
+        ]
+      }
+    ],
+    "80002": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43113,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          84532,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          421614,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042002,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155111,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155420,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      }
+    ],
+    "84532": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43113,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          80002,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          421614,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042002,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155111,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155420,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      }
+    ],
+    "421614": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43113,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          80002,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          84532,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042002,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155111,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155420,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      }
+    ],
+    "5042002": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43113,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          80002,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          84532,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          421614,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155111,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155420,
+          2,
+          1000
+        ]
+      }
+    ],
+    "11155111": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43113,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          80002,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          84532,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          421614,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042002,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155420,
+          2,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      }
+    ],
+    "11155420": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          10143,
+          15,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          43113,
+          1,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          80002,
+          7,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          84532,
+          6,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          421614,
+          3,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          5042002,
+          26,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setDomain(uint256,uint32,uint32)",
+        "args": [
+          11155111,
+          0,
+          1000
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      }
+    ],
+    "56": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "100": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "1868": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "5031": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "80094": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "747474": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ],
+    "33139": [
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "addBridgeAdapters(address[])",
+        "args": [
+          "[0x0000000000000000000000000000000000000000]"
+        ]
+      },
+      {
+        "target": "0x0000000000000000000000000000000000000000",
+        "signature": "setSolver(address,bool)",
+        "args": [
+          "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+          true
+        ]
+      }
+    ]
+  }
+}

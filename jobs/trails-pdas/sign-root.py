@@ -242,34 +242,50 @@ def signer_address(priv: int) -> str:
     return "0x" + keccak256(uncompressed)[-20:].hex()
 
 
-def build_signature(
-    root: bytes,
-    wallet: str,
+def eth_sign_hash(op_hash: bytes) -> bytes:
+    """The hash an eth_sign / personal_sign wallet signs for a 32-byte message."""
+    return k(b"\x19Ethereum Signed Message:\n32" + op_hash)
+
+
+def encode_signature_tree(
     signers: list[str],
     threshold: int,
     checkpoint: int,
     chain_id: int,
-    key_env: str,
-) -> tuple[bytes, bytes, bytes]:
-    digest = root_digest(root)
-    op_hash = sequence_op_hash(digest, wallet, chain_id)
+    signatures: dict[str, tuple[str, bytes]],
+) -> bytes:
+    """Encode a Sequence v3 signature over a threshold-1-weight-each wallet configuration.
 
-    priv = load_private_key(key_env)
-    r, y_parity_and_s = sign_hash(op_hash, priv)
-    me = signer_address(priv).lower()
-
+    `signatures` maps a lowercase signer address to (kind, 64-byte ERC-2098 compact signature),
+    where kind is "hash" (signed the opHash directly) or "eth_sign" (signed its eth_sign
+    wrapping). Signers absent from the map are emitted as address-only leaves, which keeps the
+    recovered tree hashing to the imageHash without contributing weight.
+    """
     branch = b""
-    emitted = False
+    weight = 0
     for signer in signers:
-        if signer.lower() == me:
-            # FLAG_SIGNATURE_HASH (top nibble 0) + weight 1 -> 0x01, then r ++ yParityAndS
-            branch += b"\x01" + r + y_parity_and_s
-            emitted = True
-        else:
+        entry = signatures.get(signer.lower())
+        if entry is None:
             # FLAG_ADDRESS (top nibble 1) + weight 1 -> 0x11, then the 20-byte address
             branch += b"\x11" + addr_bytes(signer)
-    if not emitted:
-        sys.exit("error: the signing key is not in --signers")
+            continue
+        kind, compact = entry
+        if len(compact) != 64:
+            sys.exit(f"error: signature for {signer} is not 64 bytes")
+        # FLAG_SIGNATURE_HASH (top nibble 0) or FLAG_SIGNATURE_ETH_SIGN (top nibble 7), weight 1,
+        # then r ++ yParityAndS
+        if kind == "hash":
+            branch += b"\x01" + compact
+        elif kind == "eth_sign":
+            branch += b"\x71" + compact
+        else:
+            sys.exit(f"error: unknown signature kind {kind!r} for {signer}")
+        weight += 1
+    unknown = set(signatures) - {s.lower() for s in signers}
+    if unknown:
+        sys.exit(f"error: signatures from addresses outside the signer set: {sorted(unknown)}")
+    if weight < threshold:
+        sys.exit(f"error: {weight} signature(s) collected, threshold is {threshold}")
 
     # Signature flag byte:
     #   bits [1..0] signature type: 00 normal (chain-bound), 10 no-chain-id
@@ -285,7 +301,30 @@ def build_signature(
     else:
         th = bytes([threshold])
 
-    return digest, op_hash, bytes([flag]) + cp + th + branch
+    return bytes([flag]) + cp + th + branch
+
+
+def build_signature(
+    root: bytes,
+    wallet: str,
+    signers: list[str],
+    threshold: int,
+    checkpoint: int,
+    chain_id: int,
+    key_env: str,
+) -> tuple[bytes, bytes, bytes]:
+    """Sign the root with the key in `key_env` and encode a complete signature around it."""
+    digest = root_digest(root)
+    op_hash = sequence_op_hash(digest, wallet, chain_id)
+
+    priv = load_private_key(key_env)
+    me = signer_address(priv).lower()
+    if me not in {s.lower() for s in signers}:
+        sys.exit("error: the signing key is not in --signers")
+    r, y_parity_and_s = sign_hash(op_hash, priv)
+
+    sig = encode_signature_tree(signers, threshold, checkpoint, chain_id, {me: ("hash", r + y_parity_and_s)})
+    return digest, op_hash, sig
 
 
 def main() -> None:

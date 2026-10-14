@@ -1,0 +1,21 @@
+name: "trails-pdas-prod-owner"
+version: "1"
+description: "Deploys the Sequence multisig wallet that owns the Trails PDAs production contracts"
+depends_on: ["sequence_v3/rc_5"]
+
+actions:
+  # Sequence v3 M-of-N wallet, checkpoint 0, checkpointer address(0). Salt is the imageHash of
+  # that configuration, so the address is the same on every chain. The Configurator's digest
+  # omits chainId, so this wallet must NOT share a signer set with trails-pdas-dev-owner: a shared
+  # owner would let dev rollouts redeem on prod Configurators.
+  # See ./jobs/trails-pdas-prod/README.md to reproduce the imageHash.
+  #
+  # TODO: replace the salt with the imageHash of the production signer set
+  # (`THRESHOLD=<m> ./jobs/trails-pdas/image-hash.sh <signers...>`), then record the signers, their
+  # order and the threshold here and in constants.yaml. A zero salt deploys a wallet nobody controls.
+  - name: "trails-pdas-prod-owner"
+    template: "deploy-wallet-v3"
+    arguments:
+      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      salt: "0x0000000000000000000000000000000000000000000000000000000000000000"
+    output: true

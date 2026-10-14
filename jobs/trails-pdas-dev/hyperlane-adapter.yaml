@@ -12,7 +12,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/pdas-1/HyperlaneAdapter.json:HyperlaneAdapter).creationCode}}"
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/HyperlaneAdapter.json:HyperlaneAdapter).creationCode}}"
           types: ["address"]
           values: ["{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"]
     output: true
@@ -22,7 +22,7 @@ actions:
     depends_on: ["trails-pdas-hyperlane-adapter"]
     arguments:
       address: "{{trails-pdas-hyperlane-adapter.address}}"
-      contract: "{{Contract(./build-info/pdas-1/HyperlaneAdapter.json:HyperlaneAdapter)}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/HyperlaneAdapter.json:HyperlaneAdapter)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:

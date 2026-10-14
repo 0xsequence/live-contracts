@@ -18,7 +18,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/pdas-1/SignedSwapOracle.json:SignedSwapOracle).creationCode}}"
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/SignedSwapOracle.json:SignedSwapOracle).creationCode}}"
           types: ["address", "address[]"]
           values:
             - "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
@@ -30,7 +30,7 @@ actions:
     depends_on: ["trails-pdas-signed-swap-oracle"]
     arguments:
       address: "{{trails-pdas-signed-swap-oracle.address}}"
-      contract: "{{Contract(./build-info/pdas-1/SignedSwapOracle.json:SignedSwapOracle)}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/SignedSwapOracle.json:SignedSwapOracle)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:

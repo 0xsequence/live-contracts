@@ -12,7 +12,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/pdas-1/OVaultComposerAdapter.json:OVaultComposerAdapter).creationCode}}"
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/OVaultComposerAdapter.json:OVaultComposerAdapter).creationCode}}"
           types: ["address"]
           values: ["{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"]
     output: true
@@ -22,7 +22,7 @@ actions:
     depends_on: ["trails-pdas-ovault-composer-adapter"]
     arguments:
       address: "{{trails-pdas-ovault-composer-adapter.address}}"
-      contract: "{{Contract(./build-info/pdas-1/OVaultComposerAdapter.json:OVaultComposerAdapter)}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/OVaultComposerAdapter.json:OVaultComposerAdapter)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:

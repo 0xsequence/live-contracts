@@ -1,0 +1,13 @@
+{
+  "type": "constants",
+  "constants": {
+    "trails-pdas-prod-rollout-0001-bootstrap": {
+      "_todo": "Placeholder. Regenerate with `python3 jobs/trails-pdas/build-rollout.py build jobs/trails-pdas-prod/rollouts/0001-bootstrap.spec.json` once the spec holds the production addresses, then export, collect the multisig signatures and assemble. An empty `leaves` map makes the rollout job skip on every chain, so merging this file deploys the contracts but configures nothing.",
+      "configurator": "0x0000000000000000000000000000000000000000",
+      "root": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "rootDigest": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "",
+      "leaves": {}
+    }
+  }
+}

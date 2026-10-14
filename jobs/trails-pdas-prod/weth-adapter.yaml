@@ -1,0 +1,55 @@
+name: "trails-pdas-prod/weth-adapter"
+version: "1"
+description: "Deploy the Trails PDAs WETH adapter on chains with a known wrapped native token"
+depends_on: ["era-evm-predeploy-erc2470"]
+min_evm_version: "cancun"
+
+actions:
+  - name: "trails-pdas-weth-adapter"
+    template: "erc-2470"
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-wrapped-native}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      salt: "{{salt-zero}}"
+      creationCode:
+        type: "constructor-encode"
+        arguments:
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/WethAdapter.json:WethAdapter).creationCode}}"
+          types: ["address"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-wrapped-native}}"
+                path: "{{Network().chainId}}"
+    output: true
+
+  - name: "verify-trails-pdas-weth-adapter"
+    type: "verify-contract"
+    depends_on: ["trails-pdas-weth-adapter"]
+    skip_condition:
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json: "{{trails-pdas-wrapped-native}}"
+              path: "{{Network().chainId}}"
+    arguments:
+      address: "{{trails-pdas-weth-adapter.address}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/WethAdapter.json:WethAdapter)}}"
+      constructorArguments:
+        type: "constructor-encode"
+        arguments:
+          types: ["address"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-wrapped-native}}"
+                path: "{{Network().chainId}}"
+    output: false

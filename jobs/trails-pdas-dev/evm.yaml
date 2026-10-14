@@ -26,7 +26,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/pdas-1/trails-pdas-evm.json:TrailsPdasEvm).creationCode}}"
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/trails-pdas-evm.json:TrailsPdasEvm).creationCode}}"
           types: ["address", "address", "address[]", "address[]"]
           values:
             - "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
@@ -44,7 +44,7 @@ actions:
     depends_on: ["trails-pdas-evm"]
     arguments:
       address: "{{trails-pdas-evm.address}}"
-      contract: "{{Contract(./build-info/pdas-1/trails-pdas-evm.json:TrailsPdasEvm)}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/trails-pdas-evm.json:TrailsPdasEvm)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:
