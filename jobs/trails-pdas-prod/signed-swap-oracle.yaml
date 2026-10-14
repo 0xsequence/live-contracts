@@ -10,6 +10,14 @@ constants:
   # constructor argument, so changing it moves the oracle on every chain.
   trails-pdas-prod-oracle-signer: "0x0000000000000000000000000000000000000000"
 
+# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
+# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
+skip_condition:
+  - type: "basic-arithmetic"
+    arguments:
+      operation: "eq"
+      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
+
 actions:
   # Signed oracle used by the router to value route balance deltas. Admin is the Configurator and
   # the initial signer set holds SIGNER_ROLE. Both constructor arguments are chain-invariant, so

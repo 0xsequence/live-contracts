@@ -4,6 +4,14 @@ description: "Deploy the Trails PDAs Hyperlane adapter (Cancun transient-storage
 depends_on: ["era-evm-predeploy-erc2470", "trails-pdas-prod/configurator"]
 min_evm_version: "cancun"
 
+# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
+# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
+skip_condition:
+  - type: "basic-arithmetic"
+    arguments:
+      operation: "eq"
+      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
+
 actions:
   - name: "trails-pdas-hyperlane-adapter"
     template: "erc-2470"

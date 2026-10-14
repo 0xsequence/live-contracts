@@ -4,6 +4,14 @@ description: "Deploy the Trails PDAs Configurator, owner-of-record for adapter a
 depends_on: ["era-evm-predeploy-erc2470"]
 min_evm_version: "cancun"
 
+# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
+# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
+skip_condition:
+  - type: "basic-arithmetic"
+    arguments:
+      operation: "eq"
+      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
+
 actions:
   # Owner-of-record for the bridge adapters. It redeems one owner-signed merkle root covering every
   # chain's configuration batch, so an administrative rollout costs one signing round rather than

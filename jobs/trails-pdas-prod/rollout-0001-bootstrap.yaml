@@ -9,6 +9,14 @@ depends_on:
   - "trails-pdas-prod/uniswap-v3-adapter"
 min_evm_version: "cancun"
 
+# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
+# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
+skip_condition:
+  - type: "basic-arithmetic"
+    arguments:
+      operation: "eq"
+      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
+
 actions:
   # Grants the executor role, sets the swap oracle, registers the CCTP adapter with the router,
   # sets the Stargate and CCTP corridors, registers the WETH and Uniswap v4 local adapters, and
