@@ -15,3 +15,9 @@ constants:
   # 0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf, each with weight 1. Counterfactual and identical
   # on every chain, so the Trails PDAs contracts can take it as owner before it exists.
   trails-pdas-dev-owner-address: "0xda93c44a5f1f7da9537f51c4f7260c6b4829571c"
+  # Sequence v3 multisig deployed by jobs/wallets_and_safes/trails-pdas-prod-owner.yaml. Owner of
+  # the production Configurator; every prod contract address derives from it.
+  # TODO: set to the counterfactual address of the production signer set (image-hash.sh output).
+  # address(0) is a placeholder: the Configurator constructor reverts on it, so nothing deploys
+  # until it is replaced.
+  trails-pdas-prod-owner-address: "0x0000000000000000000000000000000000000000"

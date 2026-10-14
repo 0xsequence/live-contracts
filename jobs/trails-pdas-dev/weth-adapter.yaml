@@ -20,7 +20,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/pdas-1/WethAdapter.json:WethAdapter).creationCode}}"
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/WethAdapter.json:WethAdapter).creationCode}}"
           types: ["address"]
           values:
             - type: "read-json"
@@ -42,7 +42,7 @@ actions:
               path: "{{Network().chainId}}"
     arguments:
       address: "{{trails-pdas-weth-adapter.address}}"
-      contract: "{{Contract(./build-info/pdas-1/WethAdapter.json:WethAdapter)}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/WethAdapter.json:WethAdapter)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:

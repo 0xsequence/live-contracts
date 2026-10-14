@@ -12,7 +12,7 @@ actions:
       creationCode:
         type: "constructor-encode"
         arguments:
-          creationCode: "{{Contract(./build-info/pdas-1/OVaultStargateAdapter.json:OVaultStargateAdapter).creationCode}}"
+          creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/OVaultStargateAdapter.json:OVaultStargateAdapter).creationCode}}"
           types: ["address"]
           values: ["{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"]
     output: true
@@ -22,7 +22,7 @@ actions:
     depends_on: ["trails-pdas-ovault-stargate-adapter"]
     arguments:
       address: "{{trails-pdas-ovault-stargate-adapter.address}}"
-      contract: "{{Contract(./build-info/pdas-1/OVaultStargateAdapter.json:OVaultStargateAdapter)}}"
+      contract: "{{Contract(../trails-pdas/build-info/pdas-1/OVaultStargateAdapter.json:OVaultStargateAdapter)}}"
       constructorArguments:
         type: "constructor-encode"
         arguments:

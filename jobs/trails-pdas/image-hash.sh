@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Computes the Sequence v3 imageHash and counterfactual address for a
-# threshold-1 wallet over the given signers (each weight 1).
+# wallet over the given signers (each weight 1), threshold THRESHOLD (default 1).
 #
-# Usage: ./image-hash.sh <signer> [<signer> ...]
+# Usage: [THRESHOLD=<m>] ./image-hash.sh <signer> [<signer> ...]
 #
 # Leaf   = keccak256("Sequence signer:\n" ++ address ++ uint256(weight))
 # Branch = keccak256(left, right), folded left-to-right
@@ -10,12 +10,18 @@
 #          with checkpoint = 0 and checkpointer = address(0)
 set -euo pipefail
 
+THRESHOLD=${THRESHOLD:-1}
+if [ "$THRESHOLD" -lt 1 ] || [ "$THRESHOLD" -gt "$#" ]; then
+  echo "THRESHOLD=$THRESHOLD must be between 1 and the number of signers ($#)" >&2
+  exit 1
+fi
+
 FACTORY=${FACTORY:-0x00000000000018A77519fcCCa060c2537c9D6d3F}
 MAIN_MODULE=${MAIN_MODULE:-0x0000000000001f3C39d61698ab21131a12134454}
 PROXY_CREATION_CODE=0x6041600e3d396021805130553df33d3d36153402601f57363d3d373d363d30545af43d82803e903d91601f57fd5bf3
 
-THRESHOLD_HEX=0000000000000000000000000000000000000000000000000000000000000001
-WEIGHT_HEX=$THRESHOLD_HEX
+THRESHOLD_HEX=$(printf '%064x' "$THRESHOLD")
+WEIGHT_HEX=0000000000000000000000000000000000000000000000000000000000000001
 ZERO_HEX=0000000000000000000000000000000000000000000000000000000000000000
 SIGNER_PREFIX=$(printf 'Sequence signer:\n' | xxd -p | tr -d '\n')
 
@@ -41,5 +47,6 @@ INIT_CODE_HASH=$(cast keccak "$INIT_CODE")
 CREATE2=$(cast keccak "0xff${FACTORY#0x}${IMAGE_HASH#0x}${INIT_CODE_HASH#0x}")
 ADDRESS=$(cast to-check-sum-address "0x${CREATE2: -40}")
 
+echo "threshold       $THRESHOLD"
 echo "imageHash       $IMAGE_HASH"
 echo "walletAddress   $ADDRESS"
