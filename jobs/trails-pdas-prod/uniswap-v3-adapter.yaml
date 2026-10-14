@@ -10,6 +10,14 @@ constants:
   # address on every chain.
   trails-pdas-uniswap-v3-fee: "3000"
 
+# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
+# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
+skip_condition:
+  - type: "basic-arithmetic"
+    arguments:
+      operation: "eq"
+      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
+
 actions:
   - name: "trails-pdas-uniswap-v3-adapter"
     template: "erc-2470"

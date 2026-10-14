@@ -20,6 +20,14 @@ constants:
   # argument, so changing it moves the router and the governor on every chain.
   trails-pdas-prod-fee-collector: "0x0000000000000000000000000000000000000000"
 
+# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
+# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
+skip_condition:
+  - type: "basic-arithmetic"
+    arguments:
+      operation: "eq"
+      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
+
 actions:
   - name: "trails-pdas-evm"
     template: "erc-2470"

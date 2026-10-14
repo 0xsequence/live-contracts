@@ -18,6 +18,7 @@ Do not add local compatibility hacks to keep nearby config compiling. Change the
 ## Repository Shape
 
 - `package.json` exposes the main Catapult commands: `deploy`, `dry-run`, `download-build-info`, `gen-table`, and `update-readme`.
+- `scripts/gen-table.mjs` wraps `catapult utils gen-table` and adds a `* per-chain address` row for every `output: true` action whose arguments look up `Network().chainId`, since those actions skip on the local Anvil chain and would otherwise be missing from the table.
 - `constants.yaml` contains shared constants such as zero address, salts, multisig, and ERC-4337 entrypoints.
 - `constants/*.constants.yaml` stores large or special-purpose constants, such as chain-specific signed payloads.
 - `networks.yaml` is the CI matrix source. `testnet: true` controls the testnet workflow, and `supports` controls verification targets.
