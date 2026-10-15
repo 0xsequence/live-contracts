@@ -31,7 +31,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          run_install: false
 
       - name: Determine pnpm store path
         id: pnpm-store
@@ -112,7 +112,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          run_install: false
 
       - name: Determine pnpm store path
         id: pnpm-store
@@ -180,7 +180,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          run_install: false
 
       - name: Determine pnpm store path
         id: pnpm-store
