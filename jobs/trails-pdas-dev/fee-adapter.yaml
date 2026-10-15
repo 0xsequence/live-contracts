@@ -4,7 +4,7 @@ description: "Deploy the Trails PDAs fee adapter (Cancun transient-storage varia
 depends_on: ["era-evm-predeploy-erc2470"]
 # TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base;
 # 31337 keeps the local Anvil run that generates the README table.
-only_networks: [10, 137, 8453, 31337]
+only_networks: [10, 137, 42161, 8453, 31337]
 min_evm_version: "cancun"
 
 actions:

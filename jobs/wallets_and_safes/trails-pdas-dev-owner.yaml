@@ -4,7 +4,7 @@ description: "Deploys the 1/2 Sequence wallet that owns the Trails PDAs contract
 depends_on: ["sequence_v3/rc_6"]
 # TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base;
 # 31337 keeps the local Anvil run that generates the README table.
-only_networks: [10, 137, 8453, 31337]
+only_networks: [10, 137, 42161, 8453, 31337]
 
 actions:
   # Sequence v3 1/2 wallet: threshold 1, checkpoint 0, checkpointer address(0), signers
