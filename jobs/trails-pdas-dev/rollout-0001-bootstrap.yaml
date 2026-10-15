@@ -14,8 +14,10 @@ min_evm_version: "cancun"
 
 actions:
   # Grants the executor role, sets the swap oracle, registers the CCTP adapter with the router,
-  # sets the Stargate and CCTP corridors, registers the WETH and Uniswap v4 local adapters, and
-  # sets the EVM remote-inbox fallback. See ./rollouts/0001-bootstrap.spec.json.
+  # sets the Stargate and CCTP corridors, registers the WETH and Uniswap v4 local adapters, sets
+  # the EVM remote-inbox fallback, approves Relay's solver, and sets the Relay USDC->MAGIC
+  # corridors between Arbitrum and Base. Relay deposits USDC for MAGIC output (it swaps locally
+  # before the deposit), so USDC is the corridor's tokenIn. See ./rollouts/0001-bootstrap.spec.json.
   #
   # Redeems this chain's leaf from the signed root in ./rollouts/0001-bootstrap.constants.yaml.
   # Skipped once the Configurator's nonce has moved past the leaf, which is also how a second run

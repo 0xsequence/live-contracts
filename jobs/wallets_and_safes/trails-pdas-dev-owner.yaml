@@ -7,7 +7,7 @@ depends_on: ["sequence_v3/rc_6"]
 only_networks: [10, 137, 42161, 8453, 31337]
 
 actions:
-  # Sequence v3 1/2 wallet: threshold 1, checkpoint 0, checkpointer address(0), signers
+  # Sequence v3 1/2 wallet: threshold 1, checkpoint 1, checkpointer address(0), signers
   # 0xe8db071f698aBA1d60babaE8e08F5cBc28782108 and 0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf,
   # each with weight 1, folded in that order.
   # Salt is the imageHash of that configuration, so the address is the same on every chain.
@@ -16,5 +16,5 @@ actions:
     template: "deploy-wallet-v3"
     arguments:
       mainModule: "{{sequence_v3/rc_6.stage-1-module.address}}"
-      salt: "0x2020ea78d2c0eed21b2b8d4e5eab6d1043c7b8ebbb7c1a1547367dc6c9f6807a"
+      salt: "0xa132ecc1171133fa1b68e9e756f1c78e1f17e5137e740306caacd07825161a93"
     output: true

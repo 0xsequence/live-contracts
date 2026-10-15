@@ -10,7 +10,7 @@ to disk, and never appears in a command line or in another process's arguments.
 
 Usage:
   python3 sign-root.py --root 0x<32 bytes> \
-      --wallet 0xdA93C44A5f1F7dA9537f51c4F7260c6b4829571c \
+      --wallet 0x72Cdd7061370314C8412b09b1aeD49d2040016F2 \
       --signers 0xe8db...,0x44FE...        # in imageHash fold order, left to right
       [--threshold 1] [--checkpoint 0] [--chain-id 0]
 

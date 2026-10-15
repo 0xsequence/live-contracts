@@ -228,18 +228,18 @@ The following is a list of contracts that are deployed by this script.
 │ stack-signers                           │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
 │ stack-signers                           │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
 │ trails-pausable-sapient-1               │ TrailsPausableSapient             │ 0x72030E1dbf0a847196ae62EA3ee84BD7ce99D6c1 │
-│ trails-pdas-dev-owner                   │ TrailsPdasDevOwner                │ 0xdA93C44A5f1F7dA9537f51c4F7260c6b4829571c │
+│ trails-pdas-dev-owner                   │ TrailsPdasDevOwner                │ 0x72Cdd7061370314C8412b09b1aeD49d2040016F2 │
 │ trails-pdas-dev/cctp-adapter            │ TrailsPdasCctpAdapter             │ * per-chain address                        │
-│ trails-pdas-dev/configurator            │ TrailsPdasConfigurator            │ 0x7a518a9f83bba2E899e497F4BC3ecaE670583b0D │
-│ trails-pdas-dev/evm                     │ TrailsPdasEvm                     │ 0xB2AAAA5f233aC8000a6f301b5072C5acea919824 │
-│ trails-pdas-dev/fee-adapter             │ TrailsPdasFeeAdapter              │ 0xDbE6603F01Dc87fb5F5d442827Fb7a88a1abfb50 │
-│ trails-pdas-dev/hyperlane-adapter       │ TrailsPdasHyperlaneAdapter        │ 0xA473502D5cDd1600445C40d6BC0762d36aB4ECce │
-│ trails-pdas-dev/layerzero-adapter       │ TrailsPdasLayerzeroAdapter        │ 0x7b882A89548fe1855BE3Bfc020F3224b59993288 │
-│ trails-pdas-dev/ovault-composer-adapter │ TrailsPdasOvaultComposerAdapter   │ 0x42429E8B530aAF35a11196525A78363Dea15C9d8 │
-│ trails-pdas-dev/ovault-stargate-adapter │ TrailsPdasOvaultStargateAdapter   │ 0x1231f9155cB9a395bB0cD5006b2C3E4dADE49363 │
+│ trails-pdas-dev/configurator            │ TrailsPdasConfigurator            │ 0xf295FdD97F470d72De9c09aB3bc8c1b040933394 │
+│ trails-pdas-dev/evm                     │ TrailsPdasEvm                     │ 0x9D73cD3e2D230D5258c89F00a45Dc1e0bAA44127 │
+│ trails-pdas-dev/fee-adapter             │ TrailsPdasFeeAdapter              │ 0x64355D75C8BE6A1cD0f77330d2d95c114e6Fe40A │
+│ trails-pdas-dev/hyperlane-adapter       │ TrailsPdasHyperlaneAdapter        │ 0xeC407d45F61df52Eb4BeA5DafEF4d6c97c1Fde71 │
+│ trails-pdas-dev/layerzero-adapter       │ TrailsPdasLayerzeroAdapter        │ 0xeBbD4f56BB37dCEc7cE9eb0ee61964E663C823c6 │
+│ trails-pdas-dev/ovault-composer-adapter │ TrailsPdasOvaultComposerAdapter   │ 0x8e750F088C9903D9cD7F5417BF329CD3D6b9F384 │
+│ trails-pdas-dev/ovault-stargate-adapter │ TrailsPdasOvaultStargateAdapter   │ 0x03698BDC3448F26fB2BfF28272185804b0Cc3d2C │
 │ trails-pdas-dev/relay-adapter           │ TrailsPdasRelayAdapter            │ * per-chain address                        │
-│ trails-pdas-dev/signed-swap-oracle      │ TrailsPdasSignedSwapOracle        │ 0x76a576E91B0c489401Dd56545178daF7F8FA08f3 │
-│ trails-pdas-dev/stargate-adapter        │ TrailsPdasStargateAdapter         │ 0x43E3C60B759260ee1F5305C3Cd590158eBC1667B │
+│ trails-pdas-dev/signed-swap-oracle      │ TrailsPdasSignedSwapOracle        │ 0x01c11c38a6Bf45611817C77a8919cE552f2D28D8 │
+│ trails-pdas-dev/stargate-adapter        │ TrailsPdasStargateAdapter         │ 0x2928C345c5233E43DD4Dd567d435C8230eA2f2C9 │
 │ trails-pdas-dev/uniswap-v3-adapter      │ TrailsPdasUniswapV3AdapterV3      │ * per-chain address                        │
 │ trails-pdas-dev/uniswap-v4-adapter      │ TrailsPdasUniswapV4AdapterV4      │ * per-chain address                        │
 │ trails-pdas-dev/weth-adapter            │ TrailsPdasWethAdapter             │ * per-chain address                        │
