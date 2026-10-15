@@ -1,0 +1,5 @@
+minimumReleaseAge: 10080 # 60 * 24 * 7 = do not install package releases that are not at least 1 week old
+# DO NOT REMOVE OR MODIFY minimumReleaseAge without approval
+# list packages to be excluded from minimum release limitation
+minimumReleaseAgeExclude:
+  - '@0xsequence/*'
