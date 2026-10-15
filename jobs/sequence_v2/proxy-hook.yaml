@@ -1,6 +1,7 @@
 name: "proxy-hook"
 version: "1"
 description: "Immutable chains require proxies to have an implementation method, this hook implements it."
+deprecated: true
 
 only_networks:
   - 13371   # Immutable zkEVM Mainnet
