@@ -1,0 +1,20 @@
+name: "trails-pdas-dev-executor"
+version: "1"
+description: "Deploys the 1/1 Sequence wallet that holds EXECUTOR_ROLE on the Trails PDAs router"
+depends_on: ["sequence_v3/rc_5"]
+# TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base;
+# 31337 keeps the local Anvil run that generates the README table.
+only_networks: [10, 137, 42161, 8453, 31337]
+
+actions:
+  # Sequence v3 1/1 wallet: threshold 1, checkpoint 0, checkpointer address(0), signer
+  # 0xcafB8BAB9b76A659F20E8C7BcFD4ECec69730d41 with weight 1.
+  # EXECUTOR_ROLE on the router names this address, so it must have code on every chain
+  # the relayer executes routes on. Salt is the imageHash of that configuration, so the
+  # address is the same on every chain.
+  - name: "trails-pdas-dev-executor"
+    template: "deploy-wallet-v3"
+    arguments:
+      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      salt: "0x7ce8869a046678c826e31e8bdd17963106b4ff014dd3abcef4f7e8a52d82b33c"
+    output: true
