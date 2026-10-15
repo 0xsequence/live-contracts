@@ -116,16 +116,16 @@ forge build --sizes | grep -E '^\| (TrailsPdas|TrailsPdasEvm) '
 
 ### 2. Compute the owner wallet imageHash and address
 
-`./image-hash.sh <signer> [<signer> ...]` builds a threshold-1 configuration over the given
-signers (each weight 1) and prints the imageHash — used as the wallet's deploy salt — and the
+`CHECKPOINT=1 ./image-hash.sh <signer> [<signer> ...]` builds a threshold-1, checkpoint-1
+configuration over the given signers (each weight 1) and prints the imageHash — used as the wallet's deploy salt — and the
 counterfactual address.
 
 ```sh
-./jobs/trails-pdas/image-hash.sh \
+CHECKPOINT=1 ./jobs/trails-pdas/image-hash.sh \
   0xe8db071f698aBA1d60babaE8e08F5cBc28782108 \
   0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf
-# imageHash       0x2020ea78d2c0eed21b2b8d4e5eab6d1043c7b8ebbb7c1a1547367dc6c9f6807a
-# walletAddress   0xdA93C44A5f1F7dA9537f51c4F7260c6b4829571c
+# imageHash       0xa132ecc1171133fa1b68e9e756f1c78e1f17e5137e740306caacd07825161a93
+# walletAddress   0x72Cdd7061370314C8412b09b1aeD49d2040016F2
 ```
 
 **Signer order matters** — the leaves are folded left to right, so reordering them yields a
@@ -173,11 +173,11 @@ leaf: a root is spent by the first leaf of it redeemed on a chain, so a root car
 leaf per chain. Then sign the root:
 
 ```sh
-W=0xdA93C44A5f1F7dA9537f51c4F7260c6b4829571c   # owner wallet
+W=0x72Cdd7061370314C8412b09b1aeD49d2040016F2   # owner wallet
 A=0xe8db071f698aBA1d60babaE8e08F5cBc28782108   # signer 1
 B=0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf   # signer 2 (the test key)
 
-python3 ./jobs/trails-pdas/sign-root.py --root 0x<merkle root> --wallet $W --signers $A,$B
+python3 ./jobs/trails-pdas/sign-root.py --root 0x<merkle root> --wallet $W --signers $A,$B --checkpoint 1
 ```
 
 List **all** the wallet's signers, in imageHash order. The script emits the signing key as a

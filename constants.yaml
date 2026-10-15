@@ -11,13 +11,13 @@ constants:
   era-evm-predeploy-manager: "0x0000000000000000000000000000000000008014"
   pausable-enchanter-multisig: "0x20bfB5e67f4C75BDd234Aa6F7BcfbC3A3d2c2395"
   # 1/2 Sequence v3 wallet deployed by jobs/wallets_and_safes/trails-pdas-dev-owner.yaml: threshold 1,
-  # checkpoint 0, checkpointer address(0), signers 0xe8db071f698aBA1d60babaE8e08F5cBc28782108 and
+  # checkpoint 1, checkpointer address(0), signers 0xe8db071f698aBA1d60babaE8e08F5cBc28782108 and
   # 0x44FE7566909FeDB819EDe3AAb086C14fE9eEc8cf, each with weight 1. Counterfactual and identical
   # on every chain, so the Trails PDAs contracts can take it as owner before it exists.
   # TODO: both signers are Michael Standen's testing wallets. Replace them with team-held signers;
   # that changes the imageHash, so the wallet, the Configurator and every dev contract redeploy at
   # new addresses.
-  trails-pdas-dev-owner-address: "0xda93c44a5f1f7da9537f51c4f7260c6b4829571c"
+  trails-pdas-dev-owner-address: "0x72cdd7061370314c8412b09b1aed49d2040016f2"
   # Sequence v3 multisig deployed by jobs/wallets_and_safes/trails-pdas-prod-owner.yaml. Owner of
   # the production Configurator; every prod contract address derives from it.
   # TODO: set to the counterfactual address of the production signer set (image-hash.sh output).
