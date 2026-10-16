@@ -1,6 +1,7 @@
 name: "immutable-factories"
 version: "1"
 description: "Factory contracts for the builder (needed for immutable, as they enforce an operator)"
+deprecated: true
 
 only_networks:
   - 13371   # Immutable zkEVM Mainnet

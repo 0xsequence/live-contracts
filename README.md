@@ -185,8 +185,6 @@ The following is a list of contracts that are deployed by this script.
 │ guards-v1                  │ ProdGuardV1                       │ 0x596aF90CecdBF9A768886E771178fd5561dD27Ab │
 │ guards-v2                  │ DevGuardV2                        │ 0x1d76D1D72EC65A9B933745bd0a87cAA0FAc75Af0 │
 │ guards-v2                  │ ProdGuardV2                       │ 0x761f5e29944D79d76656323F106CF2efBF5F09e9 │
-│ immutable-factories        │ Erc1155OperatorEnforcedFactory    │ 0xc89f63389ef3B53D07649D52D47F9E4afcAbb1fB │
-│ immutable-factories        │ Erc712OperatorEnforcedFactory     │ 0x5fD880b092bD285873b16335a454D11c062a4689 │
 │ implicit-registry          │ ImplicitRegistryDev               │ 0x0000002DBE996066c3F322753B4AB7F245C13981 │
 │ implicit-registry          │ ImplicitRegistryNext              │ 0x0000001d15BEA64A9584078917f8DB51Fb44C678 │
 │ implicit-registry          │ ImplicitRegistryProd              │ 0x00000000809DcDFe2Ee78a9F43eAB5f678A46002 │
@@ -202,7 +200,6 @@ The following is a list of contracts that are deployed by this script.
 │ payments                   │ PaymentSignerDev                  │ 0x498399DD85CAa29A42Af499f82b271f1629ba0D7 │
 │ payments                   │ PaymentSignerNext                 │ 0x51805F2d8719a833C28EAc68aE881B2Eb70c0330 │
 │ payments                   │ PaymentSignerProd                 │ 0x9061a36CDBD17fFe8115aD34c85F94b624f0Dc0F │
-│ proxy-hook                 │ WalletProxyHook                   │ 0x1f56dbAD5e8319F0DE9a323E24A31b5077dEB1a4 │
 │ SEQ-0001                   │ SequenceMainModuleUpgradableDuoV1 │ 0x94Fb1E5196B4eE5A1c9ad737a505CE12bAe7Ca85 │
 │ SEQ-0001                   │ SequenceMainModuleUpgradableDuoV2 │ 0x4f8ce847174b32cBe21b3887Be894e0DEBC28952 │
 │ sequence_v3/eip_7702       │ Stage7702ModuleV3                 │ 0x000000732C68Dc7D14AE652cCcbEAAC791832E58 │
@@ -253,8 +250,6 @@ The following is a list of contracts that are deployed by this script.
 │ waas-trust-factory         │ TrustFactory                      │ 0x4483FaA9dEEDd6D6FaCFee9c686f1E394A1280f9 │
 └────────────────────────────┴───────────────────────────────────┴────────────────────────────────────────────┘
 ```
-
-> `ERC721OperatorEnforcedFactory`, `ERC1155OperatorEnforcedFactory` and `WalletProxyHook` are only deployed on Immutable's chains.
 
 > To obtain this table for a specific deployment, run the deployment (without errors) and then run `pnpm -s run gen-table`.
 > To update this table, run `pnpm -s run update-readme`.
