@@ -23,7 +23,7 @@ Some contracts are near the [EIP-170](https://eips.ethereum.org/EIPS/eip-170) co
 
 Affected deployments:
 
-* [niftyswap](jobs/niftyswap/niftyswap.yaml)
+* [niftyswap](jobs/niftyswap/niftyswap.yaml) (deprecated)
 * [sequence v1](jobs/patches/SEQ-0001/seq0001.yaml)
 * [guards v1](jobs/sequence_v1/guards-v1.yaml)
 * [seq-0001](jobs/patches/SEQ-0001/seq0001.yaml)
