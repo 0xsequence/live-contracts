@@ -3,6 +3,7 @@ version: "1"
 description: "Sequence v3 contracts (release candidate 5) (commit 0d9061f229da73edae890e6fdd1fbf753028df6d) (evm paris)"
 depends_on: ["p256-verifier"]
 
+deprecated: true
 
 # Changelog since rc-4
 #
