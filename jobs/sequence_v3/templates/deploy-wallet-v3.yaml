@@ -15,13 +15,13 @@ returns:
 setup:
   - type: "job-completed"
     arguments:
-      job: "sequence_v3/rc_5"
+      job: "sequence_v3/rc_6"
 
 actions:
   - name: "deploy"
     type: "send-transaction"
     arguments:
-      to: "{{sequence_v3/rc_5.factory.address}}"
+      to: "{{sequence_v3/rc_6.factory.address}}"
       value: "0"
       data:
         type: "abi-encode"
@@ -37,7 +37,7 @@ skip_condition:
       address:
         type: "compute-create2"
         arguments:
-          deployerAddress: "{{sequence_v3/rc_5.factory.address}}"
+          deployerAddress: "{{sequence_v3/rc_6.factory.address}}"
           salt: "{{salt}}"
           initCode:
             type: "constructor-encode"
@@ -50,7 +50,7 @@ outputs:
   address:
     type: "compute-create2"
     arguments:
-      deployerAddress: "{{sequence_v3/rc_5.factory.address}}"
+      deployerAddress: "{{sequence_v3/rc_6.factory.address}}"
       salt: "{{salt}}"
       initCode:
         type: "constructor-encode"

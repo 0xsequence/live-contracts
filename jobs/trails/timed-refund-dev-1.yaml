@@ -1,7 +1,7 @@
 name: "trails-timed-refund-dev-1"
 version: "1"
 description: "Deploy timed refund auto-recovery contracts (dev) (0xsequence/trails-contracts commit 3611e8a313793d148eb2b2dbfe4727130c48aa23)"
-depends_on: ["era-evm-predeploy-erc2470", "sequence_v3/rc_5"]
+depends_on: ["era-evm-predeploy-erc2470", "sequence_v3/rc_6"]
 
 constants:
   timed-refund-dev-allowlist:
@@ -74,7 +74,7 @@ actions:
   - name: "trails-timed-refund-dev-watchtower-wallet"
     template: "deploy-wallet-v3"
     arguments:
-      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      mainModule: "{{sequence_v3/rc_6.stage-1-module.address}}"
       # threshold 1, checkpoint 0, checkpointer address(0), signer 0x07F9D6566336C42E70cE6B6faa6cDf78b1f101a7 with weight 1
       salt: "0x7c400dc22a44bb9f0b97fd859271f40ee7593963ff41ec1332cf491088df9541"
     output: false
@@ -82,7 +82,7 @@ actions:
   - name: "trails-timed-refund-dev-api-wallet"
     template: "deploy-wallet-v3"
     arguments:
-      mainModule: "{{sequence_v3/rc_5.stage-1-module.address}}"
+      mainModule: "{{sequence_v3/rc_6.stage-1-module.address}}"
       # threshold 1, checkpoint 0, checkpointer address(0), signer 0x54fAE124fE06D157ad9cc898b0D10A027C70d25c with weight 1
       salt: "0x678c0ca0528005c2b2ff487e8d09df4ec6bfff54e08a03a55876af4e512dae9f"
     output: false
