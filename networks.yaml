@@ -194,6 +194,16 @@
   chainId: 747474
   rpcUrl: "https://nodes.sequence.app/katana/{{RPC_BUILDER_KEY}}"
 
+- name: Bali 82
+  chainId: 828282
+  rpcUrl: "https://dev-nodes.sequence.app/bali-82-op"
+  testnet: true
+
+- name: Bali 85
+  chainId: 858585
+  rpcUrl: "https://dev-nodes.sequence.app/bali-85-op"
+  testnet: true
+
 - name: Arc Testnet
   chainId: 5042002
   rpcUrl: "https://nodes.sequence.app/arc-testnet/{{RPC_BUILDER_KEY}}"
