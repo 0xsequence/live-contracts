@@ -216,7 +216,7 @@ The following is a list of contracts that are deployed by this script.
 │ sequence_v3/rc_6           │ Erc4337FactoryWrapperV3           │ 0x00000000000003c0C955C8AE06FB13cDd19a7ac6 │
 │ sequence_v3/rc_6           │ GuestV3                           │ 0x0000000000006Ac72ed1d192fa28f0058D3F8806 │
 │ sequence_v3/rc_6           │ PasskeysV3                        │ 0x0000000000005204F3711851EAD52CC9c241499a │
-│ sequence_v3/rc_6           │ RecoveryV3                        │ 0x3b2E20d990c32bFB8c3fD363b42133743EE647f8 │
+│ sequence_v3/rc_6           │ RecoveryV3                        │ 0x0000000002BEFBcfaF3a7Cd665AbBbe234672b2F │
 │ sequence_v3/rc_6           │ SequenceV3/rc6FactoryV3           │ 0x00000000000018A77519fcCCa060c2537c9D6d3F │
 │ sequence_v3/rc_6           │ SessionsV3                        │ 0x00000000000030Bcc832F7d657f50D6Be35C92b3 │
 │ sequence_v3/rc_6           │ Stage1Module433707V3              │ 0x0000000000009caFdeDb6f64Bf5F31a22124B2a8 │

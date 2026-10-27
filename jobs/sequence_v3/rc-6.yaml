@@ -103,7 +103,7 @@ actions:
   - name: "recovery"
     template: "erc-2470"
     arguments:
-      salt: "{{salt-zero}}"
+      salt: "0xc8447eca4f4f0500000000b1ffc42fed5aee11eec7768ca2049a1cd7c5ae57ac"
       creationCode: "{{Contract(./build-info/rc-6/recovery.json:Recovery).creationCode}}"
     output: true
 
