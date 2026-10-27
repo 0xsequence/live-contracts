@@ -1,0 +1,9 @@
+type: source
+
+build_info:
+  "./recovery.json":
+    repo: "https://github.com/0xsequence/wallet-contracts-v3"
+    ref: "master"
+    commit: "e20df65d993ddf4b12346a99a845fce8ff7b7c53"
+    image: "ghcr.io/foundry-rs/foundry:v1.5.1"
+    build: "git submodule update --init --recursive && forge build src/extensions/recovery/Recovery.sol --build-info --evm-version paris --use solc:0.8.28"
