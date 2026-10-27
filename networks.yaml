@@ -12,19 +12,6 @@
     - etherscan_v2
     - sourcify
 
-- name: Telos EVM
-  chainId: 40
-  rpcUrl: "https://nodes.sequence.app/telos/{{RPC_BUILDER_KEY}}"
-  supports:
-    - sourcify
-  evmVersion: shanghai
-
-- name: Telos Testnet
-  chainId: 41
-  rpcUrl: "https://nodes.sequence.app/telos-testnet/{{RPC_BUILDER_KEY}}"
-  testnet: true
-  evmVersion: shanghai
-
 - name: BNB Smart Chain
   chainId: 56
   rpcUrl: "https://nodes.sequence.app/bsc/{{RPC_BUILDER_KEY}}"
