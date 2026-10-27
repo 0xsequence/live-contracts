@@ -1,7 +1,6 @@
 name: "sequence_v3/rc_6"
 version: "1"
-# TODO: replace with the wallet-contracts-v3 merge commit
-description: "Sequence v3 contracts (release candidate 6) (commit 19fc92b) (evm paris)"
+description: "Sequence v3 contracts (release candidate 6) (commit e20df65) (evm paris)"
 depends_on: ["p256-verifier"]
 
 
