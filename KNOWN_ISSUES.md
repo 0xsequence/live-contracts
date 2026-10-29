@@ -6,19 +6,6 @@ This file keeps a record of known deployment issues.
 
 The following issues are not actively looking to be resolved and have been skipped in CI. 
 
-### Large Contracts
-
-Affected deployments:
-
-* [factories](jobs/builder/factories_v3.yaml)
-
-Affected networks:
-
-* Telos (40)
-* Telos testnet (41)
-
-Some contracts are near the [EIP-170](https://eips.ethereum.org/EIPS/eip-170) contract size limit. For chains with low block sizes, these contracts are unable to be deployed.
-
 ### Universal Deployer
 
 Affected deployments:
