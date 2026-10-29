@@ -1,0 +1,3503 @@
+{
+  "configurator": "0xf295FdD97F470d72De9c09aB3bc8c1b040933394",
+  "chains": {
+    "137": 1,
+    "10": 1,
+    "42161": 1,
+    "8453": 1,
+    "1": 1,
+    "143": 1,
+    "146": 1,
+    "999": 1,
+    "5042": 1,
+    "43114": 1,
+    "56": 1,
+    "100": 1,
+    "1868": 1,
+    "5031": 1,
+    "80094": 1,
+    "747474": 1,
+    "33139": 1
+  },
+  "calls": [],
+  "chainCalls": {
+    "1": [
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb1e2A0fA50dE8eC5f951CF5713b968cF64953090",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "10": [
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCfb1783D80Fce5AecA5Fd4Fe6e190C447eaDe87D",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "56": [
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x5D0D91EeDAfb84DFcFF4ccc2B15d080F3229F3C9",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "100": [
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xb7300c788E5B859974178279369e57A430608D71",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x2a22f9c3b484c3629090feed35f17ff8f88f76f0",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "137": [
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x0a6998407ab6FD03F0a2a4E3792BA896CC6B3264",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "143": [
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          "ethereum",
+          "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+          "optimism",
+          "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+          "bsc",
+          "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x2a22f9c3b484c3629090feed35f17ff8f88f76f0",
+          "gnosis",
+          "0x2a22f9c3b484c3629090feed35f17ff8f88f76f0",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+          "polygon",
+          "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x29219dd400f2bf60e5a23d13be72b486d4038894",
+          "sonic",
+          "0x29219dd400f2bf60e5a23d13be72b486d4038894",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0xb88339cb7199b77e23db6e890353e22632ba630f",
+          "hyperevm",
+          "0xb88339cb7199b77e23db6e890353e22632ba630f",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0xba9986d2381edf1da03b0b9c1f8b00dc4aacc369",
+          "soneium",
+          "0xba9986d2381edf1da03b0b9c1f8b00dc4aacc369",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x3600000000000000000000000000000000000000",
+          "arc",
+          "0x3600000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          "base",
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0xf1815bd50389c46847f0bda824ec8da914045d14",
+          "apechain",
+          "0xf1815bd50389c46847f0bda824ec8da914045d14",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+          "arbitrum",
+          "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+          "avalanche",
+          "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x549943e04f40284185054145c6e4e9568c1d3241",
+          "berachain",
+          "0x549943e04f40284185054145c6e4e9568c1d3241",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x203a662b0bd271a6ed5a60edfbd04bfce608fd36",
+          "katana",
+          "0x203a662b0bd271a6ed5a60edfbd04bfce608fd36",
+          0
+        ]
+      }
+    ],
+    "146": [
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x9581737B81FFCC35ea26f596516a28E7D7AFBe55",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x29219dd400f2bf60e5a23d13be72b486d4038894",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "999": [
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xBbeCa53814c5a68532358A7e9608Ec009Da34F4A",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0xb88339cb7199b77e23db6e890353e22632ba630f",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "1868": [
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x21C1867688e86475e2Aa08015A9Ebf35aa1D74eb",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0xba9986d2381edf1da03b0b9c1f8b00dc4aacc369",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "5031": [
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x2f3AB444eB7B0BF3aBEBDAD06908A70f0fFd29B5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "5042": [
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xbFCDCb119C0d36458DdBdE01f8f9921998aBB442",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x3600000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "8453": [
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCcfB03a40055F87dd1B7E7C0ee45759bCaD7195c",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "33139": [
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0x4DD15f490E87Ba7DBa7c3Bf9d72E5b072A03E1f0",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0xf1815bd50389c46847f0bda824ec8da914045d14",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "42161": [
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xe9CCD37C2607Fc953EBE8b8e31A485903Fc51DAE",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "43114": [
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xD8eaA8A0f763f7702d981D08351e9119f563C27a",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "80094": [
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xCd3c5d80d3cECadCb9104404a121d9C76D7364C5",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x549943e04f40284185054145c6e4e9568c1d3241",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ],
+    "747474": [
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          56,
+          "0x0000000000000000000000000000000000000000",
+          "bsc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          100,
+          "0x0000000000000000000000000000000000000000",
+          "gnosis",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          137,
+          "0x0000000000000000000000000000000000000000",
+          "polygon",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          146,
+          "0x0000000000000000000000000000000000000000",
+          "sonic",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          999,
+          "0x0000000000000000000000000000000000000000",
+          "hyperevm",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5031,
+          "0x0000000000000000000000000000000000000000",
+          "somnia",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          5042,
+          "0x0000000000000000000000000000000000000000",
+          "arc",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          33139,
+          "0x0000000000000000000000000000000000000000",
+          "apechain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          43114,
+          "0x0000000000000000000000000000000000000000",
+          "avalanche",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          80094,
+          "0x0000000000000000000000000000000000000000",
+          "berachain",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xF96709428f645c917159163DD09E78D33bD85621",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x203a662b0bd271a6ed5a60edfbd04bfce608fd36",
+          143,
+          "0x0000000000000000000000000000000000000000",
+          "monad",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ]
+  }
+}
