@@ -1,0 +1,83 @@
+{
+  "configurator": "0xf295FdD97F470d72De9c09aB3bc8c1b040933394",
+  "chains": {
+    "143": 2
+  },
+  "calls": [],
+  "chainCalls": {
+    "143": [
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1,
+          "0x0000000000000000000000000000000000000000",
+          "ethereum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          10,
+          "0x0000000000000000000000000000000000000000",
+          "optimism",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          1868,
+          "0x0000000000000000000000000000000000000000",
+          "soneium",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          8453,
+          "0x0000000000000000000000000000000000000000",
+          "base",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          42161,
+          "0x0000000000000000000000000000000000000000",
+          "arbitrum",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      },
+      {
+        "target": "0xDAe65FEDf6fe8F10e565f916b9295c762B4Ab9Cd",
+        "signature": "setDestination(address,uint256,address,string,bytes,uint8)",
+        "args": [
+          "0x0000000000000000000000000000000000000000",
+          747474,
+          "0x0000000000000000000000000000000000000000",
+          "katana",
+          "0x0000000000000000000000000000000000000000",
+          0
+        ]
+      }
+    ]
+  }
+}

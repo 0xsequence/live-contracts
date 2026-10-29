@@ -1,0 +1,104 @@
+name: "trails-pdas-dev/rollout-0003-mon-native-corridors"
+version: "1"
+description: "Redeem the Trails PDAs dev MON native corridor rollout on each chain's Configurator"
+depends_on:
+  - "trails-pdas-dev-owner"
+  - "trails-pdas-dev/configurator"
+  - "trails-pdas-dev/relay-adapter"
+  - "trails-pdas-dev/rollout-0001-bootstrap"
+  - "trails-pdas-dev/rollout-0002-relay-corridors"
+# TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base;
+# 31337 keeps the local Anvil run that generates the README table.
+only_networks: [10, 137, 8453, 31337]
+min_evm_version: "cancun"
+
+actions:
+  # Repoints Monad's outbound native corridors to the destination chain's native ETH on the
+  # six ETH-native Relay chains (Ethereum, OP, Soneium, Base, Arbitrum, Katana), at nonce 2
+  # (after the bootstrap and corridor rollouts). The adapter holds one destination per
+  # (tokenIn, dstChainId) pair, so these overwrite the MON->USDC legs that rollout 0002 set on
+  # those chains; Relay quotes MON->native on all six (api.relay.link/quote verified).
+  # See ./rollouts/0003-mon-native-corridors.spec.json.
+  #
+  # Redeems this chain's leaf from the signed root in ./rollouts/0002-relay-corridors.constants.yaml.
+  # Skipped once the Configurator's nonce has moved past the leaf, which is also how a second run
+  # is a no-op. The owner wallet must be deployed on the chain for its signature to validate.
+  # Catapult expands a template only when it is the whole string, so each per-chain value is two
+  # nested lookups: the chain's entry under `leaves`, then the field within it.
+  - name: "rollout-0003-mon-native-corridors"
+    template: "send-transaction"
+    skip_condition:
+      # Chains outside the rollout have no leaf, including the local chain the README table deploys to.
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json:
+                type: "read-json"
+                arguments:
+                  json: "{{trails-pdas-dev-rollout-0003-mon-native-corridors}}"
+                  path: "leaves"
+              path: "{{Network().chainId}}"
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "gt"
+          values:
+            - type: "call"
+              arguments:
+                to: "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+                signature: "nonce() returns (uint256)"
+                values: []
+            - type: "read-json"
+              arguments:
+                json:
+                  type: "read-json"
+                  arguments:
+                    json:
+                      type: "read-json"
+                      arguments:
+                        json: "{{trails-pdas-dev-rollout-0003-mon-native-corridors}}"
+                        path: "leaves"
+                    path: "{{Network().chainId}}"
+                path: "leaf.2"
+    arguments:
+      to: "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+      value: "0"
+      data:
+        type: "abi-encode"
+        arguments:
+          signature: "updateConfig(bytes32,(uint256,address,uint256,(address,bytes)[]),bytes32[],bytes)"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-dev-rollout-0003-mon-native-corridors}}"
+                path: "root"
+            - type: "read-json"
+              arguments:
+                json:
+                  type: "read-json"
+                  arguments:
+                    json:
+                      type: "read-json"
+                      arguments:
+                        json: "{{trails-pdas-dev-rollout-0003-mon-native-corridors}}"
+                        path: "leaves"
+                    path: "{{Network().chainId}}"
+                path: "leaf"
+            - type: "read-json"
+              arguments:
+                json:
+                  type: "read-json"
+                  arguments:
+                    json:
+                      type: "read-json"
+                      arguments:
+                        json: "{{trails-pdas-dev-rollout-0003-mon-native-corridors}}"
+                        path: "leaves"
+                    path: "{{Network().chainId}}"
+                path: "proof"
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-dev-rollout-0003-mon-native-corridors}}"
+                path: "signature"
+    output: false
