@@ -7,16 +7,22 @@ depends_on: ["era-evm-predeploy-erc2470"]
 only_networks: [10, 137, 8453, 31337]
 min_evm_version: "cancun"
 
-# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
-# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
-skip_condition:
-  - type: "basic-arithmetic"
-    arguments:
-      operation: "eq"
-      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
 
 actions:
   - name: "trails-pdas-fee-adapter"
+    # TODO: remove once trails-pdas-prod-owner-address is set. Skipped on the deployable networks
+    # while the owner is the address(0) placeholder; the local Anvil run reads the stand-in owner
+    # from trails-pdas-prod-owner in constants.yaml, so it deploys and the README table gets its row.
+    skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
@@ -25,10 +31,27 @@ actions:
         arguments:
           creationCode: "{{Contract(../trails-pdas/build-info/pdas-1/FeeAdapter.json:FeeAdapter).creationCode}}"
           types: ["address"]
-          values: ["{{trails-pdas-prod-owner-address}}"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
     output: true
 
   - name: "verify-trails-pdas-fee-adapter"
+    # TODO: remove once trails-pdas-prod-owner-address is set. Skipped on the deployable networks
+    # while the owner is the address(0) placeholder; the local Anvil run reads the stand-in owner
+    # from trails-pdas-prod-owner in constants.yaml, so it deploys and the README table gets its row.
+    skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
     type: "verify-contract"
     depends_on: ["trails-pdas-fee-adapter"]
     arguments:
@@ -38,5 +61,9 @@ actions:
         type: "constructor-encode"
         arguments:
           types: ["address"]
-          values: ["{{trails-pdas-prod-owner-address}}"]
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
     output: false

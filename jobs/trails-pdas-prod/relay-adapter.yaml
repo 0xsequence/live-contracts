@@ -7,13 +7,6 @@ depends_on: ["era-evm-predeploy-erc2470", "trails-pdas-prod/configurator"]
 only_networks: [10, 137, 8453, 31337]
 min_evm_version: "cancun"
 
-# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
-# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
-skip_condition:
-  - type: "basic-arithmetic"
-    arguments:
-      operation: "eq"
-      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
 
 actions:
   # Takes the chain's Relay v2 Depository and Relay chain-id string, which differ per chain (the
@@ -25,6 +18,15 @@ actions:
   - name: "trails-pdas-relay-adapter"
     template: "erc-2470"
     skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
       - type: "value-empty"
         arguments:
           value:
@@ -55,6 +57,15 @@ actions:
     type: "verify-contract"
     depends_on: ["trails-pdas-relay-adapter"]
     skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
       - type: "value-empty"
         arguments:
           value:

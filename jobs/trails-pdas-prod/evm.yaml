@@ -19,20 +19,31 @@ min_evm_version: "cancun"
 
 constants:
   # Recipient of ERC-20 deposit pull fees. Set at construction and only changeable by the admin.
-  # TODO: set to the production fee collector. address(0) is a placeholder; it is a constructor
-  # argument, so changing it moves the router and the governor on every chain.
-  trails-pdas-prod-fee-collector: "0x0000000000000000000000000000000000000000"
+  # TODO: set to the production fee collector. address(0) is a placeholder on the deployable
+  # networks; it is a constructor argument, so changing it moves the router and the governor on
+  # every chain. The Anvil stand-in lets the local README run deploy the router.
+  trails-pdas-prod-fee-collector:
+    "10": "0x0000000000000000000000000000000000000000"
+    "137": "0x0000000000000000000000000000000000000000"
+    "8453": "0x0000000000000000000000000000000000000000"
+    "31337": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
 
-# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
-# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
-skip_condition:
-  - type: "basic-arithmetic"
-    arguments:
-      operation: "eq"
-      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
 
 actions:
   - name: "trails-pdas-evm"
+    # TODO: remove once trails-pdas-prod-owner-address is set. Skipped on the deployable networks
+    # while the owner is the address(0) placeholder; the local Anvil run reads the stand-in owner
+    # from trails-pdas-prod-owner in constants.yaml, so it deploys and the README table gets its row.
+    skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
@@ -43,7 +54,10 @@ actions:
           types: ["address", "address", "address[]", "address[]"]
           values:
             - "{{trails-pdas-prod/configurator.trails-pdas-configurator.address}}"
-            - "{{trails-pdas-prod-fee-collector}}"
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-fee-collector}}"
+                path: "{{Network().chainId}}"
             - ["{{trails-pdas-prod/fee-adapter.trails-pdas-fee-adapter.address}}"]
             - - "{{trails-pdas-prod/hyperlane-adapter.trails-pdas-hyperlane-adapter.address}}"
               - "{{trails-pdas-prod/layerzero-adapter.trails-pdas-layerzero-adapter.address}}"
@@ -53,6 +67,19 @@ actions:
     output: true
 
   - name: "verify-trails-pdas-evm"
+    # TODO: remove once trails-pdas-prod-owner-address is set. Skipped on the deployable networks
+    # while the owner is the address(0) placeholder; the local Anvil run reads the stand-in owner
+    # from trails-pdas-prod-owner in constants.yaml, so it deploys and the README table gets its row.
+    skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
     type: "verify-contract"
     depends_on: ["trails-pdas-evm"]
     arguments:
@@ -64,7 +91,10 @@ actions:
           types: ["address", "address", "address[]", "address[]"]
           values:
             - "{{trails-pdas-prod/configurator.trails-pdas-configurator.address}}"
-            - "{{trails-pdas-prod-fee-collector}}"
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-fee-collector}}"
+                path: "{{Network().chainId}}"
             - ["{{trails-pdas-prod/fee-adapter.trails-pdas-fee-adapter.address}}"]
             - - "{{trails-pdas-prod/hyperlane-adapter.trails-pdas-hyperlane-adapter.address}}"
               - "{{trails-pdas-prod/layerzero-adapter.trails-pdas-layerzero-adapter.address}}"

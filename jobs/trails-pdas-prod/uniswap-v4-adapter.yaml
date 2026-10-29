@@ -13,13 +13,6 @@ constants:
   trails-pdas-uniswap-v4-fee: "3000"
   trails-pdas-uniswap-v4-tick-spacing: "60"
 
-# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
-# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
-skip_condition:
-  - type: "basic-arithmetic"
-    arguments:
-      operation: "eq"
-      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
 
 actions:
   # UniswapV4Adapter is pinned to a single pool shape: one fee tier and one tick spacing are
@@ -29,6 +22,15 @@ actions:
   - name: "trails-pdas-uniswap-v4-adapter"
     template: "erc-2470"
     skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
       - type: "value-empty"
         arguments:
           value:
@@ -57,6 +59,15 @@ actions:
     type: "verify-contract"
     depends_on: ["trails-pdas-uniswap-v4-adapter"]
     skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
       - type: "value-empty"
         arguments:
           value:

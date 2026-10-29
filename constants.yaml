@@ -24,3 +24,12 @@ constants:
   # address(0) is a placeholder: the Configurator constructor reverts on it, so nothing deploys
   # until it is replaced.
   trails-pdas-prod-owner-address: "0x0000000000000000000000000000000000000000"
+  # TODO: remove once trails-pdas-prod-owner-address is set. Per-chain owner the prod jobs read:
+  # the address(0) placeholder on every deployable network keeps them skipped, and the dev owner
+  # wallet stands in on the local Anvil chain so they deploy and the README table gets their rows.
+  # Replaced wholesale by the real owner address when it exists.
+  trails-pdas-prod-owner:
+    "10": "0x0000000000000000000000000000000000000000"
+    "137": "0x0000000000000000000000000000000000000000"
+    "8453": "0x0000000000000000000000000000000000000000"
+    "31337": "0x72cdd7061370314c8412b09b1aed49d2040016f2"

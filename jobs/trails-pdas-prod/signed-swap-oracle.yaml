@@ -8,24 +8,35 @@ only_networks: [10, 137, 8453, 31337]
 min_evm_version: "cancun"
 
 constants:
-  # TODO: set to the production trails-api oracle signer. address(0) is a placeholder: the
-  # SignedSwapOracle constructor reverts on it, so nothing deploys until it is replaced. It is a
-  # constructor argument, so changing it moves the oracle on every chain.
-  trails-pdas-prod-oracle-signer: "0x0000000000000000000000000000000000000000"
+  # TODO: set to the production trails-api oracle signer. address(0) is a placeholder on the
+  # deployable networks: the SignedSwapOracle constructor reverts on it, so nothing deploys until
+  # it is replaced. It is a constructor argument, so changing it moves the oracle on every chain.
+  # The Anvil stand-in lets the local README run deploy the oracle.
+  trails-pdas-prod-oracle-signers:
+    "10": ["0x0000000000000000000000000000000000000000"]
+    "137": ["0x0000000000000000000000000000000000000000"]
+    "8453": ["0x0000000000000000000000000000000000000000"]
+    "31337": ["0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"]
 
-# TODO: remove once trails-pdas-prod-owner-address is set. Skipped while the owner is the
-# address(0) placeholder, so the README table run and CI deploys do not fail on the revert.
-skip_condition:
-  - type: "basic-arithmetic"
-    arguments:
-      operation: "eq"
-      values: ["{{trails-pdas-prod-owner-address}}", "{{address-zero}}"]
 
 actions:
   # Signed oracle used by the router to value route balance deltas. Admin is the Configurator and
   # the initial signer set holds SIGNER_ROLE. Both constructor arguments are chain-invariant, so
   # the address is the same on every chain.
   - name: "trails-pdas-signed-swap-oracle"
+    # TODO: remove once trails-pdas-prod-owner-address is set. Skipped on the deployable networks
+    # while the owner is the address(0) placeholder; the local Anvil run reads the stand-in owner
+    # from trails-pdas-prod-owner in constants.yaml, so it deploys and the README table gets its row.
+    skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
@@ -36,10 +47,26 @@ actions:
           types: ["address", "address[]"]
           values:
             - "{{trails-pdas-prod/configurator.trails-pdas-configurator.address}}"
-            - ["{{trails-pdas-prod-oracle-signer}}"]
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-oracle-signers}}"
+                path: "{{Network().chainId}}"
     output: true
 
   - name: "verify-trails-pdas-signed-swap-oracle"
+    # TODO: remove once trails-pdas-prod-owner-address is set. Skipped on the deployable networks
+    # while the owner is the address(0) placeholder; the local Anvil run reads the stand-in owner
+    # from trails-pdas-prod-owner in constants.yaml, so it deploys and the README table gets its row.
+    skip_condition:
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "eq"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-owner}}"
+                path: "{{Network().chainId}}"
+            - "{{address-zero}}"
     type: "verify-contract"
     depends_on: ["trails-pdas-signed-swap-oracle"]
     arguments:
@@ -51,5 +78,8 @@ actions:
           types: ["address", "address[]"]
           values:
             - "{{trails-pdas-prod/configurator.trails-pdas-configurator.address}}"
-            - ["{{trails-pdas-prod-oracle-signer}}"]
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-prod-oracle-signers}}"
+                path: "{{Network().chainId}}"
     output: false
