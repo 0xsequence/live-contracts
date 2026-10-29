@@ -245,16 +245,16 @@ The following is a list of contracts that are deployed by this script.
 │ trails-pdas-dev/uniswap-v4-adapter       │ TrailsPdasUniswapV4AdapterV4      │ * per-chain address                        │
 │ trails-pdas-dev/weth-adapter             │ TrailsPdasWethAdapter             │ * per-chain address                        │
 │ trails-pdas-prod/cctp-adapter            │ TrailsPdasCctpAdapter             │ * per-chain address                        │
-│ trails-pdas-prod/configurator            │ TrailsPdasConfigurator            │ 0xf295FdD97F470d72De9c09aB3bc8c1b040933394 │
-│ trails-pdas-prod/evm                     │ TrailsPdasEvm                     │ 0x8BB7ebFeDaa4acAa7BA847508C3a321E7c43bE66 │
-│ trails-pdas-prod/fee-adapter             │ TrailsPdasFeeAdapter              │ 0x64355D75C8BE6A1cD0f77330d2d95c114e6Fe40A │
-│ trails-pdas-prod/hyperlane-adapter       │ TrailsPdasHyperlaneAdapter        │ 0xeC407d45F61df52Eb4BeA5DafEF4d6c97c1Fde71 │
-│ trails-pdas-prod/layerzero-adapter       │ TrailsPdasLayerzeroAdapter        │ 0xeBbD4f56BB37dCEc7cE9eb0ee61964E663C823c6 │
-│ trails-pdas-prod/ovault-composer-adapter │ TrailsPdasOvaultComposerAdapter   │ 0x8e750F088C9903D9cD7F5417BF329CD3D6b9F384 │
-│ trails-pdas-prod/ovault-stargate-adapter │ TrailsPdasOvaultStargateAdapter   │ 0x03698BDC3448F26fB2BfF28272185804b0Cc3d2C │
+│ trails-pdas-prod/configurator            │ TrailsPdasConfigurator            │ 0x669aF42d926cb6398285F969C6cA2C3F7a481B5f │
+│ trails-pdas-prod/evm                     │ TrailsPdasEvm                     │ 0xabfDDf2F356B544E06cF01afdBEc76F30c69A32D │
+│ trails-pdas-prod/fee-adapter             │ TrailsPdasFeeAdapter              │ 0xc6b2D7AbE9f5Bd60C4F51Ce8DE55Bb1B4bD27A3B │
+│ trails-pdas-prod/hyperlane-adapter       │ TrailsPdasHyperlaneAdapter        │ 0x6b4Cb825AE78b3A9Ee7b5Bc4BC045122e690a038 │
+│ trails-pdas-prod/layerzero-adapter       │ TrailsPdasLayerzeroAdapter        │ 0xb86151EB3e40aDB505EC648C5B2d3ECf120BC54c │
+│ trails-pdas-prod/ovault-composer-adapter │ TrailsPdasOvaultComposerAdapter   │ 0xAa24437a856C525B0D43e8126030C8DfE66363c4 │
+│ trails-pdas-prod/ovault-stargate-adapter │ TrailsPdasOvaultStargateAdapter   │ 0xE6Fec5DC2F529C892F01C9546B8Abcd33E3FB6b7 │
 │ trails-pdas-prod/relay-adapter           │ TrailsPdasRelayAdapter            │ * per-chain address                        │
-│ trails-pdas-prod/signed-swap-oracle      │ TrailsPdasSignedSwapOracle        │ 0x3E389448292e2955552d684f647fAC7a3C632fBD │
-│ trails-pdas-prod/stargate-adapter        │ TrailsPdasStargateAdapter         │ 0x2928C345c5233E43DD4Dd567d435C8230eA2f2C9 │
+│ trails-pdas-prod/signed-swap-oracle      │ TrailsPdasSignedSwapOracle        │ 0x868a18EEA37ecaC2B3142B34E42E3B4083259473 │
+│ trails-pdas-prod/stargate-adapter        │ TrailsPdasStargateAdapter         │ 0x2d7806481674Fb46E175ED4d7a00CB8e0C8BBefE │
 │ trails-pdas-prod/uniswap-v3-adapter      │ TrailsPdasUniswapV3AdapterV3      │ * per-chain address                        │
 │ trails-pdas-prod/uniswap-v4-adapter      │ TrailsPdasUniswapV4AdapterV4      │ * per-chain address                        │
 │ trails-pdas-prod/weth-adapter            │ TrailsPdasWethAdapter             │ * per-chain address                        │

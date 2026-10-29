@@ -11,7 +11,7 @@ What differs:
 
 | | dev | prod |
 |---|---|---|
-| Owner wallet | `trails-pdas-dev-owner`, 1/2, throwaway signer | `trails-pdas-prod-owner`, M-of-N multisig |
+| Owner wallet | `trails-pdas-dev-owner`, 1/2, throwaway signer | the developer multisig, `0x007a47e6…40bc4` |
 | Fee collector | dev EOA | `trails-pdas-prod-fee-collector` in `evm.yaml` |
 | Oracle signer | dev trails-api key | `trails-pdas-prod-oracle-signer` in `signed-swap-oracle.yaml` |
 | Executor (rollout `grantRole`) | dev relayer | prod relayer, in `rollouts/*.spec.json` |
@@ -24,14 +24,12 @@ cannot redeem on the other.
 
 ## TODO before the first deploy
 
-Every `0x0000000000000000000000000000000000000000` in this directory and in
-`jobs/wallets_and_safes/trails-pdas-prod-owner.yaml` / `constants.yaml` is a placeholder marked
-`TODO`. The Configurator and the oracle revert on a zero owner / zero signer, so the jobs cannot
-deploy until these are set:
+The owner is the existing developer multisig (see below), so the Configurator deploys; the
+remaining `0x0000000000000000000000000000000000000000` values in this directory are placeholders
+marked `TODO`. The router and the oracle revert on a zero fee collector / zero signer, so they
+cannot deploy until these are set:
 
-1. `jobs/wallets_and_safes/trails-pdas-prod-owner.yaml` — `salt` = imageHash of the production
-   signer set; `constants.yaml` — `trails-pdas-prod-owner-address` = its counterfactual address.
-2. `evm.yaml` — `trails-pdas-prod-fee-collector`.
+1. `evm.yaml` — `trails-pdas-prod-fee-collector`.
 3. `signed-swap-oracle.yaml` — `trails-pdas-prod-oracle-signer`.
 4. `rollouts/0001-bootstrap.spec.json` — every prod contract address (Configurator, router,
    governor, oracle, CCTP / Stargate / Relay adapters, WETH / Uniswap local adapters) and the
@@ -41,23 +39,21 @@ deploy until these are set:
 
 ## 1. Owner wallet
 
-A Sequence v3 wallet, M-of-N, each signer weight 1, checkpoint 0, no checkpointer. A Sequence
-wallet rather than a Safe because the Configurator's one-root-for-every-chain design depends on the
-owner's ERC-1271 check accepting a chain-agnostic signature; Sequence v3 does (flag bit `0x02`),
-a Safe binds its domain to the chain id and would need one signing round per chain.
+The production owner is the existing developer multisig, `0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4`
+(`jobs/wallets_and_safes/developer-multisig.yaml`), per the decision to update and reuse it rather
+than stand up a new wallet. The jobs take it as `{{developer-multisig.developer-multisig.address}}`
+with that job as a dependency, so the address flows from the deployment instead of a maintained
+constant. Two prerequisites before prod rollout signatures:
 
-```sh
-THRESHOLD=<m> ./jobs/trails-pdas/image-hash.sh <signer-1> <signer-2> ... <signer-n>
-# threshold       m
-# imageHash       0x...   -> salt in jobs/wallets_and_safes/trails-pdas-prod-owner.yaml
-# walletAddress   0x...   -> trails-pdas-prod-owner-address in constants.yaml
-```
+- Its pending v3 conversion (enchanter) must land: the Configurator's one-root-for-every-chain
+  design depends on the owner's ERC-1271 check accepting a chain-agnostic signature, and
+  `sign-root.py` / `build-rollout.py assemble` encode Sequence v3 signature trees (flag bit
+  `0x02`). A Safe would not work at all — it binds its domain to the chain id.
+- Its pending signer update (security owns multisig signer decisions) should land first so the
+  first signed root is approved by the intended set.
 
-Signer order is part of the imageHash. Record it in the wallet job's comment; `export` below
-needs the same order.
-
-The wallet must not share a signer set with `trails-pdas-dev-owner`: the Configurator digest omits
-`chainId` and `verifyingContract`, so a shared owner would let a dev rollout redeem on prod.
+Signer rotations after that happen in place via `updateImageHash`, so the owner address — and
+therefore every prod contract address — is stable across rotations (see "Rotating the owner").
 
 ## 2. Addresses
 
@@ -112,5 +108,6 @@ must redeem and `Configurator.nonce()` must read 1 afterwards.
 
 ## Rotating the owner
 
-Rotating the signer set changes the wallet's imageHash, so its address, so the Configurator's, so
-every contract in this directory. It is a full redeploy at new addresses, not an update.
+Signer rotations happen in place: the multisig's `updateImageHash` changes its configuration
+without moving its address, so the Configurator and every contract in this directory stay put.
+Only switching to a different owner wallet entirely would be a full redeploy at new addresses.

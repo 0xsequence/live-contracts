@@ -2,9 +2,9 @@ name: "trails-pdas-prod/relay-adapter"
 version: "1"
 description: "Deploy the Trails PDAs Relay adapter on chains with a Relay Protocol v2 Depository"
 depends_on: ["era-evm-predeploy-erc2470", "trails-pdas-prod/configurator"]
-# TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base;
-# 31337 keeps the local Anvil run that generates the README table.
-only_networks: [10, 137, 8453, 31337]
+# TODO: remove when the prod stack is ready to go live. Anvil only until then, so the local
+# README run deploys the jobs and no real network does.
+only_networks: [31337]
 min_evm_version: "cancun"
 
 
@@ -18,15 +18,6 @@ actions:
   - name: "trails-pdas-relay-adapter"
     template: "erc-2470"
     skip_condition:
-      - type: "basic-arithmetic"
-        arguments:
-          operation: "eq"
-          values:
-            - type: "read-json"
-              arguments:
-                json: "{{trails-pdas-prod-owner}}"
-                path: "{{Network().chainId}}"
-            - "{{address-zero}}"
       - type: "value-empty"
         arguments:
           value:
@@ -57,15 +48,6 @@ actions:
     type: "verify-contract"
     depends_on: ["trails-pdas-relay-adapter"]
     skip_condition:
-      - type: "basic-arithmetic"
-        arguments:
-          operation: "eq"
-          values:
-            - type: "read-json"
-              arguments:
-                json: "{{trails-pdas-prod-owner}}"
-                path: "{{Network().chainId}}"
-            - "{{address-zero}}"
       - type: "value-empty"
         arguments:
           value:

@@ -18,18 +18,8 @@ constants:
   # that changes the imageHash, so the wallet, the Configurator and every dev contract redeploy at
   # new addresses.
   trails-pdas-dev-owner-address: "0x72cdd7061370314c8412b09b1aed49d2040016f2"
-  # Sequence v3 multisig deployed by jobs/wallets_and_safes/trails-pdas-prod-owner.yaml. Owner of
-  # the production Configurator; every prod contract address derives from it.
-  # TODO: set to the counterfactual address of the production signer set (image-hash.sh output).
-  # address(0) is a placeholder: the Configurator constructor reverts on it, so nothing deploys
-  # until it is replaced.
-  trails-pdas-prod-owner-address: "0x0000000000000000000000000000000000000000"
-  # TODO: remove once trails-pdas-prod-owner-address is set. Per-chain owner the prod jobs read:
-  # the address(0) placeholder on every deployable network keeps them skipped, and the dev owner
-  # wallet stands in on the local Anvil chain so they deploy and the README table gets their rows.
-  # Replaced wholesale by the real owner address when it exists.
-  trails-pdas-prod-owner:
-    "10": "0x0000000000000000000000000000000000000000"
-    "137": "0x0000000000000000000000000000000000000000"
-    "8453": "0x0000000000000000000000000000000000000000"
-    "31337": "0x72cdd7061370314c8412b09b1aed49d2040016f2"
+  # There is deliberately no trails-pdas-prod-owner-address here. The Trails PDAs prod owner is
+  # the developer multisig (developer-multisig-01 above), and the prod jobs read
+  # {{developer-multisig.developer-multisig.address}} with that job as a dependency, so the
+  # address flows from the deployment instead of a second maintained copy of it. See
+  # jobs/trails-pdas-prod/README.md before touching this.

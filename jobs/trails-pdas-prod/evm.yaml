@@ -3,7 +3,7 @@ version: "1"
 description: "Deploy the Trails PDAs router (Cancun transient-storage variant) and configure it"
 depends_on:
   - "era-evm-predeploy-erc2470"
-  - "trails-pdas-prod-owner"
+  - "developer-multisig"
   - "trails-pdas-prod/configurator"
   - "trails-pdas-prod/fee-adapter"
   - "trails-pdas-prod/hyperlane-adapter"
@@ -12,9 +12,9 @@ depends_on:
   - "trails-pdas-prod/ovault-composer-adapter"
   - "trails-pdas-prod/ovault-stargate-adapter"
   - "trails-pdas-prod/signed-swap-oracle"
-# TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base;
-# 31337 keeps the local Anvil run that generates the README table.
-only_networks: [10, 137, 8453, 31337]
+# TODO: remove when the prod stack is ready to go live. Anvil only until then, so the local
+# README run deploys the jobs and no real network does.
+only_networks: [31337]
 min_evm_version: "cancun"
 
 constants:
@@ -31,19 +31,6 @@ constants:
 
 actions:
   - name: "trails-pdas-evm"
-    # TODO: remove once trails-pdas-prod-owner-address is set. Skipped on the deployable networks
-    # while the owner is the address(0) placeholder; the local Anvil run reads the stand-in owner
-    # from trails-pdas-prod-owner in constants.yaml, so it deploys and the README table gets its row.
-    skip_condition:
-      - type: "basic-arithmetic"
-        arguments:
-          operation: "eq"
-          values:
-            - type: "read-json"
-              arguments:
-                json: "{{trails-pdas-prod-owner}}"
-                path: "{{Network().chainId}}"
-            - "{{address-zero}}"
     template: "erc-2470"
     arguments:
       salt: "{{salt-zero}}"
@@ -67,19 +54,6 @@ actions:
     output: true
 
   - name: "verify-trails-pdas-evm"
-    # TODO: remove once trails-pdas-prod-owner-address is set. Skipped on the deployable networks
-    # while the owner is the address(0) placeholder; the local Anvil run reads the stand-in owner
-    # from trails-pdas-prod-owner in constants.yaml, so it deploys and the README table gets its row.
-    skip_condition:
-      - type: "basic-arithmetic"
-        arguments:
-          operation: "eq"
-          values:
-            - type: "read-json"
-              arguments:
-                json: "{{trails-pdas-prod-owner}}"
-                path: "{{Network().chainId}}"
-            - "{{address-zero}}"
     type: "verify-contract"
     depends_on: ["trails-pdas-evm"]
     arguments:
