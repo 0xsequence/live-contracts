@@ -1,0 +1,18 @@
+{
+  "configurator": "0xf295FdD97F470d72De9c09aB3bc8c1b040933394",
+  "chains": {
+    "747474": 3
+  },
+  "calls": [],
+  "chainCalls": {
+    "747474": [
+      {
+        "target": "0x9D73cD3e2D230D5258c89F00a45Dc1e0bAA44127",
+        "signature": "addLocalAdapters(address[])",
+        "args": [
+          "[0x2F99512cdF9ba9630783eAd68b32C6C53E4A9aa5,0x8f2e1403b2F4CC48a1d6c1B955d19aC10F69d67B,0xdd8314002c602D55A5622F4797ED98CFb14E0a10,0x19b373AdC32FD3762888d1A0a7BC4a551006D097,0xE623F894631799b312E078906C550c3E204460ef]"
+        ]
+      }
+    ]
+  }
+}

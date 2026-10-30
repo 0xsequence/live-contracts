@@ -63,6 +63,7 @@ constants:
     "999": "0xf0db7b58379503491d857dB50AC9ece64c653918" # HyperEVM
     "42161": "0x1F98431c8aD98523631AE4a59f267346ea31F984" # Arbitrum One
     "43114": "0x740b1c1de25031C31FF4fC9A62f554A55cdC1baD" # Avalanche
+    "747474": "0x203e8740894c8955cB8950759876d7E7E45E04c1" # Katana (its own deployment, not the canonical cross-chain address; read off SwapRouter02 0x42eF97FaE7AD46d98bAf99A0e505b43B7e1C00e9 factory())
 
     # Testnets
     "11155111": "0x0227628f3F023bb0B980b67D528571c95c6DaC1c" # Ethereum Sepolia

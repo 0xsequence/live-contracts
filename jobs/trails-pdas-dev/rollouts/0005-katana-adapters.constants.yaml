@@ -1,0 +1,37 @@
+{
+  "type": "constants",
+  "constants": {
+    "trails-pdas-dev-rollout-0005-katana-adapters": {
+      "configurator": "0xf295FdD97F470d72De9c09aB3bc8c1b040933394",
+      "root": "0x6b59231918378aa929c2457d287fcdfbb296fad2aa448fc9755255e81b97ad59",
+      "rootDigest": "0xfc2230852606c3e1b613ceb36ae1c2638573f4f92d035ebaecac61036c7a90ab",
+      "signature": "0x06010111e8db071f698aba1d60babae8e08f5cbc28782108010b087b3ee7a1eee6f9fba993a446ee68d305e65a7a1a91e2a47c92935bf971dd5c15ca68cf00a1108ed48044d0ae67f4db13328676fb19fea3ae80fcff61a6c7",
+      "leaves": {
+        "747474": {
+          "calls": [
+            {
+              "target": "0x9D73cD3e2D230D5258c89F00a45Dc1e0bAA44127",
+              "signature": "addLocalAdapters(address[])",
+              "args": [
+                "[0x2F99512cdF9ba9630783eAd68b32C6C53E4A9aa5,0x8f2e1403b2F4CC48a1d6c1B955d19aC10F69d67B,0xdd8314002c602D55A5622F4797ED98CFb14E0a10,0x19b373AdC32FD3762888d1A0a7BC4a551006D097,0xE623F894631799b312E078906C550c3E204460ef]"
+              ]
+            }
+          ],
+          "leaf": [
+            747474,
+            "0xf295FdD97F470d72De9c09aB3bc8c1b040933394",
+            3,
+            [
+              [
+                "0x9D73cD3e2D230D5258c89F00a45Dc1e0bAA44127",
+                "0xe8d3e035000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000050000000000000000000000002f99512cdf9ba9630783ead68b32c6c53e4a9aa50000000000000000000000008f2e1403b2f4cc48a1d6c1b955d19ac10f69d67b000000000000000000000000dd8314002c602d55a5622f4797ed98cfb14e0a1000000000000000000000000019b373adc32fd3762888d1a0a7bc4a551006d097000000000000000000000000e623f894631799b312e078906c550c3e204460ef"
+              ]
+            ]
+          ],
+          "leafHash": "0x6b59231918378aa929c2457d287fcdfbb296fad2aa448fc9755255e81b97ad59",
+          "proof": []
+        }
+      }
+    }
+  }
+}

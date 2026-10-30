@@ -1,0 +1,112 @@
+name: "trails-pdas-dev/rollout-0005-katana-adapters"
+version: "1"
+description: "Redeem the Trails PDAs dev Katana adapter rollout on each chain's Configurator"
+depends_on:
+  - "trails-pdas-dev-owner"
+  - "trails-pdas-dev/configurator"
+  - "trails-pdas-dev/evm"
+  - "trails-pdas-dev/uniswap-v3-adapter-3000"
+  - "trails-pdas-dev/uniswap-v3-adapter-100"
+  - "trails-pdas-dev/uniswap-v3-adapter-500"
+  - "trails-pdas-dev/uniswap-v3-adapter-10000"
+  - "trails-pdas-dev/uniswap-v3-adapter-20000"
+  - "trails-pdas-dev/rollout-0004-hyperlane-corridors"
+# TODO: remove once testing is done. Limits Trails PDAs deploys to Optimism, Polygon and Base and
+# Katana; 31337 keeps the local Anvil run that generates the README table.
+only_networks: [10, 137, 8453, 747474, 31337]
+min_evm_version: "cancun"
+
+actions:
+  # Registers the five per-fee-tier Uniswap v3 adapters on Katana's router, at nonce 3 (after the
+  # bootstrap, relay corridor and Hyperlane corridor rollouts): the Everlong path-oracle flow
+  # (see ~/.hermes/plans/2026-10-29_222500-everlong-katana-path-oracle.md) executes Everlong's
+  # /quote route legs as sequential local swaps through the per-tier UniswapV3Adapter
+  # deployments, so a leg is routable only when its pool's fee tier has a registered adapter.
+  # All five observed tiers are registered (100/500/3000/10000/20000 bps, sampled 2026-10-29).
+  # The addresses are deterministic ERC-2470 zero-salt deployments, derived by running the tier
+  # jobs against a local Anvil fork of Katana; the 3000 tier is the global uniswap-v3-adapter
+  # job, the other four are its Katana-scoped siblings. See
+  # ./rollouts/0005-katana-adapters.spec.json.
+  #
+  # Redeems this chain's leaf from the signed root in ./rollouts/0005-katana-adapters.constants.yaml.
+  # Skipped once the Configurator's nonce has moved past the leaf, which is also how a second run
+  # is a no-op. The owner wallet must be deployed on the chain for its signature to validate.
+  # Catapult expands a template only when it is the whole string, so each per-chain value is two
+  # nested lookups: the chain's entry under `leaves`, then the field within it.
+  - name: "rollout-0005-katana-adapters"
+    template: "send-transaction"
+    skip_condition:
+      # Chains outside the rollout have no leaf, including the local chain the README table deploys to.
+      - type: "value-empty"
+        arguments:
+          value:
+            type: "read-json"
+            arguments:
+              json:
+                type: "read-json"
+                arguments:
+                  json: "{{trails-pdas-dev-rollout-0005-katana-adapters}}"
+                  path: "leaves"
+              path: "{{Network().chainId}}"
+      - type: "basic-arithmetic"
+        arguments:
+          operation: "gt"
+          values:
+            - type: "call"
+              arguments:
+                to: "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+                signature: "nonce() returns (uint256)"
+                values: []
+            - type: "read-json"
+              arguments:
+                json:
+                  type: "read-json"
+                  arguments:
+                    json:
+                      type: "read-json"
+                      arguments:
+                        json: "{{trails-pdas-dev-rollout-0005-katana-adapters}}"
+                        path: "leaves"
+                    path: "{{Network().chainId}}"
+                path: "leaf.2"
+    arguments:
+      to: "{{trails-pdas-dev/configurator.trails-pdas-configurator.address}}"
+      value: "0"
+      data:
+        type: "abi-encode"
+        arguments:
+          signature: "updateConfig(bytes32,(uint256,address,uint256,(address,bytes)[]),bytes32[],bytes)"
+          values:
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-dev-rollout-0005-katana-adapters}}"
+                path: "root"
+            - type: "read-json"
+              arguments:
+                json:
+                  type: "read-json"
+                  arguments:
+                    json:
+                      type: "read-json"
+                      arguments:
+                        json: "{{trails-pdas-dev-rollout-0005-katana-adapters}}"
+                        path: "leaves"
+                    path: "{{Network().chainId}}"
+                path: "leaf"
+            - type: "read-json"
+              arguments:
+                json:
+                  type: "read-json"
+                  arguments:
+                    json:
+                      type: "read-json"
+                      arguments:
+                        json: "{{trails-pdas-dev-rollout-0005-katana-adapters}}"
+                        path: "leaves"
+                    path: "{{Network().chainId}}"
+                path: "proof"
+            - type: "read-json"
+              arguments:
+                json: "{{trails-pdas-dev-rollout-0005-katana-adapters}}"
+                path: "signature"
+    output: false

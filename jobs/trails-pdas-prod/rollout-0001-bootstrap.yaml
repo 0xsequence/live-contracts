@@ -6,7 +6,7 @@ depends_on:
   - "trails-pdas-prod/configurator"
   - "trails-pdas-prod/cctp-adapter"
   - "trails-pdas-prod/evm"
-  - "trails-pdas-prod/uniswap-v3-adapter"
+  - "trails-pdas-prod/uniswap-v3-adapter-3000"
 # TODO: remove when the prod stack is ready to go live. Anvil only until then, so the local
 # README run deploys the jobs and no real network does.
 only_networks: [31337]
