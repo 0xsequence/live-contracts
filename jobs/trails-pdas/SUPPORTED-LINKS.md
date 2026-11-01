@@ -14,6 +14,10 @@ A link is one directed `setDestination` call on one bridge adapter, keyed by
 separate calls on two different chains. `tokenOut` is stored as a value, not part of the key,
 so an adapter holds exactly one destination per `(tokenIn, dstChainId)` pair.
 
+`CctpAdapter` is the exception: its EVM corridors come from Circle's on-chain registry, so its
+configuration is one `setDomain` call per destination chain. Its per-token destination table
+holds the Solana ATA entries. See the CCTP section.
+
 A corridor is only usable when all of the following exist:
 
 | Requirement | Where | Call |
@@ -31,9 +35,8 @@ chain-invariant under ERC-2470 zero salt, every EVM entry carries the same addre
 
 ## Deployable chains
 
-`networks.yaml` defines 45 networks; 7 declare a pre-cancun EVM version and are excluded by
-`min_evm_version: cancun` (Telos 40/41, HOMEVERSE 19011/40875, SKALE 37084624/324705682/1482601649).
-That leaves 22 mainnets and 16 testnets.
+Chains declaring a pre-cancun EVM version are excluded by `min_evm_version: cancun` (Telos
+40/41, SKALE 324705682/1482601649).
 
 | Chain ID | Name | Net |
 |---|---|---|
@@ -45,13 +48,10 @@ That leaves 22 mainnets and 16 testnets.
 | 143 | Monad | mainnet |
 | 146 | Sonic | mainnet |
 | 999 | HyperEVM | mainnet |
-| 1284 | Moonbeam | mainnet |
 | 1868 | Soneium | mainnet |
 | 5031 | Somnia | mainnet |
 | 5042 | Arc | mainnet |
-| 8333 | B3 | mainnet |
 | 8453 | Base | mainnet |
-| 13371 | Immutable zkEVM | mainnet |
 | 33139 | ApeChain | mainnet |
 | 42161 | Arbitrum One | mainnet |
 | 42170 | Arbitrum Nova | mainnet |
@@ -60,19 +60,17 @@ That leaves 22 mainnets and 16 testnets.
 | 80094 | Berachain | mainnet |
 | 747474 | Katana | mainnet |
 | 97 | BNB Testnet | testnet |
-| 1287 | Moonbase Alpha | testnet |
 | 1946 | Soneium Minato | testnet |
-| 1993 | B3 Sepolia | testnet |
-| 10143 | Monad Testnet | testnet |
-| 13473 | Immutable zkEVM Testnet | testnet |
 | 33111 | Curtis | testnet |
 | 43113 | Avalanche Fuji | testnet |
 | 50312 | Somnia Testnet | testnet |
 | 80002 | Polygon Amoy | testnet |
 | 84532 | Base Sepolia | testnet |
-| 127823 | Etherlink Testnet | testnet |
+| 127823 | Etherlink Shadownet | testnet |
 | 421614 | Arbitrum Sepolia | testnet |
-| 5042002 | Arc Sepolia | testnet |
+| 828282 | Bali 82 | testnet |
+| 858585 | Bali 85 | testnet |
+| 5042002 | Arc Testnet | testnet |
 | 11155111 | Sepolia | testnet |
 | 11155420 | OP Sepolia | testnet |
 
@@ -82,12 +80,26 @@ That leaves 22 mainnets and 16 testnets.
 differs per chain and it is **not** in the router's constructor adapter array — it must be
 registered post-deploy with `addBridgeAdapters`.
 
-`setDestination(address tokenIn, uint256 dstChainId, address tokenOut, uint32 destinationDomain)`
+The owner call is
+
+`setDomain(uint256 dstChainId, uint32 cctpDomain, uint32 minFinalityThreshold)`
+
+— one per destination chain on the source adapter. Any `(tokenIn, tokenOut)` pair Circle has
+registered for that domain in `TokenMinterV2.getLocalToken` is routable, read live from the
+registry at quote and execution time.
+
+A destination chain with no `setDomain` entry reverts `UnsupportedDestination`; a token pair
+Circle has not registered reverts `UnregisteredCctpToken`.
+
+The EVM flavor routes through the registry; `setSolanaAtaDestination` covers the Solana ATA
+flavor and mints to the recipient's token account.
 
 Mainnet and testnet USDC pools are separate networks and must never be linked to each other.
 
-Mainnet: 10 endpoints -> **90 directed links** (full mesh).
-Testnet: 8 endpoints -> **56 directed links**.
+Configuration cost is per destination chain, not per token: mainnet 10 endpoints ->
+**90 `setDomain` calls** (9 per chain), testnet 8 endpoints across 7 deployable source chains
+-> **49** (7 per chain). The USDC column below is informational — the registry decides which
+pairs route.
 
 | Chain ID | Chain | CCTP domain | USDC | Net |
 |---|---|---|---|---|
@@ -117,10 +129,11 @@ Arc (5042 / 5042002) uses the predeploy USDC `0x3600…0000` at the same address
 `StargateAdapter` and `LayerZeroAdapter` both take only an owner, so both are chain-invariant
 and both are already in the router's constructor adapter array.
 
-Stargate: `setDestination(address tokenIn, address pool, uint256 dstChainId, address tokenOut, uint32 eid)`
-LayerZero: `setDestination(address tokenIn, address oft, uint256 dstChainId, address tokenOut, uint32 eid)`
+Stargate: `setDestination(address tokenIn, address stargate, uint256 dstChainId, address tokenOut, uint32 dstEid, uint8 tokenOutDecimals)`
+LayerZero: `setDestination(address tokenIn, address oft, uint256 dstChainId, address tokenOut, uint32 dstEid, uint8 tokenOutDecimals)`
 
-`pool`/`oft` is the source-chain contract; `eid` is the **destination** LayerZero endpoint id.
+`stargate`/`oft` is the source-chain contract; `dstEid` is the **destination** LayerZero
+endpoint id; `tokenOutDecimals` scales the quote across differing token decimals.
 
 ### USDC — 10 endpoints, 90 directed links
 
@@ -187,19 +200,20 @@ therefore no links; it needs a second supported chain before it is configurable.
 
 ## Hyperlane warp routes
 
-The registry yields 1576 directed rows between deployable chains, collapsing to
-**769 unique `(srcChain, tokenIn, dstChain)` adapter keys** across 116 warp route ids.
+The registry yields 1574 directed rows between deployable chains, collapsing to
+**767 unique `(srcChain, tokenIn, dstChain)` adapter keys** across 115 warp route ids.
 
-**142 of those keys collide** — two or more warp routes serve the same
+**138 of those keys collide** — two or more warp routes serve the same
 `(tokenIn, dstChainId)` pair with different routers or different `tokenOut`. The adapter can
 hold only one, so each collision needs a manual choice before it can be configured.
-Unambiguous keys: **627**.
+Unambiguous keys: **629**.
 
-`setDestination(address tokenIn, address router, uint256 dstChainId, address tokenOut, uint32 destinationDomain, ...)`
+`setDestination(address tokenIn, address router, uint256 dstChainId, address tokenOut, uint32 dstDomain, uint256 remoteScaleNumerator, uint256 remoteScaleDenominator)`
 
-The adapter reads and stores the local router's `sourceScale` at set time and reverts
+The adapter reads and stores the local router's source scale at set time and reverts
 `RouterScaleChanged` at execution if it later differs — a scale change on any warp router
-requires re-running `setDestination` for every link that uses it.
+requires re-running `setDestination` for every link that uses it. The remote scale is passed
+explicitly because it cannot be read from the destination chain.
 
 Token distribution of the directed rows:
 
@@ -232,7 +246,7 @@ Per-source-chain unique key counts:
 |---|---|---|
 | 1 | Ethereum | 129 |
 | 10 | OP Mainnet | 79 |
-| 56 | BNB Chain | 94 |
+| 56 | BNB Chain | 93 |
 | 100 | Gnosis | 6 |
 | 137 | Polygon PoS | 68 |
 | 143 | Monad | 22 |
@@ -240,7 +254,6 @@ Per-source-chain unique key counts:
 | 999 | HyperEVM | 39 |
 | 1868 | Soneium | 11 |
 | 8453 | Base | 111 |
-| 13371 | Immutable zkEVM | 1 |
 | 33139 | ApeChain | 3 |
 | 42161 | Arbitrum One | 96 |
 | 43114 | Avalanche | 40 |
@@ -260,11 +273,12 @@ Full row-level detail is too large for this file; regenerate it from the trails-
 the chain they are deployed to and have **no `setDestination` and no setters at all**. Every
 knob is a constructor immutable, so reconfiguring one means redeploying it and re-registering.
 
-They are not in the router constructor (their addresses are chain-specific, which would move
-the router address), so each needs an `addLocalAdapters` call on its chain. **No job does this
-today — it is the largest outstanding gap.**
+Only `FeeAdapter` is in the router constructor's local adapter array. The rest have
+chain-specific addresses, which would move the router address, so each needs an
+`addLocalAdapters` call on its chain. Both the dev and prod bootstrap rollouts carry those
+calls: 20 `addLocalAdapters` calls registering 42 adapters.
 
-### WETH — wrap/unwrap, 19 deployable chains
+### WETH — wrap/unwrap
 
 | Chain ID | Chain | Wrapped native |
 |---|---|---|
@@ -288,10 +302,22 @@ today — it is the largest outstanding gap.**
 | 11155111 | Sepolia | `0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9` |
 | 11155420 | OP Sepolia | `0x4200000000000000000000000000000000000006` |
 
+### Uniswap v3 — five fee tiers
+
+`UniswapV3Adapter` bakes one `uint24` fee tier into its constructor, so one deployment routes
+through one tier's pools. Five tier jobs exist — `uniswap-v3-adapter-{100,500,3000,10000,20000}` —
+covering the tiers Everlong's Katana routes use (sampled 2026-10-29 across 144 routes). Each
+tier is a separate ERC-2470 zero-salt deployment at its own address, so a chain needs one
+`addLocalAdapters` registration per tier it should route through.
+
+`constants/trails-pdas.constants.yaml` carries a v3 factory per deployable chain that has one,
+including Katana's own deployment at `0x203e8740894c8955cB8950759876d7E7E45E04c1`; the jobs
+skip any chain without a factory or a wrapped-native entry.
+
 ### Uniswap v4
 
-`constants/trails-pdas.constants.yaml` carries a `PoolManager` for 9 mainnets and 3 testnets;
-the job skips any chain without an entry. The pool shape is fixed at fee 3000 / tick spacing 60 /
+`constants/trails-pdas.constants.yaml` carries a `PoolManager` per deployable chain that has
+one; the job skips any chain without an entry. The pool shape is fixed at fee 3000 / tick spacing 60 /
 no hooks.
 
 ## Providers with no static links
@@ -301,40 +327,76 @@ on chain. They either need no adapter configuration, or a different kind of it.
 
 | Provider | Mechanism | On-chain configuration needed |
 |---|---|---|
-| Relay | `api.relay.link` per quote | `RelayAdapter(relayDepository, originRelayChainId)` is chain-specific, plus `setSolver` allowlist and `setDestination` per corridor. A route is dead until its solver is approved. |
+| Relay | `api.relay.link` per quote | `RelayAdapter(relayDepository, originRelayChainId)` is chain-specific, plus a `setSolver` allowlist and `setDestination(address tokenIn, uint256 dstChainId, address tokenOut, string relayChainId, bytes outputCurrency, AddressEncoding)` per corridor. A route is dead until its solver is approved. `tokenIn` is the local token Relay swaps from, because Relay routes every order through a local swap before the deposit. |
 | LiFi | `li.quest/v1` | none — no PDA adapter exists |
 | 0x | `api.0x.org` | none — no PDA adapter exists |
 | Sushi | `api.sushi.com` | none — no PDA adapter exists |
-| Everlong | `swap.foreverlong.io` | none — no PDA adapter exists |
+| Everlong | `swap.foreverlong.io`, Katana-only same-chain swaps | its route legs execute as sequential local swaps through the per-tier `UniswapV3Adapter` deployments; a leg is routable when its pool's fee tier has a registered adapter |
 | LZ transfer | `transfer.layerzero-api.com` | covered by `LayerZeroAdapter` links above |
 | gas.zip | snapshot of `backend.gas.zip/v2/chains`, re-synced at runtime | none — native gas only, no adapter |
-| OIF | snapshot of the OZ solver `/assets` | `OifAdapter(inputSettler)` is chain-specific; `setWindows` is global with `expiryWindow <= 1 days`; 4 static assets |
+| OIF | snapshot of the OZ solver `/assets` | `OifAdapter(inputSettler, owner, fillWindow, expiryWindow)`; `setWindows` is global with `expiryWindow <= MAX_EXPIRY_WINDOW` (1 day); the snapshot carries 4 assets across Ethereum and Katana |
 
-`gas.zip` accounts for 17,484 of the 22,051 raw static links in trails-api but has no PDA
-adapter, which is why the real configuration burden is three orders of magnitude smaller than
+`gas.zip`'s snapshot carries 231 outbound and 76 inbound chains, so 17,484 directed native-gas
+links. It has no PDA adapter, which is why the real configuration burden is far smaller than
 the raw route count.
 
 ## Totals
 
-| Adapter | Mainnet links | Testnet links | Notes |
+| Adapter | Mainnet calls | Testnet calls | Notes |
 |---|---|---|---|
-| CCTP | 90 | 56 | full mesh, USDC only |
+| CCTP | 90 | 49 | `setDomain` per destination chain; token coverage comes from Circle's registry |
 | Stargate / LayerZero OFT | 168 | 0 | USDC 90, USDT 30, WETH 30, SOMI 12, KAT 6 |
-| Hyperlane | 751 | 18 | 142 keys collide and need a manual pick |
+| Hyperlane | 749 | 18 | 138 keys collide and need a manual pick |
 | OVault composer / stargate | 0 | 0 | deployed, no destinations identified in trails-api |
-| Relay | 0 | 0 | dynamic; needs solver allowlist first |
+| Relay | 17 + corridors | 0 | `setSolver` per chain, then one `setDestination` per corridor |
 
-Excluding Hyperlane, **258 mainnet links**. With Hyperlane's unambiguous keys, **885**.
+Excluding Hyperlane, **258 mainnet calls** (90 of which are CCTP `setDomain` calls, not
+per-token links — each unlocks every registry pair for that domain). With Hyperlane's 613
+unambiguous mainnet keys, **871**.
 
 ## Current state in live-contracts
 
-Configured today: a 4x3 Stargate USDC mesh over Polygon, OP, Arbitrum and Base — 12 of the 258.
+The dev jobs carry five signed rollouts under `jobs/trails-pdas-dev/rollouts/`, each a merkle
+root of per-chain Configurator leaves redeemed in nonce order.
 
-Not yet configured:
+`0001-bootstrap` (nonce 0, 24 chains) configures each chain's adapter set:
 
-- every CCTP link (the adapter has no job at all)
-- every LayerZero, OVault-composer and OVault-stargate link
-- Stargate beyond USDC and beyond those 4 chains
-- `addLocalAdapters` for the WETH and Uniswap v4 adapters on all 19 / 12 chains
-- `setRemoteInbox` / `setRemoteInboxFallback` on every chain
+- executor role grant, swap oracle, and one `setRemoteInboxFallback` covering every EVM chain
+- `addBridgeAdapters` (34 registrations) and `addLocalAdapters` (20 calls, 42 registrations)
+- CCTP: `setDomain` for every supported destination — 9 per mainnet chain, 7 per testnet chain
+- Stargate: the 4x3 USDC mesh over Polygon, OP, Arbitrum and Base
+- Relay: the solver allowlist on all 17 deployable chains and the USDC->MAGIC corridors between
+  Arbitrum and Base
 
+`0002-relay-corridors` (nonce 1, 17 chains) carries 287 Relay `setDestination` calls: 257
+native->native legs, Monad's 15 outbound MON->USDC legs, and the 15 inbound USDC->MON legs.
+Every chain holds 17 corridors except Monad and Somnia at 16. Native is the zero address on both sides —
+`depositNative` in, zero-address output currency out. Arc's "native" is USDC, its gas token.
+Somnia takes native MON->SOMI on the Monad pair.
+
+`0003-mon-native-corridors` (nonce 2, Monad only) repoints 6 of Monad's outbound legs to
+native ETH on Ethereum, OP, Soneium, Base, Arbitrum and Katana.
+
+`0004-hyperlane-corridors` (nonce 2, chains 1/10/56/137/8453/42161/747474) carries 90
+Hyperlane `setDestination` calls: 30 USDT->USDT, 40 USDC->USDC over pairs touching Katana or
+BNB plus the CCTP-chain fallbacks, and 20 Katana USDC<->USDT cross pairs. Those 7 chains admit
+84 ordered same-family stablecoin pairs, so 14 stay unconfigured. Four have no registry route
+at all (OP<->BNB and OP<->Katana on USDT). Six resolve only to the
+`USDT/arbitrum-ethereum-optimism-polygon-prom` routers, which are pre-scale and revert on
+`token()`; `_validateRouterToken` rejects that for an ERC-20 route. The remaining four are
+OP<->Katana on USDC, and OP<->Base on USDT where the registry carries only oUSDT routers.
+
+`0005-katana-adapters` (nonce 3, Katana only) registers the five per-fee-tier
+`UniswapV3Adapter` deployments on Katana's router in one `addLocalAdapters` call.
+
+Prod mirrors the dev job set with the developer multisig
+(`{{developer-multisig.developer-multisig.address}}`,
+`0x007a47e6BF40C1e0ed5c01aE42fDC75879140bc4`) as owner-of-record. Its jobs are
+`only_networks: [31337]` until go-live and its `0001-bootstrap` constants hold a placeholder
+root with an empty `leaves` map, so the rollout job skips on every chain.
+
+Dev jobs are `only_networks: [10, 137, 8453, 747474, 31337]`. On-chain at configurator
+`0xf295FdD97F470d72De9c09aB3bc8c1b040933394`, router
+`0x9D73cD3e2D230D5258c89F00a45Dc1e0bAA44127`: Optimism and Base run the router with the
+executor role granted, the swap oracle set and the Configurator at nonce 2; Polygon and
+Katana have the Configurator at nonce 0 and the router pending deploy.
