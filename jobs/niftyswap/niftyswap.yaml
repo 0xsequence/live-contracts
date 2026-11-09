@@ -2,6 +2,7 @@ name: "niftyswap"
 version: "1"
 description: ""
 depends_on: ["era-evm-predeploy-erc2470", "era-evm-predeploy-universal"]
+deprecated: true
 
 skip_networks: [146]
 
