@@ -110,15 +110,6 @@
     - etherscan_v2
     - sourcify
 
-- name: Somnia Testnet
-  chainId: 50312
-  rpcUrl: "https://nodes.sequence.app/somnia-testnet/{{RPC_BUILDER_KEY}}"
-  testnet: true
-
-- name: Somnia
-  chainId: 5031
-  rpcUrl: "https://nodes.sequence.app/somnia/{{RPC_BUILDER_KEY}}"
-
 - name: Polygon Amoy
   chainId: 80002
   rpcUrl: "https://nodes.sequence.app/amoy/{{RPC_BUILDER_KEY}}"
