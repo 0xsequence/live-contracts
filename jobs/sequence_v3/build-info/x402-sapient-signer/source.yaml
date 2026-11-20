@@ -1,0 +1,8 @@
+type: source
+
+build_info:
+  "./x402-sapient-signer.json":
+    repo: "https://github.com/0xsequence/wallet-contracts-v3"
+    commit: "45e839b28e1072504c0fa1f401e64dd6af4984ed"
+    image: "ghcr.io/foundry-rs/foundry:v1.5.1"
+    build: "git submodule update --init --recursive && forge build src/extensions/x402/X402SessionSapientSigner.sol --build-info"
